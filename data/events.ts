@@ -22,6 +22,7 @@ export type EventSequenceData = {
   nextEvent: string | null;
   // Alias property requested by specification
   framePath: string;
+  videoUrl: string;
 };
 
 // Backward-compatible type for old components if referenced elsewhere
@@ -40,7 +41,6 @@ export type EventData = {
     z: number;
   };
 };
-
 
 export const eventsSequenceData: EventSequenceData[] = [
   {
@@ -64,6 +64,7 @@ export const eventsSequenceData: EventSequenceData[] = [
     },
     nextEvent: "IDEATHON",
     framePath: "/events/hacknation-2_frames/frame_001.png",
+    videoUrl: "/events/hacknation-2.mp4",
   },
   {
     id: "ideathon",
@@ -86,6 +87,7 @@ export const eventsSequenceData: EventSequenceData[] = [
     },
     nextEvent: "SHIVATECH",
     framePath: "/events/Ideathon_frames/frame_001.png",
+    videoUrl: "/events/Ideathon.mp4",
   },
   {
     id: "shivatech",
@@ -108,6 +110,7 @@ export const eventsSequenceData: EventSequenceData[] = [
     },
     nextEvent: "SCIENCE CHAMPIONSHIP",
     framePath: "/events/shivatech_frames/frame_015.png",
+    videoUrl: "/events/shivatech.mp4",
   },
   {
     id: "science-championship",
@@ -130,9 +133,9 @@ export const eventsSequenceData: EventSequenceData[] = [
     },
     nextEvent: null,
     framePath: "/events/Science_champion_frames/frame_001.png",
+    videoUrl: "/events/Science%20champion.mp4",
   },
 ];
-
 
 export const eventsData: EventData[] = eventsSequenceData.map((e) => ({
   id: e.id,
@@ -248,44 +251,45 @@ export const eventZoomConfigs: Record<string, EventZoomConfig> = {
   "ideathon": {
     maxScale: 1.65,
     focalX: 0.50,
-    focalY: 0.44,
+    focalY: 0.42,
   },
   "shivatech": {
     maxScale: 1.60,
     focalX: 0.50,
-    focalY: 0.42,
+    focalY: 0.40,
   },
   "science-championship": {
-    maxScale: 1.65,
+    maxScale: 1.70,
     focalX: 0.50,
     focalY: 0.38,
   },
 };
 
 /**
- * Calculates current frame zoom scale and focal target for active event
+ * Returns dynamic zoom scale and focal point for building arrival
  */
-export function getEventZoomState(eventId: string, eventProgress: number): {
-  scale: number;
-  focalX: number;
-  focalY: number;
-} {
+export function getEventZoomState(
+  eventId: string,
+  eventProgress: number
+): { scale: number; focalX: number; focalY: number } {
   const config = eventZoomConfigs[eventId] || {
     maxScale: 1.5,
     focalX: 0.5,
     focalY: 0.4,
   };
 
-  const progress = Math.max(0, Math.min(1, eventProgress));
-  
+  // Zoom starts accelerating in the final 35% of event scroll progress (0.65 to 1.0)
+  if (eventProgress < 0.65) {
+    return { scale: 1.0, focalX: 0.5, focalY: 0.5 };
+  }
+
+  const zoomFactor = (eventProgress - 0.65) / 0.35; // 0.0 to 1.0
   // Power 2.2 curve: smooth initial camera fly-over, accelerating zoom into building name in final frames
-  const zoomFactor = Math.pow(progress, 2.2);
-  const scale = 1.0 + (config.maxScale - 1.0) * zoomFactor;
+  const easedFactor = Math.pow(zoomFactor, 2.2);
 
-  return {
-    scale,
-    focalX: config.focalX,
-    focalY: config.focalY,
-  };
+  const scale = 1.0 + (config.maxScale - 1.0) * easedFactor;
+  const focalX = 0.5 + (config.focalX - 0.5) * easedFactor;
+  const focalY = 0.5 + (config.focalY - 0.5) * easedFactor;
+
+  return { scale, focalX, focalY };
 }
-
