@@ -241,6 +241,19 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
   }, [drawFrameToCanvas]);
 
   /**
+   * Finds the nearest already-cached PNG frame image for the active event to prevent lag or black screens
+   */
+  const findNearestCachedFrame = useCallback((event: (typeof eventsSequenceData)[0], targetFrame: number) => {
+    for (let offset = 1; offset <= 30; offset++) {
+      const prevUrl = getFrameUrl(event, targetFrame - offset);
+      if (imageCacheRef.current.has(prevUrl)) return imageCacheRef.current.get(prevUrl)!;
+      const nextUrl = getFrameUrl(event, targetFrame + offset);
+      if (imageCacheRef.current.has(nextUrl)) return imageCacheRef.current.get(nextUrl)!;
+    }
+    return null;
+  }, []);
+
+  /**
    * Preload initial key frames & videos for all 4 events on page load
    */
   useEffect(() => {
@@ -265,16 +278,16 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
         onInitialFramesLoaded();
       }
 
-      // 3. Low priority: asynchronously preload remaining initial frames without blocking UI
-      const remainingUrls: string[] = [];
-      for (let f = event1.minFrame + 1; f < Math.min(event1.minFrame + 6, event1.maxFrame); f++) {
-        remainingUrls.push(getFrameUrl(event1, f));
+      // 3. Preload first 15 frames of Event 1 immediately
+      const initialUrls: string[] = [];
+      for (let f = event1.minFrame + 1; f < Math.min(event1.minFrame + 15, event1.maxFrame); f++) {
+        initialUrls.push(getFrameUrl(event1, f));
       }
       eventsSequenceData.slice(1).forEach((evt) => {
-        remainingUrls.push(getFrameUrl(evt, evt.minFrame));
+        initialUrls.push(getFrameUrl(evt, evt.minFrame));
       });
 
-      Promise.all(remainingUrls.map((url) => loadSingleFrame(url))).catch(() => {});
+      Promise.all(initialUrls.map((url) => loadSingleFrame(url))).catch(() => {});
     };
 
     preloadInitialBatch();
@@ -285,11 +298,45 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
   }, [loadSingleFrame, getOrCreateVideo, onInitialFramesLoaded]);
 
   /**
-   * Preload window of frames around active state to ensure smooth scrubbing
+   * Progressive background preloader: cache ALL 461 frames across all 4 events into memory
+   */
+  useEffect(() => {
+    let isCancelled = false;
+
+    const preloadAllFramesBackground = async () => {
+      const allUrls: string[] = [];
+      eventsSequenceData.forEach((evt) => {
+        for (let f = evt.minFrame; f <= evt.maxFrame; f++) {
+          allUrls.push(getFrameUrl(evt, f));
+        }
+      });
+
+      // Chunk load 12 images at a time so network is never saturated
+      const chunkSize = 12;
+      for (let i = 0; i < allUrls.length; i += chunkSize) {
+        if (isCancelled) break;
+        const chunk = allUrls.slice(i, i + chunkSize);
+        await Promise.all(chunk.map((url) => loadSingleFrame(url))).catch(() => {});
+        await new Promise((resolve) => setTimeout(resolve, 40));
+      }
+    };
+
+    const timer = setTimeout(() => {
+      preloadAllFramesBackground();
+    }, 400);
+
+    return () => {
+      isCancelled = true;
+      clearTimeout(timer);
+    };
+  }, [loadSingleFrame]);
+
+  /**
+   * Priority burst preload: when user moves to an event, preload its surrounding window immediately
    */
   useEffect(() => {
     const { activeEvent, frameNumber } = sequenceState;
-    const windowSize = 12;
+    const windowSize = 25;
 
     const preloadUrls: string[] = [];
 
@@ -300,7 +347,7 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
       }
     }
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 10; i++) {
       const targetFrame = frameNumber - i;
       if (targetFrame >= activeEvent.minFrame) {
         preloadUrls.push(getFrameUrl(activeEvent, targetFrame));
@@ -315,12 +362,12 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
   }, [sequenceState, loadSingleFrame]);
 
   /**
-   * Render target frame on canvas for active event
+   * Render target frame on canvas for active event with 0ms nearest-frame fallback
    */
   useEffect(() => {
     updateCanvasDimensions();
 
-    const { activeEvent, eventProgress, frameUrl } = sequenceState;
+    const { activeEvent, eventProgress, frameUrl, frameNumber } = sequenceState;
     const cachedImage = imageCacheRef.current.get(frameUrl);
 
     if (cachedImage) {
@@ -328,8 +375,11 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
     } else {
       let cancelled = false;
 
-      // Draw last rendered source while loading
-      if (lastRenderedSourceRef.current) {
+      // Try finding nearest cached PNG frame first (instant 0ms render without lag)
+      const nearestImage = findNearestCachedFrame(activeEvent, frameNumber);
+      if (nearestImage) {
+        drawFrameToCanvas(nearestImage);
+      } else if (lastRenderedSourceRef.current) {
         drawFrameToCanvas(lastRenderedSourceRef.current);
       }
 
@@ -338,7 +388,7 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
         if (img) {
           drawFrameToCanvas(img);
         } else {
-          // PNG image fetch failed (e.g. 404 on Vercel), seek video for active event!
+          // Video fallback if image fails
           seekVideoToProgress(activeEvent.id, activeEvent.videoUrl, eventProgress);
         }
       });
@@ -353,6 +403,7 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
     loadSingleFrame,
     seekVideoToProgress,
     updateCanvasDimensions,
+    findNearestCachedFrame,
   ]);
 
   /**
