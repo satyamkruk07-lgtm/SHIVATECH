@@ -12,7 +12,17 @@ export const EventsLoader: React.FC<EventsLoaderProps> = ({ isLoading }) => {
   const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
+    // Safety max timeout: never keep user waiting at loader for more than 1.2s
+    const maxTimeout = setTimeout(() => {
+      setProgress(100);
+      setIsFading(true);
+      setTimeout(() => {
+        setShouldRender(false);
+      }, 700);
+    }, 1200);
+
     if (!isLoading) {
+      clearTimeout(maxTimeout);
       setProgress(100);
       setIsFading(true);
       const timer = setTimeout(() => {
@@ -21,16 +31,19 @@ export const EventsLoader: React.FC<EventsLoaderProps> = ({ isLoading }) => {
       return () => clearTimeout(timer);
     }
 
-    // Simulate progress increments until initial frames load
+    // Fast visual progress increment towards 95%
     const interval = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 92) return prev;
-        const inc = Math.floor(Math.random() * 15) + 5;
-        return Math.min(92, prev + inc);
+        if (prev >= 95) return prev;
+        const inc = Math.floor(Math.random() * 20) + 10;
+        return Math.min(95, prev + inc);
       });
-    }, 150);
+    }, 60);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(maxTimeout);
+      clearInterval(interval);
+    };
   }, [isLoading]);
 
   if (!shouldRender) return null;

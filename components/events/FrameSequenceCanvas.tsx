@@ -252,25 +252,29 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
         getOrCreateVideo(evt.id, evt.videoUrl);
       });
 
-      // 2. First 10 frames of Event 1
-      const initialUrls: string[] = [];
+      // 2. High priority: load frame 1 of Event 1 instantly (with 600ms timeout race)
       const event1 = eventsSequenceData[0];
-      for (let f = event1.minFrame; f < Math.min(event1.minFrame + 10, event1.maxFrame); f++) {
-        initialUrls.push(getFrameUrl(event1, f));
+      const firstFrameUrl = getFrameUrl(event1, event1.minFrame);
+      
+      const loadFirstFrame = loadSingleFrame(firstFrameUrl);
+      const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 600));
+
+      await Promise.race([loadFirstFrame, timeoutPromise]);
+
+      if (isMounted && onInitialFramesLoaded) {
+        onInitialFramesLoaded();
       }
 
-      // 3. First frames of all other events
+      // 3. Low priority: asynchronously preload remaining initial frames without blocking UI
+      const remainingUrls: string[] = [];
+      for (let f = event1.minFrame + 1; f < Math.min(event1.minFrame + 6, event1.maxFrame); f++) {
+        remainingUrls.push(getFrameUrl(event1, f));
+      }
       eventsSequenceData.slice(1).forEach((evt) => {
-        initialUrls.push(getFrameUrl(evt, evt.minFrame));
+        remainingUrls.push(getFrameUrl(evt, evt.minFrame));
       });
 
-      await Promise.all(initialUrls.map((url) => loadSingleFrame(url)));
-
-      if (isMounted) {
-        if (onInitialFramesLoaded) {
-          onInitialFramesLoaded();
-        }
-      }
+      Promise.all(remainingUrls.map((url) => loadSingleFrame(url))).catch(() => {});
     };
 
     preloadInitialBatch();
