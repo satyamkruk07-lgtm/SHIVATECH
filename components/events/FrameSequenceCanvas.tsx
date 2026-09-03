@@ -24,24 +24,17 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
     sequenceStateRef.current = sequenceState;
   }, [sequenceState]);
 
-  // Cache for loaded images or ImageBitmaps
-  const imageCacheRef = useRef<Map<string, HTMLImageElement | ImageBitmap>>(
-    new Map()
-  );
-  // Track in-flight fetch promises to prevent duplicate downloads
-  const loadingPromisesRef = useRef<Map<string, Promise<HTMLImageElement | ImageBitmap | null>>>(
-    new Map()
-  );
-  
-  // HTML5 Video Fallback cache for Vercel deployment reliability
+  // Image cache
+  const imageCacheRef = useRef<Map<string, HTMLImageElement | ImageBitmap>>(new Map());
+  const loadingPromisesRef = useRef<Map<string, Promise<HTMLImageElement | ImageBitmap | null>>>(new Map());
+
+  // HTML5 Video cache & seek queue for Vercel deployment reliability across all 4 events
   const videoElementsRef = useRef<Map<string, HTMLVideoElement>>(new Map());
+  const isSeekingRef = useRef<Map<string, boolean>>(new Map());
+  const pendingTimeRef = useRef<Map<string, number>>(new Map());
 
-  // Keep reference to the last successfully rendered source to prevent black screen flashes
-  const lastRenderedImageRef = useRef<HTMLImageElement | ImageBitmap | HTMLVideoElement | null>(
-    null
-  );
-
-  const initialLoadedRef = useRef<boolean>(false);
+  // Last rendered source to prevent black screen flashes
+  const lastRenderedSourceRef = useRef<HTMLImageElement | ImageBitmap | HTMLVideoElement | null>(null);
 
   /**
    * Safe image fetcher with createImageBitmap priority and standard Image fallback
@@ -128,7 +121,7 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
 
       const canvasWidth = canvas.width;
       const canvasHeight = canvas.height;
-      
+
       const srcWidth = source instanceof HTMLVideoElement ? source.videoWidth || 1920 : source.width;
       const srcHeight = source instanceof HTMLVideoElement ? source.videoHeight || 1080 : source.height;
 
@@ -162,10 +155,68 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
 
       ctx.drawImage(source, 0, 0, srcWidth, srcHeight, finalOffsetX, finalOffsetY, scaledWidth, scaledHeight);
 
-      lastRenderedImageRef.current = source;
+      lastRenderedSourceRef.current = source;
     },
     []
   );
+
+  /**
+   * Non-blocking queued video seek for smooth playback across all 4 events
+   */
+  const seekVideoToProgress = useCallback((eventId: string, videoUrl: string, progress: number) => {
+    const video = getOrCreateVideo(eventId, videoUrl);
+    if (!video) return;
+
+    const performSeek = () => {
+      if (!video.duration || isNaN(video.duration)) return;
+
+      const targetTime = Math.max(0, Math.min(video.duration, progress * video.duration));
+      pendingTimeRef.current.set(eventId, targetTime);
+
+      // If video is not currently seeking, seek now!
+      if (!isSeekingRef.current.get(eventId)) {
+        // If current video time is already close enough, draw immediately
+        if (Math.abs(video.currentTime - targetTime) < 0.04) {
+          drawFrameToCanvas(video);
+          return;
+        }
+
+        isSeekingRef.current.set(eventId, true);
+        
+        // Fast seek if supported by browser, else standard currentTime
+        if ('fastSeek' in video && typeof (video as any).fastSeek === 'function') {
+          (video as any).fastSeek(targetTime);
+        } else {
+          video.currentTime = targetTime;
+        }
+
+        const handleSeeked = () => {
+          isSeekingRef.current.set(eventId, false);
+          drawFrameToCanvas(video);
+
+          // Check if a newer target time arrived while seeking
+          const latestPending = pendingTimeRef.current.get(eventId);
+          if (latestPending !== undefined && Math.abs(video.currentTime - latestPending) > 0.04) {
+            performSeek();
+          }
+        };
+
+        video.addEventListener("seeked", handleSeeked, { once: true });
+      } else {
+        // Draw last available frame while seeking
+        if (video.readyState >= 2) {
+          drawFrameToCanvas(video);
+        }
+      }
+    };
+
+    if (video.readyState >= 2 && video.duration) {
+      performSeek();
+    } else {
+      video.addEventListener("loadedmetadata", performSeek, { once: true });
+      video.addEventListener("canplay", performSeek, { once: true });
+    }
+  }, [getOrCreateVideo, drawFrameToCanvas]);
 
   /**
    * Handle canvas sizing with devicePixelRatio clamping
@@ -183,28 +234,26 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
       canvas.width = newWidth;
       canvas.height = newHeight;
 
-      // Re-draw last image after resize if available
-      if (lastRenderedImageRef.current) {
-        drawFrameToCanvas(lastRenderedImageRef.current);
+      if (lastRenderedSourceRef.current) {
+        drawFrameToCanvas(lastRenderedSourceRef.current);
       }
     }
   }, [drawFrameToCanvas]);
 
   /**
-   * Preload initial key frames & videos on page load
+   * Preload initial key frames & videos for all 4 events on page load
    */
   useEffect(() => {
     let isMounted = true;
 
     const preloadInitialBatch = async () => {
-      const initialUrls: string[] = [];
-      
-      // 1. Preload video fallbacks for Vercel CDN stability
+      // 1. Preload video elements for ALL 4 events
       eventsSequenceData.forEach((evt) => {
         getOrCreateVideo(evt.id, evt.videoUrl);
       });
 
-      // 2. First 10 frames of Event 1 (HACKNATION 2.0)
+      // 2. First 10 frames of Event 1
+      const initialUrls: string[] = [];
       const event1 = eventsSequenceData[0];
       for (let f = event1.minFrame; f < Math.min(event1.minFrame + 10, event1.maxFrame); f++) {
         initialUrls.push(getFrameUrl(event1, f));
@@ -215,11 +264,9 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
         initialUrls.push(getFrameUrl(evt, evt.minFrame));
       });
 
-      // Load all initial batch items concurrently
       await Promise.all(initialUrls.map((url) => loadSingleFrame(url)));
 
       if (isMounted) {
-        initialLoadedRef.current = true;
         if (onInitialFramesLoaded) {
           onInitialFramesLoaded();
         }
@@ -242,21 +289,13 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
 
     const preloadUrls: string[] = [];
 
-    // Ahead
     for (let i = 1; i <= windowSize; i++) {
       const targetFrame = frameNumber + i;
       if (targetFrame <= activeEvent.maxFrame) {
         preloadUrls.push(getFrameUrl(activeEvent, targetFrame));
-      } else if (activeEvent.index < eventsSequenceData.length) {
-        const nextEvt = eventsSequenceData[activeEvent.index];
-        const overflow = targetFrame - activeEvent.maxFrame;
-        if (nextEvt && nextEvt.minFrame + overflow - 1 <= nextEvt.maxFrame) {
-          preloadUrls.push(getFrameUrl(nextEvt, nextEvt.minFrame + overflow - 1));
-        }
       }
     }
 
-    // Behind
     for (let i = 1; i <= 5; i++) {
       const targetFrame = frameNumber - i;
       if (targetFrame >= activeEvent.minFrame) {
@@ -272,7 +311,7 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
   }, [sequenceState, loadSingleFrame]);
 
   /**
-   * Render target frame on canvas (with instant Video Frame fallback if PNG fails on Vercel)
+   * Render target frame on canvas for active event
    */
   useEffect(() => {
     updateCanvasDimensions();
@@ -285,9 +324,9 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
     } else {
       let cancelled = false;
 
-      // Render last rendered image while target frame is loading
-      if (lastRenderedImageRef.current) {
-        drawFrameToCanvas(lastRenderedImageRef.current);
+      // Draw last rendered source while loading
+      if (lastRenderedSourceRef.current) {
+        drawFrameToCanvas(lastRenderedSourceRef.current);
       }
 
       loadSingleFrame(frameUrl).then((img) => {
@@ -295,23 +334,8 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
         if (img) {
           drawFrameToCanvas(img);
         } else {
-          // PNG image fetch failed (e.g. 404 on Vercel), fallback to seeking video stream!
-          const video = getOrCreateVideo(activeEvent.id, activeEvent.videoUrl);
-          if (video) {
-            const seekVideo = () => {
-              if (video.duration && !isNaN(video.duration)) {
-                video.currentTime = eventProgress * video.duration;
-              }
-              drawFrameToCanvas(video);
-            };
-
-            if (video.readyState >= 2) {
-              seekVideo();
-            } else {
-              video.addEventListener("loadedmetadata", seekVideo, { once: true });
-              video.addEventListener("canplay", seekVideo, { once: true });
-            }
-          }
+          // PNG image fetch failed (e.g. 404 on Vercel), seek video for active event!
+          seekVideoToProgress(activeEvent.id, activeEvent.videoUrl, eventProgress);
         }
       });
 
@@ -323,7 +347,7 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
     sequenceState,
     drawFrameToCanvas,
     loadSingleFrame,
-    getOrCreateVideo,
+    seekVideoToProgress,
     updateCanvasDimensions,
   ]);
 
