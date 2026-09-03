@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { forwardRef } from "react";
 
 interface HeroContentProps {
@@ -52,21 +53,16 @@ const HeroContent = forwardRef<HTMLDivElement, HeroContentProps>(
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 md:gap-8 mt-4">
-            {/* Primary Button */}
-            <button className="group relative px-8 py-3 bg-black/60 backdrop-blur-md overflow-hidden rounded-[4px] border-2 border-red-600/80 hover:border-red-500 hover:bg-red-950/40 transition-all duration-300 pointer-events-auto flex items-center gap-2 shadow-[0_0_15px_rgba(220,38,38,0.3)] hover:shadow-[0_0_25px_rgba(220,38,38,0.6)]">
-              <span className="relative z-10 text-xs md:text-sm font-bold tracking-[0.1em] text-white drop-shadow-md">
-                EXPLORE EVENTS
-              </span>
-              <span className="text-red-500 font-bold group-hover:translate-x-1 transition-transform relative z-10">&gt;</span>
-            </button>
-
-            {/* Secondary Button */}
-            <button className="group relative px-8 py-3 bg-black/60 backdrop-blur-md overflow-hidden rounded-[4px] border-2 border-blue-600/80 hover:border-blue-500 hover:bg-blue-950/40 transition-all duration-300 pointer-events-auto flex items-center gap-2 shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.6)]">
+            {/* Register Now Link Button to /events */}
+            <Link
+              href="/events"
+              className="group relative px-8 py-3 bg-black/60 backdrop-blur-md overflow-hidden rounded-[4px] border-2 border-red-600/80 hover:border-red-500 hover:bg-red-950/40 transition-all duration-300 pointer-events-auto flex items-center gap-2 shadow-[0_0_15px_rgba(220,38,38,0.3)] hover:shadow-[0_0_25px_rgba(220,38,38,0.6)]"
+            >
               <span className="relative z-10 text-xs md:text-sm font-bold tracking-[0.1em] text-white drop-shadow-md">
                 REGISTER NOW
               </span>
-              <span className="text-blue-500 font-bold group-hover:translate-x-1 transition-transform relative z-10">&gt;</span>
-            </button>
+              <span className="text-red-500 font-bold group-hover:translate-x-1 transition-transform relative z-10">&gt;</span>
+            </Link>
           </div>
         </div>
       </div>

@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import RegisterButton from "./RegisterButton";
 
 interface MobileMenuProps {
   navLinks: { name: string; href: string }[];
@@ -88,16 +87,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                   </motion.div>
                 );
               })}
-
-              {/* Mobile CTA Register Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + navLinks.length * 0.05 }}
-                className="w-full pt-4"
-              >
-                <RegisterButton onClick={onClose} className="w-full py-3.5" />
-              </motion.div>
             </div>
           </motion.div>
         )}
