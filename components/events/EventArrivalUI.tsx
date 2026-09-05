@@ -16,9 +16,12 @@ interface EventArrivalUIProps {
 export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState }) => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedModalEvent, setSelectedModalEvent] = useState<(typeof eventsSequenceData)[0] | null>(null);
 
   const { activeEvent, activeEventIndex, isArrivalRange } = sequenceState;
 
+  const modalEvent = selectedModalEvent || activeEvent;
+  const modalIndex = modalEvent.index.toString().padStart(2, "0");
   const displayIndex = (activeEventIndex + 1).toString().padStart(2, "0");
   const totalEvents = "04";
 
@@ -37,13 +40,16 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
             </span>
           </div>
 
-          {/* Vertical Serial List (Names Only - No Icons) */}
+          {/* Vertical Serial List (Names Only - Click opens popup & scrolls to event) */}
           <div className="flex flex-col space-y-2 font-mono">
             {eventsSequenceData.map((evt, idx) => {
               const isActive = activeEventIndex === idx;
 
-              // Smooth scroll handler when clicking an event name
+              // Click handler: opens register modal popup immediately & scrolls camera to event
               const handleEventClick = () => {
+                setSelectedModalEvent(evt);
+                setIsModalOpen(true);
+
                 let accum = 0;
                 for (let k = 0; k < idx; k++) {
                   accum += eventsSequenceData[k].frameCount;
@@ -140,7 +146,10 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
                   transition={{ delay: 0.1, duration: 0.3 }}
                   whileHover={{ scale: 1.02, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => {
+                    setSelectedModalEvent(activeEvent);
+                    setIsModalOpen(true);
+                  }}
                   className="py-2.5 px-3 rounded bg-white/10 border border-white/20 text-white text-xs font-bold tracking-wider hover:border-red-400/50 transition-all text-center"
                 >
                   VIEW EVENT
@@ -163,7 +172,7 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
         )}
       </AnimatePresence>
 
-      {/* 3. Cinematic View Event Details Modal */}
+      {/* 3. Cinematic View Event Details & Register Modal */}
       <AnimatePresence>
         {isModalOpen && (
           <motion.div
@@ -175,7 +184,10 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
             {/* Backdrop Blur */}
             <div
               className="absolute inset-0 bg-black/75 backdrop-blur-xl cursor-pointer"
-              onClick={() => setIsModalOpen(false)}
+              onClick={() => {
+                setIsModalOpen(false);
+                setSelectedModalEvent(null);
+              }}
             />
 
             {/* Modal Panel */}
@@ -190,14 +202,17 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
               <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-4">
                 <div>
                   <span className="text-xs font-mono text-red-500 tracking-[0.3em] uppercase block mb-1">
-                    EVENT {displayIndex} / {totalEvents} • {activeEvent.category}
+                    EVENT {modalIndex} / {totalEvents} • {modalEvent.category}
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-bold tracking-wider text-white">
-                    {activeEvent.title}
+                    {modalEvent.title}
                   </h2>
                 </div>
                 <button
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={() => {
+                    setIsModalOpen(false);
+                    setSelectedModalEvent(null);
+                  }}
                   className="w-9 h-9 rounded-full bg-white/5 border border-white/20 text-white/60 hover:text-white hover:bg-white/15 flex items-center justify-center transition-colors text-lg"
                 >
                   ✕
@@ -206,7 +221,7 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
 
               {/* Description */}
               <p className="text-sm sm:text-base text-white/80 leading-relaxed mb-6 font-sans">
-                {activeEvent.description}
+                {modalEvent.description}
               </p>
 
               {/* Event Metadata Grid */}
@@ -232,14 +247,18 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
                 <button
                   onClick={() => {
                     setIsModalOpen(false);
-                    router.push(`/register?event=${activeEvent.id}`);
+                    setSelectedModalEvent(null);
+                    router.push(`/register?event=${modalEvent.id}`);
                   }}
                   className="flex-1 py-3.5 bg-gradient-to-r from-red-600 to-blue-600 rounded-lg text-white font-bold text-xs sm:text-sm tracking-widest shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:brightness-110 transition-all text-center"
                 >
-                  REGISTER
+                  REGISTER FOR {modalEvent.title}
                 </button>
                 <button
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={() => {
+                    setIsModalOpen(false);
+                    setSelectedModalEvent(null);
+                  }}
                   className="px-6 py-3.5 border border-white/20 rounded-lg text-white/70 hover:text-white hover:bg-white/10 font-bold text-xs sm:text-sm tracking-widest transition-colors"
                 >
                   CLOSE
