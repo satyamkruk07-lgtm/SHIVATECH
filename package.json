@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:event-atlas": "node scripts/generate-event-atlases.js",
-    "build": "node scripts/generate-event-atlases.js && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
