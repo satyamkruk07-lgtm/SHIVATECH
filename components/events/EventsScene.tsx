@@ -44,8 +44,8 @@ export const EventsScene: React.FC = () => {
         typeof window !== "undefined" &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      // Lerp target progress for smooth camera scroll feel
-      const lerpFactor = isReducedMotion ? 1.0 : 0.15;
+      // Lerp target progress for smooth yet instant camera scroll feel
+      const lerpFactor = isReducedMotion ? 1.0 : 0.45;
       const diff = targetProgressRef.current - currentProgressRef.current;
 
       if (Math.abs(diff) > 0.0001) {
