@@ -150,20 +150,20 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
       const srcWidth = img.width;
       const srcHeight = img.height;
 
-      if (!canvasWidth || !canvasHeight || !srcWidth || !srcHeight) return;
+      // Source Cropping: crop out right 25% and bottom 18% containing the AI watermark (located at x~78%, y~85%)
+      // This ensures the watermark is never read or drawn onto the canvas while preserving all main buildings and composition.
+      const sX = 0;
+      const sY = 0;
+      const sWidth = srcWidth * 0.74;
+      const sHeight = srcHeight * 0.80;
 
-      // Cover scaling algorithm with consistent scale-crop factor to remove bottom-right watermark
-      const baseHRatio = canvasWidth / srcWidth;
-      const baseVRatio = canvasHeight / srcHeight;
-      const baseRatio = Math.max(baseHRatio, baseVRatio);
+      // Cover scaling algorithm based on clean cropped source area
+      const hRatio = canvasWidth / sWidth;
+      const vRatio = canvasHeight / sHeight;
+      const ratio = Math.max(hRatio, vRatio);
 
-      // Consistent 1.06x crop scale (6% zoom) pushes the bottom-right AI watermark outside the visible canvas bounds
-      const watermarkCropFactor = 1.06;
-      const ratio = baseRatio * watermarkCropFactor;
-
-      const drawWidth = srcWidth * ratio;
-      const drawHeight = srcHeight * ratio;
-      // Position slightly upward & leftward so the bottom-right margin is cropped out while maintaining central composition
+      const drawWidth = sWidth * ratio;
+      const drawHeight = sHeight * ratio;
       const offsetX = (canvasWidth - drawWidth) / 2;
       const offsetY = (canvasHeight - drawHeight) / 2;
 
@@ -183,7 +183,7 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
       const finalOffsetX = targetX - (targetX - offsetX) * scale;
       const finalOffsetY = targetY - (targetY - offsetY) * scale;
 
-      ctx.drawImage(img, 0, 0, srcWidth, srcHeight, finalOffsetX, finalOffsetY, scaledWidth, scaledHeight);
+      ctx.drawImage(img, sX, sY, sWidth, sHeight, finalOffsetX, finalOffsetY, scaledWidth, scaledHeight);
 
       lastRenderedUrlRef.current = frameUrl;
       lastRenderedImageRef.current = img;
