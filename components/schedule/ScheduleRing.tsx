@@ -47,8 +47,10 @@ export default function ScheduleRing({
 
   useEffect(() => {
     const updateRadius = () => {
-      if (window.innerWidth < 640) {
-        setRadius(120);
+      if (window.innerWidth < 400) {
+        setRadius(105);
+      } else if (window.innerWidth < 640) {
+        setRadius(115);
       } else if (window.innerWidth < 1024) {
         setRadius(145);
       } else {
@@ -171,7 +173,7 @@ export default function ScheduleRing({
   return (
     <div
       ref={containerRef}
-      className="relative w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[480px] lg:h-[480px] xl:w-[520px] xl:h-[520px] flex items-center justify-center select-none touch-none"
+      className="relative w-[290px] h-[290px] xs:w-[320px] xs:h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[480px] lg:h-[480px] xl:w-[520px] xl:h-[520px] flex items-center justify-center select-none touch-none"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
@@ -276,7 +278,7 @@ export default function ScheduleRing({
       </div>
 
       {/* STATIONARY CENTRAL HUB */}
-      <div className="relative z-20 w-36 h-36 sm:w-44 sm:h-44 lg:w-48 lg:h-48 rounded-full bg-[#040814]/85 border border-sky-400/40 backdrop-blur-2xl flex flex-col items-center justify-center p-3 text-center shadow-[0_0_35px_rgba(56,189,248,0.3),inset_0_0_20px_rgba(239,68,68,0.15)] pointer-events-none select-none">
+      <div className="relative z-20 w-32 h-32 xs:w-36 xs:h-36 sm:w-44 sm:h-44 lg:w-48 lg:h-48 rounded-full bg-[#040814]/85 border border-sky-400/40 backdrop-blur-2xl flex flex-col items-center justify-center p-2 xs:p-3 text-center shadow-[0_0_35px_rgba(56,189,248,0.3),inset_0_0_20px_rgba(239,68,68,0.15)] pointer-events-none select-none">
         {/* Inner Glowing Ring */}
         <div className="absolute inset-1.5 rounded-full border border-red-500/25 animate-pulse" />
 

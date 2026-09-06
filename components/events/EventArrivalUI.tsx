@@ -101,42 +101,59 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
         </div>
       </div>
 
-      {/* 1B. Mobile Floating Events Bottom Selector Bar */}
-      <div className="sm:hidden fixed bottom-3 left-3 right-3 z-30 pointer-events-auto">
-        <div className="bg-[#040814]/90 backdrop-blur-xl border border-white/15 rounded-xl p-1.5 shadow-[0_0_30px_rgba(0,0,0,0.8)] flex items-center justify-between space-x-1 font-mono">
-          {eventsSequenceData.map((evt, idx) => {
-            const isActive = activeEventIndex === idx;
+      {/* 1B. Mobile Floating Events Bottom Selector Bar with Number AND Event Name */}
+      <div className="sm:hidden fixed bottom-3 left-2.5 right-2.5 z-30 pointer-events-auto">
+        <div className="bg-[#040814]/92 backdrop-blur-2xl border border-white/20 rounded-2xl p-2 shadow-[0_8px_32px_rgba(0,0,0,0.85),0_0_20px_rgba(239,68,68,0.2)]">
+          {/* Active Event Current Status Bar */}
+          <div className="flex items-center justify-between px-2 pb-1.5 mb-1.5 border-b border-white/10 font-mono text-[10px]">
+            <span className="text-slate-400 tracking-wider">EVENTS:</span>
+            <span className="text-red-400 font-bold tracking-widest uppercase flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+              {activeEvent.title}
+            </span>
+          </div>
 
-            const handleEventClick = () => {
-              setDismissedEventId(null);
-              const segmentWidth = 0.25;
-              const arrivalRatio = (evt.arrival.startFrame - evt.minFrame) / (evt.frameCount - 1);
-              const targetProgress = idx * segmentWidth + segmentWidth * arrivalRatio;
+          {/* Horizontal scrollable event buttons with Number + Name */}
+          <div className="flex items-center space-x-1.5 overflow-x-auto no-scrollbar font-mono py-0.5">
+            {eventsSequenceData.map((evt, idx) => {
+              const isActive = activeEventIndex === idx;
 
-              if (typeof window !== "undefined") {
-                const maxScroll =
-                  document.documentElement.scrollHeight - window.innerHeight;
-                window.scrollTo({
-                  top: maxScroll * targetProgress,
-                  behavior: "smooth",
-                });
-              }
-            };
+              const handleEventClick = () => {
+                setDismissedEventId(null);
+                const segmentWidth = 0.25;
+                const arrivalRatio = (evt.arrival.startFrame - evt.minFrame) / (evt.frameCount - 1);
+                const targetProgress = idx * segmentWidth + segmentWidth * arrivalRatio;
 
-            return (
-              <button
-                key={evt.id}
-                onClick={handleEventClick}
-                className={`flex-1 py-1.5 px-1 rounded-lg text-center transition-all ${
-                  isActive
-                    ? "bg-gradient-to-r from-red-600 to-blue-600 text-white font-bold text-[10px] shadow-md border border-white/30"
-                    : "text-white/60 hover:text-white text-[10px]"
-                }`}
-              >
-                0{idx + 1}
-              </button>
-            );
-          })}
+                if (typeof window !== "undefined") {
+                  const maxScroll =
+                    document.documentElement.scrollHeight - window.innerHeight;
+                  window.scrollTo({
+                    top: maxScroll * targetProgress,
+                    behavior: "smooth",
+                  });
+                }
+              };
+
+              return (
+                <button
+                  key={evt.id}
+                  onClick={handleEventClick}
+                  className={`shrink-0 py-1.5 px-2.5 rounded-xl flex items-center space-x-1.5 transition-all text-xs ${
+                    isActive
+                      ? "bg-gradient-to-r from-red-600 to-blue-600 text-white font-bold shadow-[0_0_15px_rgba(239,68,68,0.5)] border border-white/30"
+                      : "bg-white/5 hover:bg-white/10 text-white/70 hover:text-white border border-white/10"
+                  }`}
+                >
+                  <span className={`text-[10px] font-bold ${isActive ? "text-cyan-200" : "text-red-400"}`}>
+                    0{idx + 1}
+                  </span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider whitespace-nowrap">
+                    {evt.title}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
