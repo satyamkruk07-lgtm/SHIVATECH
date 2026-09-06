@@ -104,29 +104,41 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* 2 INSTITUTION LOGOS (RIGHT OF SHIVATECH, LEFT OF HOME) */}
-          <div className="hidden sm:flex items-center space-x-2 pl-3 border-l border-white/20">
+          {/* 3 INSTITUTION LOGOS (RIGHT OF SHIVATECH, LEFT OF HOME) - ENLARGED BY 30% */}
+          <div className="hidden sm:flex items-center space-x-2.5 pl-3 sm:pl-4 border-l border-white/20">
             {/* 1. University Logo */}
-            <div className="h-8 px-2 bg-white/95 rounded-lg flex items-center justify-center shadow-sm hover:scale-105 transition-transform">
+            <div className="h-10 sm:h-11 px-2.5 bg-white/95 rounded-xl flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform">
               <Image
                 src="/images/university_logo.png"
                 alt="Shivalik University Logo"
-                width={80}
-                height={26}
+                width={105}
+                height={34}
                 priority
-                className="object-contain h-6 w-auto"
+                className="object-contain h-8 sm:h-9 w-auto"
               />
             </div>
 
             {/* 2. ACM Logo */}
-            <div className="h-8 w-8 bg-white/95 rounded-lg p-0.5 flex items-center justify-center shadow-sm hover:scale-105 transition-transform">
+            <div className="h-10 w-10 sm:h-11 sm:w-11 bg-white/95 rounded-xl p-1 flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform">
               <Image
                 src="/images/acm_logo_cropped.png"
                 alt="ACM Logo"
-                width={26}
-                height={26}
+                width={36}
+                height={36}
                 priority
-                className="object-contain h-6 w-6"
+                className="object-contain h-8 w-8 sm:h-9 sm:w-9"
+              />
+            </div>
+
+            {/* 3. CBII Logo */}
+            <div className="h-10 w-10 sm:h-11 sm:w-11 bg-white/95 rounded-xl p-1 flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform">
+              <Image
+                src="/images/cbii_logo.png"
+                alt="CBII Logo"
+                width={36}
+                height={36}
+                priority
+                className="object-contain h-8 w-8 sm:h-9 sm:w-9"
               />
             </div>
           </div>
