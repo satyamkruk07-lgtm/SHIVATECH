@@ -10,6 +10,19 @@ interface ScheduleRingProps {
   onSelectNode: (index: number) => void;
 }
 
+// Pre-calculated static ticks outside component to guarantee 100% identical SSR & client hydration output
+const RADIAL_TICKS = Array.from({ length: 36 }).map((_, i) => {
+  const tickAngle = (i * 10 * Math.PI) / 180;
+  return {
+    i,
+    x1: Number((350 + 310 * Math.cos(tickAngle)).toFixed(2)),
+    y1: Number((350 + 310 * Math.sin(tickAngle)).toFixed(2)),
+    x2: Number((350 + 318 * Math.cos(tickAngle)).toFixed(2)),
+    y2: Number((350 + 318 * Math.sin(tickAngle)).toFixed(2)),
+    isAccent: i % 9 === 0,
+  };
+});
+
 export default function ScheduleRing({
   items,
   selectedIndex,
@@ -220,25 +233,18 @@ export default function ScheduleRing({
         <line x1="630" y1="350" x2="680" y2="350" stroke="#38bdf8" strokeOpacity="0.4" strokeWidth="1" />
 
         {/* Fine Radial Ticks around Ring */}
-        {Array.from({ length: 36 }).map((_, i) => {
-          const tickAngle = (i * 10 * Math.PI) / 180;
-          const x1 = 350 + 310 * Math.cos(tickAngle);
-          const y1 = 350 + 310 * Math.sin(tickAngle);
-          const x2 = 350 + 318 * Math.cos(tickAngle);
-          const y2 = 350 + 318 * Math.sin(tickAngle);
-          return (
-            <line
-              key={i}
-              x1={x1}
-              y1={y1}
-              x2={x2}
-              y2={y2}
-              stroke={i % 9 === 0 ? "#ef4444" : "#38bdf8"}
-              strokeOpacity={i % 9 === 0 ? 0.7 : 0.25}
-              strokeWidth={i % 9 === 0 ? 1.5 : 1}
-            />
-          );
-        })}
+        {RADIAL_TICKS.map((t) => (
+          <line
+            key={t.i}
+            x1={t.x1}
+            y1={t.y1}
+            x2={t.x2}
+            y2={t.y2}
+            stroke={t.isAccent ? "#ef4444" : "#38bdf8"}
+            strokeOpacity={t.isAccent ? 0.7 : 0.25}
+            strokeWidth={t.isAccent ? 1.5 : 1}
+          />
+        ))}
       </svg>
 
       {/* ROTATING SCHEDULE RING CONTAINER */}
