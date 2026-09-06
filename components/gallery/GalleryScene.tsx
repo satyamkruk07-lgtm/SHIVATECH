@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { galleryData, GalleryCategory, GalleryItem } from "@/data/gallery";
-import GalleryAtmosphere from "./GalleryAtmosphere";
+import CityBackground from "./CityBackground";
 import GalleryFilters from "./GalleryFilters";
 import WebNetwork from "./WebNetwork";
 import GalleryNode from "./GalleryNode";
 import GalleryDetailsPanel from "./GalleryDetailsPanel";
-import GalleryNavigation from "./GalleryNavigation";
+import GalleryHUD from "./GalleryHUD";
 
 export default function GalleryScene() {
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>("ALL");
@@ -23,12 +23,6 @@ export default function GalleryScene() {
   const startPointerPosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const startDragOffsetRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
-  // Filter items based on active category
-  const filteredData = galleryData.filter(
-    (item) => activeCategory === "ALL" || item.category === activeCategory
-  );
-
-  // Keep selected index within bounds when category changes
   const handleSelectCategory = (cat: GalleryCategory) => {
     setActiveCategory(cat);
     setSelectedIndex(0);
@@ -49,13 +43,15 @@ export default function GalleryScene() {
         handleNext();
       } else if (e.key === "ArrowLeft") {
         handlePrev();
+      } else if (e.key === "Escape") {
+        setSelectedIndex(0);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleNext, handlePrev]);
 
-  // Mouse Parallax & Pointer Drag Handlers
+  // Mouse Parallax & Drag Handlers
   const handleMouseMove = (e: React.MouseEvent) => {
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
@@ -65,7 +61,6 @@ export default function GalleryScene() {
   };
 
   const handlePointerDown = (e: React.PointerEvent) => {
-    // Only drag if left click
     if (e.button !== 0) return;
     isDraggingRef.current = true;
     startPointerPosRef.current = { x: e.clientX, y: e.clientY };
@@ -77,8 +72,8 @@ export default function GalleryScene() {
     const dx = e.clientX - startPointerPosRef.current.x;
     const dy = e.clientY - startPointerPosRef.current.y;
     setDragOffset({
-      x: startDragOffsetRef.current.x + dx * 0.4,
-      y: startDragOffsetRef.current.y + dy * 0.4,
+      x: startDragOffsetRef.current.x + dx * 0.35,
+      y: startDragOffsetRef.current.y + dy * 0.35,
     });
   };
 
@@ -96,25 +91,25 @@ export default function GalleryScene() {
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
     >
-      {/* 1. ATMOSPHERIC CINEMATIC BACKGROUND */}
-      <GalleryAtmosphere />
+      {/* 1. CINEMATIC FUTURISTIC CITY SKYLINE & ROOFTOP BACKGROUND */}
+      <CityBackground mouseX={mouseOffset.x} mouseY={mouseOffset.y} />
 
-      {/* 2. TOP CATEGORY FILTERS & TITLE */}
+      {/* 2. TOP CATEGORY FILTERS PILL BAR */}
       <GalleryFilters
         activeCategory={activeCategory}
         onSelectCategory={handleSelectCategory}
       />
 
-      {/* 3. MAIN SPIDER-WEB & PHOTO NETWORK CONTAINER */}
+      {/* 3. MAIN SPIDER-WEB & ORGANIC PHOTO NETWORK CONTAINER */}
       <div
-        className="relative z-10 w-full min-h-[70vh] flex items-center justify-center pointer-events-none transition-transform duration-200 ease-out"
+        className="relative z-10 w-full min-h-[72vh] flex items-center justify-center pointer-events-none transition-transform duration-200 ease-out"
         style={{
-          transform: `translate3d(${dragOffset.x + mouseOffset.x * 8}px, ${
-            dragOffset.y + mouseOffset.y * 8
+          transform: `translate3d(${dragOffset.x + mouseOffset.x * 12}px, ${
+            dragOffset.y + mouseOffset.y * 12
           }px, 0)`,
         }}
       >
-        {/* SVG Spider-Web Lines Network */}
+        {/* SVG Spider-Web Network */}
         <WebNetwork
           items={galleryData}
           selectedIndex={selectedIndex}
@@ -122,12 +117,19 @@ export default function GalleryScene() {
           centerPos={{ x: 500, y: 500 }}
         />
 
-        {/* Central Web Hub Label */}
+        {/* Central Web Hub Emblem */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-center pointer-events-none">
-          <div className="text-[9px] font-mono font-bold tracking-widest text-sky-400 uppercase drop-shadow">
+          <div className="w-7 h-7 mx-auto mb-0.5 flex items-center justify-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-red-500 filter drop-shadow">
+              <ellipse cx="12" cy="13.5" rx="3" ry="4" fill="#040814" stroke="currentColor" strokeWidth="1.5" />
+              <circle cx="12" cy="7" r="2.2" fill="#040814" stroke="#38bdf8" strokeWidth="1.5" />
+              <circle cx="12" cy="13.5" r="1.2" fill="#ef4444" className="animate-pulse" />
+            </svg>
+          </div>
+          <div className="text-[9px] font-mono font-black tracking-widest text-white uppercase drop-shadow">
             WEB OF MEMORIES
           </div>
-          <div className="text-[8px] font-mono text-red-500 uppercase tracking-widest">
+          <div className="text-[8px] font-mono text-red-500 font-bold tracking-widest uppercase">
             SHIVATECH
           </div>
         </div>
@@ -155,7 +157,7 @@ export default function GalleryScene() {
         })}
       </div>
 
-      {/* 4. FLOATING LIGHTBOX PHOTO DETAILS PANEL */}
+      {/* 4. FLOATING CINEMATIC GLASS DETAILS PANEL */}
       <GalleryDetailsPanel
         item={selectedItem}
         onPrev={handlePrev}
@@ -163,8 +165,8 @@ export default function GalleryScene() {
         onClose={() => setSelectedIndex(0)}
       />
 
-      {/* 5. BOTTOM NAVIGATION COUNTER */}
-      <GalleryNavigation
+      {/* 5. TOP-LEFT TITLE, BOTTOM COUNTER, SCROLL & NAV HUD */}
+      <GalleryHUD
         currentIndex={selectedIndex}
         totalCount={galleryData.length}
         onPrev={handlePrev}

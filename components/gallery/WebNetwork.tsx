@@ -21,38 +21,38 @@ export default function WebNetwork({
 
   return (
     <svg
-      className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible filter drop-shadow-[0_0_15px_rgba(56,189,248,0.25)]"
+      className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible filter drop-shadow-[0_0_20px_rgba(56,189,248,0.3)]"
       viewBox="0 0 1000 1000"
       fill="none"
     >
       <defs>
         <radialGradient id="webCenterGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#ef4444" stopOpacity="0.25" />
-          <stop offset="60%" stopColor="#38bdf8" stopOpacity="0.12" />
+          <stop offset="0%" stopColor="#ef4444" stopOpacity="0.3" />
+          <stop offset="60%" stopColor="#38bdf8" stopOpacity="0.15" />
           <stop offset="100%" stopColor="#040814" stopOpacity="0" />
         </radialGradient>
       </defs>
 
       {/* Central Ambient Glow */}
-      <circle cx={cx} cy={cy} r="380" fill="url(#webCenterGlow)" />
+      <circle cx={cx} cy={cy} r="420" fill="url(#webCenterGlow)" />
 
-      {/* Concentric Spider Web Rings */}
-      {[70, 150, 230, 310, 390].map((r, i) => (
+      {/* Organic Spider Web Rings */}
+      {[80, 160, 240, 320, 400, 480].map((r, i) => (
         <circle
           key={i}
           cx={cx}
           cy={cy}
           r={r}
           stroke={i % 2 === 0 ? "#38bdf8" : "#ef4444"}
-          strokeOpacity={i % 2 === 0 ? 0.22 : 0.15}
+          strokeOpacity={i % 2 === 0 ? 0.25 : 0.18}
           strokeWidth="1"
-          strokeDasharray={i % 2 === 0 ? "6 4" : "12 6"}
+          strokeDasharray={i % 2 === 0 ? "8 4" : "16 8"}
         />
       ))}
 
-      {/* Crosshair Sector Lines */}
-      <line x1={cx - 450} y1={cy} x2={cx + 450} y2={cy} stroke="#38bdf8" strokeOpacity="0.15" strokeWidth="1" />
-      <line x1={cx} y1={cy - 450} x2={cx} y2={cy + 450} stroke="#38bdf8" strokeOpacity="0.15" strokeWidth="1" />
+      {/* Crosshair Sector Guidelines */}
+      <line x1={cx - 480} y1={cy} x2={cx + 480} y2={cy} stroke="#38bdf8" strokeOpacity="0.18" strokeWidth="1" />
+      <line x1={cx} y1={cy - 480} x2={cx} y2={cy + 480} stroke="#38bdf8" strokeOpacity="0.18" strokeWidth="1" />
 
       {/* Radial Web Strands Connecting Central Hub to Photo Nodes */}
       {items.map((item, idx) => {
@@ -70,13 +70,13 @@ export default function WebNetwork({
               y1={cy}
               x2={nx}
               y2={ny}
-              stroke={isSelected ? "#ef4444" : isHovered ? "#38bdf8" : "rgba(56, 189, 248, 0.25)"}
-              strokeOpacity={isSelected ? 0.9 : isHovered ? 0.7 : 0.25}
-              strokeWidth={isSelected ? 2 : isHovered ? 1.5 : 1}
+              stroke={isSelected ? "#ef4444" : isHovered ? "#38bdf8" : "rgba(56, 189, 248, 0.3)"}
+              strokeOpacity={isSelected ? 0.95 : isHovered ? 0.75 : 0.3}
+              strokeWidth={isSelected ? 2.5 : isHovered ? 1.8 : 1}
               strokeDasharray={isSelected ? "none" : "8 4"}
             />
 
-            {/* Glowing Accent Strand on Selected/Hovered Node */}
+            {/* Glowing Pulse Strand on Selected/Hovered Node */}
             {(isSelected || isHovered) && (
               <line
                 x1={cx}
@@ -84,9 +84,9 @@ export default function WebNetwork({
                 x2={nx}
                 y2={ny}
                 stroke={isSelected ? "#ef4444" : "#38bdf8"}
-                strokeWidth="3"
-                strokeOpacity="0.6"
-                className="animate-pulse filter drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]"
+                strokeWidth="3.5"
+                strokeOpacity="0.7"
+                className="animate-pulse filter drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]"
               />
             )}
           </g>
@@ -94,8 +94,8 @@ export default function WebNetwork({
       })}
 
       {/* Central Web Hub Ring */}
-      <circle cx={cx} cy={cy} r="45" fill="#040814" stroke="#38bdf8" strokeWidth="1.5" strokeOpacity="0.6" />
-      <circle cx={cx} cy={cy} r="35" stroke="#ef4444" strokeWidth="1" strokeDasharray="4 2" />
+      <circle cx={cx} cy={cy} r="48" fill="#040814" stroke="#38bdf8" strokeWidth="1.5" strokeOpacity="0.7" />
+      <circle cx={cx} cy={cy} r="38" stroke="#ef4444" strokeWidth="1" strokeDasharray="4 2" />
     </svg>
   );
 }

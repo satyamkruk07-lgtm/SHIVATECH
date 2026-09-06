@@ -27,7 +27,7 @@ export default function GalleryNode({
   onMouseEnter,
   onMouseLeave,
 }: GalleryNodeProps) {
-  // Dimension sizing based on node size prop
+  // Sizing based on item size prop
   const getDimensions = () => {
     switch (item.size) {
       case "lg":
@@ -76,8 +76,8 @@ export default function GalleryNode({
         }`}
       >
         {/* Sci-Fi Corner Tech Accents */}
-        <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-sky-400 z-10" />
-        <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-red-500 z-10" />
+        <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-sky-400 z-10" />
+        <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-red-500 z-10" />
 
         {/* Thumbnail Image */}
         <div className="relative w-full h-full rounded-xl overflow-hidden">
@@ -87,7 +87,7 @@ export default function GalleryNode({
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
 
-          {/* Dark Glass Overlay for Text Readability */}
+          {/* Dark Gradient Overlay for Text Readability */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#040814]/90 via-[#040814]/20 to-transparent" />
 
           {/* Category Badge (Top Left) */}
@@ -97,7 +97,7 @@ export default function GalleryNode({
             </span>
           </div>
 
-          {/* Title & Location Overlay (Bottom Left) */}
+          {/* Title & Date Overlay (Bottom Left) */}
           <div className="absolute bottom-2 left-2 right-2">
             <h4
               className={`text-xs font-mono font-extrabold uppercase tracking-wide truncate transition-colors ${
@@ -107,7 +107,7 @@ export default function GalleryNode({
               {item.title}
             </h4>
             <p className="text-[9px] font-mono text-slate-300 truncate">
-              {item.event}
+              {item.date}
             </p>
           </div>
         </div>
