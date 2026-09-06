@@ -1,5 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
+import Navbar from "@/components/Navbar";
 import TeamScene from "@/components/team/TeamScene";
 
 export const metadata: Metadata = {
@@ -8,5 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default function TeamPage() {
-  return <TeamScene />;
+  return (
+    <>
+      <Navbar />
+      <TeamScene />
+    </>
+  );
 }
