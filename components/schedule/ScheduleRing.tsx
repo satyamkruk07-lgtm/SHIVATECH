@@ -42,17 +42,17 @@ export default function ScheduleRing({
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Dynamic radial radius scaled for 55% viewport height
-  const [radius, setRadius] = useState<number>(280);
+  // Dynamic radial radius scaled for optimal clearance below header
+  const [radius, setRadius] = useState<number>(230);
 
   useEffect(() => {
     const updateRadius = () => {
       if (window.innerWidth < 640) {
-        setRadius(180);
+        setRadius(160);
       } else if (window.innerWidth < 1024) {
-        setRadius(230);
+        setRadius(200);
       } else {
-        setRadius(290);
+        setRadius(240);
       }
     };
     updateRadius();

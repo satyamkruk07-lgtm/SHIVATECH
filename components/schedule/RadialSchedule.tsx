@@ -6,6 +6,7 @@ import ScheduleRing from "./ScheduleRing";
 import ScheduleHUD from "./ScheduleHUD";
 import ScheduleDetails from "./ScheduleDetails";
 import HolographicHand from "./HolographicHand";
+import ScheduleCountdown from "./ScheduleCountdown";
 
 export default function RadialSchedule() {
   const [activeDay, setActiveDay] = useState<number>(1);
@@ -27,7 +28,7 @@ export default function RadialSchedule() {
     setSelectedIndex(index);
   }, []);
 
-  // Keyboard navigation
+  // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight" || e.key === "ArrowDown") {
@@ -56,7 +57,7 @@ export default function RadialSchedule() {
 
   return (
     <div
-      className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative w-full min-h-screen flex flex-col items-center justify-between overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* 1. PHOTOREALISTIC SUPERHERO HAND LAYER (BEHIND UI) */}
@@ -65,8 +66,8 @@ export default function RadialSchedule() {
       {/* 2. TOP CENTER PAGE TITLE & DAY SELECTOR */}
       <ScheduleHUD activeDay={activeDay} onSelectDay={handleSelectDay} />
 
-      {/* 3. CENTRAL LARGE INTERACTIVE RADIAL HOLOGRAM */}
-      <div className="relative z-10 my-auto pt-36 pb-12 sm:pt-40 sm:pb-16">
+      {/* 3. CENTRAL RADIAL INTERACTIVE HOLOGRAM */}
+      <div className="relative z-10 my-auto py-4 sm:py-6">
         <ScheduleRing
           items={items}
           selectedIndex={selectedIndex}
@@ -74,7 +75,10 @@ export default function RadialSchedule() {
         />
       </div>
 
-      {/* 4. FLOATING EVENT DETAILS GLASS PANEL */}
+      {/* 4. BOTTOM-LEFT "STAY ON TRACK" LIVE COUNTDOWN TIMER PANEL */}
+      <ScheduleCountdown />
+
+      {/* 5. FLOATING EVENT DETAILS GLASS PANEL */}
       <ScheduleDetails item={selectedItem} />
     </div>
   );
