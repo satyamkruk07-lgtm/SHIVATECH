@@ -6,8 +6,16 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
 
 export const metadata: Metadata = {
-  title: "Rise. Create. Innovate. | Tech Fest",
-  description: "A premium college tech fest.",
+  title: "SHIVATECH 2026 | Tech Fest",
+  description: "Official Tech Fest of Shivalik University, Dehradun.",
+  icons: {
+    icon: [
+      { url: "/favicon.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
