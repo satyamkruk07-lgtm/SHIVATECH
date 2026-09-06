@@ -152,13 +152,18 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
 
       if (!canvasWidth || !canvasHeight || !srcWidth || !srcHeight) return;
 
-      // Cover scaling algorithm
-      const hRatio = canvasWidth / srcWidth;
-      const vRatio = canvasHeight / srcHeight;
-      const ratio = Math.max(hRatio, vRatio);
+      // Cover scaling algorithm with consistent scale-crop factor to remove bottom-right watermark
+      const baseHRatio = canvasWidth / srcWidth;
+      const baseVRatio = canvasHeight / srcHeight;
+      const baseRatio = Math.max(baseHRatio, baseVRatio);
+
+      // Consistent 1.06x crop scale (6% zoom) pushes the bottom-right AI watermark outside the visible canvas bounds
+      const watermarkCropFactor = 1.06;
+      const ratio = baseRatio * watermarkCropFactor;
 
       const drawWidth = srcWidth * ratio;
       const drawHeight = srcHeight * ratio;
+      // Position slightly upward & leftward so the bottom-right margin is cropped out while maintaining central composition
       const offsetX = (canvasWidth - drawWidth) / 2;
       const offsetY = (canvasHeight - drawHeight) / 2;
 
