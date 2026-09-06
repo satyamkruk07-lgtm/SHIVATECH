@@ -1,63 +1,28 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { galleryData, GalleryCategory, GalleryItem } from "@/data/gallery";
+import React, { useState, useEffect, useCallback } from "react";
+import { galleryData, galleryCategories, GalleryCategory, GalleryItem } from "@/data/gallery";
 import CityBackground from "./CityBackground";
 import GalleryFilters from "./GalleryFilters";
-import WebNetwork from "./WebNetwork";
-import GalleryNode from "./GalleryNode";
-import GalleryDetailsPanel from "./GalleryDetailsPanel";
-import GalleryHUD from "./GalleryHUD";
+import GalleryCarousel from "./GalleryCarousel";
+import GalleryDetails from "./GalleryDetails";
 
 export default function GalleryScene() {
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>("ALL");
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [showDetailsPanel, setShowDetailsPanel] = useState<boolean>(true);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [selectedPhotoItem, setSelectedPhotoItem] = useState<GalleryItem | null>(null);
 
-  // Parallax offset
+  // Mouse Parallax Offset
   const [mouseOffset, setMouseOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
-  // Web Network Draggable Position
-  const [dragOffset, setDragOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const isDraggingRef = useRef<boolean>(false);
-  const startPointerPosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const startDragOffsetRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  // Filter items based on selected category
+  const filteredItems = galleryData.filter(
+    (item) => activeCategory === "ALL" || item.category === activeCategory
+  );
 
   const handleSelectCategory = (cat: GalleryCategory) => {
     setActiveCategory(cat);
-    setSelectedIndex(0);
   };
 
-  const handleSelectNode = (idx: number) => {
-    setSelectedIndex(idx);
-    setShowDetailsPanel(true);
-  };
-
-  const handleNext = useCallback(() => {
-    setSelectedIndex((prev) => (prev + 1) % galleryData.length);
-  }, []);
-
-  const handlePrev = useCallback(() => {
-    setSelectedIndex((prev) => (prev - 1 + galleryData.length) % galleryData.length);
-  }, []);
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") {
-        handleNext();
-      } else if (e.key === "ArrowLeft") {
-        handlePrev();
-      } else if (e.key === "Escape") {
-        setShowDetailsPanel(false);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleNext, handlePrev]);
-
-  // Mouse Parallax & Drag Handlers
   const handleMouseMove = (e: React.MouseEvent) => {
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
@@ -66,119 +31,75 @@ export default function GalleryScene() {
     setMouseOffset({ x, y });
   };
 
-  const handlePointerDown = (e: React.PointerEvent) => {
-    if (e.button !== 0) return;
-    isDraggingRef.current = true;
-    startPointerPosRef.current = { x: e.clientX, y: e.clientY };
-    startDragOffsetRef.current = { ...dragOffset };
-  };
+  const handlePrevModalPhoto = useCallback(() => {
+    if (!selectedPhotoItem) return;
+    const currentIdx = filteredItems.findIndex((it) => it.id === selectedPhotoItem.id);
+    const prevIdx = (currentIdx - 1 + filteredItems.length) % filteredItems.length;
+    setSelectedPhotoItem(filteredItems[prevIdx]);
+  }, [selectedPhotoItem, filteredItems]);
 
-  const handlePointerMove = (e: React.PointerEvent) => {
-    if (!isDraggingRef.current) return;
-    const dx = e.clientX - startPointerPosRef.current.x;
-    const dy = e.clientY - startPointerPosRef.current.y;
-    setDragOffset({
-      x: startDragOffsetRef.current.x + dx * 0.35,
-      y: startDragOffsetRef.current.y + dy * 0.35,
-    });
-  };
+  const handleNextModalPhoto = useCallback(() => {
+    if (!selectedPhotoItem) return;
+    const currentIdx = filteredItems.findIndex((it) => it.id === selectedPhotoItem.id);
+    const nextIdx = (currentIdx + 1) % filteredItems.length;
+    setSelectedPhotoItem(filteredItems[nextIdx]);
+  }, [selectedPhotoItem, filteredItems]);
 
-  const handlePointerUp = () => {
-    isDraggingRef.current = false;
-  };
-
-  const selectedItem = galleryData[selectedIndex] || galleryData[0];
+  // Keyboard navigation for modal & carousel
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedPhotoItem) {
+        if (e.key === "ArrowLeft") handlePrevModalPhoto();
+        if (e.key === "ArrowRight") handleNextModalPhoto();
+        if (e.key === "Escape") setSelectedPhotoItem(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedPhotoItem, handlePrevModalPhoto, handleNextModalPhoto]);
 
   return (
     <main
-      className="relative w-full min-h-screen bg-[#02050e] text-white overflow-hidden selection:bg-red-600 selection:text-white select-none"
+      className="relative w-full min-h-screen bg-[#02050e] text-white overflow-hidden selection:bg-red-600 selection:text-white select-none flex flex-col justify-between"
       onMouseMove={handleMouseMove}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
     >
       {/* 1. CINEMATIC FUTURISTIC CITY SKYLINE & ROOFTOP BACKGROUND */}
       <CityBackground mouseX={mouseOffset.x} mouseY={mouseOffset.y} />
 
-      {/* 2. TOP CATEGORY FILTERS PILL BAR */}
-      <GalleryFilters
-        activeCategory={activeCategory}
-        onSelectCategory={handleSelectCategory}
-      />
-
-      {/* 3. MAIN SPIDER-WEB & ORGANIC PHOTO NETWORK CONTAINER */}
-      <div
-        className="relative z-10 w-full min-h-[70vh] flex items-center justify-center pointer-events-none transition-transform duration-200 ease-out"
-        style={{
-          transform: `translate3d(${dragOffset.x + mouseOffset.x * 10}px, ${
-            dragOffset.y + mouseOffset.y * 10
-          }px, 0)`,
-        }}
-      >
-        {/* SVG Spider-Web Network */}
-        <WebNetwork
-          items={galleryData}
-          selectedIndex={selectedIndex}
-          hoveredIndex={hoveredIndex}
-          centerPos={{ x: 500, y: 500 }}
-        />
-
-        {/* Central Web Hub Emblem */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-center pointer-events-none">
-          <div className="w-7 h-7 mx-auto mb-0.5 flex items-center justify-center">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-red-500 filter drop-shadow">
-              <ellipse cx="12" cy="13.5" rx="3" ry="4" fill="#040814" stroke="currentColor" strokeWidth="1.5" />
-              <circle cx="12" cy="7" r="2.2" fill="#040814" stroke="#38bdf8" strokeWidth="1.5" />
-              <circle cx="12" cy="13.5" r="1.2" fill="#ef4444" className="animate-pulse" />
-            </svg>
-          </div>
-          <div className="text-[9px] font-mono font-black tracking-widest text-white uppercase drop-shadow">
+      {/* 2. TOP HEADER HUD & CATEGORY FILTERS PILL BAR */}
+      <div className="relative z-20 pt-16 sm:pt-20 px-4 flex flex-col items-center">
+        {/* Title */}
+        <div className="inline-flex items-center space-x-2 px-3 py-0.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-1">
+          <span className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)] animate-pulse" />
+          <span className="text-[10px] sm:text-[11px] font-mono font-bold tracking-widest text-red-500 uppercase">
             WEB OF MEMORIES
-          </div>
-          <div className="text-[8px] font-mono text-red-500 font-bold tracking-widest uppercase">
-            SHIVATECH
-          </div>
+          </span>
         </div>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white uppercase font-mono drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] leading-none mb-4 text-center">
+          GALLERY ARCHIVE
+        </h1>
 
-        {/* Floating Photo Nodes */}
-        {galleryData.map((item, idx) => {
-          const isFilteredOut =
-            activeCategory !== "ALL" && item.category !== activeCategory;
-
-          return (
-            <GalleryNode
-              key={item.id}
-              item={item}
-              index={idx}
-              x={item.x}
-              y={item.y}
-              isSelected={idx === selectedIndex}
-              isHovered={idx === hoveredIndex}
-              isFilteredOut={isFilteredOut}
-              onClick={() => handleSelectNode(idx)}
-              onMouseEnter={() => setHoveredIndex(idx)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            />
-          );
-        })}
+        {/* Category Filters Bar */}
+        <GalleryFilters
+          activeCategory={activeCategory}
+          onSelectCategory={handleSelectCategory}
+        />
       </div>
 
-      {/* 4. FLOATING CINEMATIC GLASS DETAILS PANEL */}
-      {showDetailsPanel && (
-        <GalleryDetailsPanel
-          item={selectedItem}
-          onPrev={handlePrev}
-          onNext={handleNext}
-          onClose={() => setShowDetailsPanel(false)}
+      {/* 3. PRIMARY MASK-TO-PHOTO REVEAL CAROUSEL */}
+      <div className="relative z-10 w-full my-auto">
+        <GalleryCarousel
+          items={filteredItems}
+          onOpenPhotoModal={(item) => setSelectedPhotoItem(item)}
         />
-      )}
+      </div>
 
-      {/* 5. TOP-LEFT TITLE, BOTTOM COUNTER, SCROLL & NAV HUD */}
-      <GalleryHUD
-        currentIndex={selectedIndex}
-        totalCount={galleryData.length}
-        onPrev={handlePrev}
-        onNext={handleNext}
+      {/* 4. CINEMATIC LIGHTBOX MODAL (On clicking center photo) */}
+      <GalleryDetails
+        item={selectedPhotoItem}
+        onClose={() => setSelectedPhotoItem(null)}
+        onPrev={handlePrevModalPhoto}
+        onNext={handleNextModalPhoto}
       />
     </main>
   );
