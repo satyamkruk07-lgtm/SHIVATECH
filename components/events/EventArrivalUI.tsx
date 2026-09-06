@@ -31,8 +31,8 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
 
   return (
     <>
-      {/* 1. Left-Side Vertical Serial Events Navigation Panel */}
-      <div className="fixed left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 pointer-events-auto">
+      {/* 1. Left-Side Vertical Serial Events Navigation Panel (Desktop / Tablet) */}
+      <div className="hidden sm:block fixed left-4 sm:left-6 top-1/2 -translate-y-1/2 z-30 pointer-events-auto">
         <div className="bg-[#040814]/85 backdrop-blur-xl border border-white/15 rounded-2xl p-3.5 sm:p-5 shadow-[0_0_40px_rgba(0,0,0,0.8),0_0_20px_rgba(239,68,68,0.15)] flex flex-col w-[160px] sm:w-[210px] text-white">
           {/* Top Sci-Fi Border Highlight */}
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-red-500 via-white to-blue-500 opacity-70 rounded-t-2xl" />
@@ -101,9 +101,48 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
         </div>
       </div>
 
+      {/* 1B. Mobile Floating Events Bottom Selector Bar */}
+      <div className="sm:hidden fixed bottom-3 left-3 right-3 z-30 pointer-events-auto">
+        <div className="bg-[#040814]/90 backdrop-blur-xl border border-white/15 rounded-xl p-1.5 shadow-[0_0_30px_rgba(0,0,0,0.8)] flex items-center justify-between space-x-1 font-mono">
+          {eventsSequenceData.map((evt, idx) => {
+            const isActive = activeEventIndex === idx;
+
+            const handleEventClick = () => {
+              setDismissedEventId(null);
+              const segmentWidth = 0.25;
+              const arrivalRatio = (evt.arrival.startFrame - evt.minFrame) / (evt.frameCount - 1);
+              const targetProgress = idx * segmentWidth + segmentWidth * arrivalRatio;
+
+              if (typeof window !== "undefined") {
+                const maxScroll =
+                  document.documentElement.scrollHeight - window.innerHeight;
+                window.scrollTo({
+                  top: maxScroll * targetProgress,
+                  behavior: "smooth",
+                });
+              }
+            };
+
+            return (
+              <button
+                key={evt.id}
+                onClick={handleEventClick}
+                className={`flex-1 py-1.5 px-1 rounded-lg text-center transition-all ${
+                  isActive
+                    ? "bg-gradient-to-r from-red-600 to-blue-600 text-white font-bold text-[10px] shadow-md border border-white/30"
+                    : "text-white/60 hover:text-white text-[10px]"
+                }`}
+              >
+                0{idx + 1}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* DEV-ONLY SEQUENCE DEBUG OVERLAY (Hidden in production) */}
       {process.env.NODE_ENV !== "production" && (
-        <div className="fixed top-20 right-4 sm:right-6 z-40 bg-[#040814]/90 backdrop-blur-md border border-red-500/50 text-white font-mono text-xs p-3 rounded-xl pointer-events-none select-none shadow-[0_0_20px_rgba(239,68,68,0.3)]">
+        <div className="fixed top-16 right-3 sm:top-20 sm:right-6 z-40 bg-[#040814]/90 backdrop-blur-md border border-red-500/50 text-white font-mono text-xs p-2.5 rounded-xl pointer-events-none select-none shadow-[0_0_20px_rgba(239,68,68,0.3)]">
           <div className="text-red-500 font-extrabold tracking-widest uppercase text-[10px] mb-1">
             DEV SEQUENCE DEBUG
           </div>
@@ -126,7 +165,7 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
         </div>
       )}
 
-      {/* 2. Detailed Event Arrival Modal/Card (Image 1 Style - Appears on arrival, disappears on scroll) */}
+      {/* 2. Detailed Event Arrival Modal/Card (Appears on arrival, disappears on scroll) */}
       <AnimatePresence mode="wait">
         {isArrivalRange && dismissedEventId !== activeEvent.id && (
           <motion.div
@@ -135,9 +174,9 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
             animate={{ opacity: 1, y: 0, scale: 1.0 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 flex items-center justify-center p-4 sm:p-6 pointer-events-none"
+            className="fixed inset-0 z-40 flex items-center justify-center p-3 sm:p-6 pointer-events-none"
           >
-            <div className="relative w-full max-w-xl bg-[#050b18]/90 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-[0_0_80px_rgba(239,68,68,0.25)] overflow-hidden text-white p-6 sm:p-8 pointer-events-auto select-none">
+            <div className="relative w-full max-w-xl max-h-[85vh] overflow-y-auto bg-[#050b18]/95 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-[0_0_80px_rgba(239,68,68,0.25)] text-white p-5 sm:p-8 pointer-events-auto select-none">
               {/* Top sci-fi border highlight */}
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-red-500 via-white to-blue-500 opacity-70" />
 

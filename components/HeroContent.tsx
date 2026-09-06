@@ -35,28 +35,28 @@ const HeroContent = forwardRef<HTMLDivElement, HeroContentProps>(
               <path d="M70 40 Q100 30 130 40 Q140 50 130 60 Q100 70 70 60 Q60 50 70 40 Z" />
             </svg>
             
-            <h1 className="font-orbitron font-black text-6xl md:text-8xl lg:text-[8.5rem] tracking-tight leading-none text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-100 to-gray-400 drop-shadow-[0_15px_25px_rgba(0,0,0,0.9)] italic transform -skew-x-6 relative z-10 px-6 sm:px-12 lg:px-16 overflow-visible select-none">
-              <span className="absolute inset-0 px-6 sm:px-12 lg:px-16 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-blue-600 mix-blend-overlay blur-[3px]">
+            <h1 className="font-orbitron font-black text-4xl min-[380px]:text-5xl sm:text-7xl md:text-8xl lg:text-[8.5rem] tracking-tight leading-none text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-100 to-gray-400 drop-shadow-[0_15px_25px_rgba(0,0,0,0.9)] italic transform -skew-x-6 relative z-10 px-2 sm:px-12 lg:px-16 overflow-visible select-none">
+              <span className="absolute inset-0 px-2 sm:px-12 lg:px-16 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-blue-600 mix-blend-overlay blur-[3px]">
                 SHIVATECH
               </span>
-              <span className="absolute inset-0 px-6 sm:px-12 lg:px-16 drop-shadow-[0_0_15px_rgba(220,38,38,0.5)] z-[-1]">SHIVATECH</span>
+              <span className="absolute inset-0 px-2 sm:px-12 lg:px-16 drop-shadow-[0_0_15px_rgba(220,38,38,0.5)] z-[-1]">SHIVATECH</span>
               SHIVATECH
             </h1>
 
-            <div className="absolute -bottom-4 md:-bottom-8 right-[5%] md:right-[15%] text-4xl md:text-6xl font-orbitron font-black tracking-widest text-red-600 drop-shadow-[0_0_20px_rgba(220,38,38,0.8)] italic transform -skew-x-12 z-20">
+            <div className="absolute -bottom-3 sm:-bottom-6 md:-bottom-8 right-1 sm:right-[5%] md:right-[15%] text-2xl sm:text-4xl md:text-6xl font-orbitron font-black tracking-widest text-red-600 drop-shadow-[0_0_20px_rgba(220,38,38,0.8)] italic transform -skew-x-12 z-20">
               2026
             </div>
           </div>
 
-          <p className="text-xs md:text-sm font-semibold tracking-[0.4em] md:tracking-[0.6em] text-white mt-12 mb-8 uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] flex items-center justify-center gap-4">
+          <p className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.2em] sm:tracking-[0.4em] md:tracking-[0.6em] text-white mt-8 sm:mt-12 mb-6 sm:mb-8 uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] flex items-center justify-center gap-2.5 sm:gap-4 px-2">
             RISE <span className="w-1.5 h-1.5 bg-red-600 rounded-full shadow-[0_0_10px_rgba(220,38,38,0.8)]"></span> CREATE <span className="w-1.5 h-1.5 bg-red-600 rounded-full shadow-[0_0_10px_rgba(220,38,38,0.8)]"></span> INNOVATE
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 md:gap-8 mt-4">
+          <div className="flex flex-col sm:flex-row gap-6 md:gap-8 mt-2 sm:mt-4">
             {/* Register Now Link Button to /events */}
             <Link
               href="/events"
-              className="group relative px-8 py-3 bg-black/60 backdrop-blur-md overflow-hidden rounded-[4px] border-2 border-red-600/80 hover:border-red-500 hover:bg-red-950/40 transition-all duration-300 pointer-events-auto flex items-center gap-2 shadow-[0_0_15px_rgba(220,38,38,0.3)] hover:shadow-[0_0_25px_rgba(220,38,38,0.6)]"
+              className="group relative px-7 sm:px-8 py-2.5 sm:py-3 bg-black/60 backdrop-blur-md overflow-hidden rounded-[4px] border-2 border-red-600/80 hover:border-red-500 hover:bg-red-950/40 transition-all duration-300 pointer-events-auto flex items-center gap-2 shadow-[0_0_15px_rgba(220,38,38,0.3)] hover:shadow-[0_0_25px_rgba(220,38,38,0.6)]"
             >
               <span className="relative z-10 text-xs md:text-sm font-bold tracking-[0.1em] text-white drop-shadow-md">
                 REGISTER NOW

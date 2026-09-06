@@ -76,7 +76,7 @@ export const GalleryCard: React.FC<GalleryCardProps> = ({
 
   return (
     <motion.div
-      className="absolute top-0 left-0 right-0 bottom-0 m-auto w-[240px] h-[340px] sm:w-[280px] sm:h-[390px] md:w-[320px] md:h-[440px] cursor-pointer pointer-events-auto"
+      className="absolute top-0 left-0 right-0 bottom-0 m-auto w-[210px] h-[300px] xs:w-[240px] xs:h-[340px] sm:w-[280px] sm:h-[390px] md:w-[320px] md:h-[440px] cursor-pointer pointer-events-auto"
       animate={{
         x: slotStyle.x,
         scale: slotStyle.scale,

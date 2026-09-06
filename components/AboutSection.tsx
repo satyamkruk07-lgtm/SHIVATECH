@@ -22,7 +22,7 @@ export default function AboutSection() {
   return (
     <section 
       ref={containerRef}
-      className="relative w-full min-h-screen bg-[#050914] text-white pt-32 pb-24 px-6 lg:px-12 overflow-hidden"
+      className="relative w-full min-h-screen bg-[#050914] text-white pt-24 sm:pt-32 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-12 overflow-hidden"
     >
       {/* Residual Mist matching the Hero Fog transition */}
       <div className="absolute top-0 left-0 w-full h-[30vh] bg-gradient-to-b from-[#050914] to-transparent pointer-events-none z-0" />
@@ -39,7 +39,7 @@ export default function AboutSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col justify-center min-h-[calc(100vh-12rem)]">
         
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+        <div className="flex flex-col lg:flex-row items-center gap-10 sm:gap-16 lg:gap-24">
           
           {/* Left Column: Content */}
           <motion.div 
@@ -51,23 +51,23 @@ export default function AboutSection() {
             }}
           >
             {/* Eyebrow */}
-            <motion.div variants={textVariants} className="flex items-center gap-4 mb-6">
-              <div className="h-[1px] w-12 bg-red-500" />
-              <span className="font-orbitron tracking-[0.3em] text-red-500 text-sm font-bold uppercase">
+            <motion.div variants={textVariants} className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <div className="h-[1px] w-8 sm:w-12 bg-red-500" />
+              <span className="font-orbitron tracking-[0.2em] sm:tracking-[0.3em] text-red-500 text-xs sm:text-sm font-bold uppercase">
                 ORGANISED BY SHIVALIK UNIVERSITY
               </span>
             </motion.div>
 
             {/* Main Heading */}
-            <motion.div variants={textVariants} className="mb-4">
-              <h2 className="font-orbitron text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white drop-shadow-md">
+            <motion.div variants={textVariants} className="mb-3 sm:mb-4">
+              <h2 className="font-orbitron text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white drop-shadow-md">
                 SHIVATECH <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500">2026</span>
               </h2>
             </motion.div>
 
             {/* Supporting Heading */}
-            <motion.div variants={textVariants} className="mb-4">
-              <h3 className="font-sans text-xl md:text-2xl text-white/80 tracking-wide font-light">
+            <motion.div variants={textVariants} className="mb-3 sm:mb-4">
+              <h3 className="font-sans text-lg sm:text-xl md:text-2xl text-white/80 tracking-wide font-light">
                 WHERE TECHNOLOGY MEETS CREATIVITY
               </h3>
             </motion.div>

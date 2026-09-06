@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -62,32 +63,68 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             </motion.div>
 
             {/* Staggered Navigation Items */}
-            <div className="flex flex-col items-center space-y-5 font-mono text-center w-full max-w-xs">
+            <div className="flex flex-col items-center space-y-4 font-mono text-center w-full max-w-xs">
               {navLinks.map((link, i) => {
-                const isActive = pathname === link.href;
-                return (
-                  <motion.div
-                    key={link.name}
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + i * 0.05 }}
-                    className="w-full"
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={onClose}
-                      className={`block py-2.5 px-4 text-sm font-bold tracking-[0.2em] uppercase rounded-lg transition-all ${
-                        isActive
-                          ? "bg-gradient-to-r from-red-600/30 to-blue-600/30 border border-white/20 text-white shadow-[0_0_15px_rgba(239,68,68,0.4)]"
-                          : "text-white/70 hover:text-white hover:bg-white/5"
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </div>
+                 const isActive = pathname === link.href;
+                 return (
+                   <motion.div
+                     key={link.name}
+                     initial={{ opacity: 0, y: 15 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     transition={{ delay: 0.1 + i * 0.05 }}
+                     className="w-full"
+                   >
+                     <Link
+                       href={link.href}
+                       onClick={onClose}
+                       className={`block py-2 px-4 text-sm font-bold tracking-[0.2em] uppercase rounded-lg transition-all ${
+                         isActive
+                           ? "bg-gradient-to-r from-red-600/30 to-blue-600/30 border border-white/20 text-white shadow-[0_0_15px_rgba(239,68,68,0.4)]"
+                           : "text-white/70 hover:text-white hover:bg-white/5"
+                       }`}
+                     >
+                       {link.name}
+                     </Link>
+                   </motion.div>
+                 );
+               })}
+             </div>
+
+            {/* Mobile Menu Bottom Logos Row */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35 }}
+              className="pt-4 border-t border-white/15 flex items-center justify-center space-x-3 w-full max-w-xs"
+            >
+              <div className="h-9 px-2 bg-white/95 rounded-lg flex items-center justify-center shadow-md">
+                <Image
+                  src="/images/university_logo.png"
+                  alt="Shivalik University Logo"
+                  width={85}
+                  height={28}
+                  className="object-contain h-7 w-auto"
+                />
+              </div>
+              <div className="h-9 w-9 bg-white/95 rounded-lg p-1 flex items-center justify-center shadow-md">
+                <Image
+                  src="/images/acm_logo_cropped.png"
+                  alt="ACM Logo"
+                  width={30}
+                  height={30}
+                  className="object-contain h-7 w-7"
+                />
+              </div>
+              <div className="h-9 w-9 bg-white/95 rounded-lg p-1 flex items-center justify-center shadow-md">
+                <Image
+                  src="/images/cbii_logo.png"
+                  alt="CBII Logo"
+                  width={30}
+                  height={30}
+                  className="object-contain h-7 w-7"
+                />
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

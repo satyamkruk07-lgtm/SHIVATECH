@@ -67,7 +67,7 @@ export const TeamCarousel: React.FC = () => {
       </button>
 
       {/* HORIZONTAL TEAM CARDS ROW */}
-      <div className="w-full flex items-center justify-center space-x-2 sm:space-x-3 md:space-x-4 lg:space-x-5 overflow-x-auto no-scrollbar py-6 px-12 sm:px-16">
+      <div className="w-full flex items-center justify-start md:justify-center space-x-2.5 sm:space-x-3 md:space-x-4 lg:space-x-5 overflow-x-auto no-scrollbar py-6 px-4 sm:px-12 md:px-16 scroll-smooth snap-x snap-mandatory">
         {ordered.map(({ member, idx, isCenter }) => (
           <TeamCard
             key={member.id}

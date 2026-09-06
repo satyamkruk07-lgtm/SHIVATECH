@@ -13,7 +13,7 @@ export default function GalleryFilters({
   onSelectCategory,
 }: GalleryFiltersProps) {
   return (
-    <div className="w-full max-w-3xl mx-auto flex items-center justify-center pointer-events-auto select-none px-4 pt-20 sm:pt-24 pb-1 z-20">
+    <div className="w-full max-w-3xl mx-auto flex items-center justify-center pointer-events-auto select-none px-2 sm:px-4 pt-2 pb-1 z-20">
       {/* Category Pills Bar */}
       <div className="inline-flex items-center flex-wrap justify-center gap-1.5 p-1 rounded-full bg-[#040814]/85 border border-white/15 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
         {galleryCategories.map((cat) => (

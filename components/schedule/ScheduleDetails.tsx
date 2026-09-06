@@ -13,8 +13,8 @@ export default function ScheduleDetails({ item, onClose }: ScheduleDetailsProps)
   if (!item) return null;
 
   return (
-    <div className="absolute top-16 sm:top-20 right-3 sm:right-6 lg:right-8 z-30 w-full max-w-[280px] sm:max-w-[310px] pointer-events-auto select-none transition-all duration-500 ease-out animate-fadeIn">
-      <div className="relative p-4 rounded-xl sm:rounded-2xl bg-[#040814]/85 border border-sky-500/30 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.85),0_0_25px_rgba(56,189,248,0.2)]">
+    <div className="absolute bottom-3 left-3 right-3 sm:bottom-auto sm:left-auto sm:top-20 sm:right-6 lg:right-8 z-30 w-auto sm:w-full sm:max-w-[310px] pointer-events-auto select-none transition-all duration-500 ease-out animate-fadeIn">
+      <div className="relative p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#040814]/90 border border-sky-500/30 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.85),0_0_25px_rgba(56,189,248,0.2)]">
         {/* Sci-Fi Angular Tech Accents */}
         <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-red-500" />
         <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-sky-400" />

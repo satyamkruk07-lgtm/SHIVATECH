@@ -61,30 +61,30 @@ export default function Navbar() {
       }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out select-none ${
         scrolled
-          ? "bg-[#040814]/90 backdrop-blur-2xl border-b border-white/15 py-4 md:py-5 shadow-[0_8px_32px_rgba(0,0,0,0.85),0_0_25px_rgba(239,68,68,0.15)]"
-          : "bg-transparent py-6 md:py-8"
+          ? "bg-[#040814]/95 backdrop-blur-2xl border-b border-white/15 py-2.5 sm:py-4 md:py-5 shadow-[0_8px_32px_rgba(0,0,0,0.85),0_0_25px_rgba(239,68,68,0.15)]"
+          : "bg-[#040814]/60 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none py-3 sm:py-6 md:py-8"
       }`}
     >
       {/* Dynamic Web Accent Border */}
       <NavbarWebAccent activeHoverIndex={activeHoverIndex} />
 
       {/* Header Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between relative z-10">
+      <div className="max-w-7xl mx-auto px-2.5 xs:px-4 sm:px-6 lg:px-8 flex items-center justify-between relative z-10">
         {/* LEFT: SHIVATECH Brand & Logos */}
-        <div className="flex items-center space-x-3 sm:space-x-4">
+        <div className="flex items-center space-x-1.5 xs:space-x-2 sm:space-x-4 min-w-0">
           <Link
             href="/"
-            className="group flex items-center space-x-3.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-sm"
+            className="group flex items-center space-x-1.5 xs:space-x-2 sm:space-x-3.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-sm shrink-0"
           >
             {/* Abstract Tech Spider Icon */}
-            <div className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 border border-white/15 group-hover:border-red-500/60 transition-all shadow-[0_0_20px_rgba(239,68,68,0.25)]">
+            <div className="relative w-7 h-7 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg sm:rounded-xl bg-white/10 border border-white/15 group-hover:border-red-500/60 transition-all shadow-[0_0_20px_rgba(239,68,68,0.25)] shrink-0">
               <svg
-                width="24"
-                height="24"
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="text-white group-hover:text-red-400 transition-colors"
+                className="text-white group-hover:text-red-400 transition-colors sm:w-6 sm:h-6"
               >
                 <ellipse cx="12" cy="13.5" rx="3" ry="4" fill="#060b16" stroke="currentColor" strokeWidth="1.2" />
                 <circle cx="12" cy="7" r="2.2" fill="#060b16" stroke="#3b82f6" strokeWidth="1.2" />
@@ -99,46 +99,46 @@ export default function Navbar() {
             </div>
 
             {/* Wordmark */}
-            <span className="font-mono font-black text-2xl sm:text-3xl tracking-[0.16em] text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-red-400 transition-all duration-300 drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]">
+            <span className="font-mono font-black text-sm xs:text-base sm:text-2xl md:text-3xl tracking-[0.06em] xs:tracking-[0.1em] sm:tracking-[0.16em] text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-red-400 transition-all duration-300 drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]">
               SHIVATECH
             </span>
           </Link>
 
-          {/* 3 INSTITUTION LOGOS (RIGHT OF SHIVATECH, LEFT OF HOME) - ENLARGED BY 30% */}
-          <div className="hidden sm:flex items-center space-x-2.5 pl-3 sm:pl-4 border-l border-white/20">
+          {/* 3 INSTITUTION LOGOS (VISIBLE ON ALL DEVICES: MOBILE, TABLET & DESKTOP) */}
+          <div className="flex items-center space-x-1 xs:space-x-1.5 sm:space-x-2.5 pl-1.5 xs:pl-2 sm:pl-4 border-l border-white/20 shrink-0">
             {/* 1. University Logo */}
-            <div className="h-10 sm:h-11 px-2.5 bg-white/95 rounded-xl flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform">
+            <div className="h-6 xs:h-7 sm:h-10 md:h-11 px-1 xs:px-1.5 sm:px-2.5 bg-white/95 rounded-md sm:rounded-xl flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform shrink-0">
               <Image
                 src="/images/university_logo.png"
                 alt="Shivalik University Logo"
                 width={105}
                 height={34}
                 priority
-                className="object-contain h-8 sm:h-9 w-auto"
+                className="object-contain h-4 xs:h-5 sm:h-8 md:h-9 w-auto"
               />
             </div>
 
             {/* 2. ACM Logo */}
-            <div className="h-10 w-10 sm:h-11 sm:w-11 bg-white/95 rounded-xl p-1 flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform">
+            <div className="h-6 w-6 xs:h-7 xs:w-7 sm:h-10 sm:w-10 md:h-11 md:w-11 bg-white/95 rounded-md sm:rounded-xl p-0.5 sm:p-1 flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform shrink-0">
               <Image
                 src="/images/acm_logo_cropped.png"
                 alt="ACM Logo"
                 width={36}
                 height={36}
                 priority
-                className="object-contain h-8 w-8 sm:h-9 sm:w-9"
+                className="object-contain h-4 w-4 xs:h-5 xs:w-5 sm:h-8 sm:w-8 md:h-9 md:w-9"
               />
             </div>
 
             {/* 3. CBII Logo */}
-            <div className="h-10 w-10 sm:h-11 sm:w-11 bg-white/95 rounded-xl p-1 flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform">
+            <div className="h-6 w-6 xs:h-7 xs:w-7 sm:h-10 sm:w-10 md:h-11 md:w-11 bg-white/95 rounded-md sm:rounded-xl p-0.5 sm:p-1 flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform shrink-0">
               <Image
                 src="/images/cbii_logo.png"
                 alt="CBII Logo"
                 width={36}
                 height={36}
                 priority
-                className="object-contain h-8 w-8 sm:h-9 sm:w-9"
+                className="object-contain h-4 w-4 xs:h-5 xs:w-5 sm:h-8 sm:w-8 md:h-9 md:w-9"
               />
             </div>
           </div>

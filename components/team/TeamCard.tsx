@@ -21,7 +21,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
       onClick={onClick}
       whileHover={{ y: -8, scale: isCenter ? 1.07 : 1.03 }}
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative w-[210px] h-[330px] sm:w-[225px] sm:h-[360px] md:w-[240px] md:h-[385px] rounded-2xl overflow-hidden cursor-pointer select-none transition-all duration-300 flex flex-col justify-between p-2.5 ${
+      className={`relative shrink-0 snap-center w-[190px] h-[310px] xs:w-[210px] xs:h-[330px] sm:w-[225px] sm:h-[360px] md:w-[240px] md:h-[385px] rounded-2xl overflow-hidden cursor-pointer select-none transition-all duration-300 flex flex-col justify-between p-2.5 ${
         isCenter
           ? "bg-[#080e22]/90 border-t-2 border-l-2 border-red-500 border-b-2 border-r-2 border-sky-400 shadow-[0_0_35px_rgba(239,68,68,0.5),0_0_25px_rgba(56,189,248,0.4)] z-20 scale-105"
           : "bg-[#050917]/75 border-t border-l border-red-500/50 border-b border-r border-sky-400/50 shadow-[0_0_20px_rgba(0,0,0,0.6)] hover:border-red-500/80 hover:shadow-[0_0_25px_rgba(239,68,68,0.35)]"
