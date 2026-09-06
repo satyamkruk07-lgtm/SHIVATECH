@@ -45,7 +45,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
 
     const timer = setInterval(() => {
       handleNext();
-    }, 4500);
+    }, 3000);
 
     return () => clearInterval(timer);
   }, [isAutoPlaying, isHovered, total, handleNext]);
