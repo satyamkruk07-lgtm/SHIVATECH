@@ -28,12 +28,12 @@ export const TeamBackground: React.FC<TeamBackgroundProps> = ({
         }}
       >
         <Image
-          src="/gallery/city_skyline_rooftop.jpg"
-          alt="Cinematic Spider City"
+          src="/images/team/team_custom_bg.png"
+          alt="Cinematic Custom Team Background"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-70 brightness-90 contrast-110"
+          className="object-cover object-center opacity-85 brightness-95 contrast-105"
         />
       </div>
 
