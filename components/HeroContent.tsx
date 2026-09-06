@@ -21,10 +21,10 @@ const HeroContent = forwardRef<HTMLDivElement, HeroContentProps>(
             transition: 'transform 0.1s ease-out'
           }}
         >
-          <p className="text-[10px] md:text-xs font-bold tracking-[0.3em] text-white/80 mb-2 md:mb-0 uppercase drop-shadow-md">
-            SHIVALIK COLLEGE OF ENGINEERING
+          <p className="text-[10px] md:text-xs font-bold tracking-[0.3em] text-white/90 mb-2 md:mb-0 uppercase drop-shadow-md">
+            Shivalik University
             <br />
-            PRESENTS
+            Presents
           </p>
 
           <div className="relative flex flex-col items-center justify-center">
