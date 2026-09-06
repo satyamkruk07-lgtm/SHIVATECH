@@ -107,7 +107,13 @@ export default function Navbar() {
           {/* 3 INSTITUTION LOGOS (VISIBLE ON ALL DEVICES: MOBILE, TABLET & DESKTOP) */}
           <div className="flex items-center space-x-1 xs:space-x-1.5 sm:space-x-2.5 pl-1.5 xs:pl-2 sm:pl-4 border-l border-white/20 shrink-0">
             {/* 1. University Logo */}
-            <div className="h-6 xs:h-7 sm:h-10 md:h-11 px-1 xs:px-1.5 sm:px-2.5 bg-white/95 rounded-md sm:rounded-xl flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform shrink-0">
+            <a
+              href="https://sudoon.ac.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Shivalik University"
+              className="h-6 xs:h-7 sm:h-10 md:h-11 px-1 xs:px-1.5 sm:px-2.5 bg-white/95 rounded-md sm:rounded-xl flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 active:scale-95 transition-all shrink-0 cursor-pointer"
+            >
               <Image
                 src="/images/university_logo.png"
                 alt="Shivalik University Logo"
@@ -116,10 +122,16 @@ export default function Navbar() {
                 priority
                 className="object-contain h-4 xs:h-5 sm:h-8 md:h-9 w-auto"
               />
-            </div>
+            </a>
 
             {/* 2. ACM Logo */}
-            <div className="h-6 w-6 xs:h-7 xs:w-7 sm:h-10 sm:w-10 md:h-11 md:w-11 bg-white/95 rounded-md sm:rounded-xl p-0.5 sm:p-1 flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform shrink-0">
+            <a
+              href="https://acmshivalik.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="ACM Student Chapter"
+              className="h-6 w-6 xs:h-7 xs:w-7 sm:h-10 sm:w-10 md:h-11 md:w-11 bg-white/95 rounded-md sm:rounded-xl p-0.5 sm:p-1 flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 active:scale-95 transition-all shrink-0 cursor-pointer"
+            >
               <Image
                 src="/images/acm_logo_cropped.png"
                 alt="ACM Logo"
@@ -128,10 +140,16 @@ export default function Navbar() {
                 priority
                 className="object-contain h-4 w-4 xs:h-5 xs:w-5 sm:h-8 sm:w-8 md:h-9 md:w-9"
               />
-            </div>
+            </a>
 
             {/* 3. CBII Logo */}
-            <div className="h-6 w-6 xs:h-7 xs:w-7 sm:h-10 sm:w-10 md:h-11 md:w-11 bg-white/95 rounded-md sm:rounded-xl p-0.5 sm:p-1 flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform shrink-0">
+            <a
+              href="https://shivalikcollege.edu.in/ihub-cbii/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="CBII / iHub"
+              className="h-6 w-6 xs:h-7 xs:w-7 sm:h-10 sm:w-10 md:h-11 md:w-11 bg-white/95 rounded-md sm:rounded-xl p-0.5 sm:p-1 flex items-center justify-center shadow-[0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 active:scale-95 transition-all shrink-0 cursor-pointer"
+            >
               <Image
                 src="/images/cbii_logo.png"
                 alt="CBII Logo"
@@ -140,7 +158,7 @@ export default function Navbar() {
                 priority
                 className="object-contain h-4 w-4 xs:h-5 xs:w-5 sm:h-8 sm:w-8 md:h-9 md:w-9"
               />
-            </div>
+            </a>
           </div>
         </div>
 

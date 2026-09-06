@@ -97,7 +97,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
               transition={{ delay: 0.35 }}
               className="pt-4 border-t border-white/15 flex items-center justify-center space-x-3 w-full max-w-xs"
             >
-              <div className="h-9 px-2 bg-white/95 rounded-lg flex items-center justify-center shadow-md">
+              <a
+                href="https://sudoon.ac.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Shivalik University"
+                className="h-9 px-2 bg-white/95 rounded-lg flex items-center justify-center shadow-md hover:scale-105 active:scale-95 transition-transform cursor-pointer"
+              >
                 <Image
                   src="/images/university_logo.png"
                   alt="Shivalik University Logo"
@@ -105,8 +111,14 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                   height={28}
                   className="object-contain h-7 w-auto"
                 />
-              </div>
-              <div className="h-9 w-9 bg-white/95 rounded-lg p-1 flex items-center justify-center shadow-md">
+              </a>
+              <a
+                href="https://acmshivalik.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="ACM Student Chapter"
+                className="h-9 w-9 bg-white/95 rounded-lg p-1 flex items-center justify-center shadow-md hover:scale-105 active:scale-95 transition-transform cursor-pointer"
+              >
                 <Image
                   src="/images/acm_logo_cropped.png"
                   alt="ACM Logo"
@@ -114,8 +126,14 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                   height={30}
                   className="object-contain h-7 w-7"
                 />
-              </div>
-              <div className="h-9 w-9 bg-white/95 rounded-lg p-1 flex items-center justify-center shadow-md">
+              </a>
+              <a
+                href="https://shivalikcollege.edu.in/ihub-cbii/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="CBII / iHub"
+                className="h-9 w-9 bg-white/95 rounded-lg p-1 flex items-center justify-center shadow-md hover:scale-105 active:scale-95 transition-transform cursor-pointer"
+              >
                 <Image
                   src="/images/cbii_logo.png"
                   alt="CBII Logo"
@@ -123,7 +141,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                   height={30}
                   className="object-contain h-7 w-7"
                 />
-              </div>
+              </a>
             </motion.div>
           </motion.div>
         )}
