@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -18,6 +18,13 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
   const [dismissedEventId, setDismissedEventId] = useState<string | null>(null);
 
   const { activeEvent, activeEventIndex, isArrivalRange } = sequenceState;
+
+  // Auto-reset manual dismissal when scrolling out of arrival range so card appears next time
+  useEffect(() => {
+    if (!isArrivalRange) {
+      setDismissedEventId(null);
+    }
+  }, [isArrivalRange]);
 
   const displayIndex = (activeEventIndex + 1).toString().padStart(2, "0");
   const totalEvents = "04";
