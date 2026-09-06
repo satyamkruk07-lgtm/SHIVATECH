@@ -50,12 +50,9 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
                 setSelectedModalEvent(evt);
                 setIsModalOpen(true);
 
-                let accum = 0;
-                for (let k = 0; k < idx; k++) {
-                  accum += eventsSequenceData[k].frameCount;
-                }
-                const arrivalTargetFrame = accum + (evt.arrival.startFrame - evt.minFrame);
-                const targetProgress = arrivalTargetFrame / TOTAL_GLOBAL_FRAMES;
+                const segmentWidth = 0.25;
+                const arrivalRatio = (evt.arrival.startFrame - evt.minFrame) / (evt.frameCount - 1);
+                const targetProgress = idx * segmentWidth + segmentWidth * arrivalRatio;
 
                 if (typeof window !== "undefined") {
                   const maxScroll =
@@ -102,6 +99,31 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
           </div>
         </div>
       </div>
+
+      {/* DEV-ONLY SEQUENCE DEBUG OVERLAY (Step 9: Hidden in production) */}
+      {process.env.NODE_ENV !== "production" && (
+        <div className="fixed top-20 right-4 sm:right-6 z-40 bg-[#040814]/90 backdrop-blur-md border border-red-500/50 text-white font-mono text-xs p-3 rounded-xl pointer-events-none select-none shadow-[0_0_20px_rgba(239,68,68,0.3)]">
+          <div className="text-red-500 font-extrabold tracking-widest uppercase text-[10px] mb-1">
+            DEV SEQUENCE DEBUG
+          </div>
+          <div className="flex items-center space-x-2 text-[11px] mb-0.5">
+            <span className="text-slate-400">EVENT:</span>
+            <span className="text-white font-bold">{activeEvent.title}</span>
+          </div>
+          <div className="flex items-center space-x-2 text-[11px] mb-0.5">
+            <span className="text-slate-400">FRAME:</span>
+            <span className="text-cyan-400 font-bold">
+              {sequenceState.frameNumber} / {activeEvent.maxFrame}
+            </span>
+          </div>
+          <div className="flex items-center space-x-2 text-[10px]">
+            <span className="text-slate-400">PROGRESS:</span>
+            <span className="text-red-400 font-bold">
+              {(sequenceState.eventProgress * 100).toFixed(1)}%
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* 2. Floating Cinematic Event Arrival Card (Bottom-Right) */}
       <AnimatePresence mode="wait">

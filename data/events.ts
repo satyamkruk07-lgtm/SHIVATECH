@@ -55,12 +55,12 @@ export const eventsSequenceData: EventSequenceData[] = [
     minFrame: 1,
     maxFrame: 240,
     frameCount: 240,
-    cardStartFrame: 150,
-    cardEndFrame: 235,
+    cardStartFrame: 160,
+    cardEndFrame: 240,
     arrival: {
-      startFrame: 150,
-      peakFrame: 195,
-      endFrame: 235,
+      startFrame: 160,
+      peakFrame: 200,
+      endFrame: 240,
     },
     nextEvent: "IDEATHON",
     framePath: "/events/hacknation-2_frames/frame_001.webp",
@@ -78,12 +78,12 @@ export const eventsSequenceData: EventSequenceData[] = [
     minFrame: 1,
     maxFrame: 85,
     frameCount: 85,
-    cardStartFrame: 45,
-    cardEndFrame: 82,
+    cardStartFrame: 50,
+    cardEndFrame: 85,
     arrival: {
-      startFrame: 45,
-      peakFrame: 65,
-      endFrame: 82,
+      startFrame: 50,
+      peakFrame: 70,
+      endFrame: 85,
     },
     nextEvent: "SHIVATECH",
     framePath: "/events/Ideathon_frames/frame_001.webp",
@@ -101,12 +101,12 @@ export const eventsSequenceData: EventSequenceData[] = [
     minFrame: 15,
     maxFrame: 85,
     frameCount: 71,
-    cardStartFrame: 45,
-    cardEndFrame: 82,
+    cardStartFrame: 50,
+    cardEndFrame: 85,
     arrival: {
-      startFrame: 45,
-      peakFrame: 65,
-      endFrame: 82,
+      startFrame: 50,
+      peakFrame: 70,
+      endFrame: 85,
     },
     nextEvent: "SCIENCE CHAMPIONSHIP",
     framePath: "/events/shivatech_frames/frame_015.webp",
@@ -124,12 +124,12 @@ export const eventsSequenceData: EventSequenceData[] = [
     minFrame: 1,
     maxFrame: 65,
     frameCount: 65,
-    cardStartFrame: 35,
-    cardEndFrame: 62,
+    cardStartFrame: 38,
+    cardEndFrame: 65,
     arrival: {
-      startFrame: 35,
-      peakFrame: 50,
-      endFrame: 62,
+      startFrame: 38,
+      peakFrame: 52,
+      endFrame: 65,
     },
     nextEvent: null,
     framePath: "/events/Science_champion_frames/frame_001.webp",
@@ -177,40 +177,29 @@ export type GlobalSequenceState = {
 };
 
 /**
- * Maps global scroll progress (0.0 to 1.0) into exact event & frame state
+ * Maps global scroll progress (0.0 to 1.0) into exact event & frame state.
+ * Each of the 4 events occupies an equal 25% segment of global scroll.
+ * Inside an event segment, local progress (0.0 to 1.0) maps from minFrame to maxFrame.
  */
 export function getGlobalSequenceState(progress: number): GlobalSequenceState {
   const clampedProgress = Math.max(0, Math.min(1, progress));
-  
-  // Total global discrete frame index from 0 to (TOTAL_GLOBAL_FRAMES - 1)
-  const globalIndex = Math.min(
-    TOTAL_GLOBAL_FRAMES - 1,
-    Math.floor(clampedProgress * TOTAL_GLOBAL_FRAMES)
-  );
+  const numEvents = eventsSequenceData.length;
+  const segmentWidth = 1 / numEvents; // 0.25
 
-  let accumulated = 0;
-  let activeEventIndex = 0;
-  let activeEvent = eventsSequenceData[0];
-  let localFrameIndex = 0;
-
-  for (let i = 0; i < eventsSequenceData.length; i++) {
-    const event = eventsSequenceData[i];
-    if (globalIndex < accumulated + event.frameCount || i === eventsSequenceData.length - 1) {
-      activeEventIndex = i;
-      activeEvent = event;
-      localFrameIndex = globalIndex - accumulated;
-      break;
-    }
-    accumulated += event.frameCount;
+  let activeEventIndex = Math.floor(clampedProgress / segmentWidth);
+  if (activeEventIndex >= numEvents) {
+    activeEventIndex = numEvents - 1;
   }
 
-  // Calculate actual frame number inside the folder
-  const frameNumber = activeEvent.minFrame + localFrameIndex;
-  
-  // Calculate event progress (0.0 to 1.0 within active event)
-  const eventProgress = activeEvent.frameCount > 1 
-    ? localFrameIndex / (activeEvent.frameCount - 1)
-    : 1;
+  const activeEvent = eventsSequenceData[activeEventIndex];
+
+  // Local progress (0.0 to 1.0) inside active event segment
+  const segmentStart = activeEventIndex * segmentWidth;
+  const localProgress = Math.max(0, Math.min(1, (clampedProgress - segmentStart) / segmentWidth));
+
+  // Map localProgress to frame index from minFrame to maxFrame
+  const localFrameOffset = Math.round(localProgress * (activeEvent.frameCount - 1));
+  const frameNumber = Math.min(activeEvent.maxFrame, activeEvent.minFrame + localFrameOffset);
 
   // Check card arrival range
   const isArrivalRange =
@@ -228,7 +217,7 @@ export function getGlobalSequenceState(progress: number): GlobalSequenceState {
     activeEvent,
     activeEventIndex,
     frameNumber,
-    eventProgress,
+    eventProgress: localProgress,
     globalProgress: clampedProgress,
     isArrivalRange,
     eventArrivalProgress,
