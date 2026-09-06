@@ -35,11 +35,11 @@ const HeroContent = forwardRef<HTMLDivElement, HeroContentProps>(
               <path d="M70 40 Q100 30 130 40 Q140 50 130 60 Q100 70 70 60 Q60 50 70 40 Z" />
             </svg>
             
-            <h1 className="font-orbitron font-black text-6xl md:text-8xl lg:text-[9rem] tracking-tighter leading-none text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-100 to-gray-400 drop-shadow-[0_15px_25px_rgba(0,0,0,0.9)] italic transform -skew-x-6 relative z-10">
-              <span className="absolute inset-0 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-blue-600 mix-blend-overlay blur-[3px]">
+            <h1 className="font-orbitron font-black text-6xl md:text-8xl lg:text-[8.5rem] tracking-tight leading-none text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-100 to-gray-400 drop-shadow-[0_15px_25px_rgba(0,0,0,0.9)] italic transform -skew-x-6 relative z-10 px-6 sm:px-12 lg:px-16 overflow-visible select-none">
+              <span className="absolute inset-0 px-6 sm:px-12 lg:px-16 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-blue-600 mix-blend-overlay blur-[3px]">
                 SHIVATECH
               </span>
-              <span className="absolute inset-0 drop-shadow-[0_0_15px_rgba(220,38,38,0.5)] z-[-1]">SHIVATECH</span>
+              <span className="absolute inset-0 px-6 sm:px-12 lg:px-16 drop-shadow-[0_0_15px_rgba(220,38,38,0.5)] z-[-1]">SHIVATECH</span>
               SHIVATECH
             </h1>
 
