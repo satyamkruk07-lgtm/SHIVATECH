@@ -57,7 +57,7 @@ export default function RadialSchedule() {
 
   return (
     <div
-      className="relative w-full min-h-screen flex flex-col items-center justify-between overflow-hidden"
+      className="relative w-full h-full min-h-screen flex flex-col items-center justify-between overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* 1. PHOTOREALISTIC SUPERHERO HAND LAYER (BEHIND UI) */}

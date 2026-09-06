@@ -30,10 +30,24 @@ export default function ScheduleNode({
 }: ScheduleNodeProps) {
   // Normalize angle to [-180, 180]
   const normAngle = ((angleDeg % 360) + 540) % 360 - 180;
-  
-  // Smart label placement to prevent overlapping panels & header
-  const isRightSide = normAngle >= -75 && normAngle <= 75;
-  const isTopNode = normAngle < -75 || normAngle > -105;
+
+  // Smart 4-Sector Label Placement
+  const isTopSector = normAngle >= -115 && normAngle <= -65;
+  const isBottomSector = normAngle >= 65 && normAngle <= 115;
+  const isRightSide = normAngle > -65 && normAngle < 65;
+
+  const getLabelClass = () => {
+    if (isTopSector) {
+      return "top-11 left-1/2 -translate-x-1/2 text-center";
+    }
+    if (isBottomSector) {
+      return "bottom-11 left-1/2 -translate-x-1/2 text-center";
+    }
+    if (isRightSide) {
+      return "left-11 top-1/2 -translate-y-1/2 text-left";
+    }
+    return "right-11 top-1/2 -translate-y-1/2 text-right";
+  };
 
   // Render Icon
   const renderIcon = () => {
@@ -139,7 +153,7 @@ export default function ScheduleNode({
       {/* Node Circle */}
       <div className="relative flex items-center justify-center">
         <div
-          className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 ${
+          className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border transition-all duration-300 ${
             isSelected
               ? "bg-[#060c1d]/95 border-red-500 text-red-400 shadow-[0_0_20px_rgba(239,68,68,0.7),0_0_10px_rgba(56,189,248,0.5)]"
               : isHovered
@@ -156,17 +170,15 @@ export default function ScheduleNode({
 
         {/* Pulse Dot */}
         {isSelected && (
-          <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-red-500 border-2 border-[#040814] animate-ping" />
+          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-red-500 border-2 border-[#040814] animate-ping" />
         )}
 
-        {/* Text Label Floating to Left or Right */}
+        {/* Text Label Floating in calculated sector */}
         <div
-          className={`absolute top-1/2 -translate-y-1/2 whitespace-nowrap transition-all duration-300 pointer-events-none ${
-            isRightSide ? "left-12 text-left" : "right-12 text-right"
-          }`}
+          className={`absolute whitespace-nowrap transition-all duration-300 pointer-events-none ${getLabelClass()}`}
         >
           <div
-            className={`text-[11px] font-mono font-bold tracking-wider mb-0.5 transition-colors ${
+            className={`text-[10px] sm:text-[11px] font-mono font-bold tracking-wider mb-0.5 transition-colors ${
               isSelected ? "text-red-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]" : "text-sky-400"
             }`}
           >
@@ -174,7 +186,7 @@ export default function ScheduleNode({
           </div>
 
           <div
-            className={`text-xs font-extrabold uppercase tracking-wide font-mono transition-colors ${
+            className={`text-[11px] sm:text-xs font-extrabold uppercase tracking-wide font-mono transition-colors ${
               isSelected
                 ? "text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]"
                 : isHovered
@@ -185,7 +197,7 @@ export default function ScheduleNode({
             {item.title}
           </div>
 
-          <div className="text-[10px] text-slate-400 max-w-[130px] sm:max-w-[160px] truncate leading-tight">
+          <div className="text-[9px] sm:text-[10px] text-slate-400 max-w-[120px] sm:max-w-[140px] truncate leading-tight">
             {item.subtitle}
           </div>
         </div>

@@ -42,17 +42,17 @@ export default function ScheduleRing({
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Dynamic radial radius scaled for optimal clearance below header
-  const [radius, setRadius] = useState<number>(230);
+  // Dynamic radial radius scaled to fit 100% within viewport height
+  const [radius, setRadius] = useState<number>(170);
 
   useEffect(() => {
     const updateRadius = () => {
       if (window.innerWidth < 640) {
-        setRadius(160);
+        setRadius(120);
       } else if (window.innerWidth < 1024) {
-        setRadius(200);
+        setRadius(145);
       } else {
-        setRadius(240);
+        setRadius(170);
       }
     };
     updateRadius();
@@ -64,11 +64,11 @@ export default function ScheduleRing({
   const totalNodes = items.length;
   const angleStep = totalNodes > 0 ? 360 / totalNodes : 0;
 
-  // Align selected node to ~ -45 degrees (top-rightreadable position)
+  // Align selected node to ~ -15 degrees (top-right readable position without header collision)
   const rotateToNode = useCallback(
     (index: number) => {
       const targetNodeAngle = index * angleStep;
-      const desiredAngle = -45;
+      const desiredAngle = -15;
       let newTarget = desiredAngle - targetNodeAngle;
 
       const diff = ((newTarget - currentRotationRef.current + 180) % 360) - 180;
@@ -171,7 +171,7 @@ export default function ScheduleRing({
   return (
     <div
       ref={containerRef}
-      className="relative w-[380px] h-[380px] sm:w-[540px] sm:h-[540px] lg:w-[660px] lg:h-[660px] flex items-center justify-center select-none touch-none"
+      className="relative w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[480px] lg:h-[480px] xl:w-[520px] xl:h-[520px] flex items-center justify-center select-none touch-none"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
@@ -276,7 +276,7 @@ export default function ScheduleRing({
       </div>
 
       {/* STATIONARY CENTRAL HUB */}
-      <div className="relative z-20 w-44 h-44 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full bg-[#040814]/85 border border-sky-400/40 backdrop-blur-2xl flex flex-col items-center justify-center p-4 text-center shadow-[0_0_40px_rgba(56,189,248,0.3),inset_0_0_25px_rgba(239,68,68,0.15)] pointer-events-none select-none">
+      <div className="relative z-20 w-36 h-36 sm:w-44 sm:h-44 lg:w-48 lg:h-48 rounded-full bg-[#040814]/85 border border-sky-400/40 backdrop-blur-2xl flex flex-col items-center justify-center p-3 text-center shadow-[0_0_35px_rgba(56,189,248,0.3),inset_0_0_20px_rgba(239,68,68,0.15)] pointer-events-none select-none">
         {/* Inner Glowing Ring */}
         <div className="absolute inset-1.5 rounded-full border border-red-500/25 animate-pulse" />
 

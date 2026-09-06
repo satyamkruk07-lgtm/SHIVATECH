@@ -13,14 +13,14 @@ export default function ScheduleDetails({ item, onClose }: ScheduleDetailsProps)
   if (!item) return null;
 
   return (
-    <div className="absolute top-28 right-4 sm:right-8 lg:right-12 z-30 w-full max-w-[320px] sm:max-w-[350px] pointer-events-auto select-none transition-all duration-500 ease-out animate-fadeIn">
-      <div className="relative p-5 rounded-2xl bg-[#040814]/80 border border-sky-500/30 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.85),0_0_25px_rgba(56,189,248,0.2)]">
+    <div className="absolute top-16 sm:top-20 right-3 sm:right-6 lg:right-8 z-30 w-full max-w-[280px] sm:max-w-[310px] pointer-events-auto select-none transition-all duration-500 ease-out animate-fadeIn">
+      <div className="relative p-4 rounded-xl sm:rounded-2xl bg-[#040814]/85 border border-sky-500/30 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.85),0_0_25px_rgba(56,189,248,0.2)]">
         {/* Sci-Fi Angular Tech Accents */}
         <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-red-500" />
         <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-sky-400" />
 
         {/* Header Row: Category & Title */}
-        <div className="flex items-start justify-between mb-3 border-b border-white/10 pb-3">
+        <div className="flex items-start justify-between mb-2 border-b border-white/10 pb-2">
           <div>
             <span className="text-[10px] font-mono font-bold tracking-widest text-sky-400 uppercase">
               {item.category}
