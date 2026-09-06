@@ -54,7 +54,7 @@ export default function AboutSection() {
             <motion.div variants={textVariants} className="flex items-center gap-4 mb-6">
               <div className="h-[1px] w-12 bg-red-500" />
               <span className="font-orbitron tracking-[0.3em] text-red-500 text-sm font-bold uppercase">
-                The Story Begins
+                ORGANISED BY SHIVALIK UNIVERSITY
               </span>
             </motion.div>
 
@@ -66,15 +66,23 @@ export default function AboutSection() {
             </motion.div>
 
             {/* Supporting Heading */}
-            <motion.div variants={textVariants} className="mb-8">
+            <motion.div variants={textVariants} className="mb-4">
               <h3 className="font-sans text-xl md:text-2xl text-white/80 tracking-wide font-light">
                 WHERE TECHNOLOGY MEETS CREATIVITY
               </h3>
             </motion.div>
 
+            {/* Organiser Badge Pill */}
+            <motion.div variants={textVariants} className="mb-6 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)] animate-pulse" />
+              <span className="text-xs font-mono font-bold tracking-wider text-red-400 uppercase">
+                OFFICIAL FEST OF SHIVALIK UNIVERSITY, DEHRADUN
+              </span>
+            </motion.div>
+
             {/* Description */}
-            <motion.p variants={textVariants} className="font-sans text-base md:text-lg text-white/60 leading-relaxed mb-10 max-w-xl">
-              SHIVATECH is a celebration of technology, innovation, creativity and competitive spirit, bringing students together to learn, build, compete and create.
+            <motion.p variants={textVariants} className="font-sans text-base md:text-lg text-white/70 leading-relaxed mb-8 max-w-xl">
+              SHIVATECH 2026 is the annual technical festival proudly organized by Shivalik University, Dehradun. A grand celebration of technology, innovation, creativity and competitive spirit, bringing students together to learn, build, compete and create.
             </motion.p>
 
             {/* CTA Button */}

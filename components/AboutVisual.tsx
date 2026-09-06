@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion, useInView } from "framer-motion";
 
 export default function AboutVisual() {
@@ -13,7 +14,6 @@ export default function AboutVisual() {
     if (prefersReducedMotion || window.innerWidth < 768) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      // Very subtle parallax for the visual panel
       const x = (e.clientX / window.innerWidth) * 2 - 1;
       const y = (e.clientY / window.innerHeight) * 2 - 1;
       setMousePos({ x, y });
@@ -38,46 +38,56 @@ export default function AboutVisual() {
       variants={panelVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden group"
+      className="relative w-full h-[360px] md:h-[480px] lg:h-[540px] rounded-2xl overflow-hidden group shadow-[0_0_40px_rgba(239,68,68,0.25),0_0_30px_rgba(56,189,248,0.2)] border border-red-500/40"
     >
-      {/* Glass Surface / Border */}
-      <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl z-10 pointer-events-none transition-colors duration-500 group-hover:bg-white/[0.05] group-hover:border-white/20" />
-      
-      {/* Subtle Red/Blue Edge Lighting */}
-      <div className="absolute top-0 left-0 w-[1px] h-full bg-gradient-to-b from-red-500/0 via-red-500/50 to-red-500/0 z-20" />
-      <div className="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-blue-500/0 via-blue-500/50 to-blue-500/0 z-20" />
-      
-      {/* Glow Behind */}
-      <div className="absolute -inset-10 bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.1)_0%,transparent_50%)] z-0 blur-2xl pointer-events-none" />
-
-      {/* Internal Visual Layers (with parallax) */}
+      {/* 1. Shivalik Campus Image */}
       <div 
-        className="absolute inset-[-10%] w-[120%] h-[120%] z-0"
+        className="absolute inset-0 w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
         style={{
-          transform: `translate(${mousePos.x * -10}px, ${mousePos.y * -10}px)`,
-          transition: 'transform 0.1s ease-out'
+          transform: `translate3d(${mousePos.x * -8}px, ${mousePos.y * -8}px, 0)`,
         }}
       >
-        {/* Deep dark background */}
-        <div className="absolute inset-0 bg-[#050914]" />
-
-        {/* Existing Web Asset scaled and positioned abstractly */}
-        <img 
-          src="/images/hero/web-right.png" 
-          alt="" 
-          className="absolute top-[-20%] right-[-10%] w-[120%] opacity-40 mix-blend-screen"
+        <Image
+          src="/images/shivalik_campus.webp"
+          alt="Shivalik University Dehradun Campus"
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover object-center brightness-95 contrast-105"
         />
 
-        {/* Existing Building Asset to maintain visual continuity */}
-        <img 
-          src="/images/hero/buildings-front.png" 
-          alt="" 
-          className="absolute bottom-[-10%] left-0 w-[150%] opacity-50 mix-blend-screen grayscale"
-        />
-        
-        {/* Dynamic Lighting Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-red-900/30 via-transparent to-blue-900/30 mix-blend-overlay" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050914]" />
+        {/* Ambient Dark Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050914] via-[#050914]/40 to-transparent opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-red-900/30 via-transparent to-sky-900/30 mix-blend-overlay" />
+      </div>
+
+      {/* 2. Cyber Corner Tech Accents */}
+      <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-red-500 z-20" />
+      <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-sky-400 z-20" />
+      <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-sky-400 z-20" />
+      <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-red-500 z-20" />
+
+      {/* 3. Floating Overlay Badge: SHIVALIK UNIVERSITY */}
+      <div className="absolute bottom-4 left-4 right-4 z-20 p-4 rounded-xl bg-[#040814]/85 border border-white/15 backdrop-blur-md flex items-center justify-between font-mono shadow-[0_0_20px_rgba(0,0,0,0.8)]">
+        <div className="flex items-center space-x-3">
+          <div className="w-8 h-8 rounded-lg bg-red-500/20 border border-red-500/40 flex items-center justify-center text-red-500">
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
+            </svg>
+          </div>
+          <div>
+            <div className="text-[10px] font-bold text-red-500 tracking-[0.2em] uppercase">
+              ORGANISER
+            </div>
+            <div className="text-xs sm:text-sm font-black text-white tracking-wider uppercase">
+              SHIVALIK UNIVERSITY, DEHRADUN
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden sm:inline-flex px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-400/30 text-[10px] font-bold text-sky-400 tracking-widest uppercase">
+          OFFICIAL HOST
+        </div>
       </div>
     </motion.div>
   );
