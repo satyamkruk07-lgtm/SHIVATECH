@@ -12,6 +12,7 @@ import GalleryHUD from "./GalleryHUD";
 export default function GalleryScene() {
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>("ALL");
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [showDetailsPanel, setShowDetailsPanel] = useState<boolean>(true);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   // Parallax offset
@@ -26,6 +27,11 @@ export default function GalleryScene() {
   const handleSelectCategory = (cat: GalleryCategory) => {
     setActiveCategory(cat);
     setSelectedIndex(0);
+  };
+
+  const handleSelectNode = (idx: number) => {
+    setSelectedIndex(idx);
+    setShowDetailsPanel(true);
   };
 
   const handleNext = useCallback(() => {
@@ -44,7 +50,7 @@ export default function GalleryScene() {
       } else if (e.key === "ArrowLeft") {
         handlePrev();
       } else if (e.key === "Escape") {
-        setSelectedIndex(0);
+        setShowDetailsPanel(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -102,10 +108,10 @@ export default function GalleryScene() {
 
       {/* 3. MAIN SPIDER-WEB & ORGANIC PHOTO NETWORK CONTAINER */}
       <div
-        className="relative z-10 w-full min-h-[72vh] flex items-center justify-center pointer-events-none transition-transform duration-200 ease-out"
+        className="relative z-10 w-full min-h-[70vh] flex items-center justify-center pointer-events-none transition-transform duration-200 ease-out"
         style={{
-          transform: `translate3d(${dragOffset.x + mouseOffset.x * 12}px, ${
-            dragOffset.y + mouseOffset.y * 12
+          transform: `translate3d(${dragOffset.x + mouseOffset.x * 10}px, ${
+            dragOffset.y + mouseOffset.y * 10
           }px, 0)`,
         }}
       >
@@ -149,7 +155,7 @@ export default function GalleryScene() {
               isSelected={idx === selectedIndex}
               isHovered={idx === hoveredIndex}
               isFilteredOut={isFilteredOut}
-              onClick={() => setSelectedIndex(idx)}
+              onClick={() => handleSelectNode(idx)}
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}
             />
@@ -158,12 +164,14 @@ export default function GalleryScene() {
       </div>
 
       {/* 4. FLOATING CINEMATIC GLASS DETAILS PANEL */}
-      <GalleryDetailsPanel
-        item={selectedItem}
-        onPrev={handlePrev}
-        onNext={handleNext}
-        onClose={() => setSelectedIndex(0)}
-      />
+      {showDetailsPanel && (
+        <GalleryDetailsPanel
+          item={selectedItem}
+          onPrev={handlePrev}
+          onNext={handleNext}
+          onClose={() => setShowDetailsPanel(false)}
+        />
+      )}
 
       {/* 5. TOP-LEFT TITLE, BOTTOM COUNTER, SCROLL & NAV HUD */}
       <GalleryHUD

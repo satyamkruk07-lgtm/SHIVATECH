@@ -15,7 +15,7 @@ export type GalleryItem = {
   date: string;
   location: string;
   description: string;
-  // Organic coordinates relative to central hub (in pixels for desktop viewport)
+  // Compact non-overlapping coordinates relative to central hub
   x: number;
   y: number;
   size: "sm" | "md" | "lg";
@@ -41,9 +41,9 @@ export const galleryData: GalleryItem[] = [
     date: "OCTOBER 24, 2026",
     location: "GRAND AUDITORIUM",
     description: "Grand opening keynotes, dignitary speeches, holographic light lasers, and reveal of the SHIVATECH 2026 flagship trophy.",
-    x: -320,
-    y: -180,
-    size: "lg",
+    x: -260,
+    y: -110,
+    size: "md",
     featured: true,
   },
   {
@@ -55,8 +55,8 @@ export const galleryData: GalleryItem[] = [
     date: "OCTOBER 24, 2026",
     location: "HACKATHON ARENA - HALL A",
     description: "Elite developer teams diving into 24 hours of non-stop code, AI experimentation, and rapid prototyping.",
-    x: 0,
-    y: -260,
+    x: -80,
+    y: -140,
     size: "lg",
     featured: true,
   },
@@ -69,8 +69,8 @@ export const galleryData: GalleryItem[] = [
     date: "OCTOBER 24, 2026",
     location: "SEMINAR HALL 1",
     description: "Hands-on deep dive into edge computing models, real-time spatial vision, and autonomous neural agents.",
-    x: 320,
-    y: -180,
+    x: 110,
+    y: -130,
     size: "md",
   },
   {
@@ -82,7 +82,7 @@ export const galleryData: GalleryItem[] = [
     date: "OCTOBER 24, 2026",
     location: "INNOVATION HUB - HALL B",
     description: "Founders pitching game-changing tech frameworks and venture ideas directly to startup mentors and investors.",
-    x: 420,
+    x: 160,
     y: 0,
     size: "md",
   },
@@ -95,8 +95,8 @@ export const galleryData: GalleryItem[] = [
     date: "OCTOBER 25, 2026",
     location: "MAIN ARENA STAGE",
     description: "Grand prize distribution of ₹5,00,000+ pool, trophy handovers, confetti explosion, and team celebrations.",
-    x: 320,
-    y: 180,
+    x: 110,
+    y: 130,
     size: "lg",
     featured: true,
   },
@@ -109,8 +109,8 @@ export const galleryData: GalleryItem[] = [
     date: "OCTOBER 25, 2026",
     location: "MAIN ARENA COMPLEX",
     description: "High-octane robotics battle circuit featuring custom autonomous bots, obstacle traversal, and precision kinetic tasks.",
-    x: 0,
-    y: 260,
+    x: -80,
+    y: 140,
     size: "md",
   },
   {
@@ -122,8 +122,8 @@ export const galleryData: GalleryItem[] = [
     date: "OCTOBER 24, 2026",
     location: "LAB ZONE 1",
     description: "Competitive algotrading, data structure sprints, and real-time debugging challenges under strict time pressure.",
-    x: -320,
-    y: 180,
+    x: -260,
+    y: 110,
     size: "md",
   },
   {
@@ -135,7 +135,7 @@ export const galleryData: GalleryItem[] = [
     date: "OCTOBER 24, 2026",
     location: "GAMING LOUNGE",
     description: "Pro gaming showdown with live shoutcasting, high-fps tournament stages, and cheering crowds.",
-    x: -420,
+    x: -330,
     y: 0,
     size: "md",
   },
@@ -148,8 +148,8 @@ export const galleryData: GalleryItem[] = [
     date: "OCTOBER 24, 2026",
     location: "LAB ZONE 3",
     description: "Design masterclass exploring glassmorphic shaders, micro-interactions, and 3D web animation pipelines.",
-    x: -200,
-    y: -320,
+    x: -170,
+    y: -75,
     size: "sm",
   },
   {
@@ -161,8 +161,8 @@ export const galleryData: GalleryItem[] = [
     date: "OCTOBER 25, 2026",
     location: "SEMINAR HALL 2",
     description: "Fast-paced tech history, trivia, and rapid-fire buzzer rounds testing deep computing knowledge.",
-    x: 200,
-    y: -320,
+    x: 20,
+    y: -75,
     size: "sm",
   },
   {
@@ -174,8 +174,8 @@ export const galleryData: GalleryItem[] = [
     date: "OCTOBER 25, 2026",
     location: "SHIVATECH HQ",
     description: "The dedicated organizers, student coordinators, and technical leads who brought SHIVATECH 2026 to life.",
-    x: 200,
-    y: 320,
+    x: 20,
+    y: 75,
     size: "sm",
   },
   {
@@ -187,8 +187,8 @@ export const galleryData: GalleryItem[] = [
     date: "OCTOBER 24, 2026",
     location: "MAIN PLAZA",
     description: "Midnight laser canopy, ambient synthwave beats, and illuminated web structures across the plaza deck.",
-    x: -200,
-    y: 320,
+    x: -170,
+    y: 75,
     size: "sm",
   },
 ];
