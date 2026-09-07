@@ -202,8 +202,11 @@ export function getGlobalSequenceState(progress: number): GlobalSequenceState {
   const segmentStart = activeEventIndex * segmentWidth;
   const localProgress = Math.max(0, Math.min(1, (clampedProgress - segmentStart) / segmentWidth));
 
-  // Map localProgress to frame index from minFrame to maxFrame
-  const localFrameOffset = Math.round(localProgress * (activeEvent.frameCount - 1));
+  // Map localProgress so all frames finish by localProgress = 0.86, and 0.86 to 1.0 holds the final frame
+  // This ensures the entire event sequence, including the final zoomed arrival frames, is fully experienced BEFORE any transition starts!
+  const playCap = activeEventIndex < numEvents - 1 ? 0.86 : 0.92;
+  const playProgress = Math.min(1, localProgress / playCap);
+  const localFrameOffset = Math.round(playProgress * (activeEvent.frameCount - 1));
   const frameNumber = Math.min(activeEvent.maxFrame, activeEvent.minFrame + localFrameOffset);
 
   // Check card arrival range
@@ -232,6 +235,7 @@ export function getGlobalSequenceState(progress: number): GlobalSequenceState {
 
 export type EventZoomConfig = {
   maxScale: number;
+  lastFramesScale: number;
   focalX: number;
   focalY: number;
 };
@@ -239,23 +243,27 @@ export type EventZoomConfig = {
 export const eventZoomConfigs: Record<string, EventZoomConfig> = {
   "hacknation-2": {
     maxScale: 1.35,
+    lastFramesScale: 1.35,
     focalX: 0.50,
     focalY: 0.38,
   },
   "ideathon": {
-    maxScale: 1.65,
-    focalX: 0.50,
-    focalY: 0.42,
+    maxScale: 1.70,
+    lastFramesScale: 2.35, // Extra zoom on last 3 frames to make it full screen like Hacknation 2.0
+    focalX: 0.52,
+    focalY: 0.58, // Focused directly on the Ideathon building entrance & neon sign
   },
   "shivatech": {
-    maxScale: 1.60,
+    maxScale: 1.65,
+    lastFramesScale: 2.30, // Extra zoom on last 3 frames to make it full screen
     focalX: 0.50,
-    focalY: 0.40,
+    focalY: 0.54, // Focused directly on the Shivatech building entrance
   },
   "science-championship": {
     maxScale: 1.70,
+    lastFramesScale: 2.10,
     focalX: 0.50,
-    focalY: 0.38,
+    focalY: 0.42,
   },
 };
 
@@ -264,26 +272,33 @@ export const eventZoomConfigs: Record<string, EventZoomConfig> = {
  */
 export function getEventZoomState(
   eventId: string,
-  eventProgress: number
+  eventProgress: number,
+  frameNumber?: number
 ): { scale: number; focalX: number; focalY: number } {
   const config = eventZoomConfigs[eventId] || {
     maxScale: 1.5,
+    lastFramesScale: 2.0,
     focalX: 0.5,
-    focalY: 0.4,
+    focalY: 0.5,
   };
 
-  // Zoom starts accelerating in the final 35% of event scroll progress (0.65 to 1.0)
-  if (eventProgress < 0.65) {
-    return { scale: 1.0, focalX: 0.5, focalY: 0.5 };
+  const activeEvent = eventsSequenceData.find((e) => e.id === eventId);
+  const maxFrame = activeEvent ? activeEvent.maxFrame : 85;
+
+  // Base arrival zoom starting from eventProgress 0.55 up to 0.85
+  const baseZoomProgress = Math.max(0, Math.min(1, (eventProgress - 0.55) / 0.30));
+  const easedBase = Math.pow(baseZoomProgress, 2.0);
+
+  let scale = 1.0 + (config.maxScale - 1.0) * easedBase;
+  let focalX = 0.5 + (config.focalX - 0.5) * easedBase;
+  let focalY = 0.5 + (config.focalY - 0.5) * easedBase;
+
+  // Extra accelerated full-screen zoom in the final 3-4 frames (like Hacknation 2.0)
+  if (frameNumber !== undefined && frameNumber >= maxFrame - 3) {
+    const lastFramesProgress = Math.min(1, (frameNumber - (maxFrame - 3)) / 3);
+    const easedLast = Math.pow(lastFramesProgress, 1.6);
+    scale = scale + (config.lastFramesScale - config.maxScale) * easedLast;
   }
-
-  const zoomFactor = (eventProgress - 0.65) / 0.35; // 0.0 to 1.0
-  // Power 2.2 curve: smooth initial camera fly-over, accelerating zoom into building name in final frames
-  const easedFactor = Math.pow(zoomFactor, 2.2);
-
-  const scale = 1.0 + (config.maxScale - 1.0) * easedFactor;
-  const focalX = 0.5 + (config.focalX - 0.5) * easedFactor;
-  const focalY = 0.5 + (config.focalY - 0.5) * easedFactor;
 
   return { scale, focalX, focalY };
 }

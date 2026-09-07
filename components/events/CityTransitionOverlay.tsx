@@ -25,8 +25,8 @@ const TRANSITION_ZONES: TransitionZone[] = [
     index: 1,
     fromEvent: "HACKNATION 2.0",
     toEvent: "IDEATHON",
-    startProgress: 0.215,
-    endProgress: 0.285,
+    startProgress: 0.232,
+    endProgress: 0.268,
     centerProgress: 0.25,
     direction: "rtl",
     accentColor: "#ef4444", // Crimson/Red
@@ -37,8 +37,8 @@ const TRANSITION_ZONES: TransitionZone[] = [
     index: 2,
     fromEvent: "IDEATHON",
     toEvent: "SHIVATECH",
-    startProgress: 0.465,
-    endProgress: 0.535,
+    startProgress: 0.482,
+    endProgress: 0.518,
     centerProgress: 0.50,
     direction: "ltr",
     accentColor: "#38bdf8", // Sky blue
@@ -49,8 +49,8 @@ const TRANSITION_ZONES: TransitionZone[] = [
     index: 3,
     fromEvent: "SHIVATECH",
     toEvent: "SCIENCE CHAMPIONSHIP",
-    startProgress: 0.715,
-    endProgress: 0.785,
+    startProgress: 0.732,
+    endProgress: 0.768,
     centerProgress: 0.75,
     direction: "rtl",
     accentColor: "#a855f7", // Purple

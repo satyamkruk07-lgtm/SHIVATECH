@@ -19,10 +19,7 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const sequenceStateRef = useRef<GlobalSequenceState>(sequenceState);
-
-  useEffect(() => {
-    sequenceStateRef.current = sequenceState;
-  }, [sequenceState]);
+  sequenceStateRef.current = sequenceState;
 
   // Small bounded memory cache (current frame ± 10 frames)
   const imageCacheRef = useRef<Map<string, HTMLImageElement>>(new Map());
@@ -31,6 +28,7 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
   // Last rendered frame & source to prevent redundant redrawing and black flashes
   const lastRenderedUrlRef = useRef<string | null>(null);
   const lastRenderedImageRef = useRef<HTMLImageElement | null>(null);
+  const lastRenderedScaleRef = useRef<number | null>(null);
 
   // Dev-only performance diagnostic counters
   const renderStatsRef = useRef<{
@@ -160,7 +158,8 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
       const currentState = sequenceStateRef.current;
       const { scale, focalX, focalY } = getEventZoomState(
         currentState.activeEvent.id,
-        currentState.eventProgress
+        currentState.eventProgress,
+        currentState.frameNumber
       );
 
       const isPortraitMobile = canvasWidth / canvasHeight < 0.95;
@@ -175,11 +174,11 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
       let effectiveScale = scale;
 
       if (isPortraitMobile) {
-        // Mobile portrait: perfectly center building horizontally (50%)
-        // Gentle arrival zoom (max ~1.05-1.08x) so building architecture and neon signs remain fully in frame
-        effectiveScale = 1.0 + (scale - 1.0) * 0.15;
-        focalAdjustX = 0.50; // 100% dead center horizontally
-        focalAdjustY = 0.44; // Position in upper clear screen area above bottom UI
+        // Mobile portrait: center building horizontally (50%)
+        // Robust arrival zoom so building entrance fills screen in final arrival frames (like Hacknation 2.0)
+        effectiveScale = 1.0 + (scale - 1.0) * 0.72;
+        focalAdjustX = 0.50; // Dead center horizontally
+        focalAdjustY = focalY; // Positioned on each event's entrance facade
       }
 
       const drawWidth = sWidth * ratio;
@@ -200,6 +199,7 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
 
       lastRenderedUrlRef.current = frameUrl;
       lastRenderedImageRef.current = img;
+      lastRenderedScaleRef.current = effectiveScale;
 
       // Dev-only performance tracking
       if (process.env.NODE_ENV !== "production" && startTime > 0) {
@@ -322,10 +322,17 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
   useEffect(() => {
     updateCanvasDimensions();
 
-    const { activeEvent, frameUrl, frameNumber } = sequenceState;
+    const { activeEvent, frameUrl, frameNumber, eventProgress } = sequenceState;
+    const { scale } = getEventZoomState(activeEvent.id, eventProgress, frameNumber);
 
-    // Step 10: Skip draw if exact frame is already displayed on canvas
-    if (frameUrl === lastRenderedUrlRef.current && lastRenderedImageRef.current) {
+    // Step 10: Skip draw if exact frame and zoom are already displayed on canvas
+    const lastScale = lastRenderedScaleRef.current;
+    if (
+      frameUrl === lastRenderedUrlRef.current &&
+      lastRenderedImageRef.current &&
+      lastScale !== null &&
+      Math.abs(scale - lastScale) < 0.01
+    ) {
       return;
     }
 

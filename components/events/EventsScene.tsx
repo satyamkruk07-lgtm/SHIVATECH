@@ -23,6 +23,7 @@ export const EventsScene: React.FC = () => {
   const targetProgressRef = useRef<number>(0);
   const currentProgressRef = useRef<number>(0);
   const lastStateFrameUrlRef = useRef<string>(sequenceState.frameUrl);
+  const lastStateProgressRef = useRef<number>(sequenceState.globalProgress);
 
   const handleInitialFramesLoaded = useCallback(() => {
     setIsLoading(false);
@@ -53,16 +54,20 @@ export const EventsScene: React.FC = () => {
         currentProgressRef.current += diff * lerpFactor;
         const newState = getGlobalSequenceState(currentProgressRef.current);
         
-        // Only update state if frame actually changed to minimize React re-renders
-        if (newState.frameUrl !== lastStateFrameUrlRef.current) {
+        // Update state if frame changed OR if progress moved for silky smooth 60fps transition wipes & zoom
+        const progressDiff = Math.abs(currentProgressRef.current - lastStateProgressRef.current);
+        if (newState.frameUrl !== lastStateFrameUrlRef.current || progressDiff > 0.001) {
           lastStateFrameUrlRef.current = newState.frameUrl;
+          lastStateProgressRef.current = currentProgressRef.current;
           setSequenceState(newState);
         }
       } else if (currentProgressRef.current !== targetProgressRef.current) {
         currentProgressRef.current = targetProgressRef.current;
         const newState = getGlobalSequenceState(currentProgressRef.current);
-        if (newState.frameUrl !== lastStateFrameUrlRef.current) {
+        const progressDiff = Math.abs(currentProgressRef.current - lastStateProgressRef.current);
+        if (newState.frameUrl !== lastStateFrameUrlRef.current || progressDiff > 0.001) {
           lastStateFrameUrlRef.current = newState.frameUrl;
+          lastStateProgressRef.current = currentProgressRef.current;
           setSequenceState(newState);
         }
       }
