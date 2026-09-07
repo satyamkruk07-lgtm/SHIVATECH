@@ -22,8 +22,6 @@ export const EventsScene: React.FC = () => {
 
   const targetProgressRef = useRef<number>(0);
   const currentProgressRef = useRef<number>(0);
-  const lastStateFrameUrlRef = useRef<string>(sequenceState.frameUrl);
-  const lastStateProgressRef = useRef<number>(sequenceState.globalProgress);
 
   const handleInitialFramesLoaded = useCallback(() => {
     setIsLoading(false);
@@ -46,30 +44,18 @@ export const EventsScene: React.FC = () => {
         typeof window !== "undefined" &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      // Lerp target progress for smooth yet instant camera scroll feel
-      const lerpFactor = isReducedMotion ? 1.0 : 0.45;
+      // Smooth cinematic camera gliding lerp factor (0.18 gives buttery continuous motion without wheel notch stops)
+      const lerpFactor = isReducedMotion ? 1.0 : 0.18;
       const diff = targetProgressRef.current - currentProgressRef.current;
 
-      if (Math.abs(diff) > 0.0001) {
+      if (Math.abs(diff) > 0.00005) {
         currentProgressRef.current += diff * lerpFactor;
         const newState = getGlobalSequenceState(currentProgressRef.current);
-        
-        // Update state if frame changed OR if progress moved for silky smooth 60fps transition wipes & zoom
-        const progressDiff = Math.abs(currentProgressRef.current - lastStateProgressRef.current);
-        if (newState.frameUrl !== lastStateFrameUrlRef.current || progressDiff > 0.001) {
-          lastStateFrameUrlRef.current = newState.frameUrl;
-          lastStateProgressRef.current = currentProgressRef.current;
-          setSequenceState(newState);
-        }
+        setSequenceState(newState);
       } else if (currentProgressRef.current !== targetProgressRef.current) {
         currentProgressRef.current = targetProgressRef.current;
         const newState = getGlobalSequenceState(currentProgressRef.current);
-        const progressDiff = Math.abs(currentProgressRef.current - lastStateProgressRef.current);
-        if (newState.frameUrl !== lastStateFrameUrlRef.current || progressDiff > 0.001) {
-          lastStateFrameUrlRef.current = newState.frameUrl;
-          lastStateProgressRef.current = currentProgressRef.current;
-          setSequenceState(newState);
-        }
+        setSequenceState(newState);
       }
 
       animationFrameId = requestAnimationFrame(tick);

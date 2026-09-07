@@ -202,9 +202,17 @@ export function getGlobalSequenceState(progress: number): GlobalSequenceState {
   const segmentStart = activeEventIndex * segmentWidth;
   const localProgress = Math.max(0, Math.min(1, (clampedProgress - segmentStart) / segmentWidth));
 
-  // Map localProgress so all frames finish by localProgress = 0.86, and 0.86 to 1.0 holds the final frame
-  // This ensures the entire event sequence, including the final zoomed arrival frames, is fully experienced BEFORE any transition starts!
-  const playCap = activeEventIndex < numEvents - 1 ? 0.86 : 0.92;
+  // Map localProgress so frames finish according to event type:
+  // - Hacknation (index 0): playCap = 0.95 so frames 237-239 arrive right as transition starts (1-2 frames before the end)
+  // - Ideathon (index 1) and Shivatech (index 2): playCap = 0.84 so all frames & full-screen zoom complete early,
+  //   holding the peak entrance on screen, and transition begins strictly AFTER!
+  let playCap = 0.84;
+  if (activeEventIndex === 0) {
+    playCap = 0.95; // Hacknation: transition sweeps in 1-2 frames before sequence ends
+  } else if (activeEventIndex === numEvents - 1) {
+    playCap = 0.92; // Science Championship
+  }
+
   const playProgress = Math.min(1, localProgress / playCap);
   const localFrameOffset = Math.round(playProgress * (activeEvent.frameCount - 1));
   const frameNumber = Math.min(activeEvent.maxFrame, activeEvent.minFrame + localFrameOffset);

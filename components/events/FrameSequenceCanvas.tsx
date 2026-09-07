@@ -307,6 +307,14 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
       }
     }
 
+    // Preload next event's opening frames when near the end of current event for seamless transition reveal
+    if (frameNumber >= activeEvent.maxFrame - 15 && sequenceState.activeEventIndex < eventsSequenceData.length - 1) {
+      const nextEvent = eventsSequenceData[sequenceState.activeEventIndex + 1];
+      for (let f = nextEvent.minFrame; f <= Math.min(nextEvent.minFrame + 8, nextEvent.maxFrame); f++) {
+        preloadUrls.push(getFrameUrl(nextEvent, f));
+      }
+    }
+
     preloadUrls.forEach((url) => {
       if (!imageCacheRef.current.has(url) && !loadingPromisesRef.current.has(url)) {
         loadSingleFrame(url);
@@ -317,11 +325,9 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
   }, [sequenceState, loadSingleFrame, evictDistantCache]);
 
   /**
-   * Main Render Effect: Step 10 — Redraw ONLY when target frame or canvas size changes
+   * Main Render Effect: Step 10 — Redraw ONLY when target frame or zoom scale changes
    */
   useEffect(() => {
-    updateCanvasDimensions();
-
     const { activeEvent, frameUrl, frameNumber, eventProgress } = sequenceState;
     const { scale } = getEventZoomState(activeEvent.id, eventProgress, frameNumber);
 
@@ -367,7 +373,6 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
     drawFrameToCanvas,
     loadSingleFrame,
     findNearestCachedImage,
-    updateCanvasDimensions,
   ]);
 
   /**

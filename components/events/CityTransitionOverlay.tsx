@@ -25,8 +25,8 @@ const TRANSITION_ZONES: TransitionZone[] = [
     index: 1,
     fromEvent: "HACKNATION 2.0",
     toEvent: "IDEATHON",
-    startProgress: 0.232,
-    endProgress: 0.268,
+    startProgress: 0.235,
+    endProgress: 0.265,
     centerProgress: 0.25,
     direction: "rtl",
     accentColor: "#ef4444", // Crimson/Red
@@ -37,8 +37,8 @@ const TRANSITION_ZONES: TransitionZone[] = [
     index: 2,
     fromEvent: "IDEATHON",
     toEvent: "SHIVATECH",
-    startProgress: 0.482,
-    endProgress: 0.518,
+    startProgress: 0.485,
+    endProgress: 0.515,
     centerProgress: 0.50,
     direction: "ltr",
     accentColor: "#38bdf8", // Sky blue
@@ -49,8 +49,8 @@ const TRANSITION_ZONES: TransitionZone[] = [
     index: 3,
     fromEvent: "SHIVATECH",
     toEvent: "SCIENCE CHAMPIONSHIP",
-    startProgress: 0.732,
-    endProgress: 0.768,
+    startProgress: 0.735,
+    endProgress: 0.765,
     centerProgress: 0.75,
     direction: "rtl",
     accentColor: "#a855f7", // Purple
@@ -84,14 +84,17 @@ export const CityTransitionOverlay: React.FC<CityTransitionOverlayProps> = ({
   const distanceFromCenter = Math.abs(t - 0.5);
   const occlusionStrength = Math.max(0, 1 - distanceFromCenter * 2.8); // 1.0 at center, drops to 0 by t ~0.15 and 0.85
 
+  // Smooth cubic easing for continuous, fluid velocity without abrupt start/stop
+  const smoothT = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
   // Skyscraper X translation:
   // For 'rtl': moves from +130% to -130%
   // For 'ltr': moves from -130% to +130%
   const sign = activeZone.direction === "rtl" ? 1 : -1;
-  const translateX = (0.5 - t) * 260 * sign; // at t=0.5 -> 0vw
+  const translateX = (0.5 - smoothT) * 260 * sign; // at smoothT=0.5 -> 0vw
 
   // Parallax secondary building layer translation (moves faster across background)
-  const secondaryTranslateX = (0.5 - t) * 380 * sign;
+  const secondaryTranslateX = (0.5 - smoothT) * 360 * sign;
 
   // Atmospheric fog opacity and drift
   const fogOpacity = Math.sin(t * Math.PI) * 0.85;
@@ -107,7 +110,7 @@ export const CityTransitionOverlay: React.FC<CityTransitionOverlayProps> = ({
     >
       {/* 1. ATMOSPHERIC VOLUMETRIC MIST LAYERS (Rolls across camera before building wipe) */}
       <div
-        className="absolute inset-0 w-full h-full transition-opacity duration-150 ease-out"
+        className="absolute inset-0 w-full h-full will-change-[opacity,transform]"
         style={{ opacity: fogOpacity }}
       >
         {/* Low-altitude dense fog */}
@@ -129,7 +132,7 @@ export const CityTransitionOverlay: React.FC<CityTransitionOverlayProps> = ({
 
       {/* 2. CINEMATIC SPEED LINES & RAIN STREAKS */}
       <div
-        className="absolute inset-0 w-full h-full opacity-0 transition-opacity duration-150"
+        className="absolute inset-0 w-full h-full will-change-[opacity]"
         style={{ opacity: speedLinesOpacity }}
       >
         <svg className="w-full h-full opacity-40" xmlns="http://www.w3.org/2000/svg">
@@ -301,10 +304,10 @@ export const CityTransitionOverlay: React.FC<CityTransitionOverlayProps> = ({
 
       {/* 5. CINEMATIC SECTOR TELEMETRY HUD OVERLAY (Flashes briefly during wipe) */}
       <div
-        className="absolute top-28 sm:top-24 left-1/2 -translate-x-1/2 z-30 transition-all duration-200"
+        className="absolute top-28 sm:top-24 left-1/2 -translate-x-1/2 z-30 will-change-[transform,opacity]"
         style={{
           opacity: occlusionStrength > 0.4 ? Math.min(1, (occlusionStrength - 0.4) * 2.2) : 0,
-          transform: `translate3d(-50%, ${(0.5 - t) * 30}px, 0)`,
+          transform: `translate3d(-50%, ${(0.5 - smoothT) * 30}px, 0)`,
         }}
       >
         <div className="bg-[#040814]/90 backdrop-blur-md border border-white/20 px-4 py-2 rounded-xl flex items-center space-x-3 shadow-[0_0_30px_rgba(0,0,0,0.8)] font-mono">
