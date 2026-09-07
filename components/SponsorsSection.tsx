@@ -1,190 +1,112 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-
-interface Sponsor {
-  name: string;
-  category: "TITLE" | "GOLD" | "PARTNER";
-  logoText: string;
-  subText: string;
-  color: string;
-}
-
-const sponsorsList: Sponsor[] = [
-  {
-    name: "NVIDIA",
-    category: "TITLE",
-    logoText: "NVIDIA",
-    subText: "Official AI & GPU Computing Partner",
-    color: "from-emerald-400 to-green-500",
-  },
-  {
-    name: "GOOGLE CLOUD",
-    category: "TITLE",
-    logoText: "Google Cloud",
-    subText: "Cloud Infrastructure Partner",
-    color: "from-blue-400 to-red-500",
-  },
-  {
-    name: "MICROSOFT",
-    category: "TITLE",
-    logoText: "Microsoft",
-    subText: "Developer Ecosystem Partner",
-    color: "from-sky-400 to-blue-600",
-  },
-  {
-    name: "INTEL",
-    category: "GOLD",
-    logoText: "intel",
-    subText: "Hardware & Semiconductor Partner",
-    color: "from-cyan-400 to-blue-500",
-  },
-  {
-    name: "RED BULL",
-    category: "GOLD",
-    logoText: "RedBull",
-    subText: "Official Energy Partner",
-    color: "from-red-500 to-yellow-400",
-  },
-  {
-    name: "RAZER",
-    category: "GOLD",
-    logoText: "RAZER",
-    subText: "Gaming & Esports Partner",
-    color: "from-green-400 to-emerald-600",
-  },
-  {
-    name: "GITHUB",
-    category: "PARTNER",
-    logoText: "GitHub",
-    subText: "Open Source Partner",
-    color: "from-purple-400 to-pink-500",
-  },
-  {
-    name: "VERCEL",
-    category: "PARTNER",
-    logoText: "▲ Vercel",
-    subText: "Deployment & Web Partner",
-    color: "from-slate-200 to-white",
-  },
-  {
-    name: "AWS",
-    category: "PARTNER",
-    logoText: "AWS",
-    subText: "Cloud & Startup Partner",
-    color: "from-amber-400 to-orange-500",
-  },
-];
 
 export default function SponsorsSection() {
   return (
-    <section className="relative w-full bg-[#030612] text-white py-24 px-4 sm:px-6 lg:px-12 overflow-hidden border-t border-white/10 select-none">
+    <section className="relative w-full bg-[#030612] text-white py-20 sm:py-28 px-4 sm:px-6 lg:px-12 overflow-hidden border-t border-white/10 select-none">
       {/* Ambient Cyber Neon Glow */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-red-600/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-sky-500/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[160px] pointer-events-none" />
 
       {/* Cyber Grid Background */}
       <div
-        className="absolute inset-0 opacity-10 pointer-events-none"
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(#ef4444 1px, transparent 1px), linear-gradient(90deg, #38bdf8 1px, transparent 1px)`,
           backgroundSize: "40px 40px",
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center text-center">
-        {/* Eyebrow Pill */}
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-3">
-          <span className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)] animate-pulse" />
-          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-red-500 uppercase">
-            SHIVATECH 2026 PARTNERS
+      <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center">
+        {/* Eyebrow Badge */}
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-sky-400/30 backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+          <span className="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)] animate-pulse" />
+          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-sky-400 uppercase">
+            SHIVATECH 2026 OFFICIAL PARTNER
           </span>
         </div>
 
         {/* Main Title */}
-        <h2 className="text-3xl sm:text-5xl font-black font-mono tracking-tight uppercase mb-2">
-          OUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-400 to-sky-400 drop-shadow-[0_0_20px_rgba(239,68,68,0.7)]">SPONSORS</span>
+        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black font-mono tracking-tight uppercase mb-3">
+          OUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-white to-red-500 drop-shadow-[0_0_25px_rgba(56,189,248,0.6)]">SPONSOR</span>
         </h2>
 
         {/* Subtitle */}
-        <p className="text-xs sm:text-sm font-mono tracking-[0.25em] text-slate-400 uppercase max-w-2xl mb-12">
-          POWERED BY INDUSTRY LEADERS & INNOVATORS
+        <p className="text-xs sm:text-sm font-mono tracking-[0.25em] text-slate-400 uppercase max-w-xl mb-12">
+          POWERED BY OUR OFFICIAL PLATFORM PARTNER
         </p>
 
-        {/* Title Sponsors Category */}
-        <div className="w-full mb-12">
-          <div className="text-[11px] font-mono font-bold text-red-500 tracking-[0.3em] uppercase mb-6 flex items-center justify-center space-x-3">
-            <div className="h-[1px] w-12 bg-red-500/50" />
-            <span>TITLE SPONSORS</span>
-            <div className="h-[1px] w-12 bg-red-500/50" />
+        {/* Single Featured Sponsor Showcase: Unstop */}
+        <motion.div
+          whileHover={{ y: -6, scale: 1.02 }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full max-w-xl p-8 sm:p-12 rounded-3xl bg-[#080d22]/90 border border-sky-500/40 backdrop-blur-2xl shadow-[0_0_50px_rgba(56,189,248,0.2),0_0_30px_rgba(239,68,68,0.15)] flex flex-col items-center justify-center group"
+        >
+          {/* Cyber Corner Tech Cut Notches */}
+          <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-red-500" />
+          <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-sky-400" />
+          <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-sky-400" />
+          <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-red-500" />
+
+          {/* Top Subtle Glow Line */}
+          <div className="absolute top-0 left-8 right-8 h-[1px] bg-gradient-to-r from-transparent via-sky-400 to-transparent opacity-70" />
+
+          {/* Partner Role Pill */}
+          <div className="mb-6 px-3.5 py-1 rounded-full bg-sky-500/10 border border-sky-400/40 backdrop-blur-md">
+            <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-sky-400 uppercase">
+              OFFICIAL PLATFORM & COMMUNITY PARTNER
+            </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {sponsorsList
-              .filter((s) => s.category === "TITLE")
-              .map((sponsor) => (
-                <motion.div
-                  key={sponsor.name}
-                  whileHover={{ y: -6, scale: 1.03 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative p-6 sm:p-8 rounded-2xl bg-[#080d22]/80 border border-red-500/40 backdrop-blur-xl shadow-[0_0_25px_rgba(239,68,68,0.2)] hover:border-red-500 hover:shadow-[0_0_35px_rgba(239,68,68,0.5)] flex flex-col items-center justify-center group"
-                >
-                  <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-red-500" />
-                  <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-sky-400" />
-
-                  <span className={`text-2xl sm:text-3xl font-black font-mono tracking-wider bg-clip-text text-transparent bg-gradient-to-r ${sponsor.color} drop-shadow-md group-hover:scale-105 transition-transform`}>
-                    {sponsor.logoText}
-                  </span>
-                  <span className="text-[10px] font-mono text-slate-400 tracking-wider uppercase mt-2">
-                    {sponsor.subText}
-                  </span>
-                </motion.div>
-              ))}
-          </div>
-        </div>
-
-        {/* Gold & Partners Grid */}
-        <div className="w-full mb-12">
-          <div className="text-[11px] font-mono font-bold text-sky-400 tracking-[0.3em] uppercase mb-6 flex items-center justify-center space-x-3">
-            <div className="h-[1px] w-12 bg-sky-400/50" />
-            <span>GOLD & ECOSYSTEM PARTNERS</span>
-            <div className="h-[1px] w-12 bg-sky-400/50" />
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {sponsorsList
-              .filter((s) => s.category !== "TITLE")
-              .map((sponsor) => (
-                <motion.div
-                  key={sponsor.name}
-                  whileHover={{ y: -4, scale: 1.04 }}
-                  transition={{ duration: 0.25 }}
-                  className="p-4 rounded-xl bg-[#060a1a]/70 border border-white/10 hover:border-sky-400/60 backdrop-blur-md flex flex-col items-center justify-center group"
-                >
-                  <span className={`text-lg sm:text-xl font-bold font-mono tracking-wider bg-clip-text text-transparent bg-gradient-to-r ${sponsor.color}`}>
-                    {sponsor.logoText}
-                  </span>
-                  <span className="text-[9px] font-mono text-slate-400 tracking-tight mt-1 line-clamp-1">
-                    {sponsor.subText}
-                  </span>
-                </motion.div>
-              ))}
-          </div>
-        </div>
-
-        {/* Become a Sponsor CTA */}
-        <div className="mt-4 inline-flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl">
-          <span className="text-xs font-mono text-slate-300 font-bold uppercase tracking-wider">
-            WANT TO PARTNER WITH SHIVATECH 2026?
-          </span>
+          {/* Official Unstop Logo Container (Placed directly above the Unstop Name) */}
           <a
-            href="mailto:sponsors@shivatech2026.com"
-            className="px-5 py-2 rounded-xl bg-gradient-to-r from-red-600 to-red-500 text-white font-mono text-xs font-bold tracking-wider uppercase hover:from-red-500 hover:to-sky-500 transition-all shadow-[0_0_20px_rgba(239,68,68,0.4)]"
+            href="https://unstop.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full max-w-md bg-white/95 hover:bg-white rounded-2xl p-6 sm:p-8 flex items-center justify-center shadow-[0_0_35px_rgba(28,73,128,0.35)] hover:shadow-[0_0_45px_rgba(56,189,248,0.5)] transition-all duration-300 group-hover:scale-105 cursor-pointer"
+            title="Visit Unstop"
           >
-            BECOME A SPONSOR →
+            <div className="relative w-56 sm:w-72 h-16 sm:h-20 flex items-center justify-center">
+              <Image
+                src="/sponsors/unstop-seeklogo.svg"
+                alt="Unstop Official Logo"
+                fill
+                sizes="(max-width: 768px) 240px, 320px"
+                className="object-contain"
+                priority
+              />
+            </div>
           </a>
-        </div>
+
+          {/* Sponsor Name: Unstop */}
+          <h3 className="text-2xl sm:text-4xl font-black font-mono tracking-widest text-white uppercase mt-6 drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] group-hover:text-sky-300 transition-colors">
+            UNSTOP
+          </h3>
+
+          {/* Tagline */}
+          <div className="text-xs sm:text-sm font-mono text-red-400 font-bold tracking-[0.2em] uppercase mt-1">
+            CONNECTING TALENT, COLLEGES & RECRUITERS
+          </div>
+
+          {/* Short Description */}
+          <p className="text-xs sm:text-sm text-slate-300 font-sans tracking-wide max-w-md text-center mt-3 leading-relaxed">
+            India&apos;s leading platform for hackathons, coding contests, hiring challenges, and student opportunities empowering the next generation of innovators.
+          </p>
+
+          {/* Link Hint */}
+          <a
+            href="https://unstop.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center space-x-1.5 text-xs font-mono font-bold text-sky-400 hover:text-white uppercase tracking-wider transition-colors"
+          >
+            <span>EXPLORE OPPORTUNITIES</span>
+            <span>↗</span>
+          </a>
+        </motion.div>
       </div>
     </section>
   );
