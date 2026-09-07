@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 
-// Target date: October 24, 2026 09:00:00 AM IST
-const TARGET_DATE = new Date("2026-10-24T09:00:00+05:30").getTime();
+// Target date: October 07, 2026 09:00:00 AM IST
+const TARGET_DATE = new Date("2026-10-07T09:00:00+05:30").getTime();
 
 export default function ScheduleCountdown() {
   const [timeLeft, setTimeLeft] = useState<{

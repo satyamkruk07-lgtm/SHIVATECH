@@ -38,7 +38,7 @@ export default function ScheduleHUD({ activeDay, onSelectDay }: ScheduleHUDProps
               : "text-slate-400 hover:text-white"
           }`}
         >
-          DAY 01 (OCT 24)
+          DAY 01 (07–08 OCT)
         </button>
 
         <button
@@ -49,7 +49,7 @@ export default function ScheduleHUD({ activeDay, onSelectDay }: ScheduleHUDProps
               : "text-slate-400 hover:text-white"
           }`}
         >
-          DAY 02 (OCT 25)
+          DAY 02 (09–10 OCT)
         </button>
       </div>
     </div>

@@ -10,6 +10,7 @@ export type EventSequenceData = {
   title: string;
   description: string;
   category: string;
+  date: string;
   frameFolder: string;
   framePrefix: string;
   frameExtension: string;
@@ -48,6 +49,7 @@ export const eventsSequenceData: EventSequenceData[] = [
     index: 1,
     title: "HACKNATION 2.0",
     category: "HACKATHON",
+    date: "07–08 OCTOBER 2026",
     description: "An intense innovation-driven challenge where teams build, experiment and turn bold ideas into working solutions.",
     frameFolder: "/events/hacknation-2_frames/",
     framePrefix: "frame_",
@@ -71,6 +73,7 @@ export const eventsSequenceData: EventSequenceData[] = [
     index: 2,
     title: "IDEATHON",
     category: "INNOVATION",
+    date: "07–08 OCTOBER 2026",
     description: "A creative idea-building challenge where participants transform real-world problems into practical and impactful solutions.",
     frameFolder: "/events/Ideathon_frames/",
     framePrefix: "frame_",
@@ -94,6 +97,7 @@ export const eventsSequenceData: EventSequenceData[] = [
     index: 3,
     title: "SHIVATECH",
     category: "FLAGSHIP EXPO",
+    date: "09 OCTOBER 2026",
     description: "The flagship SHIVATECH experience celebrating technology, creativity, problem-solving and student innovation.",
     frameFolder: "/events/shivatech_frames/",
     framePrefix: "frame_",
@@ -117,6 +121,7 @@ export const eventsSequenceData: EventSequenceData[] = [
     index: 4,
     title: "SCIENCE CHAMPIONSHIP",
     category: "COMPETITION",
+    date: "10 OCTOBER 2026",
     description: "A competitive science challenge designed to test knowledge, reasoning, experimentation and scientific thinking.",
     frameFolder: "/events/Science_champion_frames/",
     framePrefix: "frame_",
@@ -142,7 +147,7 @@ export const eventsData: EventData[] = eventsSequenceData.map((e) => ({
   title: e.title,
   category: e.category,
   description: e.description,
-  date: "OCT 12-14, 2026",
+  date: e.date,
   prize: "₹50,000",
   teamSize: "2–4",
   buildingId: `bldg-${e.id}`,

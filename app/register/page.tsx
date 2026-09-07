@@ -31,9 +31,16 @@ function RegisterContent() {
               {event.title}
             </h1>
           </div>
-          <span className="text-xs font-mono px-3 py-1 rounded border border-blue-500/30 bg-blue-950/40 text-blue-300">
-            EVENT 0{event.index} / 04
-          </span>
+          <div className="flex flex-col items-end gap-1.5">
+            <span className="text-xs font-mono px-3 py-1 rounded border border-blue-500/30 bg-blue-950/40 text-blue-300">
+              EVENT 0{event.index} / 04
+            </span>
+            {event.date && (
+              <span className="text-[11px] font-mono font-bold text-red-400 tracking-wider">
+                {event.date}
+              </span>
+            )}
+          </div>
         </div>
 
         <p className="text-sm text-white/70 leading-relaxed mb-6 font-sans">

@@ -227,7 +227,7 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
               <div className="grid grid-cols-3 gap-3 mb-6 bg-white/5 border border-white/10 p-3.5 sm:p-4 rounded-xl font-mono">
                 <div>
                   <div className="text-slate-400 text-[9px] sm:text-[10px] tracking-widest uppercase mb-1">DATE</div>
-                  <div className="text-xs sm:text-sm font-bold text-white">OCT 12-14, 2026</div>
+                  <div className="text-xs sm:text-sm font-bold text-white uppercase">{activeEvent.date}</div>
                 </div>
                 <div>
                   <div className="text-slate-400 text-[9px] sm:text-[10px] tracking-widest uppercase mb-1">VENUE</div>
