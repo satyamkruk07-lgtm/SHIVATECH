@@ -106,7 +106,7 @@ export const TeamCarousel: React.FC = () => {
 
                 {/* Socials */}
                 <div className="flex items-center space-x-4 mt-2.5 pt-2 border-t border-white/15 text-slate-300">
-                  {currentMember.socials.linkedin && (
+                  {currentMember.socials?.linkedin && (
                     <a
                       href={currentMember.socials.linkedin}
                       target="_blank"
@@ -120,7 +120,7 @@ export const TeamCarousel: React.FC = () => {
                       <span className="text-[10px]">LinkedIn</span>
                     </a>
                   )}
-                  {currentMember.socials.instagram && (
+                  {currentMember.socials?.instagram && (
                     <a
                       href={currentMember.socials.instagram}
                       target="_blank"
@@ -134,7 +134,7 @@ export const TeamCarousel: React.FC = () => {
                       <span className="text-[10px]">Instagram</span>
                     </a>
                   )}
-                  {currentMember.socials.github && (
+                  {currentMember.socials?.github && (
                     <a
                       href={currentMember.socials.github}
                       target="_blank"

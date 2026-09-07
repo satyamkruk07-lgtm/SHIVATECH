@@ -2,9 +2,10 @@ export interface TeamMember {
   id: string;
   name: string;
   role: string;
-  description: string;
+  category: "faculty" | "student";
+  description?: string;
   image: string;
-  socials: {
+  socials?: {
     linkedin?: string;
     github?: string;
     instagram?: string;
@@ -12,65 +13,130 @@ export interface TeamMember {
   };
 }
 
+export const facultyCoordinators: TeamMember[] = [
+  {
+    id: "kshitij-jain",
+    name: "Er. Kshitij Jain",
+    role: "ACM Faculty Coordinator",
+    category: "faculty",
+    image: "/team/kshitij-jain.jpeg",
+    description: "Faculty Mentor & Advisor",
+    socials: {},
+  },
+  {
+    id: "santosh-joshi",
+    name: "Dr. Santosh Joshi",
+    role: "Faculty Coordinator",
+    category: "faculty",
+    image: "/team/santosh-joshi.jpg",
+    description: "Academic & Strategic Lead",
+    socials: {},
+  },
+  {
+    id: "shivali-pundir",
+    name: "Ms. Shivali Pundir",
+    role: "Faculty Coordinator",
+    category: "faculty",
+    image: "/team/shivali.jpeg",
+    description: "Program & Operations Coordinator",
+    socials: {},
+  },
+];
+
+export const studentCoordinators: TeamMember[] = [
+  {
+    id: "rifat-parvez",
+    name: "Rifat Parvez",
+    role: "Chairperson",
+    category: "student",
+    image: "/team/rifat.jpeg",
+    description: "Overall Festival Lead & Strategy",
+    socials: {},
+  },
+  {
+    id: "shivam-kumar",
+    name: "Shivam Kumar",
+    role: "Vice Chairperson",
+    category: "student",
+    image: "/team/shivam.jpeg",
+    description: "Operations & Team Management",
+    socials: {},
+  },
+  {
+    id: "aman-bhardwaj",
+    name: "Aman Bhardwaj",
+    role: "Treasurer",
+    category: "student",
+    image: "/team/aman_b.jpeg",
+    description: "Finance & Resource Allocation",
+    socials: {},
+  },
+  {
+    id: "gaurav-kumar",
+    name: "Gaurav Kumar",
+    role: "Secretary",
+    category: "student",
+    image: "/team/gaurav.jpeg",
+    description: "Administration & Documentation",
+    socials: {},
+  },
+  {
+    id: "kumar-satyam",
+    name: "Kumar Satyam",
+    role: "Graphic Head",
+    category: "student",
+    image: "/team/kumar-satyam.jpeg",
+    description: "Visual Identity & Creative Lead",
+    socials: {},
+  },
+  {
+    id: "himanshu-kumar",
+    name: "Himanshu Kumar",
+    role: "Media Head",
+    category: "student",
+    image: "/team/himanshu.jpeg",
+    description: "Media Coverage & Broadcasting",
+    socials: {},
+  },
+  {
+    id: "priyanjali",
+    name: "Priyanjali",
+    role: "Vice Media Head",
+    category: "student",
+    image: "/team/priyanjali.jpeg",
+    description: "Outreach & Digital Communications",
+    socials: {},
+  },
+  {
+    id: "shubham-shah",
+    name: "Shubham Shah",
+    role: "ACM Member",
+    category: "student",
+    image: "/team/shubham.jpeg",
+    description: "Technical Support & Coordination",
+    socials: {},
+  },
+  {
+    id: "prachi-rawat",
+    name: "Prachi Rawat",
+    role: "ACM Member",
+    category: "student",
+    image: "/team/prachi.jpeg",
+    description: "Event Execution & Logistics",
+    socials: {},
+  },
+  {
+    id: "srishti-raj",
+    name: "Srishti Raj",
+    role: "ACM Member",
+    category: "student",
+    image: "/team/srishti.jpeg",
+    description: "Event Operations & Hospitality",
+    socials: {},
+  },
+];
+
 export const teamData: TeamMember[] = [
-  {
-    id: "satyam-kumar",
-    name: "SATYAM KUMAR",
-    role: "TEAM LEADER",
-    description: "Vision | Strategy | Execution",
-    image: "/images/team/satyam.jpg",
-    socials: {
-      linkedin: "https://linkedin.com",
-      instagram: "https://instagram.com",
-      email: "mailto:satyam@shivatech2026.com",
-    },
-  },
-  {
-    id: "muskan-kumari",
-    name: "MUSKAN KUMARI",
-    role: "CO-LEAD",
-    description: "Planning | Coordination | Growth",
-    image: "/images/team/muskan.jpg",
-    socials: {
-      linkedin: "https://linkedin.com",
-      instagram: "https://instagram.com",
-      email: "mailto:muskan@shivatech2026.com",
-    },
-  },
-  {
-    id: "rishabh-verma",
-    name: "RISHABH VERMA",
-    role: "TECHNICAL HEAD",
-    description: "Code | Build | Innovate",
-    image: "/images/team/rishabh.jpg",
-    socials: {
-      linkedin: "https://linkedin.com",
-      github: "https://github.com",
-      email: "mailto:rishabh@shivatech2026.com",
-    },
-  },
-  {
-    id: "shreya-singh",
-    name: "SHREYA SINGH",
-    role: "MEDIA HEAD",
-    description: "Content | Design | Outreach",
-    image: "/images/team/shreya.jpg",
-    socials: {
-      linkedin: "https://linkedin.com",
-      instagram: "https://instagram.com",
-      email: "mailto:shreya@shivatech2026.com",
-    },
-  },
-  {
-    id: "anshul-rawat",
-    name: "ANSHUL RAWAT",
-    role: "EVENTS HEAD",
-    description: "Logistics | Execution | Support",
-    image: "/images/team/anshul.jpg",
-    socials: {
-      linkedin: "https://linkedin.com",
-      instagram: "https://instagram.com",
-      email: "mailto:anshul@shivatech2026.com",
-    },
-  },
+  ...facultyCoordinators,
+  ...studentCoordinators,
 ];
