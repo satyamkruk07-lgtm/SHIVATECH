@@ -44,7 +44,17 @@ export default function ParticleField() {
       }
     };
 
+    let isVisible = true;
+    const checkVisibility = () => {
+      isVisible = window.scrollY < window.innerHeight * 1.1;
+    };
+
     const draw = () => {
+      if (!isVisible) {
+        animationFrameId = requestAnimationFrame(draw);
+        return;
+      }
+
       // Create a trailing effect by filling with semi-transparent black
       ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
       ctx.fillRect(0, 0, width, height);
@@ -92,11 +102,13 @@ export default function ParticleField() {
     };
 
     window.addEventListener("resize", resize);
+    window.addEventListener("scroll", checkVisibility, { passive: true });
     resize();
     draw();
 
     return () => {
       window.removeEventListener("resize", resize);
+      window.removeEventListener("scroll", checkVisibility);
       cancelAnimationFrame(animationFrameId);
     };
   }, [prefersReducedMotion]);
@@ -106,7 +118,7 @@ export default function ParticleField() {
   return (
     <canvas
       ref={canvasRef}
-      className="layer-particles absolute inset-0 z-[5] pointer-events-none mix-blend-screen opacity-80"
+      className="layer-particles absolute inset-0 z-[5] pointer-events-none mix-blend-screen opacity-80 will-change-transform"
     />
   );
 }

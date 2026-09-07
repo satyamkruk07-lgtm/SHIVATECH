@@ -36,28 +36,35 @@ export default function Hero() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Handle Mouse Parallax
+  // Handle Mouse Parallax with RAF throttling & scroll bypass for smooth 60fps
   useEffect(() => {
     if (isMobile || prefersReducedMotion) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      // Dynamically dampen mouse parallax as user scrolls down
-      // Uses the ScrollTrigger id to check progress without triggering React renders on scroll
-      let multiplier = 1;
-      const st = ScrollTrigger.getById("hero-scroll");
-      if (st) {
-        // Fade out mouse effect entirely by 50% scroll
-        multiplier = Math.max(0, 1 - st.progress * 2);
-      }
+    let rafId: number | null = null;
 
-      const x = ((e.clientX / window.innerWidth) * 2 - 1) * multiplier;
-      const y = ((e.clientY / window.innerHeight) * 2 - 1) * multiplier;
-      setMousePos({ x, y });
+    const handleMouseMove = (e: MouseEvent) => {
+      // Bypass parallax completely when user is scrolled down
+      if (window.scrollY > 80) return;
+
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        let multiplier = 1;
+        const st = ScrollTrigger.getById("hero-scroll");
+        if (st) {
+          multiplier = Math.max(0, 1 - st.progress * 2);
+        }
+
+        const x = ((e.clientX / window.innerWidth) * 2 - 1) * multiplier;
+        const y = ((e.clientY / window.innerHeight) * 2 - 1) * multiplier;
+        setMousePos({ x, y });
+        rafId = null;
+      });
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, [isMobile, prefersReducedMotion]);
 

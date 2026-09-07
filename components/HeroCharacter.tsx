@@ -14,7 +14,7 @@ const HeroCharacter = forwardRef<HTMLDivElement, HeroCharacterProps>(
         className="absolute inset-0 z-[6] pointer-events-none flex items-end justify-start pb-0"
       >
         <div 
-          className="layer-character relative w-[90%] md:w-[60%] lg:w-[50%] max-w-[900px] h-full"
+          className="layer-character relative w-[90%] md:w-[60%] lg:w-[50%] max-w-[900px] h-full will-change-transform"
           style={{
             transform: `translate(${mouseParallax.x * -30}px, ${mouseParallax.y * -5}px)`,
             transition: 'transform 0.1s ease-out'

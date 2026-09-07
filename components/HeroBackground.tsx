@@ -1,22 +1,39 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, useRef, useEffect } from "react";
 
 const HeroBackground = forwardRef<HTMLDivElement, { mouseParallax: { x: number; y: number } }>(
   ({ mouseParallax }, ref) => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+      const handleScroll = () => {
+        if (!videoRef.current) return;
+        if (window.scrollY > window.innerHeight * 1.3) {
+          if (!videoRef.current.paused) videoRef.current.pause();
+        } else {
+          if (videoRef.current.paused) videoRef.current.play().catch(() => {});
+        }
+      };
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
       <div 
         ref={ref}
-        className="absolute inset-[-15%] w-[130%] h-[130%] z-0"
+        className="absolute inset-[-15%] w-[130%] h-[130%] z-0 will-change-transform"
         style={{
           transform: `translate(${mouseParallax.x * -15}px, ${mouseParallax.y * -15}px)`,
           transition: 'transform 0.1s ease-out'
         }}
       >
-        <div className="absolute inset-0 w-full h-full animate-[kenburns_20s_ease-in-out_infinite_alternate]">
+        <div className="absolute inset-0 w-full h-full animate-[kenburns_20s_ease-in-out_infinite_alternate] will-change-transform">
           <div className="absolute inset-0 bg-[#050505]" />
           
           <video
+            ref={videoRef}
             autoPlay
             muted
             loop

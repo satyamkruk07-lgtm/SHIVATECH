@@ -15,7 +15,7 @@ const HeroContent = forwardRef<HTMLDivElement, HeroContentProps>(
         className="absolute inset-0 z-[10] flex items-center justify-center pointer-events-none"
       >
         <div 
-          className="layer-content text-center flex flex-col items-center pointer-events-auto mt-24"
+          className="layer-content text-center flex flex-col items-center pointer-events-auto mt-24 will-change-transform"
           style={{
             transform: `translate(${mouseParallax.x * -10}px, ${mouseParallax.y * -10}px)`,
             transition: 'transform 0.1s ease-out'

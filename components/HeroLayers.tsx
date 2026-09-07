@@ -13,7 +13,7 @@ const HeroLayers = forwardRef<HTMLDivElement, HeroLayersProps>(
         
         {/* Far Buildings (Z-index 1) */}
         <div 
-          className="layer-back-buildings absolute inset-0 z-[1]"
+          className="layer-back-buildings absolute inset-0 z-[1] will-change-transform"
           style={{
             transform: `translate(${mouseParallax.x * -20}px, ${mouseParallax.y * -20}px)`,
             transition: 'transform 0.1s ease-out'
@@ -29,7 +29,7 @@ const HeroLayers = forwardRef<HTMLDivElement, HeroLayersProps>(
         
         {/* Front Buildings (Z-index 4) */}
         <div 
-          className="layer-front-buildings absolute inset-0 z-[4]"
+          className="layer-front-buildings absolute inset-0 z-[4] will-change-transform"
           style={{
             transform: `translate(${mouseParallax.x * -40}px, ${mouseParallax.y * -40}px)`,
             transition: 'transform 0.1s ease-out'
@@ -40,7 +40,7 @@ const HeroLayers = forwardRef<HTMLDivElement, HeroLayersProps>(
 
         {/* Webs (Z-index 5) */}
         <div 
-          className="layer-web absolute inset-0 z-[5]"
+          className="layer-web absolute inset-0 z-[5] will-change-transform"
           style={{
             transform: `translate(${mouseParallax.x * -60}px, ${mouseParallax.y * -60}px)`,
             transition: 'transform 0.1s ease-out'
