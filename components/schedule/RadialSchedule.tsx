@@ -35,10 +35,8 @@ export default function RadialSchedule() {
         setSelectedIndex((prev) => (prev + 1) % items.length);
       } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
         setSelectedIndex((prev) => (prev - 1 + items.length) % items.length);
-      } else if (e.key === "1") {
-        handleSelectDay(1);
-      } else if (e.key === "2") {
-        handleSelectDay(2);
+      } else if (["1", "2", "3", "4", "5"].includes(e.key)) {
+        handleSelectDay(Number(e.key));
       }
     };
     window.addEventListener("keydown", handleKeyDown);
