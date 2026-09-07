@@ -150,12 +150,11 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
       const srcWidth = img.width;
       const srcHeight = img.height;
 
-      // Source Cropping: crop out right 25% and bottom 18% containing the AI watermark (located at x~78%, y~85%)
-      // This ensures the watermark is never read or drawn onto the canvas while preserving all main buildings and composition.
+      // Full symmetrical source image framing (keeps all 4 event buildings perfectly centered)
       const sX = 0;
       const sY = 0;
-      const sWidth = srcWidth * 0.74;
-      const sHeight = srcHeight * 0.80;
+      const sWidth = srcWidth;
+      const sHeight = srcHeight;
 
       // Calculate dynamic building zoom based on scroll progress and event ID
       const currentState = sequenceStateRef.current;
@@ -166,36 +165,27 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
 
       const isPortraitMobile = canvasWidth / canvasHeight < 0.95;
 
-      let ratio: number;
+      // Standard object-fit cover ensuring zero black bars
+      const hRatio = canvasWidth / sWidth;
+      const vRatio = canvasHeight / sHeight;
+      const ratio = Math.max(hRatio, vRatio);
+
       let focalAdjustX = focalX;
       let focalAdjustY = focalY;
       let effectiveScale = scale;
 
       if (isPortraitMobile) {
-        // Mobile portrait optimization:
-        // Prevent aggressive side cropping so the entire event building and skyline are clearly framed
-        const hRatio = canvasWidth / sWidth;
-        const vRatio = canvasHeight / sHeight;
-        ratio = Math.max(hRatio * 1.35, vRatio * 0.88);
-
-        // Cap zoom on mobile so building stays safely in frame
-        effectiveScale = 1.0 + (scale - 1.0) * 0.35;
-        // Center horizontally and position in upper 40% of mobile viewport (clears bottom UI)
-        focalAdjustX = 0.50;
-        focalAdjustY = 0.40;
-      } else {
-        // Desktop landscape standard cover
-        const hRatio = canvasWidth / sWidth;
-        const vRatio = canvasHeight / sHeight;
-        ratio = Math.max(hRatio, vRatio);
+        // Mobile portrait: perfectly center building horizontally (50%)
+        // Gentle arrival zoom (max ~1.05-1.08x) so building architecture and neon signs remain fully in frame
+        effectiveScale = 1.0 + (scale - 1.0) * 0.15;
+        focalAdjustX = 0.50; // 100% dead center horizontally
+        focalAdjustY = 0.44; // Position in upper clear screen area above bottom UI
       }
 
       const drawWidth = sWidth * ratio;
       const drawHeight = sHeight * ratio;
       const offsetX = (canvasWidth - drawWidth) / 2;
-      const offsetY = isPortraitMobile
-        ? (canvasHeight - drawHeight) * 0.32 // Position slightly upward to give space for mobile card
-        : (canvasHeight - drawHeight) / 2;
+      const offsetY = (canvasHeight - drawHeight) / 2;
 
       const scaledWidth = drawWidth * effectiveScale;
       const scaledHeight = drawHeight * effectiveScale;
@@ -409,6 +399,8 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
           filter: blurAmount !== "0" ? `blur(${blurAmount}px)` : "none",
         }}
       />
+      {/* Subtle corner fade on desktop to blend bottom-right unobtrusively */}
+      <div className="hidden sm:block absolute bottom-0 right-0 w-44 h-28 pointer-events-none bg-gradient-to-tl from-[#02040a] via-[#02040a]/70 to-transparent" />
     </div>
   );
 };
