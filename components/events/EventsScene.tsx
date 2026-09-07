@@ -9,6 +9,7 @@ import {
 import FrameSequenceCanvas from "./FrameSequenceCanvas";
 import EventsLoader from "./EventsLoader";
 import EventArrivalUI from "./EventArrivalUI";
+import CityTransitionOverlay from "./CityTransitionOverlay";
 
 export const EventsScene: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -96,15 +97,18 @@ export const EventsScene: React.FC = () => {
       {/* Tall Scroll Container (Controls global sequence camera progress) */}
       <div
         ref={containerRef}
-        className="relative w-full h-[600vh] bg-[#02040a]"
+        className="relative w-full h-[600vh] bg-[#02040a] touch-pan-y"
       >
         {/* Sticky Viewport */}
-        <div className="sticky top-0 left-0 w-full h-screen overflow-hidden">
+        <div className="sticky top-0 left-0 w-full h-screen overflow-hidden select-none">
           {/* Frame Sequence HTML Canvas Renderer */}
           <FrameSequenceCanvas
             sequenceState={sequenceState}
             onInitialFramesLoaded={handleInitialFramesLoaded}
           />
+
+          {/* Cinematic Inter-Building City Transition Overlay (Wipe, Fog, Speedlines & Telemetry) */}
+          <CityTransitionOverlay sequenceState={sequenceState} />
 
           {/* Event Arrival Building Name Glow & Cinematic Card UI */}
           <EventArrivalUI sequenceState={sequenceState} />

@@ -157,16 +157,6 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
       const sWidth = srcWidth * 0.74;
       const sHeight = srcHeight * 0.80;
 
-      // Cover scaling algorithm based on clean cropped source area
-      const hRatio = canvasWidth / sWidth;
-      const vRatio = canvasHeight / sHeight;
-      const ratio = Math.max(hRatio, vRatio);
-
-      const drawWidth = sWidth * ratio;
-      const drawHeight = sHeight * ratio;
-      const offsetX = (canvasWidth - drawWidth) / 2;
-      const offsetY = (canvasHeight - drawHeight) / 2;
-
       // Calculate dynamic building zoom based on scroll progress and event ID
       const currentState = sequenceStateRef.current;
       const { scale, focalX, focalY } = getEventZoomState(
@@ -174,14 +164,47 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
         currentState.eventProgress
       );
 
-      const scaledWidth = drawWidth * scale;
-      const scaledHeight = drawHeight * scale;
+      const isPortraitMobile = canvasWidth / canvasHeight < 0.95;
 
-      const targetX = canvasWidth * focalX;
-      const targetY = canvasHeight * focalY;
+      let ratio: number;
+      let focalAdjustX = focalX;
+      let focalAdjustY = focalY;
+      let effectiveScale = scale;
 
-      const finalOffsetX = targetX - (targetX - offsetX) * scale;
-      const finalOffsetY = targetY - (targetY - offsetY) * scale;
+      if (isPortraitMobile) {
+        // Mobile portrait optimization:
+        // Prevent aggressive side cropping so the entire event building and skyline are clearly framed
+        const hRatio = canvasWidth / sWidth;
+        const vRatio = canvasHeight / sHeight;
+        ratio = Math.max(hRatio * 1.35, vRatio * 0.88);
+
+        // Cap zoom on mobile so building stays safely in frame
+        effectiveScale = 1.0 + (scale - 1.0) * 0.35;
+        // Center horizontally and position in upper 40% of mobile viewport (clears bottom UI)
+        focalAdjustX = 0.50;
+        focalAdjustY = 0.40;
+      } else {
+        // Desktop landscape standard cover
+        const hRatio = canvasWidth / sWidth;
+        const vRatio = canvasHeight / sHeight;
+        ratio = Math.max(hRatio, vRatio);
+      }
+
+      const drawWidth = sWidth * ratio;
+      const drawHeight = sHeight * ratio;
+      const offsetX = (canvasWidth - drawWidth) / 2;
+      const offsetY = isPortraitMobile
+        ? (canvasHeight - drawHeight) * 0.32 // Position slightly upward to give space for mobile card
+        : (canvasHeight - drawHeight) / 2;
+
+      const scaledWidth = drawWidth * effectiveScale;
+      const scaledHeight = drawHeight * effectiveScale;
+
+      const targetX = canvasWidth * focalAdjustX;
+      const targetY = canvasHeight * focalAdjustY;
+
+      const finalOffsetX = targetX - (targetX - offsetX) * effectiveScale;
+      const finalOffsetY = targetY - (targetY - offsetY) * effectiveScale;
 
       ctx.drawImage(img, sX, sY, sWidth, sHeight, finalOffsetX, finalOffsetY, scaledWidth, scaledHeight);
 
@@ -361,12 +384,30 @@ export const FrameSequenceCanvas: React.FC<FrameSequenceCanvasProps> = ({
     };
   }, [updateCanvasDimensions]);
 
+  // Camera motion blur during inter-building transition zones
+  const blurAmount = React.useMemo(() => {
+    const gp = sequenceState.globalProgress;
+    const boundaries = [0.25, 0.50, 0.75];
+    for (const b of boundaries) {
+      const dist = Math.abs(gp - b);
+      if (dist < 0.025) {
+        const factor = 1 - dist / 0.025;
+        return (factor * 3.5).toFixed(1);
+      }
+    }
+    return "0";
+  }, [sequenceState.globalProgress]);
+
   return (
     <div className="fixed inset-0 w-full h-full z-0 bg-[#02040a] overflow-hidden pointer-events-none">
       <canvas
         ref={canvasRef}
-        className="w-full h-full block object-cover"
-        style={{ width: "100%", height: "100%" }}
+        className="w-full h-full block object-cover transition-[filter] duration-150"
+        style={{
+          width: "100%",
+          height: "100%",
+          filter: blurAmount !== "0" ? `blur(${blurAmount}px)` : "none",
+        }}
       />
     </div>
   );

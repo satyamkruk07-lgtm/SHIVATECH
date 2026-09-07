@@ -16,13 +16,15 @@ interface EventArrivalUIProps {
 export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState }) => {
   const router = useRouter();
   const [dismissedEventId, setDismissedEventId] = useState<string | null>(null);
+  const [isMobileExpanded, setIsMobileExpanded] = useState<boolean>(false);
 
   const { activeEvent, activeEventIndex, isArrivalRange } = sequenceState;
 
-  // Auto-reset manual dismissal when scrolling out of arrival range so card appears next time
+  // Auto-reset manual dismissal and mobile expanded drawer when scrolling out of arrival range
   useEffect(() => {
     if (!isArrivalRange) {
       setDismissedEventId(null);
+      setIsMobileExpanded(false);
     }
   }, [isArrivalRange]);
 
@@ -182,84 +184,170 @@ export const EventArrivalUI: React.FC<EventArrivalUIProps> = ({ sequenceState })
         </div>
       )}
 
-      {/* 2. Detailed Event Arrival Modal/Card (Appears on arrival, disappears on scroll) */}
+      {/* 2. Detailed Event Arrival Cards (Desktop Centered Modal + Mobile Non-Blocking Bottom Card) */}
       <AnimatePresence mode="wait">
         {isArrivalRange && dismissedEventId !== activeEvent.id && (
-          <motion.div
-            key={`arrival-detail-card-${activeEvent.id}`}
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1.0 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 flex items-center justify-center p-3 sm:p-6 pointer-events-none"
-          >
-            <div className="relative w-full max-w-xl max-h-[85vh] overflow-y-auto bg-[#050b18]/95 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-[0_0_80px_rgba(239,68,68,0.25)] text-white p-5 sm:p-8 pointer-events-auto select-none">
-              {/* Top sci-fi border highlight */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-red-500 via-white to-blue-500 opacity-70" />
+          <React.Fragment key={`arrival-cards-fragment-${activeEvent.id}`}>
+            {/* 2A. Desktop / Tablet Centered Sci-Fi Modal Card */}
+            <motion.div
+              key={`arrival-detail-card-desktop-${activeEvent.id}`}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1.0 }}
+              exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="hidden sm:flex fixed inset-0 z-40 items-center justify-center p-4 sm:p-6 pointer-events-none"
+            >
+              <div className="relative w-full max-w-xl max-h-[85vh] overflow-y-auto bg-[#050b18]/95 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-[0_0_80px_rgba(239,68,68,0.25)] text-white p-5 sm:p-8 pointer-events-auto select-none">
+                {/* Top sci-fi border highlight */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-red-500 via-white to-blue-500 opacity-70" />
 
-              {/* Close (X) Button */}
-              <button
-                onClick={() => setDismissedEventId(activeEvent.id)}
-                className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 border border-white/20 text-white/60 hover:text-white hover:bg-white/15 flex items-center justify-center transition-colors text-base"
-                aria-label="Close detail card"
-              >
-                ✕
-              </button>
-
-              {/* Header Label */}
-              <div className="mb-3 font-mono">
-                <span className="text-xs font-bold text-red-500 tracking-[0.25em] uppercase">
-                  EVENT {displayIndex} / {totalEvents} • {activeEvent.category}
-                </span>
-              </div>
-
-              {/* Event Title */}
-              <h2 className="text-2xl sm:text-3xl font-black tracking-wider text-white mb-3 drop-shadow-[0_0_12px_rgba(255,255,255,0.5)] uppercase font-mono">
-                {activeEvent.title}
-              </h2>
-
-              {/* Description */}
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6 font-sans">
-                {activeEvent.description}
-              </p>
-
-              {/* Event Metadata Grid */}
-              <div className="grid grid-cols-3 gap-3 mb-6 bg-white/5 border border-white/10 p-3.5 sm:p-4 rounded-xl font-mono">
-                <div>
-                  <div className="text-slate-400 text-[9px] sm:text-[10px] tracking-widest uppercase mb-1">DATE</div>
-                  <div className="text-xs sm:text-sm font-bold text-white uppercase">{activeEvent.date}</div>
-                </div>
-                <div>
-                  <div className="text-slate-400 text-[9px] sm:text-[10px] tracking-widest uppercase mb-1">VENUE</div>
-                  <div className="text-xs sm:text-sm font-bold text-white uppercase">MAIN AUDITORIUM</div>
-                </div>
-                <div>
-                  <div className="text-slate-400 text-[9px] sm:text-[10px] tracking-widest uppercase mb-1">PRIZE POOL</div>
-                  <div className="text-xs sm:text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-blue-400">
-                    ₹50,000
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex items-center space-x-3 font-mono">
-                <motion.button
-                  whileHover={{ scale: 1.02, boxShadow: "0 0 25px rgba(239, 68, 68, 0.5)" }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => router.push(`/register?event=${activeEvent.id}`)}
-                  className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-red-600 to-blue-600 text-white font-bold text-xs sm:text-sm tracking-widest shadow-[0_0_20px_rgba(239,68,68,0.35)] transition-all text-center uppercase"
-                >
-                  REGISTER FOR {activeEvent.title}
-                </motion.button>
+                {/* Close (X) Button */}
                 <button
                   onClick={() => setDismissedEventId(activeEvent.id)}
-                  className="px-5 py-3 rounded-xl border border-white/20 bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white font-bold text-xs sm:text-sm tracking-widest transition-colors uppercase"
+                  className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 border border-white/20 text-white/60 hover:text-white hover:bg-white/15 flex items-center justify-center transition-colors text-base"
+                  aria-label="Close detail card"
                 >
-                  CLOSE
+                  ✕
                 </button>
+
+                {/* Header Label */}
+                <div className="mb-3 font-mono">
+                  <span className="text-xs font-bold text-red-500 tracking-[0.25em] uppercase">
+                    EVENT {displayIndex} / {totalEvents} • {activeEvent.category}
+                  </span>
+                </div>
+
+                {/* Event Title */}
+                <h2 className="text-2xl sm:text-3xl font-black tracking-wider text-white mb-3 drop-shadow-[0_0_12px_rgba(255,255,255,0.5)] uppercase font-mono">
+                  {activeEvent.title}
+                </h2>
+
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6 font-sans">
+                  {activeEvent.description}
+                </p>
+
+                {/* Event Metadata Grid */}
+                <div className="grid grid-cols-3 gap-3 mb-6 bg-white/5 border border-white/10 p-3.5 sm:p-4 rounded-xl font-mono">
+                  <div>
+                    <div className="text-slate-400 text-[9px] sm:text-[10px] tracking-widest uppercase mb-1">DATE</div>
+                    <div className="text-xs sm:text-sm font-bold text-white uppercase">{activeEvent.date}</div>
+                  </div>
+                  <div>
+                    <div className="text-slate-400 text-[9px] sm:text-[10px] tracking-widest uppercase mb-1">VENUE</div>
+                    <div className="text-xs sm:text-sm font-bold text-white uppercase">MAIN AUDITORIUM</div>
+                  </div>
+                  <div>
+                    <div className="text-slate-400 text-[9px] sm:text-[10px] tracking-widest uppercase mb-1">PRIZE POOL</div>
+                    <div className="text-xs sm:text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-blue-400">
+                      ₹50,000
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex items-center space-x-3 font-mono">
+                  <motion.button
+                    whileHover={{ scale: 1.02, boxShadow: "0 0 25px rgba(239, 68, 68, 0.5)" }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => router.push(`/register?event=${activeEvent.id}`)}
+                    className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-red-600 to-blue-600 text-white font-bold text-xs sm:text-sm tracking-widest shadow-[0_0_20px_rgba(239,68,68,0.35)] transition-all text-center uppercase"
+                  >
+                    REGISTER FOR {activeEvent.title}
+                  </motion.button>
+                  <button
+                    onClick={() => setDismissedEventId(activeEvent.id)}
+                    className="px-5 py-3 rounded-xl border border-white/20 bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white font-bold text-xs sm:text-sm tracking-widest transition-colors uppercase"
+                  >
+                    CLOSE
+                  </button>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            {/* 2B. Mobile Non-Blocking Compact Bottom Arrival Card (Leaves upper 65-70% visible for building) */}
+            <motion.div
+              key={`arrival-detail-card-mobile-${activeEvent.id}`}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 25 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="sm:hidden fixed bottom-[72px] left-2.5 right-2.5 z-40 pointer-events-auto select-none"
+            >
+              <div className="relative w-full bg-[#050b18]/95 backdrop-blur-2xl border border-white/25 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.9),0_0_25px_rgba(239,68,68,0.25)] text-white p-3.5">
+                {/* Top sci-fi border highlight */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-red-500 via-white to-blue-500 opacity-80 rounded-t-2xl" />
+
+                {/* Header Row: Category Badge + Dismiss Button */}
+                <div className="flex items-center justify-between mb-1 font-mono">
+                  <div className="flex items-center space-x-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                    <span className="text-[10px] font-bold text-red-400 tracking-widest uppercase">
+                      ARRIVED • 0{activeEventIndex + 1} // {activeEvent.category}
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => setDismissedEventId(activeEvent.id)}
+                    className="w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 text-white/70 flex items-center justify-center text-xs transition-colors"
+                    aria-label="Dismiss arrival card"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                {/* Event Title & Quick Date Badge */}
+                <div className="flex items-baseline justify-between mb-2">
+                  <h3 className="text-base font-black font-mono tracking-wider text-white uppercase drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">
+                    {activeEvent.title}
+                  </h3>
+                  <span className="text-[9px] font-mono text-cyan-300 font-bold bg-cyan-950/60 border border-cyan-500/30 px-2 py-0.5 rounded-md">
+                    {activeEvent.date}
+                  </span>
+                </div>
+
+                {/* Expandable Drawer Content (Description & Prize Pool) */}
+                <AnimatePresence>
+                  {isMobileExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="overflow-hidden mb-2.5 pt-1 border-t border-white/10 font-mono text-[11px]"
+                    >
+                      <p className="text-slate-300 font-sans text-xs leading-relaxed mb-2">
+                        {activeEvent.description}
+                      </p>
+                      <div className="flex items-center justify-between bg-white/5 border border-white/10 px-2.5 py-1.5 rounded-lg text-[10px]">
+                        <span className="text-slate-400 uppercase">PRIZE:</span>
+                        <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-blue-400 text-xs">
+                          ₹50,000
+                        </span>
+                        <span className="text-slate-400 uppercase">VENUE:</span>
+                        <span className="text-white font-bold">MAIN AUDI</span>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Action Buttons: Direct Registration & Info Toggle */}
+                <div className="flex items-center space-x-2 font-mono">
+                  <button
+                    onClick={() => router.push(`/register?event=${activeEvent.id}`)}
+                    className="flex-1 py-2 px-3 rounded-xl bg-gradient-to-r from-red-600 to-blue-600 text-white font-bold text-xs tracking-wider shadow-[0_0_15px_rgba(239,68,68,0.4)] text-center uppercase active:scale-95 transition-transform"
+                  >
+                    REGISTER NOW &gt;
+                  </button>
+                  <button
+                    onClick={() => setIsMobileExpanded(!isMobileExpanded)}
+                    className="py-2 px-3 rounded-xl border border-white/20 bg-white/5 hover:bg-white/15 text-slate-200 text-xs font-bold tracking-wider uppercase transition-colors"
+                  >
+                    {isMobileExpanded ? "LESS ▾" : "INFO ▴"}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </React.Fragment>
         )}
       </AnimatePresence>
     </>
