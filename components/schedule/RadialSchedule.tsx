@@ -7,6 +7,7 @@ import ScheduleHUD from "./ScheduleHUD";
 import ScheduleDetails from "./ScheduleDetails";
 import HolographicHand from "./HolographicHand";
 import ScheduleCountdown from "./ScheduleCountdown";
+import ScheduleMobileTable from "./ScheduleMobileTable";
 
 export default function RadialSchedule() {
   const [activeDay, setActiveDay] = useState<number>(1);
@@ -55,17 +56,19 @@ export default function RadialSchedule() {
 
   return (
     <div
-      className="relative w-full h-full min-h-screen flex flex-col items-center justify-between overflow-hidden"
+      className="relative w-full min-h-screen flex flex-col items-center justify-start md:justify-between"
       onMouseMove={handleMouseMove}
     >
-      {/* 1. PHOTOREALISTIC SUPERHERO HAND LAYER (BEHIND UI) */}
-      <HolographicHand mouseX={mouseOffset.x} mouseY={mouseOffset.y} />
+      {/* 1. DESKTOP ONLY: PHOTOREALISTIC SUPERHERO HAND LAYER */}
+      <div className="hidden md:block">
+        <HolographicHand mouseX={mouseOffset.x} mouseY={mouseOffset.y} />
+      </div>
 
-      {/* 2. TOP CENTER PAGE TITLE & DAY SELECTOR */}
+      {/* 2. TOP CENTER PAGE TITLE & DAY SELECTOR (Visible on all devices) */}
       <ScheduleHUD activeDay={activeDay} onSelectDay={handleSelectDay} />
 
-      {/* 3. CENTRAL RADIAL INTERACTIVE HOLOGRAM */}
-      <div className="relative z-10 my-auto py-4 sm:py-6">
+      {/* 3. DESKTOP ONLY: CENTRAL RADIAL INTERACTIVE HOLOGRAM CIRCLE */}
+      <div className="hidden md:block relative z-10 my-auto py-4 sm:py-6">
         <ScheduleRing
           items={items}
           selectedIndex={selectedIndex}
@@ -73,11 +76,23 @@ export default function RadialSchedule() {
         />
       </div>
 
-      {/* 4. BOTTOM-LEFT "STAY ON TRACK" LIVE COUNTDOWN TIMER PANEL */}
-      <ScheduleCountdown />
+      {/* 4. DESKTOP ONLY: BOTTOM-LEFT "STAY ON TRACK" COUNTDOWN */}
+      <div className="hidden md:block">
+        <ScheduleCountdown />
+      </div>
 
-      {/* 5. FLOATING EVENT DETAILS GLASS PANEL */}
-      <ScheduleDetails item={selectedItem} />
+      {/* 5. DESKTOP ONLY: FLOATING EVENT DETAILS GLASS PANEL */}
+      <div className="hidden md:block">
+        <ScheduleDetails item={selectedItem} />
+      </div>
+
+      {/* 6. MOBILE ONLY: CLEAN RESPONSIVE CYBERPUNK SCHEDULE TABLE */}
+      <div className="block md:hidden w-full px-3 pt-3 pb-24 z-20">
+        <ScheduleMobileTable
+          items={items}
+          daySchedule={currentDaySchedule}
+        />
+      </div>
     </div>
   );
 }

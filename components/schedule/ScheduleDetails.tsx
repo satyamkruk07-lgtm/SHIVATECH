@@ -123,17 +123,10 @@ export default function ScheduleDetails({ item, onClose }: ScheduleDetailsProps)
             <div className="space-y-2">
               <Link
                 href="/events"
-                className="w-full py-2 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 flex items-center justify-center space-x-2 text-xs font-mono font-bold tracking-wider text-slate-200"
+                className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-500 border border-red-400/50 flex items-center justify-center space-x-2 text-xs font-mono font-bold tracking-wider text-white shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all"
               >
                 <span>VIEW EVENT</span>
-                <span className="text-sky-400">👁</span>
-              </Link>
-              <Link
-                href="/register"
-                className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-red-600 to-red-500 flex items-center justify-center space-x-2 text-xs font-mono font-bold tracking-wider text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]"
-              >
-                <span>REGISTER NOW</span>
-                <span>›</span>
+                <span className="text-white">👁</span>
               </Link>
             </div>
           </div>
@@ -220,24 +213,14 @@ export default function ScheduleDetails({ item, onClose }: ScheduleDetailsProps)
             </p>
           </div>
 
-          {/* Action Buttons */}
-          <div className="space-y-2.5">
-            {/* View Event Button */}
+          {/* Action Button */}
+          <div>
             <Link
               href="/events"
-              className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 hover:border-sky-400/60 flex items-center justify-center space-x-2 text-xs font-mono font-bold tracking-wider text-slate-200 hover:text-white transition-all shadow-md group"
+              className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-red-600 via-red-500 to-red-600 hover:from-red-500 hover:to-red-500 border border-red-400/50 flex items-center justify-center space-x-2 text-xs font-mono font-bold tracking-wider text-white transition-all shadow-[0_0_20px_rgba(239,68,68,0.5)] group"
             >
               <span>VIEW EVENT</span>
-              <span className="text-sky-400 group-hover:scale-110 transition-transform">👁</span>
-            </Link>
-
-            {/* Register Button */}
-            <Link
-              href="/register"
-              className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-red-600 via-red-700 to-red-600 hover:from-red-500 hover:to-red-600 border border-red-400/50 flex items-center justify-center space-x-2 text-xs font-mono font-bold tracking-wider text-white transition-all shadow-[0_0_20px_rgba(239,68,68,0.5)] group"
-            >
-              <span>REGISTER NOW</span>
-              <span className="group-hover:translate-x-1 transition-transform">›</span>
+              <span className="text-white group-hover:scale-110 transition-transform">👁</span>
             </Link>
           </div>
         </div>

@@ -7,7 +7,7 @@ import WebOverlay from "../WebOverlay";
 
 export default function ScheduleScene() {
   return (
-    <main className="relative min-h-screen w-full bg-[#02050e] text-white overflow-hidden selection:bg-red-600 selection:text-white">
+    <main className="relative min-h-screen w-full bg-[#02050e] text-white overflow-x-hidden md:overflow-hidden selection:bg-red-600 selection:text-white">
       {/* ATMOSPHERIC BACKGROUND GRADIENTS & BLOOM */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {/* Dark City Silhouette Texture Effect */}
@@ -40,8 +40,8 @@ export default function ScheduleScene() {
         <ParticleField />
       </div>
 
-      {/* MAIN RADIAL SCHEDULE INTERACTION SCENE */}
-      <div className="relative z-10 h-screen max-h-screen flex flex-col justify-between overflow-hidden">
+      {/* MAIN SCHEDULE INTERACTION SCENE */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-between overflow-y-auto md:overflow-hidden md:h-screen md:max-h-screen">
         <RadialSchedule />
       </div>
     </main>
