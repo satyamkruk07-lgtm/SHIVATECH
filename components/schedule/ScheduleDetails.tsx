@@ -52,19 +52,14 @@ export default function ScheduleDetails({ item, onClose }: ScheduleDetailsProps)
                 </h4>
               </div>
 
-              <div className="flex items-center space-x-1.5 shrink-0 font-mono">
+              <div className="flex items-center shrink-0 font-mono">
                 <button
                   onClick={() => setIsMobileExpanded(true)}
-                  className="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white text-[10px] font-bold"
+                  className="px-3 py-1.5 rounded-lg bg-sky-500/15 hover:bg-sky-500/25 border border-sky-400/40 text-sky-400 hover:text-white text-[10px] font-bold tracking-wider flex items-center space-x-1.5 transition-all shadow-[0_0_12px_rgba(56,189,248,0.2)] active:scale-95"
                 >
-                  INFO ▲
+                  <span>INFO</span>
+                  <span>▲</span>
                 </button>
-                <Link
-                  href="/register"
-                  className="px-2.5 py-1 rounded-lg bg-gradient-to-r from-red-600 to-red-500 text-white text-[10px] font-bold tracking-wider uppercase shadow-[0_0_12px_rgba(239,68,68,0.5)]"
-                >
-                  REGISTER &gt;
-                </Link>
               </div>
             </div>
           </div>

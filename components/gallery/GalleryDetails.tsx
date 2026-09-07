@@ -82,21 +82,7 @@ export const GalleryDetails: React.FC<GalleryDetailsProps> = ({
                 {item.description}
               </p>
 
-              {/* Metadata Grid */}
-              <div className="space-y-3 border-t border-b border-white/10 py-4 mb-6 text-xs">
-                <div className="flex justify-between">
-                  <span className="text-slate-400 uppercase tracking-widest">EVENT:</span>
-                  <span className="font-bold text-sky-400">{item.event}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-400 uppercase tracking-widest">DATE:</span>
-                  <span className="font-semibold text-white">{item.date}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-400 uppercase tracking-widest">LOCATION:</span>
-                  <span className="font-semibold text-white uppercase">{item.location}</span>
-                </div>
-              </div>
+              <div className="border-t border-white/10 my-4" />
             </div>
 
             {/* Navigation Buttons */}

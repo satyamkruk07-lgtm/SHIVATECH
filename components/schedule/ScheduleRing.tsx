@@ -48,13 +48,13 @@ export default function ScheduleRing({
   useEffect(() => {
     const updateRadius = () => {
       if (window.innerWidth < 400) {
-        setRadius(105);
+        setRadius(120);
       } else if (window.innerWidth < 640) {
-        setRadius(115);
+        setRadius(132);
       } else if (window.innerWidth < 1024) {
-        setRadius(145);
+        setRadius(155);
       } else {
-        setRadius(170);
+        setRadius(175);
       }
     };
     updateRadius();
@@ -278,7 +278,7 @@ export default function ScheduleRing({
       </div>
 
       {/* STATIONARY CENTRAL HUB */}
-      <div className="relative z-20 w-32 h-32 xs:w-36 xs:h-36 sm:w-44 sm:h-44 lg:w-48 lg:h-48 rounded-full bg-[#040814]/85 border border-sky-400/40 backdrop-blur-2xl flex flex-col items-center justify-center p-2 xs:p-3 text-center shadow-[0_0_35px_rgba(56,189,248,0.3),inset_0_0_20px_rgba(239,68,68,0.15)] pointer-events-none select-none">
+      <div className="relative z-20 w-28 h-28 xs:w-32 xs:h-32 sm:w-44 sm:h-44 lg:w-48 lg:h-48 rounded-full bg-[#040814]/85 border border-sky-400/40 backdrop-blur-2xl flex flex-col items-center justify-center p-1.5 xs:p-2.5 sm:p-3 text-center shadow-[0_0_35px_rgba(56,189,248,0.3),inset_0_0_20px_rgba(239,68,68,0.15)] pointer-events-none select-none">
         {/* Inner Glowing Ring */}
         <div className="absolute inset-1.5 rounded-full border border-red-500/25 animate-pulse" />
 

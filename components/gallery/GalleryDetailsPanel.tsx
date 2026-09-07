@@ -54,21 +54,7 @@ export default function GalleryDetailsPanel({
           <div className="absolute inset-0 bg-gradient-to-t from-[#040814]/80 via-transparent to-transparent" />
         </div>
 
-        {/* Date & Location Metadata */}
-        <div className="space-y-1 mb-2.5 text-[11px] font-mono">
-          <div className="flex items-center justify-between text-slate-300">
-            <span className="text-slate-400">EVENT:</span>
-            <span className="font-bold text-red-400 uppercase">{item.event}</span>
-          </div>
-          <div className="flex items-center justify-between text-slate-300">
-            <span className="text-slate-400">DATE:</span>
-            <span className="font-semibold text-slate-200">{item.date}</span>
-          </div>
-          <div className="flex items-center justify-between text-slate-300">
-            <span className="text-slate-400">VENUE:</span>
-            <span className="font-semibold text-sky-400 uppercase">{item.location}</span>
-          </div>
-        </div>
+
 
         {/* Short Description */}
         <p className="text-[11px] text-slate-300 font-sans leading-relaxed mb-3 border-t border-white/10 pt-2">

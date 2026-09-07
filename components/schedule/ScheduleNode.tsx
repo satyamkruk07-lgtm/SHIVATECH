@@ -31,22 +31,30 @@ export default function ScheduleNode({
   // Normalize angle to [-180, 180]
   const normAngle = ((angleDeg % 360) + 540) % 360 - 180;
 
-  // Smart 4-Sector Label Placement
-  const isTopSector = normAngle >= -115 && normAngle <= -65;
-  const isBottomSector = normAngle >= 65 && normAngle <= 115;
-  const isRightSide = normAngle > -65 && normAngle < 65;
+  // STRICT OUTWARD (AWAY FROM CENTER) SECTOR PLACEMENT
+  // Angle 0: Right (x > 0, y = 0)
+  // Angle 90: Bottom (x = 0, y > 0)
+  // Angle -90: Top (x = 0, y < 0)
+  // Angle 180/-180: Left (x < 0, y = 0)
+  const isTopSector = normAngle >= -135 && normAngle <= -45;
+  const isBottomSector = normAngle >= 45 && normAngle <= 135;
+  const isRightSector = normAngle > -45 && normAngle < 45;
 
   const getLabelClass = () => {
+    // 1. Top Sector (y < 0): Position ABOVE the node (towards -y, away from center)
     if (isTopSector) {
-      return "top-11 left-1/2 -translate-x-1/2 text-center";
+      return "bottom-full mb-2.5 left-1/2 -translate-x-1/2 text-center items-center flex flex-col";
     }
+    // 2. Bottom Sector (y > 0): Position BELOW the node (towards +y, away from center)
     if (isBottomSector) {
-      return "bottom-11 left-1/2 -translate-x-1/2 text-center";
+      return "top-full mt-2.5 left-1/2 -translate-x-1/2 text-center items-center flex flex-col";
     }
-    if (isRightSide) {
-      return "left-11 top-1/2 -translate-y-1/2 text-left";
+    // 3. Right Sector (x > 0): Position to the RIGHT of the node (towards +x, away from center)
+    if (isRightSector) {
+      return "left-full ml-3 top-1/2 -translate-y-1/2 text-left items-start flex flex-col";
     }
-    return "right-11 top-1/2 -translate-y-1/2 text-right";
+    // 4. Left Sector (x < 0): Position to the LEFT of the node (towards -x, away from center)
+    return "right-full mr-3 top-1/2 -translate-y-1/2 text-right items-end flex flex-col";
   };
 
   // Render Icon
@@ -141,7 +149,7 @@ export default function ScheduleNode({
         transform: `translate3d(calc(-50% + ${x.toFixed(2)}px), calc(-50% + ${y.toFixed(2)}px), 0) scale(${
           isSelected ? 1.15 : isHovered ? 1.08 : 1
         })`,
-        zIndex: isSelected ? 30 : isHovered ? 25 : 10,
+        zIndex: isSelected ? 35 : isHovered ? 25 : 10,
       }}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
@@ -155,7 +163,7 @@ export default function ScheduleNode({
         <div
           className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border transition-all duration-300 ${
             isSelected
-              ? "bg-[#060c1d]/95 border-red-500 text-red-400 shadow-[0_0_20px_rgba(239,68,68,0.7),0_0_10px_rgba(56,189,248,0.5)]"
+              ? "bg-[#060c1d]/95 border-red-500 text-red-400 shadow-[0_0_22px_rgba(239,68,68,0.8),0_0_12px_rgba(56,189,248,0.6)]"
               : isHovered
               ? "bg-[#060c1d]/90 border-sky-400 text-sky-300 shadow-[0_0_15px_rgba(56,189,248,0.5)]"
               : item.featured
@@ -168,27 +176,33 @@ export default function ScheduleNode({
           </div>
         </div>
 
-        {/* Pulse Dot */}
+        {/* Pulse Dot on Selected Node */}
         {isSelected && (
           <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-red-500 border-2 border-[#040814] animate-ping" />
         )}
 
-        {/* Text Label Floating in calculated sector */}
+        {/* Text Label Floating OUTWARD away from center */}
         <div
-          className={`absolute whitespace-nowrap transition-all duration-300 pointer-events-none ${getLabelClass()}`}
+          className={`absolute whitespace-nowrap transition-all duration-300 pointer-events-none z-20 ${getLabelClass()}`}
         >
+          {/* Time Tag */}
           <div
-            className={`text-[10px] sm:text-[11px] font-mono font-bold tracking-wider mb-0.5 transition-colors ${
-              isSelected ? "text-red-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]" : "text-sky-400"
+            className={`text-[9px] sm:text-[11px] font-mono font-bold tracking-wider transition-colors ${
+              isSelected
+                ? "text-red-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.7)] px-1.5 py-0.5 rounded bg-red-950/40 border border-red-500/30"
+                : "text-sky-400/90"
             }`}
           >
             {item.time}
           </div>
 
+          {/* Title: On mobile, visible when isSelected or isHovered; On desktop (sm:), always visible */}
           <div
-            className={`text-[11px] sm:text-xs font-extrabold uppercase tracking-wide font-mono transition-colors ${
+            className={`text-[10px] sm:text-xs font-extrabold uppercase tracking-wide font-mono transition-colors mt-0.5 ${
+              !isSelected && !isHovered ? "hidden sm:block" : "block"
+            } ${
               isSelected
-                ? "text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+                ? "text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] px-2 py-0.5 rounded-md bg-[#040814]/90 border border-red-500/40"
                 : isHovered
                 ? "text-slate-100"
                 : "text-slate-300"
@@ -197,7 +211,8 @@ export default function ScheduleNode({
             {item.title}
           </div>
 
-          <div className="text-[9px] sm:text-[10px] text-slate-400 max-w-[120px] sm:max-w-[140px] truncate leading-tight">
+          {/* Subtitle: Desktop Only */}
+          <div className="hidden sm:block text-[9px] sm:text-[10px] text-slate-400 max-w-[130px] truncate leading-tight mt-0.5">
             {item.subtitle}
           </div>
         </div>
