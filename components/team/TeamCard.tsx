@@ -57,17 +57,15 @@ export const TeamCard: React.FC<TeamCardProps> = ({
         {/* Subtle Gradient Vignette at bottom */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#080e22] via-[#080e22]/20 to-transparent opacity-85 group-hover:opacity-60 transition-opacity duration-300" />
 
-        {/* Category Badge on top-right */}
-        <div className="absolute top-2.5 right-2.5 z-10 px-2 py-0.5 rounded-full bg-[#02050e]/85 backdrop-blur-md border border-white/15 flex items-center space-x-1.5 shadow-md">
-          <span
-            className={`w-1.5 h-1.5 rounded-full animate-pulse ${
-              isFaculty ? "bg-amber-400" : "bg-cyan-400"
-            }`}
-          />
-          <span className="text-[9px] font-mono font-bold tracking-widest uppercase text-slate-200">
-            {isFaculty ? "FACULTY" : "COUNCIL"}
-          </span>
-        </div>
+        {/* Category Badge on top-right (Only for Faculty Coordinators) */}
+        {isFaculty && (
+          <div className="absolute top-2.5 right-2.5 z-10 px-2 py-0.5 rounded-full bg-[#02050e]/85 backdrop-blur-md border border-white/15 flex items-center space-x-1.5 shadow-md">
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-amber-400" />
+            <span className="text-[9px] font-mono font-bold tracking-widest uppercase text-slate-200">
+              FACULTY
+            </span>
+          </div>
+        )}
       </div>
 
       {/* 3. Bottom: Member Info */}
@@ -85,13 +83,6 @@ export const TeamCard: React.FC<TeamCardProps> = ({
         >
           {member.role}
         </div>
-
-        {/* Short Role / Department Description */}
-        {member.description && (
-          <p className="text-[11px] text-slate-300/85 font-sans tracking-tight line-clamp-1 mt-1">
-            {member.description}
-          </p>
-        )}
 
         {/* Optional Social Icons Row */}
         {member.socials && (member.socials.linkedin || member.socials.instagram || member.socials.github || member.socials.email) && (
