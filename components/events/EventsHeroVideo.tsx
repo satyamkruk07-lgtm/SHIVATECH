@@ -25,14 +25,16 @@ export const EventsHeroVideo: React.FC = () => {
         playsInline
         preload="auto"
         poster="/videos/hero-poster.webp"
-        className="absolute inset-0 w-full h-full object-cover object-[center_30%] scale-[1.04] pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
       >
         <source src="/videos/Shivatech-all-event.mp4" type="video/mp4" />
       </video>
 
-      {/* 2. EXTENDED SEAMLESS BOTTOM BLACK BLEND (Hides watermark completely) */}
-      <div className="absolute bottom-0 left-0 right-0 h-36 sm:h-48 lg:h-64 bg-gradient-to-t from-[#02040a] from-20% via-[#02040a]/80 to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-80 sm:w-[420px] h-44 sm:h-60 bg-gradient-to-tl from-[#02040a] from-30% via-[#02040a]/85 to-transparent pointer-events-none" />
+      {/* 2. COMPACT WATERMARK COVER (Only the size of the watermark in the bottom-right corner) */}
+      <div className="absolute bottom-[10%] sm:bottom-[12%] lg:bottom-[13%] right-[5%] sm:right-[7%] lg:right-[8%] w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#02040a]/95 blur-[6px] pointer-events-none" />
+
+      {/* 3. MINIMAL BOTTOM EDGE BLEND */}
+      <div className="absolute bottom-0 left-0 right-0 h-10 sm:h-14 bg-gradient-to-t from-[#02040a] to-transparent pointer-events-none" />
     </section>
   );
 };
