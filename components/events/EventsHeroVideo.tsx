@@ -25,13 +25,14 @@ export const EventsHeroVideo: React.FC = () => {
         playsInline
         preload="auto"
         poster="/videos/hero-poster.webp"
-        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover object-[center_30%] scale-[1.04] pointer-events-none"
       >
         <source src="/videos/Shivatech-all-event.mp4" type="video/mp4" />
       </video>
 
-      {/* 2. SUBTLE SEAMLESS BOTTOM BLEND TO CONTENT */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-28 lg:h-36 bg-gradient-to-t from-[#02040a] to-transparent pointer-events-none" />
+      {/* 2. EXTENDED SEAMLESS BOTTOM BLACK BLEND (Hides watermark completely) */}
+      <div className="absolute bottom-0 left-0 right-0 h-36 sm:h-48 lg:h-64 bg-gradient-to-t from-[#02040a] from-20% via-[#02040a]/80 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-80 sm:w-[420px] h-44 sm:h-60 bg-gradient-to-tl from-[#02040a] from-30% via-[#02040a]/85 to-transparent pointer-events-none" />
     </section>
   );
 };

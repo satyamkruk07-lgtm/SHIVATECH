@@ -6,7 +6,6 @@ import EventsHeroVideo from "./EventsHeroVideo";
 import EventsIntro from "./EventsIntro";
 import EventItemSection from "./EventItemSection";
 import EventDetailsModal from "./EventDetailsModal";
-import EventsFinalCTA from "./EventsFinalCTA";
 import Footer from "@/components/Footer";
 
 export const EventsPageClient: React.FC = () => {
@@ -43,10 +42,7 @@ export const EventsPageClient: React.FC = () => {
         ))}
       </div>
 
-      {/* 7. FINAL CTA */}
-      <EventsFinalCTA />
-
-      {/* 8. FOOTER */}
+      {/* FOOTER */}
       <Footer />
 
       {/* EVENT DETAILS VIEW MODAL */}
