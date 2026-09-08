@@ -30,13 +30,16 @@ export const EventsHeroVideo: React.FC = () => {
         <source src="/videos/Shivatech-all-event.mp4" type="video/mp4" />
       </video>
 
-      {/* 2. COMPACT WATERMARK COVER (Dead center over the watermark) */}
+      {/* 2. AMBIENT COLOR-MATCHED WATERMARK COVER (Blends seamlessly with slate-navy street/building tone) */}
       <div
-        className="absolute w-20 h-20 rounded-full bg-[#02040a]/95 blur-[6px] pointer-events-none"
+        className="absolute w-14 h-14 sm:w-16 sm:h-16 rounded-full pointer-events-none backdrop-blur-md"
         style={{
           right: "clamp(110px, 9.5vw, 175px)",
           bottom: "clamp(25px, 6.3vh, 65px)",
           transform: "translate(50%, 50%)",
+          background:
+            "radial-gradient(circle, rgba(17, 29, 42, 0.9) 0%, rgba(17, 29, 42, 0.65) 60%, transparent 100%)",
+          boxShadow: "0 0 14px 4px rgba(17, 29, 42, 0.6)",
         }}
       />
 
