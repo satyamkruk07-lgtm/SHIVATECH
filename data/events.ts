@@ -43,6 +43,111 @@ export type EventData = {
   };
 };
 
+export interface EventItem {
+  id: string;
+  number: string;
+  name: string;
+  category: string;
+  date: string;
+  tagline: string;
+  description: string;
+  prize: string;
+  teamSize: string;
+  venue: string;
+  registerUrl: string;
+  accentColor: "crimson" | "blue" | "flagship" | "purple";
+  isFlagship?: boolean;
+  highlights: string[];
+}
+
+export const eventsList: EventItem[] = [
+  {
+    id: "hacknation-2",
+    number: "01",
+    name: "HACKNATION 2.0",
+    category: "HACKATHON",
+    date: "07–08 OCTOBER 2026",
+    tagline: "30-HOUR INNOVATION & CODING CHALLENGE",
+    description:
+      "A 30-hour innovation and coding challenge where teams collaborate, build, experiment and solve real-world problems.",
+    prize: "₹60,000",
+    teamSize: "2–4 Members",
+    venue: "Main Computing Hub & Labs",
+    registerUrl: "/register?event=hacknation-2",
+    accentColor: "crimson",
+    highlights: [
+      "30 Hours Non-Stop Hacking",
+      "Industry Mentors & Tech Guidance",
+      "Direct Opportunity Tracks",
+      "Exciting Cash Prizes & Swag",
+    ],
+  },
+  {
+    id: "ideathon",
+    number: "02",
+    name: "IDEATHON",
+    category: "INNOVATION",
+    date: "07–08 OCTOBER 2026",
+    tagline: "INNOVATION & PROBLEM-SOLVING CONCLAVE",
+    description:
+      "Turn bold ideas into meaningful solutions through creativity, innovation and problem-solving.",
+    prize: "₹30,000",
+    teamSize: "1–3 Members",
+    venue: "Executive Conference Hall",
+    registerUrl: "/register?event=ideathon",
+    accentColor: "blue",
+    highlights: [
+      "Startup Idea Pitching",
+      "Design Thinking Frameworks",
+      "Incubation & Mentorship",
+      "Prototype Evaluation",
+    ],
+  },
+  {
+    id: "shivatech",
+    number: "03",
+    name: "SHIVATECH",
+    category: "FLAGSHIP EXPERIENCE",
+    date: "09 OCTOBER 2026",
+    tagline: "THE FLAGSHIP TECHNOLOGY FESTIVAL",
+    description:
+      "The flagship technology experience bringing together innovation, technology, creativity and competition.",
+    prize: "₹40,000",
+    teamSize: "Individual / Teams",
+    venue: "Central Auditorium & Exhibition Grounds",
+    registerUrl: "/register?event=shivatech",
+    accentColor: "flagship",
+    isFlagship: true,
+    highlights: [
+      "Grand Tech Exhibition",
+      "Robotics & Hardware Showcase",
+      "Keynotes & Industry Leaders",
+      "Interactive Future Tech Arena",
+    ],
+  },
+  {
+    id: "science-championship",
+    number: "04",
+    name: "SCIENCE CHAMPIONSHIP",
+    category: "COMPETITION",
+    date: "10 OCTOBER 2026",
+    tagline: "DISCOVERY, EXPERIMENTATION & SCIENTIFIC THINKING",
+    description:
+      "Explore scientific thinking, experimentation and innovation through an exciting competitive experience.",
+    prize: "₹20,000",
+    teamSize: "2–3 Members",
+    venue: "Science & Applied Research Arena",
+    registerUrl: "/register?event=science-championship",
+    accentColor: "purple",
+    highlights: [
+      "Live Science Experimentation",
+      "Scientific Reasoning Rounds",
+      "Interactive Olympiad Challenge",
+      "Medals & Merit Citations",
+    ],
+  },
+];
+
 export const eventsSequenceData: EventSequenceData[] = [
   {
     id: "hacknation-2",
