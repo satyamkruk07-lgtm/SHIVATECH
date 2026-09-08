@@ -30,8 +30,15 @@ export const EventsHeroVideo: React.FC = () => {
         <source src="/videos/Shivatech-all-event.mp4" type="video/mp4" />
       </video>
 
-      {/* 2. COMPACT WATERMARK COVER (Only the size of the watermark in the bottom-right corner) */}
-      <div className="absolute bottom-[10%] sm:bottom-[12%] lg:bottom-[13%] right-[5%] sm:right-[7%] lg:right-[8%] w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#02040a]/95 blur-[6px] pointer-events-none" />
+      {/* 2. COMPACT WATERMARK COVER (Dead center over the watermark) */}
+      <div
+        className="absolute w-20 h-20 rounded-full bg-[#02040a]/95 blur-[6px] pointer-events-none"
+        style={{
+          right: "clamp(110px, 9.5vw, 175px)",
+          bottom: "clamp(25px, 6.3vh, 65px)",
+          transform: "translate(50%, 50%)",
+        }}
+      />
 
       {/* 3. MINIMAL BOTTOM EDGE BLEND */}
       <div className="absolute bottom-0 left-0 right-0 h-10 sm:h-14 bg-gradient-to-t from-[#02040a] to-transparent pointer-events-none" />
