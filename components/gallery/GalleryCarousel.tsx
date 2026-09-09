@@ -40,16 +40,16 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
     setCurrentIndex(0);
   }, [itemsSignature]);
 
-  // Autoplay timer (exact 3.0s interval)
+  // Autoplay timer: runs unconditionally every 3 seconds when isAutoPlaying is true
   useEffect(() => {
-    if (!isAutoPlaying || isHovered || total <= 1) return;
+    if (!isAutoPlaying || total <= 1) return;
 
     const timer = setInterval(() => {
-      handleNext();
+      setCurrentIndex((prev) => (prev + 1) % total);
     }, 3000);
 
     return () => clearInterval(timer);
-  }, [isAutoPlaying, isHovered, total, handleNext]);
+  }, [isAutoPlaying, total]);
 
   // Touch & Mouse Swipe Handlers
   const handlePointerDown = (e: React.PointerEvent) => {
