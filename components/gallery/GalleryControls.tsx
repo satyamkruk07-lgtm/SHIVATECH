@@ -18,17 +18,25 @@ export const GalleryControls: React.FC<GalleryControlsProps> = ({
 }) => {
   return (
     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-4 pointer-events-auto select-none font-mono">
-      {/* Left Arrow Button */}
+      {/* Left Arrow Button (Only active when autoplay is OFF) */}
       <motion.button
-        whileHover={{ scale: 1.1, backgroundColor: "rgba(239, 68, 68, 0.2)" }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={isAutoPlaying ? {} : { scale: 1.1, backgroundColor: "rgba(239, 68, 68, 0.2)" }}
+        whileTap={isAutoPlaying ? {} : { scale: 0.95 }}
+        disabled={isAutoPlaying}
         onPointerDown={(e) => e.stopPropagation()}
         onClick={(e) => {
           e.stopPropagation();
-          onPrev();
+          if (!isAutoPlaying) {
+            onPrev();
+          }
         }}
-        className="w-11 h-11 rounded-full bg-[#040814]/85 border border-white/20 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-all hover:border-red-500 cursor-pointer"
+        className={`w-11 h-11 rounded-full bg-[#040814]/85 border backdrop-blur-xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-all ${
+          isAutoPlaying
+            ? "opacity-25 border-white/10 cursor-not-allowed pointer-events-none"
+            : "opacity-100 border-white/25 hover:border-red-500 cursor-pointer shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+        }`}
         aria-label="Previous Memory"
+        title={isAutoPlaying ? "Pause autoplay to use arrows" : "Previous photo"}
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
           <path d="M15 18l-6-6 6-6" />
@@ -54,17 +62,25 @@ export const GalleryControls: React.FC<GalleryControlsProps> = ({
         </span>
       </button>
 
-      {/* Right Arrow Button */}
+      {/* Right Arrow Button (Only active when autoplay is OFF) */}
       <motion.button
-        whileHover={{ scale: 1.1, backgroundColor: "rgba(239, 68, 68, 0.2)" }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={isAutoPlaying ? {} : { scale: 1.1, backgroundColor: "rgba(239, 68, 68, 0.2)" }}
+        whileTap={isAutoPlaying ? {} : { scale: 0.95 }}
+        disabled={isAutoPlaying}
         onPointerDown={(e) => e.stopPropagation()}
         onClick={(e) => {
           e.stopPropagation();
-          onNext();
+          if (!isAutoPlaying) {
+            onNext();
+          }
         }}
-        className="w-11 h-11 rounded-full bg-[#040814]/85 border border-white/20 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-all hover:border-red-500 cursor-pointer"
+        className={`w-11 h-11 rounded-full bg-[#040814]/85 border backdrop-blur-xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-all ${
+          isAutoPlaying
+            ? "opacity-25 border-white/10 cursor-not-allowed pointer-events-none"
+            : "opacity-100 border-white/25 hover:border-red-500 cursor-pointer shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+        }`}
         aria-label="Next Memory"
+        title={isAutoPlaying ? "Pause autoplay to use arrows" : "Next photo"}
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
           <path d="M9 18l6-6-6-6" />

@@ -132,31 +132,7 @@ export const GalleryCard: React.FC<GalleryCardProps> = ({
           </span>
         </div>
 
-        {/* 5. TOP-RIGHT SPIDER-MAN MASK EMBLEM BADGE */}
-        <div
-          className={`absolute top-2.5 right-2.5 z-20 flex items-center space-x-1.5 px-2 py-1 rounded-full backdrop-blur-md transition-all duration-300 ${
-            isCenter
-              ? "bg-black/80 border border-red-500/80 shadow-[0_0_14px_rgba(239,68,68,0.7)] scale-105"
-              : "bg-black/50 border border-white/15 opacity-70 group-hover:opacity-100"
-          }`}
-        >
-          <div className="relative w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
-            <Image
-              src="/gallery/spider_mask_v3.png"
-              alt="Spider-Man Mask"
-              width={20}
-              height={20}
-              className="object-contain filter drop-shadow-[0_0_6px_rgba(239,68,68,0.8)]"
-            />
-          </div>
-          {isCenter && (
-            <span className="text-[9px] font-mono font-bold tracking-widest text-red-400 uppercase hidden sm:inline-block">
-              SHIVATECH
-            </span>
-          )}
-        </div>
-
-        {/* 6. BOTTOM METADATA OVERLAY */}
+        {/* 5. BOTTOM METADATA OVERLAY */}
         {isCenter ? (
           // Center Card Full Details
           <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 bg-gradient-to-t from-[#040814] via-[#040814]/90 to-transparent font-mono text-white z-20">

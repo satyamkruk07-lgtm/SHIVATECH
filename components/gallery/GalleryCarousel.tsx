@@ -40,13 +40,13 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
     setCurrentIndex(0);
   }, [itemsSignature]);
 
-  // Autoplay timer (3.5s hold)
+  // Autoplay timer (exact 3.0s interval)
   useEffect(() => {
     if (!isAutoPlaying || isHovered || total <= 1) return;
 
     const timer = setInterval(() => {
       handleNext();
-    }, 3500);
+    }, 3000);
 
     return () => clearInterval(timer);
   }, [isAutoPlaying, isHovered, total, handleNext]);
