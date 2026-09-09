@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { galleryData, galleryCategories, GalleryCategory, GalleryItem } from "@/data/gallery";
 import CityBackground from "./CityBackground";
 import GalleryFilters from "./GalleryFilters";
@@ -14,9 +14,13 @@ export default function GalleryScene() {
   // Mouse Parallax Offset
   const [mouseOffset, setMouseOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
-  // Filter items based on selected category
-  const filteredItems = galleryData.filter(
-    (item) => activeCategory === "ALL" || item.category === activeCategory
+  // Filter items based on selected category (memoized so reference remains stable across mouse moves)
+  const filteredItems = useMemo(
+    () =>
+      galleryData.filter(
+        (item) => activeCategory === "ALL" || item.category === activeCategory
+      ),
+    [activeCategory]
   );
 
   const handleSelectCategory = (cat: GalleryCategory) => {

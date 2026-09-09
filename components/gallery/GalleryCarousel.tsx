@@ -34,24 +34,27 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
     setCurrentIndex((prev) => (prev - 1 + total) % total);
   }, [total]);
 
-  // Reset index when items (e.g. category filter) change
+  // Reset index ONLY when the filtered items list actually changes (e.g. category changed)
+  const itemsSignature = items.map((it) => it.id).join(",");
   useEffect(() => {
     setCurrentIndex(0);
-  }, [items]);
+  }, [itemsSignature]);
 
-  // Autoplay timer (4.5s hold)
+  // Autoplay timer (3.5s hold)
   useEffect(() => {
     if (!isAutoPlaying || isHovered || total <= 1) return;
 
     const timer = setInterval(() => {
       handleNext();
-    }, 3000);
+    }, 3500);
 
     return () => clearInterval(timer);
   }, [isAutoPlaying, isHovered, total, handleNext]);
 
-  // Keyboard Navigation & Touch Swipe
+  // Touch & Mouse Swipe Handlers
   const handlePointerDown = (e: React.PointerEvent) => {
+    // Prevent swipe drag if user clicked on button or controls
+    if ((e.target as HTMLElement).closest("button")) return;
     isDraggingRef.current = true;
     dragStartXRef.current = e.clientX;
   };
@@ -75,16 +78,18 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
     );
   }
 
-  // Get current slot position for index relative to currentIndex
-  const getSlotPosition = (index: number): "far-left" | "left" | "center" | "right" | "far-right" | "hidden" => {
+  // Symmetrical slot position calculator
+  const getSlotPosition = (
+    index: number
+  ): "far-left" | "left" | "center" | "right" | "far-right" | "hidden" => {
     const diff = (index - currentIndex + total) % total;
-    const normalizedDiff = diff > total / 2 ? diff - total : diff;
+    const normalizedDiff = diff > Math.floor(total / 2) ? diff - total : diff;
 
     if (normalizedDiff === 0) return "center";
-    if (normalizedDiff === -1 || (currentIndex === 0 && index === total - 1)) return "left";
-    if (normalizedDiff === 1 || (currentIndex === total - 1 && index === 0)) return "right";
-    if (normalizedDiff === -2 || (currentIndex <= 1 && index >= total - 2 + currentIndex)) return "far-left";
-    if (normalizedDiff === 2 || (currentIndex >= total - 2 && index <= 1 - (total - 1 - currentIndex))) return "far-right";
+    if (normalizedDiff === -1) return "left";
+    if (normalizedDiff === 1) return "right";
+    if (normalizedDiff === -2) return "far-left";
+    if (normalizedDiff === 2) return "far-right";
     return "hidden";
   };
 

@@ -22,8 +22,12 @@ export const GalleryControls: React.FC<GalleryControlsProps> = ({
       <motion.button
         whileHover={{ scale: 1.1, backgroundColor: "rgba(239, 68, 68, 0.2)" }}
         whileTap={{ scale: 0.95 }}
-        onClick={onPrev}
-        className="w-11 h-11 rounded-full bg-[#040814]/85 border border-white/20 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-all hover:border-red-500"
+        onPointerDown={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation();
+          onPrev();
+        }}
+        className="w-11 h-11 rounded-full bg-[#040814]/85 border border-white/20 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-all hover:border-red-500 cursor-pointer"
         aria-label="Previous Memory"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -33,8 +37,12 @@ export const GalleryControls: React.FC<GalleryControlsProps> = ({
 
       {/* AutoPlay Toggle Indicator Button */}
       <button
-        onClick={onToggleAutoPlay}
-        className="px-4 py-2 rounded-full bg-[#040814]/85 border border-sky-400/40 backdrop-blur-xl text-xs font-bold text-sky-400 hover:text-white hover:border-sky-300 flex items-center space-x-2 transition-all shadow-[0_0_15px_rgba(56,189,248,0.2)]"
+        onPointerDown={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation();
+          onToggleAutoPlay();
+        }}
+        className="px-4 py-2 rounded-full bg-[#040814]/85 border border-sky-400/40 backdrop-blur-xl text-xs font-bold text-sky-400 hover:text-white hover:border-sky-300 flex items-center space-x-2 transition-all shadow-[0_0_15px_rgba(56,189,248,0.2)] cursor-pointer"
       >
         <span
           className={`w-2 h-2 rounded-full ${
@@ -50,8 +58,12 @@ export const GalleryControls: React.FC<GalleryControlsProps> = ({
       <motion.button
         whileHover={{ scale: 1.1, backgroundColor: "rgba(239, 68, 68, 0.2)" }}
         whileTap={{ scale: 0.95 }}
-        onClick={onNext}
-        className="w-11 h-11 rounded-full bg-[#040814]/85 border border-white/20 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-all hover:border-red-500"
+        onPointerDown={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation();
+          onNext();
+        }}
+        className="w-11 h-11 rounded-full bg-[#040814]/85 border border-white/20 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-all hover:border-red-500 cursor-pointer"
         aria-label="Next Memory"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
