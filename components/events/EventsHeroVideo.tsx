@@ -16,7 +16,7 @@ export const EventsHeroVideo: React.FC = () => {
 
   return (
     <section className="relative w-full h-[65vh] sm:h-[75vh] lg:h-[85vh] min-h-[420px] max-h-[960px] overflow-hidden bg-[#02040a] select-none">
-      {/* 1. CINEMATIC VIDEO BACKGROUND */}
+      {/* 1. CINEMATIC VIDEO BACKGROUND (Optimized H.264, faststart streaming, zero watermark) */}
       <video
         ref={videoRef}
         autoPlay
@@ -30,20 +30,7 @@ export const EventsHeroVideo: React.FC = () => {
         <source src="/videos/Shivatech-all-event.mp4" type="video/mp4" />
       </video>
 
-      {/* 2. AMBIENT COLOR-MATCHED WATERMARK COVER (Blends seamlessly with slate-navy street/building tone) */}
-      <div
-        className="absolute w-14 h-14 sm:w-16 sm:h-16 rounded-full pointer-events-none backdrop-blur-md"
-        style={{
-          right: "clamp(110px, 9.5vw, 175px)",
-          bottom: "clamp(25px, 6.3vh, 65px)",
-          transform: "translate(50%, 50%)",
-          background:
-            "radial-gradient(circle, rgba(17, 29, 42, 0.9) 0%, rgba(17, 29, 42, 0.65) 60%, transparent 100%)",
-          boxShadow: "0 0 14px 4px rgba(17, 29, 42, 0.6)",
-        }}
-      />
-
-      {/* 3. MINIMAL BOTTOM EDGE BLEND */}
+      {/* 2. MINIMAL BOTTOM EDGE BLEND */}
       <div className="absolute bottom-0 left-0 right-0 h-10 sm:h-14 bg-gradient-to-t from-[#02040a] to-transparent pointer-events-none" />
     </section>
   );
