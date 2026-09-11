@@ -1,12 +1,54 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { EventItem } from "@/data/events";
+import { motion, animate } from "framer-motion";
+import { EventItem, EventStatItem } from "@/data/events";
 
 interface EventHeroProps {
   event: EventItem;
+}
+
+function HeroStatCounter({
+  to,
+  prefix = "",
+  suffix = "",
+  customText,
+}: {
+  to?: number;
+  prefix?: string;
+  suffix?: string;
+  customText?: string;
+}) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (to === undefined) return;
+    const controls = animate(0, to, {
+      duration: 1.8,
+      ease: "easeOut",
+      onUpdate: (val) => {
+        setCount(Math.round(val));
+      },
+    });
+    return controls.stop;
+  }, [to]);
+
+  if (customText) {
+    return (
+      <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight leading-tight block whitespace-normal">
+        {customText}
+      </span>
+    );
+  }
+
+  return (
+    <span>
+      {prefix}
+      {count}
+      {suffix}
+    </span>
+  );
 }
 
 export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
@@ -29,6 +71,15 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
     : isEmerald
     ? "from-emerald-600/20 via-transparent to-transparent"
     : "from-purple-600/20 via-transparent to-transparent";
+
+  // Default stats strip data matching user's requested 4 categories:
+  // participants, prize, teams, other states
+  const statsToRender: EventStatItem[] = event.eventStats || [
+    { id: "s1", value: 1000, suffix: "+", label: "PARTICIPANTS" },
+    { id: "s2", customText: event.prize || "Upto 2 Lakh", label: "PRIZE" },
+    { id: "s3", value: 200, suffix: "+", label: "TEAMS" },
+    { id: "s4", value: 15, suffix: "+", label: "OTHER STATES" },
+  ];
 
   return (
     <section className="relative w-full pt-32 pb-16 sm:pt-40 sm:pb-24 px-4 sm:px-6 lg:px-8 bg-[#02040a] overflow-hidden border-b border-white/10">
@@ -107,12 +158,12 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           </motion.div>
         )}
 
-        {/* Schedule & Metadata Bar */}
+        {/* Schedule & Metadata Bar (Box 1 in user image) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl mb-10 font-mono"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl mb-8 font-mono"
         >
           {/* Date */}
           <div className="flex flex-col">
@@ -156,11 +207,40 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           </div>
         </motion.div>
 
+        {/* Dynamic Event Stats Strip (Box 2 in user image: participants, prize, teams, other states) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.28 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 py-6 sm:py-8 px-4 sm:px-6 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-xl mb-10 relative overflow-hidden"
+        >
+          {statsToRender.map((stat, idx) => (
+            <div
+              key={stat.id || idx}
+              className={`flex flex-col items-center justify-center text-center min-w-0 relative ${
+                idx < statsToRender.length - 1 ? "md:border-r md:border-white/15" : ""
+              }`}
+            >
+              <div className="font-orbitron text-2xl min-[400px]:text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/70 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] mb-2 max-w-full">
+                <HeroStatCounter
+                  to={stat.value}
+                  prefix={stat.prefix}
+                  suffix={stat.suffix}
+                  customText={stat.customText}
+                />
+              </div>
+              <div className="font-sans text-[11px] sm:text-xs md:text-sm tracking-[0.2em] text-white/50 uppercase font-semibold">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
         {/* Hero Actions: REGISTER & EXPLORE SCHEDULE */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.32 }}
           className="flex flex-wrap items-center gap-4 font-mono"
         >
           {event.registerUrl.startsWith("http") ? (

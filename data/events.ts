@@ -25,6 +25,15 @@ export interface ScienceChallenge {
   highlights?: string[];
 }
 
+export interface EventStatItem {
+  id: string;
+  value?: number;
+  prefix?: string;
+  suffix?: string;
+  customText?: string;
+  label: string;
+}
+
 export interface EventItem {
   id: string; // Slug & unique ID
   slug: string;
@@ -54,6 +63,7 @@ export interface EventItem {
   opportunities?: string[];
   departments?: DepartmentGroup[];
   scienceChallenges?: ScienceChallenge[];
+  eventStats?: EventStatItem[];
 }
 
 export const eventsList: EventItem[] = [
@@ -89,6 +99,12 @@ export const eventsList: EventItem[] = [
     registerUrl: "https://forms.gle/CvYpny3YC5dpdYby7",
     accentColor: "crimson",
     badge: "FLAGSHIP HACKATHON",
+    eventStats: [
+      { id: "stat-1", value: 1000, suffix: "+", label: "PARTICIPANTS" },
+      { id: "stat-2", customText: "Upto 2 Lakh", label: "PRIZE" },
+      { id: "stat-3", value: 200, suffix: "+", label: "TEAMS" },
+      { id: "stat-4", value: 15, suffix: "+", label: "OTHER STATES" },
+    ],
     highlights: [
       "30 Hours Continuous Development Sprint",
       "Up to ₹2,00,000 Total Prize Pool",
@@ -186,6 +202,12 @@ export const eventsList: EventItem[] = [
     registerUrl: "/register?event=ideathon",
     accentColor: "blue",
     badge: "INCUBATION PIPELINE",
+    eventStats: [
+      { id: "stat-1", value: 500, suffix: "+", label: "PARTICIPANTS" },
+      { id: "stat-2", customText: "Upto 30,000", label: "PRIZE" },
+      { id: "stat-3", value: 100, suffix: "+", label: "TEAMS" },
+      { id: "stat-4", value: 12, suffix: "+", label: "OTHER STATES" },
+    ],
     highlights: [
       "18 Suggested Problem Domains",
       "7-Stage Idea-to-Incubation Pipeline",
@@ -264,6 +286,12 @@ export const eventsList: EventItem[] = [
     registerUrl: "/register?event=departmental-technical-events",
     accentColor: "emerald",
     badge: "MULTI-DEPARTMENT EXPO",
+    eventStats: [
+      { id: "stat-1", value: 1500, suffix: "+", label: "PARTICIPANTS" },
+      { id: "stat-2", customText: "Upto 50,000", label: "PRIZE" },
+      { id: "stat-3", value: 250, suffix: "+", label: "TEAMS" },
+      { id: "stat-4", value: 14, suffix: "+", label: "OTHER STATES" },
+    ],
     highlights: [
       "6 Academic Department Streams",
       "40+ Specialized Technical Competitions",
@@ -386,6 +414,12 @@ export const eventsList: EventItem[] = [
     registerUrl: "/register?event=science-championship",
     accentColor: "purple",
     badge: "DISCOVERY ARENA",
+    eventStats: [
+      { id: "stat-1", value: 800, suffix: "+", label: "PARTICIPANTS" },
+      { id: "stat-2", customText: "Upto 20,000", label: "PRIZE" },
+      { id: "stat-3", value: 120, suffix: "+", label: "TEAMS" },
+      { id: "stat-4", value: 10, suffix: "+", label: "OTHER STATES" },
+    ],
     highlights: [
       "2-Hour Innovation Challenge (Hackathon)",
       "Science Exhibition (Working Models & Prototypes)",
