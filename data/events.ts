@@ -285,7 +285,7 @@ export const eventsList: EventItem[] = [
     number: "02",
     name: "IDEATHON",
     category: "INNOVATION & ENTREPRENEURSHIP",
-    date: "06 OCTOBER 2026",
+    date: "07 OCTOBER 2026",
     fullDateSchedule: [
       "6 October 2026 — Idea Presentations, Pitching Sessions, Expert Evaluation & Workshops",
     ],
@@ -302,7 +302,7 @@ export const eventsList: EventItem[] = [
       "To prepare student ventures for national-level innovation competitions.",
     ],
     prize: "₹30,000+",
-    teamSize: "1–3 Members",
+    teamSize: "2–4 Members",
     registerUrl: "/register?event=ideathon",
     accentColor: "blue",
     badge: "INCUBATION PIPELINE",
