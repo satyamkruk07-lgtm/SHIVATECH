@@ -72,13 +72,12 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
     ? "from-emerald-600/20 via-transparent to-transparent"
     : "from-purple-600/20 via-transparent to-transparent";
 
-  // Default stats strip data matching user's requested 4 categories:
-  // participants, prize, teams, other states
+  // Default stats strip data matching user's requested categories:
+  // participants, teams, other states
   const statsToRender: EventStatItem[] = event.eventStats || [
-    { id: "s1", value: 1000, suffix: "+", label: "PARTICIPANTS" },
-    { id: "s2", customText: event.prize || "Upto 2 Lakh", label: "PRIZE" },
-    { id: "s3", value: 200, suffix: "+", label: "TEAMS" },
-    { id: "s4", value: 15, suffix: "+", label: "OTHER STATES" },
+    { id: "s1", value: 500, suffix: "+", label: "PARTICIPANTS" },
+    { id: "s2", value: 100, suffix: "+", label: "TEAMS" },
+    { id: "s3", value: 15, suffix: "+", label: "OTHER STATES" },
   ];
 
   return (
@@ -207,33 +206,43 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           </div>
         </motion.div>
 
-        {/* Dynamic Event Stats Strip (Box 2 in user image: participants, prize, teams, other states) */}
+        {/* Dynamic Event Stats Strip with Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.28 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 py-6 sm:py-8 px-4 sm:px-6 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-xl mb-10 relative overflow-hidden"
+          className="mb-10"
         >
-          {statsToRender.map((stat, idx) => (
-            <div
-              key={stat.id || idx}
-              className={`flex flex-col items-center justify-center text-center min-w-0 relative ${
-                idx < statsToRender.length - 1 ? "md:border-r md:border-white/15" : ""
-              }`}
-            >
-              <div className="font-orbitron text-2xl min-[400px]:text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/70 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] mb-2 max-w-full">
-                <HeroStatCounter
-                  to={stat.value}
-                  prefix={stat.prefix}
-                  suffix={stat.suffix}
-                  customText={stat.customText}
-                />
+          {/* Title above stats strip */}
+          <div className="flex items-center space-x-2.5 mb-3 font-mono">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+            <span className="text-[11px] font-bold tracking-[0.25em] text-slate-300 uppercase">
+              // {event.eventStatsTitle || "PREVIOUS HACKATHON PARTICIPATION"}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 py-6 sm:py-8 px-4 sm:px-6 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-xl relative overflow-hidden">
+            {statsToRender.map((stat, idx) => (
+              <div
+                key={stat.id || idx}
+                className={`flex flex-col items-center justify-center text-center min-w-0 relative ${
+                  idx < statsToRender.length - 1 ? "sm:border-r sm:border-white/15" : ""
+                }`}
+              >
+                <div className="font-orbitron text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/70 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] mb-2 max-w-full">
+                  <HeroStatCounter
+                    to={stat.value}
+                    prefix={stat.prefix}
+                    suffix={stat.suffix}
+                    customText={stat.customText}
+                  />
+                </div>
+                <div className="font-sans text-[11px] sm:text-xs md:text-sm tracking-[0.2em] text-white/50 uppercase font-semibold">
+                  {stat.label}
+                </div>
               </div>
-              <div className="font-sans text-[11px] sm:text-xs md:text-sm tracking-[0.2em] text-white/50 uppercase font-semibold">
-                {stat.label}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </motion.div>
 
         {/* Hero Actions: REGISTER & EXPLORE SCHEDULE */}
