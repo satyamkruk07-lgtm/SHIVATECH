@@ -22,9 +22,12 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return eventsList.map((event) => ({
-    slug: event.slug,
-  }));
+  return [
+    ...eventsList.map((event) => ({
+      slug: event.slug,
+    })),
+    { slug: "science-championship" },
+  ];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

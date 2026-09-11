@@ -29,20 +29,20 @@ export const EventScienceChallenges: React.FC<EventScienceChallengesProps> = ({ 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <span className="text-[11px] tracking-[0.25em] text-purple-400 uppercase font-bold block mb-1.5">
-            // SCIENCE CHAMPIONSHIP ARENA
+            // NEXT-GEN HACKATHON ARENA
           </span>
           <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-white uppercase mb-3">
-            CHAMPIONSHIP ARENA CHALLENGES
+            NEXT-GEN ARENA CHALLENGES
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 font-sans leading-relaxed">
-            Four specialized competitions testing speed, scientific reasoning, hardware engineering, and venture pitching. Click any card below to read complete guidelines and register!
+            Four specialized competitions testing speed, rapid innovation, hardware engineering, and venture pitching. Click any card below to read complete guidelines and register!
           </p>
         </div>
 
         {/* 4 Cards 2x2 Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
           {challenges.map((challenge, index) => {
-            const registerLink = `/register?event=science-championship&track=${encodeURIComponent(
+            const registerLink = `/register?event=next-gen-hackathon&track=${encodeURIComponent(
               challenge.id
             )}&competition=${encodeURIComponent(challenge.title)}`;
 
@@ -161,7 +161,7 @@ export const EventScienceChallenges: React.FC<EventScienceChallengesProps> = ({ 
                       EVENT {selectedChallenge.number} // {selectedChallenge.tag}
                     </span>
                     <span className="text-[10px] text-slate-400 tracking-wider">
-                      SCIENCE CHAMPIONSHIP
+                      NEXT-GEN HACKATHON
                     </span>
                   </div>
                   <h3
@@ -258,7 +258,7 @@ export const EventScienceChallenges: React.FC<EventScienceChallengesProps> = ({ 
               {/* Modal Action Buttons */}
               <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center gap-3">
                 <Link
-                  href={`/register?event=science-championship&track=${encodeURIComponent(
+                  href={`/register?event=next-gen-hackathon&track=${encodeURIComponent(
                     selectedChallenge.id
                   )}&competition=${encodeURIComponent(selectedChallenge.title)}`}
                   className="w-full sm:flex-1 py-3.5 px-6 rounded-xl font-bold tracking-widest text-xs uppercase text-center text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 shadow-[0_0_25px_rgba(168,85,247,0.35)] hover:brightness-110 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer flex items-center justify-center space-x-2"

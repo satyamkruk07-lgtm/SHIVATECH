@@ -477,35 +477,35 @@ export const eventsList: EventItem[] = [
   },
 
   // =========================================================================
-  // 04 — SCIENCE CHAMPIONSHIP (Preserved verified existing project data)
+  // 04 — NEXT-GEN HACKATHON (Formerly Science Championship)
   // =========================================================================
   {
-    id: "science-championship",
-    slug: "science-championship",
+    id: "next-gen-hackathon",
+    slug: "next-gen-hackathon",
     number: "04",
-    name: "SCIENCE CHAMPIONSHIP",
-    category: "SCIENCE & DISCOVERY",
+    name: "NEXT-GEN HACKATHON",
+    category: "RAPID HACKATHON & BUILD",
     date: "10 OCTOBER 2026",
     fullDateSchedule: [
-      "10 October 2026 — Science Prototypes, Innovation Challenges, Live Demos & Valedictory",
+      "10 October 2026 — Next-Gen Innovation Challenges, Prototype Builds, Live Demos & Valedictory",
     ],
-    duration: "Full-Day Science Showdown",
-    venue: "Science & Applied Research Arena / Exhibition Hall C",
-    theme: "Discovery, Experimentation & Scientific Thinking",
-    tagline: "DISCOVERY, EXPERIMENTATION & SCIENTIFIC THINKING",
+    duration: "Full-Day Hackathon & Build Challenges",
+    venue: "Innovation Hub & Applied Research Arena / Exhibition Hall C",
+    theme: "Rapid Prototyping, Discovery & Next-Gen Innovation",
+    tagline: "RAPID PROTOTYPING, DISCOVERY & NEXT-GEN INNOVATION",
     description:
-      "Explore scientific thinking, experimentation and innovation through 4 competitive challenges: 2-Hour Innovation Hackathon, Science Exhibition, Idea Pitching (Mini Shark Tank), and 60-Minute Robotics Build Up.",
+      "Explore next-gen innovation, rapid prototyping and scientific thinking through 4 competitive challenges: 2-Hour Innovation Hackathon, Science Exhibition, Idea Pitching (Mini Shark Tank), and 60-Minute Robotics Build Up.",
     purpose: [
-      "To celebrate scientific inquiry, reasoning, and practical experimentation.",
+      "To celebrate next-gen innovation, rapid prototyping, and practical experimentation.",
       "To host high-tempo rapid challenges alongside project exhibitions and prototype reviews.",
       "To test problem-solving, rapid robotics assembly, and venture-ready pitching.",
-      "To inspire future researchers, inventors, and scientific minds.",
+      "To inspire future engineers, inventors, and scientific minds.",
     ],
     prize: "₹20,000+",
     teamSize: "2–3 Members",
-    registerUrl: "/register?event=science-championship",
+    registerUrl: "/register?event=next-gen-hackathon",
     accentColor: "purple",
-    badge: "DISCOVERY ARENA",
+    badge: "NEXT-GEN ARENA",
     highlights: [
       "2-Hour Innovation Challenge (Hackathon)",
       "Science Exhibition (Working Models & Prototypes)",
@@ -601,6 +601,9 @@ export function getEventBySlug(slug: string): EventItem | undefined {
   }
   if (normalized === "shivatech") {
     return eventsList.find((e) => e.slug === "departmental-technical-events");
+  }
+  if (normalized === "science-championship" || normalized === "next-gen-hackathon") {
+    return eventsList.find((e) => e.slug === "next-gen-hackathon" || e.slug === "science-championship");
   }
 
   return eventsList.find((e) => e.slug === normalized || e.id === normalized);

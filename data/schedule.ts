@@ -483,7 +483,7 @@ export const scheduleData: DaySchedule[] = [
   },
 
   // =========================================================================
-  // DAY 05: SCIENCE CHAMPIONSHIP 4.0 & GRAND VALEDICTORY
+  // DAY 05: NEXT-GEN HACKATHON & GRAND VALEDICTORY
   // =========================================================================
   {
     dayNumber: 5,
@@ -510,15 +510,15 @@ export const scheduleData: DaySchedule[] = [
         day: 5,
         time: "10:00 AM",
         date: "10 OCTOBER 2026",
-        title: "SCIENCE CHAMPIONSHIP",
+        title: "NEXT-GEN HACKATHON",
         subtitle: "Exhibition, 2-Hr Hackathon & Robotics",
-        description: "Kickoff of the Science Exhibition, 2-Hour Innovation Challenge (Hackathon), and 60-Minute Build Up (Robotics Challenge).",
+        description: "Kickoff of the Next-Gen Hackathon challenges: 2-Hour Innovation Hackathon, Science Exhibition, and 60-Minute Robotics Build Up.",
         venue: "EXHIBITION HALL C & APPLIED LABS",
         category: "COMPETITION",
         duration: "10:00 AM – 01:00 PM",
         icon: "science",
-        eventSlug: "science-championship",
-        registerUrl: "/register?event=science-championship",
+        eventSlug: "next-gen-hackathon",
+        registerUrl: "/register?event=next-gen-hackathon",
         featured: true,
       },
       {
@@ -546,7 +546,7 @@ export const scheduleData: DaySchedule[] = [
         category: "COMPETITION",
         duration: "02:00 PM – 04:30 PM",
         icon: "science",
-        eventSlug: "science-championship",
+        eventSlug: "next-gen-hackathon",
         featured: true,
       },
       {

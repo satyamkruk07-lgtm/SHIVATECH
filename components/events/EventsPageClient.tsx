@@ -21,7 +21,7 @@ export const EventsPageClient: React.FC = () => {
       {/* 01 — HACKNATION 2.0 */}
       {/* 02 — IDEATHON */}
       {/* 03 — DEPARTMENTAL TECHNICAL EVENTS */}
-      {/* 04 — SCIENCE CHAMPIONSHIP */}
+      {/* 04 — NEXT-GEN HACKATHON */}
       <div className="relative w-full bg-[#02040a] py-8 sm:py-12 space-y-4">
         {eventsList.map((event, index) => (
           <EventLandingCard
