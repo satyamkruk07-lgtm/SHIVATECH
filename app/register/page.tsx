@@ -92,6 +92,24 @@ function RegisterContent() {
             />
           </div>
 
+          {eventId === "science-championship" && (
+            <div>
+              <label className="block text-xs text-purple-300/80 tracking-wider mb-1 uppercase font-semibold">
+                Select Competition Track
+              </label>
+              <select
+                defaultValue="all"
+                className="w-full px-4 py-3 rounded bg-[#070c1a] border border-purple-500/40 text-purple-200 focus:outline-none focus:border-purple-400 transition-colors"
+              >
+                <option value="all" className="bg-[#070c1a] text-white">All Events / Full Championship</option>
+                <option value="hackathon" className="bg-[#070c1a] text-white">1. 2-Hour Innovation Challenge (Hackathon)</option>
+                <option value="exhibition" className="bg-[#070c1a] text-white">2. Science Exhibition</option>
+                <option value="pitching" className="bg-[#070c1a] text-white">3. Idea Pitching (Mini Shark Tank)</option>
+                <option value="robotics" className="bg-[#070c1a] text-white">4. 60-Minute Build Up (Robotics Challenge, etc.)</option>
+              </select>
+            </div>
+          )}
+
           <div className="pt-4 flex flex-col sm:flex-row gap-3">
             <button
               type="submit"

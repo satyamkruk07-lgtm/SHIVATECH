@@ -139,16 +139,31 @@ export const EventDetailsModal: React.FC<EventDetailsModalProps> = ({ event, onC
             </p>
           </div>
 
-          {/* Highlights */}
+          {/* Highlights / Competitions */}
           <div className="mb-8">
             <h4 className="text-xs font-mono uppercase tracking-[0.2em] text-white/50 mb-3">
-              EVENT HIGHLIGHTS
+              {event.id === "science-championship"
+                ? "CHAMPIONSHIP EVENTS & CHALLENGES"
+                : "EVENT HIGHLIGHTS"}
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
               {event.highlights.map((h, i) => (
-                <div key={i} className="flex items-center space-x-2 text-slate-300">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                  <span>{h}</span>
+                <div
+                  key={i}
+                  className="flex items-center space-x-2.5 text-slate-200 bg-white/[0.04] border border-white/10 rounded-xl px-3.5 py-2.5"
+                >
+                  <span
+                    className={`w-2 h-2 rounded-full shrink-0 ${
+                      isFlagship
+                        ? "bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.7)]"
+                        : isCrimson
+                        ? "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.7)]"
+                        : isBlue
+                        ? "bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.7)]"
+                        : "bg-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.7)]"
+                    }`}
+                  />
+                  <span className="leading-snug">{h}</span>
                 </div>
               ))}
             </div>

@@ -188,9 +188,43 @@ export const EventItemSection: React.FC<EventItemSectionProps> = ({
             </div>
 
             {/* Event Description (Locked Exact Text) */}
-            <p className="text-sm sm:text-base lg:text-lg text-slate-300 font-sans font-normal leading-relaxed mb-8 max-w-2xl">
+            <p className="text-sm sm:text-base lg:text-lg text-slate-300 font-sans font-normal leading-relaxed mb-6 max-w-2xl">
               {event.description}
             </p>
+
+            {/* Event Highlights / Featured Challenges Grid */}
+            {event.highlights && event.highlights.length > 0 && (
+              <div className="mb-8">
+                <span className="text-[11px] font-mono tracking-[0.25em] text-white/50 uppercase block mb-3 font-semibold">
+                  {event.id === "science-championship"
+                    ? "CHAMPIONSHIP EVENTS & CHALLENGES"
+                    : "KEY HIGHLIGHTS"}
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-2xl">
+                  {event.highlights.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center space-x-2.5 px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-colors text-slate-200"
+                    >
+                      <span
+                        className={`w-2 h-2 rounded-full shrink-0 ${
+                          isFlagship
+                            ? "bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.7)]"
+                            : isCrimson
+                            ? "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.7)]"
+                            : isBlue
+                            ? "bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.7)]"
+                            : "bg-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.7)]"
+                        }`}
+                      />
+                      <span className="text-xs sm:text-[13px] font-sans font-medium tracking-wide">
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Action Buttons: REGISTER & VIEW EVENT */}
             <div className="flex flex-wrap items-center gap-3 sm:gap-4 font-mono">
