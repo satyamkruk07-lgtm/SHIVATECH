@@ -11,6 +11,14 @@ interface EventTracksProps {
 }
 
 const trackIcons: Record<string, string> = {
+  Infrastructure: "🏗️",
+  "Clean and Green Technology": "🌿",
+  "Smart Agriculture": "🌾",
+  "Smart Agriculutre": "🌾",
+  "Travel and Tourism": "✈️",
+  "Smart Healthcare": "🏥",
+  "AI or Cyber Security": "🛡️",
+  "Open Theme": "✨",
   "AI & Machine Learning": "🧠",
   "Artificial Intelligence & Machine Learning": "🧠",
   "Web & Mobile Applications": "📱",
@@ -24,7 +32,6 @@ const trackIcons: Record<string, string> = {
   "Healthcare Technology": "🏥",
   FinTech: "💳",
   AgriTech: "🌾",
-  "Smart Agriculture": "🌾",
   "Assistive Technology": "🦾",
   "Clean Energy": "⚡",
   "Electric Mobility": "🚗",
