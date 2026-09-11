@@ -146,7 +146,7 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           {event.name}
         </motion.h1>
 
-        {/* Target Audience Bracket Note */}
+        {/* Target Audience Highlighted Badge (High-Contrast Amber/Yellow Glow) */}
         {event.targetAudienceNote && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -154,9 +154,13 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
             transition={{ duration: 0.5, delay: 0.18 }}
             className="mb-6"
           >
-            <span className="inline-block text-xs sm:text-sm md:text-base font-mono font-bold text-purple-300 bg-purple-500/15 border border-purple-500/40 px-4 py-1.5 rounded-xl tracking-wider shadow-[0_0_20px_rgba(168,85,247,0.2)]">
-              [ {event.targetAudienceNote} ]
-            </span>
+            <div className="inline-flex items-center space-x-3 px-4 sm:px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500/25 via-yellow-400/20 to-amber-500/25 border-2 border-amber-400 shadow-[0_0_30px_rgba(251,191,36,0.45)] backdrop-blur-md">
+              <span className="text-base sm:text-xl leading-none">🎓</span>
+              <span className="text-xs sm:text-sm md:text-base font-mono font-black text-amber-200 tracking-wider uppercase drop-shadow-[0_0_10px_rgba(251,191,36,0.9)]">
+                [ {event.targetAudienceNote} ]
+              </span>
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,1)] animate-pulse" />
+            </div>
           </motion.div>
         )}
 

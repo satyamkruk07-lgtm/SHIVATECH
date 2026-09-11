@@ -81,12 +81,16 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
               {event.name}
             </h3>
 
-            {/* Target Audience Bracket Note (e.g. Only for Class 9, 10, 11 & 12 School Students) */}
+            {/* Target Audience Highlighted Badge (High-Contrast Amber/Yellow Glow) */}
             {event.targetAudienceNote && (
               <div className="mb-4">
-                <span className="inline-block text-xs sm:text-sm font-mono font-bold text-purple-300 bg-purple-500/15 border border-purple-500/35 px-3 py-1 rounded-lg tracking-wider">
-                  [ {event.targetAudienceNote} ]
-                </span>
+                <div className="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 via-yellow-400/25 to-amber-500/20 border-2 border-amber-400 shadow-[0_0_22px_rgba(251,191,36,0.5)] backdrop-blur-md">
+                  <span className="text-sm sm:text-base leading-none">🎓</span>
+                  <span className="text-xs sm:text-sm font-mono font-black text-amber-200 tracking-wider uppercase drop-shadow-[0_0_8px_rgba(251,191,36,0.9)]">
+                    [ {event.targetAudienceNote} ]
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,1)] animate-pulse" />
+                </div>
               </div>
             )}
 

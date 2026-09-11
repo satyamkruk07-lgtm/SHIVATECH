@@ -513,33 +513,35 @@ export const eventsList: EventItem[] = [
     category: "SCHOOL HACKATHON",
     date: "10 OCTOBER 2026",
     fullDateSchedule: [
-      "10 October 2026 (09:00 AM) — Check-in, Problem Briefing & School Hackathon Kickoff",
-      "10 October 2026 (10:00 AM – 03:00 PM) — Prototype Building, Code Sprints & Mentor Guidance",
-      "10 October 2026 (03:30 PM) — Jury Demos, Live Project Defense & Awards Ceremony",
+      "10 October 2026 (09:30 AM) — Check-in, Hardware Kit Handover & Lab Allotment",
+      "10 October 2026 (10:00 AM – 04:00 PM) — 6-Hour Intensive Innovation Hackathon & Hardware Build Sprint",
+      "10 October 2026 (04:15 PM) — Grand Jury Evaluation, Live Demos & School Trophy Awards Ceremony",
     ],
-    duration: "Full-Day School Hackathon Sprint",
+    duration: "6 Hours (10:00 AM – 04:00 PM)",
     venue: "Main Computing Hub, Applied Innovation Labs & Exhibition Hall C",
     theme: "Young Innovators for a Better Tomorrow",
-    tagline: "EXCLUSIVE SCHOOL HACKATHON FOR BUDDING STUDENT CREATORS",
+    tagline: "EXCLUSIVE 6-HOUR SCHOOL HACKATHON FOR BUDDING STUDENT CREATORS",
     description:
-      "An exclusive, high-energy school innovation hackathon exclusively for students of Class 9, 10, 11 & 12. Divided into two dedicated categories: Class 9 & 10 (Junior Innovators) and Class 11 & 12 (Senior Innovators), featuring curated real-world problem statements across sustainability, smart education, IoT, AI, and robotics.",
+      "An intensive 6-hour school innovation hackathon exclusively for students of Class 9, 10, 11 & 12. Divided into two dedicated categories: Class 9 & 10 (Junior Innovators) and Class 11 & 12 (Senior Innovators). Essential hardware components, sensor kits, development boards, and innovation lab equipment will be provided on-campus by the University to empower students in building their project prototypes.",
     purpose: [
       "To ignite scientific curiosity, computational thinking, and hands-on tinkering among school students.",
       "To provide a supportive, mentored university-level hackathon platform for Class 9th to 12th innovators.",
+      "To provide necessary hardware kits, sensors, and lab apparatus directly from the university.",
       "To transform creative school ideas into working software, hardware circuits, and physical prototypes.",
       "To recognize and reward top young innovators with trophies, certificates, and exciting prizes.",
     ],
     prize: "₹25,000+ & School Trophies",
-    teamSize: "2–4 School Students",
+    teamSize: "4–5 Students + 1 Faculty Mentor",
     registerUrl: "/register?event=next-gen-hackathon",
     accentColor: "purple",
     badge: "SCHOOL EXCLUSIVE",
     highlights: [
       "Exclusively for Class 9, 10, 11 & 12 School Students",
-      "Two Separate Tracks: Class 9–10 & Class 11–12",
-      "8 Curated Real-World Problem Statements",
-      "Direct Mentorship from Engineering Faculty & Tech Experts",
-      "Exciting Cash Prizes, School Champion Trophies & Certificates",
+      "6-Hour Rapid Prototyping & Build Sprint",
+      "Team Format: 4–5 Students + 1 Faculty Mentor",
+      "Hardware, Sensor Kits & Lab Equipment Provided by University",
+      "Two Dedicated Categories: Class 9–10 & Class 11–12",
+      "Cash Prizes, School Champion Trophies & Certificates",
     ],
     schoolCategoriesTitle: "Next-Gen Hackathon Categories & Problem Statements",
     schoolCategories: [
@@ -550,7 +552,7 @@ export const eventsList: EventItem[] = [
         eligibility: "Students currently enrolled in Class 9th or 10th",
         tagline: "CREATIVE SCIENCE, SMART LIVING & ECO-SOLUTIONS",
         description:
-          "Tailored for junior school students to explore foundational science, environmental conservation, smart campus automation, and creative digital learning through practical, hands-on prototypes.",
+          "Tailored for junior school students to explore foundational science, environmental conservation, smart campus automation, and creative digital learning through practical prototypes. Essential hardware kits and lab equipment are provided on-campus by the University.",
         accentColor: "emerald",
         problemStatements: [
           {
@@ -642,7 +644,7 @@ export const eventsList: EventItem[] = [
         eligibility: "Students currently enrolled in Class 11th or 12th",
         tagline: "ADVANCED APPLIED TECH, AI, IOT & REAL-WORLD PROBLEM SOLVING",
         description:
-          "Challenging senior school students to build sophisticated, high-impact prototypes leveraging artificial intelligence, IoT sensor arrays, robotics, health monitoring, and cyber safety tools.",
+          "Challenging senior school students to build sophisticated, high-impact prototypes leveraging artificial intelligence, IoT sensor arrays, robotics, health monitoring, and cyber safety tools. Essential hardware development kits, microcontrollers, and lab apparatus are provided on-campus by the University.",
         accentColor: "purple",
         problemStatements: [
           {

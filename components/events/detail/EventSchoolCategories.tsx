@@ -132,12 +132,38 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
               </p>
             </div>
 
-            <div className="shrink-0 flex items-center space-x-2 text-xs font-bold font-mono text-slate-400 bg-black/40 px-3.5 py-2 rounded-xl border border-white/10 self-start md:self-auto">
-              <span>👥 TEAM SIZE:</span>
-              <span className="text-white">2–4 STUDENTS</span>
+            <div className="shrink-0 flex flex-col sm:flex-row items-start sm:items-center gap-2 text-xs font-bold font-mono text-slate-300 self-start md:self-auto">
+              <div className="bg-black/60 px-3.5 py-2 rounded-xl border border-white/15 flex items-center space-x-2 shadow-inner">
+                <span className="text-amber-400">⏱ DURATION:</span>
+                <span className="text-white">6 HOURS</span>
+              </div>
+              <div className="bg-black/60 px-3.5 py-2 rounded-xl border border-white/15 flex items-center space-x-2 shadow-inner">
+                <span className="text-purple-400">👥 TEAM FORMAT:</span>
+                <span className="text-white">4–5 STUDENTS + 1 FACULTY MENTOR</span>
+              </div>
             </div>
           </div>
         </motion.div>
+
+        {/* University Hardware & Lab Equipment Support Callout */}
+        <div className="p-4 sm:p-5 rounded-2xl mb-8 sm:mb-10 bg-gradient-to-r from-amber-500/15 via-[#0b0f20] to-purple-950/25 border border-amber-400/40 backdrop-blur-md flex flex-col sm:flex-row items-start sm:items-center gap-3.5 sm:gap-4 shadow-[0_0_30px_rgba(251,191,36,0.12)]">
+          <div className="w-11 h-11 rounded-xl bg-amber-400/20 border border-amber-400/50 flex items-center justify-center text-2xl shrink-0 shadow-[0_0_15px_rgba(251,191,36,0.3)]">
+            🛠️
+          </div>
+          <div className="flex-1">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <span className="text-xs sm:text-sm font-black text-amber-300 uppercase tracking-wider">
+                UNIVERSITY HARDWARE & LAB EQUIPMENT PROVIDED
+              </span>
+              <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-400/25 text-amber-200 border border-amber-400/50 uppercase tracking-widest">
+                ON-CAMPUS SUPPORT
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-slate-200 font-sans leading-relaxed">
+              Apna project banane ke liye zaroori <strong className="text-white font-semibold">hardware components, microcontrollers (Arduino/ESP), sensor modules, breadboards, testing apparatus, aur university innovation labs</strong> aapko campus par hi provide kiye jayenge taaki aap aasani se apna prototype build kar sakein!
+            </p>
+          </div>
+        </div>
 
         {/* Problem Statements Grid (4 Cards per Category) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
@@ -380,6 +406,22 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
                     </div>
                   </div>
                 )}
+
+                {/* Key Event Parameters Callout */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs font-mono">
+                  <div className="p-3 rounded-xl bg-black/40 border border-white/10">
+                    <span className="text-[10px] text-amber-400 font-bold block uppercase">⏱ DURATION</span>
+                    <span className="text-white font-bold">6 Hours Sprint</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-black/40 border border-white/10">
+                    <span className="text-[10px] text-purple-400 font-bold block uppercase">👥 TEAM FORMAT</span>
+                    <span className="text-white font-bold">4–5 Students + 1 Mentor</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-black/40 border border-amber-400/30 bg-amber-500/10">
+                    <span className="text-[10px] text-amber-300 font-bold block uppercase">🛠️ HARDWARE</span>
+                    <span className="text-amber-200 font-bold">Provided by University</span>
+                  </div>
+                </div>
 
                 {/* Evaluation Criteria */}
                 <div className="p-4 rounded-xl bg-purple-950/30 border border-purple-500/30">
