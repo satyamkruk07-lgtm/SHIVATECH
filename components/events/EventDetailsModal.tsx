@@ -50,7 +50,9 @@ export const EventDetailsModal: React.FC<EventDetailsModalProps> = ({ event, onC
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-2xl bg-[#040814]/95 border border-white/20 rounded-2xl p-6 sm:p-8 shadow-[0_0_80px_rgba(0,0,0,0.9)] text-white z-10 my-8 max-h-[90vh] overflow-y-auto"
+          className={`relative w-full ${
+            event.id === "science-championship" ? "max-w-4xl" : "max-w-2xl"
+          } bg-[#040814]/95 border border-white/20 rounded-2xl p-6 sm:p-8 shadow-[0_0_80px_rgba(0,0,0,0.9)] text-white z-10 my-8 max-h-[90vh] overflow-y-auto`}
         >
           {/* Top Neon Border Line */}
           <div
@@ -139,35 +141,158 @@ export const EventDetailsModal: React.FC<EventDetailsModalProps> = ({ event, onC
             </p>
           </div>
 
-          {/* Highlights / Competitions */}
-          <div className="mb-8">
-            <h4 className="text-xs font-mono uppercase tracking-[0.2em] text-white/50 mb-3">
-              {event.id === "science-championship"
-                ? "CHAMPIONSHIP EVENTS & CHALLENGES"
-                : "EVENT HIGHLIGHTS"}
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
-              {event.highlights.map((h, i) => (
-                <div
-                  key={i}
-                  className="flex items-center space-x-2.5 text-slate-200 bg-white/[0.04] border border-white/10 rounded-xl px-3.5 py-2.5"
-                >
-                  <span
-                    className={`w-2 h-2 rounded-full shrink-0 ${
-                      isFlagship
-                        ? "bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.7)]"
-                        : isCrimson
-                        ? "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.7)]"
-                        : isBlue
-                        ? "bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.7)]"
-                        : "bg-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.7)]"
-                    }`}
-                  />
-                  <span className="leading-snug">{h}</span>
+          {/* Section: 4 Cards for Science Championship OR Highlights for other events */}
+          {event.id === "science-championship" ? (
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-purple-300 font-bold flex items-center space-x-2">
+                  <span className="w-2 h-2 rounded-full bg-purple-400 animate-ping inline-block" />
+                  <span>4 CHAMPIONSHIP EVENTS & CHALLENGES</span>
+                </h4>
+                <span className="text-[10px] font-mono text-purple-400/80 px-2 py-0.5 rounded border border-purple-500/30 bg-purple-950/40">
+                  CHOOSE YOUR TRACK
+                </span>
+              </div>
+
+              {/* 4 Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 font-mono">
+                {/* CARD 1: 2 Hour Innovation Challenge (Hackathon) */}
+                <div className="relative flex flex-col justify-between rounded-xl p-4 sm:p-5 bg-gradient-to-br from-purple-950/30 via-[#070b18] to-[#03050e] border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 shadow-[0_0_25px_rgba(168,85,247,0.08)] group hover:-translate-y-0.5">
+                  <div>
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span className="text-[10px] font-bold text-purple-400 px-2 py-0.5 rounded bg-purple-500/15 border border-purple-500/30">
+                        EVENT 01 // RAPID SPRINT
+                      </span>
+                      <span className="text-xl group-hover:scale-110 transition-transform">⚡</span>
+                    </div>
+                    <h5 className="text-base sm:text-lg font-black tracking-wide text-white group-hover:text-purple-200 transition-colors mb-0.5">
+                      2 Hour Innovation Challenge
+                    </h5>
+                    <span className="text-xs text-purple-400 font-bold block mb-2">
+                      (Hackathon)
+                    </span>
+                    <p className="text-xs text-slate-300 font-sans font-normal leading-relaxed mb-3">
+                      High-speed 120-minute rapid prototyping and problem-solving hackathon. Teams design and deploy working software prototypes under extreme time pressure.
+                    </p>
+                  </div>
+                  <div className="pt-2.5 border-t border-white/5 flex items-center justify-between text-[11px] text-purple-300/80">
+                    <span className="flex items-center space-x-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                      <span>120 Min Sprint • Team 2–4</span>
+                    </span>
+                  </div>
                 </div>
-              ))}
+
+                {/* CARD 2: Science Exhibition */}
+                <div className="relative flex flex-col justify-between rounded-xl p-4 sm:p-5 bg-gradient-to-br from-purple-950/30 via-[#070b18] to-[#03050e] border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 shadow-[0_0_25px_rgba(168,85,247,0.08)] group hover:-translate-y-0.5">
+                  <div>
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span className="text-[10px] font-bold text-purple-400 px-2 py-0.5 rounded bg-purple-500/15 border border-purple-500/30">
+                        EVENT 02 // EXPO & DEMOS
+                      </span>
+                      <span className="text-xl group-hover:scale-110 transition-transform">🔬</span>
+                    </div>
+                    <h5 className="text-base sm:text-lg font-black tracking-wide text-white group-hover:text-purple-200 transition-colors mb-0.5">
+                      Science Exhibition
+                    </h5>
+                    <span className="text-xs text-purple-400 font-bold block mb-2">
+                      (Working Models & Prototypes)
+                    </span>
+                    <p className="text-xs text-slate-300 font-sans font-normal leading-relaxed mb-3">
+                      Showcase working scientific models, eco-tech apparatus, physics demonstrations, and research innovations judged by distinguished scientists and faculty panels.
+                    </p>
+                  </div>
+                  <div className="pt-2.5 border-t border-white/5 flex items-center justify-between text-[11px] text-purple-300/80">
+                    <span className="flex items-center space-x-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                      <span>Exhibition Arena • Live Demos</span>
+                    </span>
+                  </div>
+                </div>
+
+                {/* CARD 3: Idea Pitching (Mini Shark Tank) */}
+                <div className="relative flex flex-col justify-between rounded-xl p-4 sm:p-5 bg-gradient-to-br from-purple-950/30 via-[#070b18] to-[#03050e] border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 shadow-[0_0_25px_rgba(168,85,247,0.08)] group hover:-translate-y-0.5">
+                  <div>
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span className="text-[10px] font-bold text-purple-400 px-2 py-0.5 rounded bg-purple-500/15 border border-purple-500/30">
+                        EVENT 03 // VENTURE PITCH
+                      </span>
+                      <span className="text-xl group-hover:scale-110 transition-transform">💡</span>
+                    </div>
+                    <h5 className="text-base sm:text-lg font-black tracking-wide text-white group-hover:text-purple-200 transition-colors mb-0.5">
+                      Idea Pitching
+                    </h5>
+                    <span className="text-xs text-purple-400 font-bold block mb-2">
+                      (Mini Shark Tank)
+                    </span>
+                    <p className="text-xs text-slate-300 font-sans font-normal leading-relaxed mb-3">
+                      Pitch groundbreaking scientific and technology startup concepts to a live panel of investor judges and mentors. Defend your technical feasibility and business vision.
+                    </p>
+                  </div>
+                  <div className="pt-2.5 border-t border-white/5 flex items-center justify-between text-[11px] text-purple-300/80">
+                    <span className="flex items-center space-x-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                      <span>5m Pitch + 3m Q&A • Slide Deck</span>
+                    </span>
+                  </div>
+                </div>
+
+                {/* CARD 4: 60 Minute Build Up (Robotics Challenge, etc.) */}
+                <div className="relative flex flex-col justify-between rounded-xl p-4 sm:p-5 bg-gradient-to-br from-purple-950/30 via-[#070b18] to-[#03050e] border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 shadow-[0_0_25px_rgba(168,85,247,0.08)] group hover:-translate-y-0.5">
+                  <div>
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span className="text-[10px] font-bold text-purple-400 px-2 py-0.5 rounded bg-purple-500/15 border border-purple-500/30">
+                        EVENT 04 // HARDWARE ARENA
+                      </span>
+                      <span className="text-xl group-hover:scale-110 transition-transform">🤖</span>
+                    </div>
+                    <h5 className="text-base sm:text-lg font-black tracking-wide text-white group-hover:text-purple-200 transition-colors mb-0.5">
+                      60 Minute Build Up
+                    </h5>
+                    <span className="text-xs text-purple-400 font-bold block mb-2">
+                      (Robotics Challenge, etc.)
+                    </span>
+                    <p className="text-xs text-slate-300 font-sans font-normal leading-relaxed mb-3">
+                      An on-the-spot hardware engineering and robotics showdown. Assemble, wire, and calibrate your robotic machine in exactly 60 minutes, then navigate the obstacle arena.
+                    </p>
+                  </div>
+                  <div className="pt-2.5 border-t border-white/5 flex items-center justify-between text-[11px] text-purple-300/80">
+                    <span className="flex items-center space-x-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                      <span>60-Min Build • Obstacle Arena</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="mb-8">
+              <h4 className="text-xs font-mono uppercase tracking-[0.2em] text-white/50 mb-3">
+                EVENT HIGHLIGHTS
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
+                {event.highlights.map((h, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center space-x-2.5 text-slate-200 bg-white/[0.04] border border-white/10 rounded-xl px-3.5 py-2.5"
+                  >
+                    <span
+                      className={`w-2 h-2 rounded-full shrink-0 ${
+                        isFlagship
+                          ? "bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.7)]"
+                          : isCrimson
+                          ? "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.7)]"
+                          : isBlue
+                          ? "bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.7)]"
+                          : "bg-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.7)]"
+                      }`}
+                    />
+                    <span className="leading-snug">{h}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 font-mono">
