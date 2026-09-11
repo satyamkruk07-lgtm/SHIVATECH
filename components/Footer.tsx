@@ -85,12 +85,18 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Tagline & Copyright */}
-        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-3">
-          <div className="tracking-[0.25em] uppercase text-center sm:text-left">
+        {/* Bottom Tagline, Credits & Copyright */}
+        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between text-[11px] text-slate-400 gap-4">
+          <div className="tracking-[0.25em] uppercase text-center md:text-left">
             DIFFERENT SKILLS <span className="text-red-500 font-bold mx-1">/</span> ONE VISION
           </div>
-          <div className="text-center sm:text-right tracking-wider">
+
+          <div className="text-center tracking-wider text-slate-300 font-medium py-1.5 px-4 rounded-full bg-white/[0.04] border border-white/10 shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+            Designed and developed by - <span className="text-white font-bold">Kumar Satyam</span>{" "}
+            <span className="text-red-400 font-semibold">( Graphic Head ACM )</span>
+          </div>
+
+          <div className="text-center md:text-right tracking-wider text-slate-500">
             © 2026 SHIVATECH. ALL RIGHTS RESERVED.
           </div>
         </div>
