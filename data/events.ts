@@ -1,412 +1,455 @@
-export type EventArrivalConfig = {
-  startFrame: number;
-  peakFrame: number;
-  endFrame: number;
-};
+export interface EvaluationParameter {
+  parameter: string;
+  weightage: string;
+  percentage: number;
+}
 
-export type EventSequenceData = {
-  id: string;
-  index: number;
-  title: string;
-  description: string;
-  category: string;
-  date: string;
-  frameFolder: string;
-  framePrefix: string;
-  frameExtension: string;
-  minFrame: number;
-  maxFrame: number;
-  frameCount: number;
-  cardStartFrame: number;
-  cardEndFrame: number;
-  arrival: EventArrivalConfig;
-  nextEvent: string | null;
-  // Alias property requested by specification
-  framePath: string;
-  videoUrl: string;
-};
+export interface DepartmentGroup {
+  department: string;
+  icon: string;
+  badge: string;
+  events: string[];
+}
 
-// Backward-compatible type for old components if referenced elsewhere
-export type EventData = {
+export interface ScienceChallenge {
   id: string;
+  number: string;
   title: string;
-  category: string;
+  subtitle: string;
+  tag: string;
   description: string;
-  date?: string;
-  prize?: string;
-  teamSize?: string;
-  buildingId?: string;
-  image?: string;
-  position: {
-    x: number;
-    z: number;
-  };
-};
+  format: string;
+  icon: string;
+}
 
 export interface EventItem {
-  id: string;
+  id: string; // Slug & unique ID
+  slug: string;
   number: string;
   name: string;
   category: string;
   date: string;
+  fullDateSchedule?: string[];
+  duration?: string;
+  venue: string;
+  theme?: string;
   tagline: string;
   description: string;
-  prize: string;
-  teamSize: string;
-  venue: string;
+  purpose?: string[];
+  prize?: string;
+  teamSize?: string;
   registerUrl: string;
-  accentColor: "crimson" | "blue" | "flagship" | "purple";
-  isFlagship?: boolean;
+  accentColor: "crimson" | "blue" | "emerald" | "purple";
+  badge?: string;
   highlights: string[];
+  // Event-specific structured details from PDF
+  tracks?: string[];
+  tracksTitle?: string;
+  structure?: string[];
+  structureTitle?: string;
+  evaluation?: EvaluationParameter[];
+  opportunities?: string[];
+  departments?: DepartmentGroup[];
+  scienceChallenges?: ScienceChallenge[];
 }
 
 export const eventsList: EventItem[] = [
+  // =========================================================================
+  // 01 — HACKNATION 2.0 (Source: PDF Section 4.3 & 6 - Hackathon)
+  // =========================================================================
   {
-    id: "hacknation-2",
+    id: "hacknation-2-0",
+    slug: "hacknation-2-0",
     number: "01",
     name: "HACKNATION 2.0",
     category: "HACKATHON",
-    date: "07–08 OCTOBER 2026",
-    tagline: "36-HOUR INNOVATION & CODING CHALLENGE",
+    date: "07–09 OCTOBER 2026",
+    fullDateSchedule: [
+      "7 October 2026 — Hackathon Launch, Problem Statements, Team Formation & Mentoring",
+      "8 October 2026 — Hackathon Development & Continuous Mentoring",
+      "9 October 2026 — Final Presentation, Prototype Demos, Awards & Valedictory",
+    ],
+    duration: "24–36 Hours (Proposed)",
+    venue: "Main Computing Hub & Applied Innovation Labs",
+    theme: "Code. Create. Collaborate. Solve.",
+    tagline: "INTENSIVE TECHNOLOGY & PROTOTYPE DEVELOPMENT SPRINT",
     description:
-      "A 36-hour innovation and coding challenge where teams collaborate, build, experiment and solve real-world problems.",
-    prize: "₹60,000",
+      "The Hackathon will provide an intensive platform where interdisciplinary student teams work continuously on real-world challenges and develop technology-based solutions.",
+    purpose: [
+      "To provide an intensive platform for interdisciplinary student teams to solve real-world problems.",
+      "To transform concepts into functioning code, hardware, and prototypes.",
+      "To foster collaboration with industry mentors and technical domain experts.",
+      "To encourage innovation in emerging technologies like AI, Robotics, IoT, Drones, and Cybersecurity.",
+    ],
+    prize: "₹60,000+",
     teamSize: "2–4 Members",
-    venue: "Main Computing Hub & Labs",
-    registerUrl: "/register?event=hacknation-2",
+    registerUrl: "/register?event=hacknation-2-0",
     accentColor: "crimson",
+    badge: "FLAGSHIP HACKATHON",
     highlights: [
-      "36 Hours Non-Stop Hacking",
-      "Industry Mentors & Tech Guidance",
-      "Direct Opportunity Tracks",
-      "Exciting Cash Prizes & Swag",
+      "24–36 Hours Continuous Development",
+      "12 Comprehensive Technology Tracks",
+      "Industry Mentorship & Architecture Guidance",
+      "Rigorous Multi-Tier Jury Evaluation",
+    ],
+    tracksTitle: "Proposed Technology Tracks",
+    tracks: [
+      "AI & Machine Learning",
+      "Web & Mobile Applications",
+      "Cybersecurity",
+      "IoT & Embedded Systems",
+      "Robotics & Automation",
+      "Drone Technology",
+      "Smart Campus",
+      "Sustainable Technology",
+      "Healthcare Technology",
+      "FinTech",
+      "AgriTech",
+      "Assistive Technology",
+    ],
+    structureTitle: "Hackathon Execution Structure",
+    structure: [
+      "Problem Statements",
+      "Team Formation",
+      "Mentoring",
+      "Development",
+      "Prototype",
+      "Demo",
+      "Jury Evaluation",
+      "Final Pitch",
+    ],
+    evaluation: [
+      {
+        parameter: "Technical Implementation",
+        weightage: "25%",
+        percentage: 25,
+      },
+      {
+        parameter: "Innovation & Originality",
+        weightage: "20%",
+        percentage: 20,
+      },
+      {
+        parameter: "Problem Relevance",
+        weightage: "15%",
+        percentage: 15,
+      },
+      {
+        parameter: "Feasibility & Scalability",
+        weightage: "15%",
+        percentage: 15,
+      },
+      {
+        parameter: "User Impact",
+        weightage: "15%",
+        percentage: 15,
+      },
+      {
+        parameter: "Presentation & Pitch",
+        weightage: "10%",
+        percentage: 10,
+      },
     ],
   },
+
+  // =========================================================================
+  // 02 — IDEATHON (Source: PDF Section 4.2 & 5 - Ideathon)
+  // =========================================================================
   {
     id: "ideathon",
+    slug: "ideathon",
     number: "02",
     name: "IDEATHON",
-    category: "INNOVATION",
-    date: "07–08 OCTOBER 2026",
-    tagline: "INNOVATION & PROBLEM-SOLVING CONCLAVE",
+    category: "INNOVATION & ENTREPRENEURSHIP",
+    date: "06 OCTOBER 2026",
+    fullDateSchedule: [
+      "6 October 2026 — Idea Presentations, Pitching Sessions, Expert Evaluation & Workshops",
+    ],
+    duration: "Full-Day Innovation Sprint",
+    venue: "Executive Conference Hall & CBII Innovation Suite",
+    theme: "Innovate for a Better Tomorrow",
+    tagline: "IDENTIFY REAL-WORLD PROBLEMS & DEVELOP INNOVATIVE SOLUTIONS",
     description:
-      "Turn bold ideas into meaningful solutions through creativity, innovation and problem-solving.",
-    prize: "₹30,000",
+      "The Ideathon will challenge students to identify real-world problems and develop innovative solutions across multidisciplinary domains.",
+    purpose: [
+      "To challenge students to uncover pressing societal and industrial bottlenecks.",
+      "To cultivate design thinking, problem-solving, and entrepreneurial mindsets.",
+      "To connect student innovators directly with CBII incubation, seed funding, and mentors.",
+      "To prepare student ventures for national-level innovation competitions.",
+    ],
+    prize: "₹30,000+",
     teamSize: "1–3 Members",
-    venue: "Executive Conference Hall",
     registerUrl: "/register?event=ideathon",
     accentColor: "blue",
+    badge: "INCUBATION PIPELINE",
     highlights: [
-      "Startup Idea Pitching",
-      "Design Thinking Frameworks",
-      "Incubation & Mentorship",
-      "Prototype Evaluation",
+      "18 Suggested Problem Domains",
+      "7-Stage Idea-to-Incubation Pipeline",
+      "CBII Incubation & Mentorship Opportunities",
+      "Seed Funding & Prototype Development Support",
+    ],
+    tracksTitle: "Suggested Problem Domains",
+    tracks: [
+      "Artificial Intelligence & Machine Learning",
+      "Sustainable Development",
+      "Smart Campus",
+      "Smart Agriculture",
+      "Healthcare Technology",
+      "Clean Energy",
+      "Electric Mobility",
+      "Rural Innovation",
+      "FinTech",
+      "EdTech",
+      "Assistive Technology",
+      "Women & Child Safety",
+      "Defence & Security",
+      "Waste Management",
+      "Water Management",
+      "Climate & Environment",
+      "Smart Cities",
+      "Industry 4.0",
+    ],
+    structureTitle: "Proposed Ideathon Format",
+    structure: [
+      "Stage 1: Idea Registration",
+      "Stage 2: Problem Statement Submission",
+      "Stage 3: Idea Screening",
+      "Stage 4: Idea Presentation",
+      "Stage 5: Expert Evaluation",
+      "Stage 6: Final Pitch",
+      "Stage 7: Awards / Incubation / Mentorship",
+    ],
+    opportunities: [
+      "CBII incubation at Shivalik University",
+      "Dedicated one-on-one mentorship with industry founders",
+      "Prototype development support & lab access",
+      "Seed funding opportunities & investor connections",
+      "Direct industry connect with corporate partners",
+      "Further participation in national-level innovation challenges",
     ],
   },
+
+  // =========================================================================
+  // 03 — DEPARTMENTAL TECHNICAL EVENTS (Source: PDF Section 4.4 & 7)
+  // =========================================================================
   {
-    id: "shivatech",
+    id: "departmental-technical-events",
+    slug: "departmental-technical-events",
     number: "03",
-    name: "SHIVATECH",
-    category: "FLAGSHIP EXPERIENCE",
-    date: "09 OCTOBER 2026",
-    tagline: "THE FLAGSHIP TECHNOLOGY FESTIVAL",
+    name: "DEPARTMENTAL TECHNICAL EVENTS",
+    category: "TECHNICAL COMPETITIONS",
+    date: "06 & 08 OCTOBER 2026",
+    fullDateSchedule: [
+      "6 October 2026 — Technical Competitions, Departmental Workshops & Expert Sessions",
+      "8 October 2026 — Departmental Technical Events, Project Demonstrations & Challenges",
+    ],
+    duration: "Multi-Day Departmental Championships",
+    venue: "Academic Department Complexes & Engineering Arenas",
+    theme: "Engineering Excellence & Applied Practical Skills",
+    tagline: "DEPARTMENT-WISE DEDICATED TECHNICAL COMPETITIONS",
     description:
-      "The flagship technology experience bringing together innovation, technology, creativity and competition.",
-    prize: "₹40,000",
-    teamSize: "Individual / Teams",
-    venue: "Central Auditorium & Exhibition Grounds",
-    registerUrl: "/register?event=shivatech",
-    accentColor: "flagship",
-    isFlagship: true,
+      "Each academic department will organise dedicated technical competitions and activities to ensure broad student participation.",
+    purpose: [
+      "To ensure broad, hands-on student participation across all academic departments.",
+      "To test practical engineering, design, analysis, and implementation skills.",
+      "To showcase specialized departmental talent in robotics, coding, structural design, and business strategy.",
+      "To provide interdisciplinary exposure through cross-department challenges and technical quizzes.",
+    ],
+    prize: "₹50,000+",
+    teamSize: "Individual & Teams",
+    registerUrl: "/register?event=departmental-technical-events",
+    accentColor: "emerald",
+    badge: "MULTI-DEPARTMENT EXPO",
     highlights: [
-      "Grand Tech Exhibition",
-      "Robotics & Hardware Showcase",
-      "Keynotes & Industry Leaders",
-      "Interactive Future Tech Arena",
+      "6 Academic Department Streams",
+      "40+ Specialized Technical Competitions",
+      "CAD, Robotics, Coding, Structures & Business",
+      "Hands-On Engineering & Interdisciplinary Showdowns",
+    ],
+    departments: [
+      {
+        department: "Mechanical Engineering",
+        icon: "⚙️",
+        badge: "MECHANICAL",
+        events: [
+          "CAD Modelling Competition",
+          "Robo Race",
+          "Design Challenge",
+          "AutoCAD/SolidWorks Challenge",
+          "Bridge/Structure Design",
+          "Junkyard Innovation",
+          "Mechanical Quiz",
+          "3D Design Challenge",
+        ],
+      },
+      {
+        department: "Civil Engineering",
+        icon: "🏗️",
+        badge: "CIVIL",
+        events: [
+          "Model Making",
+          "Structural Design Challenge",
+          "AutoCAD Challenge",
+          "Surveying Competition",
+          "Bridge Design Competition",
+          "Civil Engineering Quiz",
+        ],
+      },
+      {
+        department: "Computer Science / IT",
+        icon: "💻",
+        badge: "CSE / IT",
+        events: [
+          "Coding Competition",
+          "Debugging Challenge",
+          "Web Development Challenge",
+          "Cybersecurity Challenge",
+          "AI/ML Challenge",
+          "UI/UX Challenge",
+          "Tech Quiz",
+        ],
+      },
+      {
+        department: "Electronics & Communication",
+        icon: "📡",
+        badge: "ECE",
+        events: [
+          "Circuit Designing",
+          "Line Following Robot",
+          "Embedded Systems Challenge",
+          "IoT Challenge",
+          "Electronics Quiz",
+          "Automation Challenge",
+        ],
+      },
+      {
+        department: "Management",
+        icon: "📊",
+        badge: "MANAGEMENT",
+        events: [
+          "Business Plan Competition",
+          "Marketing Challenge",
+          "Business Quiz",
+          "Case Study Competition",
+          "Ad-Mad Show",
+          "Financial Simulation",
+        ],
+      },
+      {
+        department: "General / Interdisciplinary Events",
+        icon: "🌐",
+        badge: "INTERDISCIPLINARY",
+        events: [
+          "Tech Quiz",
+          "Photography",
+          "Reel/Short Video Challenge",
+          "Innovation Poster Competition",
+          "Technical Treasure Hunt",
+          "Gaming/E-Sports",
+          "Project Exhibition",
+        ],
+      },
     ],
   },
+
+  // =========================================================================
+  // 04 — SCIENCE CHAMPIONSHIP (Preserved verified existing project data)
+  // =========================================================================
   {
     id: "science-championship",
+    slug: "science-championship",
     number: "04",
     name: "SCIENCE CHAMPIONSHIP",
-    category: "COMPETITION",
+    category: "SCIENCE & DISCOVERY",
     date: "10 OCTOBER 2026",
+    fullDateSchedule: [
+      "10 October 2026 — Science Prototypes, Innovation Challenges, Live Demos & Valedictory",
+    ],
+    duration: "Full-Day Science Showdown",
+    venue: "Science & Applied Research Arena / Exhibition Hall C",
+    theme: "Discovery, Experimentation & Scientific Thinking",
     tagline: "DISCOVERY, EXPERIMENTATION & SCIENTIFIC THINKING",
     description:
       "Explore scientific thinking, experimentation and innovation through 4 competitive challenges: 2-Hour Innovation Hackathon, Science Exhibition, Idea Pitching (Mini Shark Tank), and 60-Minute Robotics Build Up.",
-    prize: "₹20,000",
+    purpose: [
+      "To celebrate scientific inquiry, reasoning, and practical experimentation.",
+      "To host high-tempo rapid challenges alongside project exhibitions and prototype reviews.",
+      "To test problem-solving, rapid robotics assembly, and venture-ready pitching.",
+      "To inspire future researchers, inventors, and scientific minds.",
+    ],
+    prize: "₹20,000+",
     teamSize: "2–3 Members",
-    venue: "Science & Applied Research Arena",
     registerUrl: "/register?event=science-championship",
     accentColor: "purple",
+    badge: "DISCOVERY ARENA",
     highlights: [
       "2-Hour Innovation Challenge (Hackathon)",
-      "Science Exhibition",
+      "Science Exhibition (Working Models & Prototypes)",
       "Idea Pitching (Mini Shark Tank)",
       "60-Minute Build Up (Robotics Challenge, etc.)",
+    ],
+    scienceChallenges: [
+      {
+        id: "hackathon",
+        number: "01",
+        title: "2 Hour Innovation Challenge",
+        subtitle: "(Hackathon)",
+        tag: "RAPID SPRINT",
+        description:
+          "High-speed 120-minute rapid prototyping and problem-solving hackathon. Teams design and deploy working software prototypes under extreme time pressure.",
+        format: "120 Min Sprint • Team 2–4 • Live Evaluation",
+        icon: "⚡",
+      },
+      {
+        id: "exhibition",
+        number: "02",
+        title: "Science Exhibition",
+        subtitle: "(Working Models & Prototypes)",
+        tag: "LIVE EXPO",
+        description:
+          "Showcase working scientific models, eco-tech apparatus, physics demonstrations, and research innovations judged by distinguished scientists and faculty panels.",
+        format: "Exhibition Arena • Live Demos",
+        icon: "🔬",
+      },
+      {
+        id: "pitching",
+        number: "03",
+        title: "Idea Pitching",
+        subtitle: "(Mini Shark Tank)",
+        tag: "VENTURE PITCH",
+        description:
+          "Pitch groundbreaking scientific and technology startup concepts to a live panel of investor judges and mentors. Defend your technical feasibility and business vision.",
+        format: "5m Pitch + 3m Q&A • Slide Deck",
+        icon: "💡",
+      },
+      {
+        id: "robotics",
+        number: "04",
+        title: "60 Minute Build Up",
+        subtitle: "(Robotics Challenge, etc.)",
+        tag: "HARDWARE ARENA",
+        description:
+          "An on-the-spot hardware engineering and robotics showdown. Assemble, wire, and calibrate your robotic machine in exactly 60 minutes, then navigate the obstacle arena.",
+        format: "60-Min Build • Obstacle Arena",
+        icon: "🤖",
+      },
     ],
   },
 ];
 
-export const eventsSequenceData: EventSequenceData[] = [
-  {
-    id: "hacknation-2",
-    index: 1,
-    title: "HACKNATION 2.0",
-    category: "HACKATHON",
-    date: "07–08 OCTOBER 2026",
-    description: "An intense innovation-driven challenge where teams build, experiment and turn bold ideas into working solutions.",
-    frameFolder: "/events/hacknation-2_frames/",
-    framePrefix: "frame_",
-    frameExtension: ".webp",
-    minFrame: 1,
-    maxFrame: 240,
-    frameCount: 240,
-    cardStartFrame: 175,
-    cardEndFrame: 240,
-    arrival: {
-      startFrame: 175,
-      peakFrame: 210,
-      endFrame: 240,
-    },
-    nextEvent: "IDEATHON",
-    framePath: "/events/hacknation-2_frames/frame_001.webp",
-    videoUrl: "/events/hacknation-2.mp4",
-  },
-  {
-    id: "ideathon",
-    index: 2,
-    title: "IDEATHON",
-    category: "INNOVATION",
-    date: "07–08 OCTOBER 2026",
-    description: "A creative idea-building challenge where participants transform real-world problems into practical and impactful solutions.",
-    frameFolder: "/events/Ideathon_frames/",
-    framePrefix: "frame_",
-    frameExtension: ".webp",
-    minFrame: 1,
-    maxFrame: 85,
-    frameCount: 85,
-    cardStartFrame: 68,
-    cardEndFrame: 85,
-    arrival: {
-      startFrame: 68,
-      peakFrame: 77,
-      endFrame: 85,
-    },
-    nextEvent: "SHIVATECH",
-    framePath: "/events/Ideathon_frames/frame_001.webp",
-    videoUrl: "/events/Ideathon.mp4",
-  },
-  {
-    id: "shivatech",
-    index: 3,
-    title: "SHIVATECH",
-    category: "FLAGSHIP EXPO",
-    date: "09 OCTOBER 2026",
-    description: "The flagship SHIVATECH experience celebrating technology, creativity, problem-solving and student innovation.",
-    frameFolder: "/events/shivatech_frames/",
-    framePrefix: "frame_",
-    frameExtension: ".webp",
-    minFrame: 15,
-    maxFrame: 85,
-    frameCount: 71,
-    cardStartFrame: 74,
-    cardEndFrame: 85,
-    arrival: {
-      startFrame: 74,
-      peakFrame: 80,
-      endFrame: 85,
-    },
-    nextEvent: "SCIENCE CHAMPIONSHIP",
-    framePath: "/events/shivatech_frames/frame_015.webp",
-    videoUrl: "/events/shivatech.mp4",
-  },
-  {
-    id: "science-championship",
-    index: 4,
-    title: "SCIENCE CHAMPIONSHIP",
-    category: "COMPETITION",
-    date: "10 OCTOBER 2026",
-    description: "A premier science challenge featuring 2-Hour Innovation Hackathon, Science Exhibition, Idea Pitching (Mini Shark Tank), and 60-Minute Robotics Build Up.",
-    frameFolder: "/events/Science_champion_frames/",
-    framePrefix: "frame_",
-    frameExtension: ".webp",
-    minFrame: 1,
-    maxFrame: 65,
-    frameCount: 65,
-    cardStartFrame: 53,
-    cardEndFrame: 65,
-    arrival: {
-      startFrame: 53,
-      peakFrame: 59,
-      endFrame: 65,
-    },
-    nextEvent: null,
-    framePath: "/events/Science_champion_frames/frame_001.webp",
-    videoUrl: "/events/Science%20champion.mp4",
-  },
-];
-
-export const eventsData: EventData[] = eventsSequenceData.map((e) => ({
-  id: e.id,
-  title: e.title,
-  category: e.category,
-  description: e.description,
-  date: e.date,
-  prize: "₹50,000",
-  teamSize: "2–4",
-  buildingId: `bldg-${e.id}`,
-  image: e.framePath,
-  position: { x: 0, z: 0 },
-}));
-
-// Calculate total frame count across all events
-export const TOTAL_GLOBAL_FRAMES = eventsSequenceData.reduce(
-  (sum, event) => sum + event.frameCount,
-  0
-); // 240 + 85 + 71 + 65 = 461 frames
-
 /**
- * Returns exact URL for a given event and frame number (1-indexed or relative frame)
+ * Helper to look up an event by slug (or legacy ID aliases)
  */
-export function getFrameUrl(event: EventSequenceData, frameNumber: number): string {
-  const clamped = Math.max(event.minFrame, Math.min(event.maxFrame, frameNumber));
-  const pad = clamped.toString().padStart(3, "0");
-  return `${event.frameFolder}${event.framePrefix}${pad}${event.frameExtension}`;
-}
+export function getEventBySlug(slug: string): EventItem | undefined {
+  const normalized = slug.toLowerCase().trim();
 
-export type GlobalSequenceState = {
-  activeEvent: EventSequenceData;
-  activeEventIndex: number;
-  frameNumber: number;
-  eventProgress: number;
-  globalProgress: number;
-  isArrivalRange: boolean;
-  eventArrivalProgress: number;
-  frameUrl: string;
-};
-
-/**
- * Maps global scroll progress (0.0 to 1.0) into exact event & frame state.
- * Each of the 4 events occupies an equal 25% segment of global scroll.
- * Inside an event segment, local progress (0.0 to 1.0) maps from minFrame to maxFrame.
- */
-export function getGlobalSequenceState(progress: number): GlobalSequenceState {
-  const clampedProgress = Math.max(0, Math.min(1, progress));
-  const numEvents = eventsSequenceData.length;
-  const segmentWidth = 1 / numEvents; // 0.25
-
-  let activeEventIndex = Math.floor(clampedProgress / segmentWidth);
-  if (activeEventIndex >= numEvents) {
-    activeEventIndex = numEvents - 1;
+  // Backward compatibility aliases
+  if (normalized === "hacknation-2" || normalized === "hacknation-2-0") {
+    return eventsList.find((e) => e.slug === "hacknation-2-0");
+  }
+  if (normalized === "shivatech") {
+    return eventsList.find((e) => e.slug === "departmental-technical-events");
   }
 
-  const activeEvent = eventsSequenceData[activeEventIndex];
-
-  // Local progress (0.0 to 1.0) inside active event segment
-  const segmentStart = activeEventIndex * segmentWidth;
-  const localProgress = Math.max(0, Math.min(1, (clampedProgress - segmentStart) / segmentWidth));
-
-  // Map localProgress so all 3 events (Hacknation, Ideathon, Shivatech) trigger transitions 1-2 frames before sequence end:
-  // - Events 0, 1, 2 (Hacknation, Ideathon, Shivatech): playCap = 0.95 so the final frames & full zoom arrive seamlessly
-  //   as the transition starts (1-2 frames before the end), keeping the scroll completely fluid!
-  // - Event 3 (Science Championship): playCap = 0.92 so it finishes and holds the final arrival view
-  const playCap = activeEventIndex < numEvents - 1 ? 0.95 : 0.92;
-
-  const playProgress = Math.min(1, localProgress / playCap);
-  const localFrameOffset = Math.round(playProgress * (activeEvent.frameCount - 1));
-  const frameNumber = Math.min(activeEvent.maxFrame, activeEvent.minFrame + localFrameOffset);
-
-  // Check card arrival range
-  const isArrivalRange =
-    frameNumber >= activeEvent.cardStartFrame &&
-    frameNumber <= activeEvent.cardEndFrame;
-
-  const cardRangeLength = activeEvent.cardEndFrame - activeEvent.cardStartFrame;
-  const eventArrivalProgress = isArrivalRange && cardRangeLength > 0
-    ? (frameNumber - activeEvent.cardStartFrame) / cardRangeLength
-    : 0;
-
-  const frameUrl = getFrameUrl(activeEvent, frameNumber);
-
-  return {
-    activeEvent,
-    activeEventIndex,
-    frameNumber,
-    eventProgress: localProgress,
-    globalProgress: clampedProgress,
-    isArrivalRange,
-    eventArrivalProgress,
-    frameUrl,
-  };
-}
-
-export type EventZoomConfig = {
-  maxScale: number;
-  lastFramesScale: number;
-  focalX: number;
-  focalY: number;
-};
-
-export const eventZoomConfigs: Record<string, EventZoomConfig> = {
-  "hacknation-2": {
-    maxScale: 1.35,
-    lastFramesScale: 1.35,
-    focalX: 0.50,
-    focalY: 0.38,
-  },
-  "ideathon": {
-    maxScale: 1.70,
-    lastFramesScale: 2.35, // Extra zoom on last 3 frames to make it full screen like Hacknation 2.0
-    focalX: 0.52,
-    focalY: 0.58, // Focused directly on the Ideathon building entrance & neon sign
-  },
-  "shivatech": {
-    maxScale: 1.65,
-    lastFramesScale: 2.30, // Extra zoom on last 3 frames to make it full screen
-    focalX: 0.50,
-    focalY: 0.54, // Focused directly on the Shivatech building entrance
-  },
-  "science-championship": {
-    maxScale: 1.70,
-    lastFramesScale: 2.10,
-    focalX: 0.50,
-    focalY: 0.42,
-  },
-};
-
-/**
- * Returns dynamic zoom scale and focal point for building arrival
- */
-export function getEventZoomState(
-  eventId: string,
-  eventProgress: number,
-  frameNumber?: number
-): { scale: number; focalX: number; focalY: number } {
-  const config = eventZoomConfigs[eventId] || {
-    maxScale: 1.5,
-    lastFramesScale: 2.0,
-    focalX: 0.5,
-    focalY: 0.5,
-  };
-
-  const activeEvent = eventsSequenceData.find((e) => e.id === eventId);
-  const maxFrame = activeEvent ? activeEvent.maxFrame : 85;
-
-  // Base arrival zoom starting from eventProgress 0.55 up to 0.85
-  const baseZoomProgress = Math.max(0, Math.min(1, (eventProgress - 0.55) / 0.30));
-  const easedBase = Math.pow(baseZoomProgress, 2.0);
-
-  let scale = 1.0 + (config.maxScale - 1.0) * easedBase;
-  let focalX = 0.5 + (config.focalX - 0.5) * easedBase;
-  let focalY = 0.5 + (config.focalY - 0.5) * easedBase;
-
-  // Extra accelerated full-screen zoom in the final 3-4 frames (like Hacknation 2.0)
-  if (frameNumber !== undefined && frameNumber >= maxFrame - 3) {
-    const lastFramesProgress = Math.min(1, (frameNumber - (maxFrame - 3)) / 3);
-    const easedLast = Math.pow(lastFramesProgress, 1.6);
-    scale = scale + (config.lastFramesScale - config.maxScale) * easedLast;
-  }
-
-  return { scale, focalX, focalY };
+  return eventsList.find((e) => e.slug === normalized || e.id === normalized);
 }

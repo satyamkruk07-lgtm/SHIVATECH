@@ -7,7 +7,7 @@ export const EventsIntro: React.FC = () => {
   return (
     <section
       id="events-intro"
-      className="relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#02040a] text-center overflow-hidden border-b border-white/[0.06]"
+      className="relative w-full py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-[#02040a] text-center overflow-hidden border-b border-white/[0.06]"
     >
       {/* Subtle Central Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-red-600/[0.07] rounded-full blur-[120px] pointer-events-none" />
@@ -31,15 +31,15 @@ export const EventsIntro: React.FC = () => {
           OUR EVENTS
         </motion.h2>
 
-        {/* Subheading: Choose your challenge. Build what matters. */}
+        {/* Subheading from Specification */}
         <motion.p
           initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-4 text-sm sm:text-lg font-sans text-slate-400 tracking-wide max-w-xl leading-relaxed"
+          className="mt-4 text-sm sm:text-lg font-sans text-slate-300 tracking-wide max-w-2xl leading-relaxed"
         >
-          Choose your challenge. Build what matters.
+          Explore innovation, technology, entrepreneurship and hands-on challenges.
         </motion.p>
       </div>
     </section>

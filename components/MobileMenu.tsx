@@ -58,7 +58,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                 TECHNOLOGY FESTIVAL
               </span>
               <h2 className="text-3xl font-bold tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] font-sans">
-                SHIVATECH
+                SHIVA INNOVEX
               </h2>
             </motion.div>
 

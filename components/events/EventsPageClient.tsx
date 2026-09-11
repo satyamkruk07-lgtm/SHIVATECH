@@ -1,55 +1,42 @@
 "use client";
 
-import React, { useState } from "react";
-import { eventsList, EventItem } from "@/data/events";
+import React from "react";
+import { eventsList } from "@/data/events";
 import EventsHeroVideo from "./EventsHeroVideo";
 import EventsIntro from "./EventsIntro";
-import EventItemSection from "./EventItemSection";
-import EventDetailsModal from "./EventDetailsModal";
+import EventLandingCard from "./EventLandingCard";
+import EventsFinalCTA from "./EventsFinalCTA";
 import Footer from "@/components/Footer";
 
 export const EventsPageClient: React.FC = () => {
-  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
-
-  const handleViewEvent = (event: EventItem) => {
-    setSelectedEvent(event);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedEvent(null);
-  };
-
   return (
     <>
       {/* 1. CINEMATIC VIDEO HERO */}
       <EventsHeroVideo />
 
-      {/* 2. EVENTS INTRO */}
+      {/* 2. EVENTS INTRO ("OUR EVENTS" - Explore innovation, technology...) */}
       <EventsIntro />
 
-      {/* 3–6. FOUR CINEMATIC EVENT SECTIONS */}
-      {/* 3. HACKNATION 2.0 (01) */}
-      {/* 4. IDEATHON (02) */}
-      {/* 5. SHIVATECH (03 - Flagship) */}
-      {/* 6. SCIENCE CHAMPIONSHIP (04) */}
-      <div className="relative w-full bg-[#02040a]">
-        {eventsList.map((event) => (
-          <EventItemSection
+      {/* 3. FOUR PREMIUM EVENT BLOCKS */}
+      {/* 01 — HACKNATION 2.0 */}
+      {/* 02 — IDEATHON */}
+      {/* 03 — DEPARTMENTAL TECHNICAL EVENTS */}
+      {/* 04 — SCIENCE CHAMPIONSHIP */}
+      <div className="relative w-full bg-[#02040a] py-8 sm:py-12 space-y-4">
+        {eventsList.map((event, index) => (
+          <EventLandingCard
             key={event.id}
             event={event}
-            onViewEvent={handleViewEvent}
+            index={index}
           />
         ))}
       </div>
 
-      {/* FOOTER */}
-      <Footer />
+      {/* 4. FINAL FESTIVAL CTA */}
+      <EventsFinalCTA />
 
-      {/* EVENT DETAILS VIEW MODAL */}
-      <EventDetailsModal
-        event={selectedEvent}
-        onClose={handleCloseModal}
-      />
+      {/* 5. EXISTING FOOTER */}
+      <Footer />
     </>
   );
 };

@@ -4,15 +4,14 @@ import React, { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import { eventsSequenceData } from "@/data/events";
+import { eventsList, getEventBySlug } from "@/data/events";
 
 function RegisterContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const eventId = searchParams.get("event") || "hacknation-2";
+  const eventParam = searchParams.get("event") || "hacknation-2-0";
 
-  const event =
-    eventsSequenceData.find((e) => e.id === eventId) || eventsSequenceData[0];
+  const event = getEventBySlug(eventParam) || eventsList[0];
 
   return (
     <div className="min-h-screen bg-[#02040a] text-white pt-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center relative overflow-hidden">
@@ -27,13 +26,13 @@ function RegisterContent() {
             <span className="text-xs font-mono text-red-500 tracking-[0.3em] uppercase block mb-1">
               REGISTRATION PORTAL • {event.category}
             </span>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-wider text-white">
-              {event.title}
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-wider text-white uppercase">
+              {event.name}
             </h1>
           </div>
           <div className="flex flex-col items-end gap-1.5">
             <span className="text-xs font-mono px-3 py-1 rounded border border-blue-500/30 bg-blue-950/40 text-blue-300">
-              EVENT 0{event.index} / 04
+              EVENT {event.number} / 04
             </span>
             {event.date && (
               <span className="text-[11px] font-mono font-bold text-red-400 tracking-wider">
@@ -47,12 +46,12 @@ function RegisterContent() {
           {event.description}
         </p>
 
-        {/* Mock Registration Form */}
+        {/* Registration Form */}
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            alert(`Registration submitted for ${event.title}!`);
-            router.push("/events");
+            alert(`Registration submitted for ${event.name}!`);
+            router.push(`/events/${event.slug}`);
           }}
           className="space-y-4 font-mono text-sm"
         >
@@ -92,7 +91,7 @@ function RegisterContent() {
             />
           </div>
 
-          {eventId === "science-championship" && (
+          {event.slug === "science-championship" && (
             <div>
               <label className="block text-xs text-purple-300/80 tracking-wider mb-1 uppercase font-semibold">
                 Select Competition Track
@@ -113,15 +112,15 @@ function RegisterContent() {
           <div className="pt-4 flex flex-col sm:flex-row gap-3">
             <button
               type="submit"
-              className="flex-1 py-3.5 bg-gradient-to-r from-red-600 to-blue-600 rounded-lg text-white font-bold text-xs sm:text-sm tracking-widest shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:brightness-110 transition-all text-center"
+              className="flex-1 py-3.5 bg-gradient-to-r from-red-600 to-blue-600 rounded-lg text-white font-bold text-xs sm:text-sm tracking-widest shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:brightness-110 transition-all text-center cursor-pointer"
             >
               CONFIRM REGISTRATION
             </button>
             <Link
-              href="/events"
+              href={`/events/${event.slug}`}
               className="px-6 py-3.5 border border-white/20 rounded-lg text-white/70 hover:text-white hover:bg-white/10 font-bold text-xs sm:text-sm tracking-widest transition-colors text-center"
             >
-              BACK TO EVENTS
+              BACK TO EVENT
             </Link>
           </div>
         </form>

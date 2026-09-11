@@ -100,7 +100,7 @@ export default function Navbar() {
 
             {/* Wordmark */}
             <span className="font-mono font-black text-sm xs:text-base sm:text-2xl md:text-3xl tracking-[0.06em] xs:tracking-[0.1em] sm:tracking-[0.16em] text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-red-400 transition-all duration-300 drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]">
-              SHIVATECH
+              SHIVA INNOVEX
             </span>
           </Link>
 
