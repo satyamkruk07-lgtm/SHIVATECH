@@ -100,7 +100,7 @@ export const eventsList: EventItem[] = [
     registerUrl: "https://forms.gle/CvYpny3YC5dpdYby7",
     accentColor: "crimson",
     badge: "FLAGSHIP HACKATHON",
-    eventStatsTitle: "PREVIOUS HACKATHON PARTICIPATION",
+    eventStatsTitle: "Previously Participants",
     eventStats: [
       { id: "stat-1", value: 500, suffix: "+", label: "PARTICIPANTS" },
       { id: "stat-2", value: 100, suffix: "+", label: "TEAMS" },

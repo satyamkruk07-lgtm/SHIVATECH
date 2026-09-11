@@ -206,22 +206,25 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           </div>
         </motion.div>
 
-        {/* Dynamic Event Stats Strip with Title */}
+        {/* Dynamic Event Stats Strip with Heading - Centered */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.28 }}
-          className="mb-10"
+          className="w-full max-w-4xl mx-auto mb-12 flex flex-col items-center"
         >
-          {/* Title above stats strip */}
-          <div className="flex items-center space-x-2.5 mb-3 font-mono">
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-            <span className="text-[11px] font-bold tracking-[0.25em] text-slate-300 uppercase">
-              // {event.eventStatsTitle || "PREVIOUS HACKATHON PARTICIPATION"}
+          {/* Heading Type Title Centered */}
+          <div className="text-center mb-5">
+            <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.25em] text-red-400 uppercase font-bold block mb-1">
+              // PARTICIPATION RECORD
             </span>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-black font-mono tracking-wider text-white uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+              {event.eventStatsTitle || "Previously Participants"}
+            </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 py-6 sm:py-8 px-4 sm:px-6 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-xl relative overflow-hidden">
+          {/* Centered Stats Box */}
+          <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 py-6 sm:py-8 px-6 sm:px-8 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-xl relative overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.5)]">
             {statsToRender.map((stat, idx) => (
               <div
                 key={stat.id || idx}
