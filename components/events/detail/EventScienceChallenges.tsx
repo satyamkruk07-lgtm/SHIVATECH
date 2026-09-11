@@ -29,7 +29,7 @@ export const EventScienceChallenges: React.FC<EventScienceChallengesProps> = ({ 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <span className="text-[11px] tracking-[0.25em] text-purple-400 uppercase font-bold block mb-1.5">
-            // NEXT-GEN HACKATHON ARENA
+            // NEXT-GEN HACKATHON 1.0 ARENA
           </span>
           <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-white uppercase mb-3">
             NEXT-GEN ARENA CHALLENGES
@@ -161,7 +161,7 @@ export const EventScienceChallenges: React.FC<EventScienceChallengesProps> = ({ 
                       EVENT {selectedChallenge.number} // {selectedChallenge.tag}
                     </span>
                     <span className="text-[10px] text-slate-400 tracking-wider">
-                      NEXT-GEN HACKATHON
+                      NEXT-GEN HACKATHON 1.0
                     </span>
                   </div>
                   <h3

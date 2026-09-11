@@ -483,7 +483,7 @@ export const scheduleData: DaySchedule[] = [
   },
 
   // =========================================================================
-  // DAY 05: NEXT-GEN HACKATHON & GRAND VALEDICTORY
+  // DAY 05: NEXT-GEN HACKATHON 1.0 & GRAND VALEDICTORY
   // =========================================================================
   {
     dayNumber: 5,
@@ -510,9 +510,9 @@ export const scheduleData: DaySchedule[] = [
         day: 5,
         time: "10:00 AM",
         date: "10 OCTOBER 2026",
-        title: "NEXT-GEN HACKATHON",
+        title: "NEXT-GEN HACKATHON 1.0",
         subtitle: "Exhibition, 2-Hr Hackathon & Robotics",
-        description: "Kickoff of the Next-Gen Hackathon challenges: 2-Hour Innovation Hackathon, Science Exhibition, and 60-Minute Robotics Build Up.",
+        description: "Kickoff of the Next-Gen Hackathon 1.0 challenges: 2-Hour Innovation Hackathon, Science Exhibition, and 60-Minute Robotics Build Up.",
         venue: "EXHIBITION HALL C & APPLIED LABS",
         category: "COMPETITION",
         duration: "10:00 AM – 01:00 PM",

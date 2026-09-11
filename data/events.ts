@@ -483,7 +483,7 @@ export const eventsList: EventItem[] = [
     id: "next-gen-hackathon",
     slug: "next-gen-hackathon",
     number: "04",
-    name: "NEXT-GEN HACKATHON",
+    name: "NEXT-GEN HACKATHON 1.0",
     category: "RAPID HACKATHON & BUILD",
     date: "10 OCTOBER 2026",
     fullDateSchedule: [
@@ -602,7 +602,12 @@ export function getEventBySlug(slug: string): EventItem | undefined {
   if (normalized === "shivatech") {
     return eventsList.find((e) => e.slug === "departmental-technical-events");
   }
-  if (normalized === "science-championship" || normalized === "next-gen-hackathon") {
+  if (
+    normalized === "science-championship" ||
+    normalized === "next-gen-hackathon" ||
+    normalized === "next-gen-hackathon-1-0" ||
+    normalized === "next-gen-hackathon-1-o"
+  ) {
     return eventsList.find((e) => e.slug === "next-gen-hackathon" || e.slug === "science-championship");
   }
 
