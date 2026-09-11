@@ -11,7 +11,7 @@ import EventTimeline from "@/components/events/detail/EventTimeline";
 import EventEvaluation from "@/components/events/detail/EventEvaluation";
 import EventDepartments from "@/components/events/detail/EventDepartments";
 import EventOpportunities from "@/components/events/detail/EventOpportunities";
-import EventScienceChallenges from "@/components/events/detail/EventScienceChallenges";
+import EventSchoolCategories from "@/components/events/detail/EventSchoolCategories";
 import EventParticipatingStates from "@/components/events/detail/EventParticipatingStates";
 import EventCTA from "@/components/events/detail/EventCTA";
 
@@ -111,9 +111,12 @@ export default async function EventDetailPage({ params }: PageProps) {
         <EventOpportunities opportunities={event.opportunities} />
       )}
 
-      {/* 9. SCIENCE ARENA CHALLENGES (Science Championship) */}
-      {event.scienceChallenges && event.scienceChallenges.length > 0 && (
-        <EventScienceChallenges challenges={event.scienceChallenges} />
+      {/* 9. SCHOOL HACKATHON CATEGORIES (Next-Gen Hackathon 1.0 - Class 9-10 & Class 11-12) */}
+      {event.schoolCategories && event.schoolCategories.length > 0 && (
+        <EventSchoolCategories
+          title={event.schoolCategoriesTitle || "Next-Gen Hackathon Categories & Problem Statements"}
+          categories={event.schoolCategories}
+        />
       )}
 
       {/* 10. REGISTRATION CALL TO ACTION */}

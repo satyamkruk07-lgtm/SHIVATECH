@@ -41,6 +41,29 @@ export interface ParticipatingState {
   imageHint: string;
 }
 
+export interface SchoolHackathonProblemStatement {
+  id: string;
+  code: string;
+  title: string;
+  domain: string;
+  icon: string;
+  description: string;
+  objective: string;
+  deliverables: string[];
+  recommendedTools?: string[];
+}
+
+export interface SchoolHackathonCategory {
+  id: string; // "class-9-10" | "class-11-12"
+  title: string;
+  gradeBadge: string;
+  eligibility: string;
+  tagline: string;
+  description: string;
+  accentColor: "emerald" | "purple" | "blue" | "crimson";
+  problemStatements: SchoolHackathonProblemStatement[];
+}
+
 export interface EventItem {
   id: string; // Slug & unique ID
   slug: string;
@@ -71,7 +94,9 @@ export interface EventItem {
   evaluation?: EvaluationParameter[];
   opportunities?: string[];
   departments?: DepartmentGroup[];
-  scienceChallenges?: ScienceChallenge[];
+  targetAudienceNote?: string;
+  schoolCategoriesTitle?: string;
+  schoolCategories?: SchoolHackathonCategory[];
   eventStatsTitle?: string;
   eventStats?: EventStatItem[];
 }
@@ -477,112 +502,229 @@ export const eventsList: EventItem[] = [
   },
 
   // =========================================================================
-  // 04 — NEXT-GEN HACKATHON (Formerly Science Championship)
+  // 04 — NEXT-GEN HACKATHON 1.0 (Only for Class 9, 10, 11 & 12 School Students)
   // =========================================================================
   {
     id: "next-gen-hackathon",
     slug: "next-gen-hackathon",
     number: "04",
     name: "NEXT-GEN HACKATHON 1.0",
-    category: "RAPID HACKATHON & BUILD",
+    targetAudienceNote: "Only for Class 9, 10, 11 & 12 School Students",
+    category: "SCHOOL HACKATHON",
     date: "10 OCTOBER 2026",
     fullDateSchedule: [
-      "10 October 2026 — Next-Gen Innovation Challenges, Prototype Builds, Live Demos & Valedictory",
+      "10 October 2026 (09:00 AM) — Check-in, Problem Briefing & School Hackathon Kickoff",
+      "10 October 2026 (10:00 AM – 03:00 PM) — Prototype Building, Code Sprints & Mentor Guidance",
+      "10 October 2026 (03:30 PM) — Jury Demos, Live Project Defense & Awards Ceremony",
     ],
-    duration: "Full-Day Hackathon & Build Challenges",
-    venue: "Innovation Hub & Applied Research Arena / Exhibition Hall C",
-    theme: "Rapid Prototyping, Discovery & Next-Gen Innovation",
-    tagline: "RAPID PROTOTYPING, DISCOVERY & NEXT-GEN INNOVATION",
+    duration: "Full-Day School Hackathon Sprint",
+    venue: "Main Computing Hub, Applied Innovation Labs & Exhibition Hall C",
+    theme: "Young Innovators for a Better Tomorrow",
+    tagline: "EXCLUSIVE SCHOOL HACKATHON FOR BUDDING STUDENT CREATORS",
     description:
-      "Explore next-gen innovation, rapid prototyping and scientific thinking through 4 competitive challenges: 2-Hour Innovation Hackathon, Science Exhibition, Idea Pitching (Mini Shark Tank), and 60-Minute Robotics Build Up.",
+      "An exclusive, high-energy school innovation hackathon exclusively for students of Class 9, 10, 11 & 12. Divided into two dedicated categories: Class 9 & 10 (Junior Innovators) and Class 11 & 12 (Senior Innovators), featuring curated real-world problem statements across sustainability, smart education, IoT, AI, and robotics.",
     purpose: [
-      "To celebrate next-gen innovation, rapid prototyping, and practical experimentation.",
-      "To host high-tempo rapid challenges alongside project exhibitions and prototype reviews.",
-      "To test problem-solving, rapid robotics assembly, and venture-ready pitching.",
-      "To inspire future engineers, inventors, and scientific minds.",
+      "To ignite scientific curiosity, computational thinking, and hands-on tinkering among school students.",
+      "To provide a supportive, mentored university-level hackathon platform for Class 9th to 12th innovators.",
+      "To transform creative school ideas into working software, hardware circuits, and physical prototypes.",
+      "To recognize and reward top young innovators with trophies, certificates, and exciting prizes.",
     ],
-    prize: "₹20,000+",
-    teamSize: "2–3 Members",
+    prize: "₹25,000+ & School Trophies",
+    teamSize: "2–4 School Students",
     registerUrl: "/register?event=next-gen-hackathon",
     accentColor: "purple",
-    badge: "NEXT-GEN ARENA",
+    badge: "SCHOOL EXCLUSIVE",
     highlights: [
-      "2-Hour Innovation Challenge (Hackathon)",
-      "Science Exhibition (Working Models & Prototypes)",
-      "Idea Pitching (Mini Shark Tank)",
-      "60-Minute Build Up (Robotics Challenge, etc.)",
+      "Exclusively for Class 9, 10, 11 & 12 School Students",
+      "Two Separate Tracks: Class 9–10 & Class 11–12",
+      "8 Curated Real-World Problem Statements",
+      "Direct Mentorship from Engineering Faculty & Tech Experts",
+      "Exciting Cash Prizes, School Champion Trophies & Certificates",
     ],
-    scienceChallenges: [
+    schoolCategoriesTitle: "Next-Gen Hackathon Categories & Problem Statements",
+    schoolCategories: [
       {
-        id: "hackathon",
-        number: "01",
-        title: "2 Hour Innovation Challenge",
-        subtitle: "(Hackathon)",
-        tag: "RAPID SPRINT",
+        id: "class-9-10",
+        title: "Class 9 & 10 Category (Junior Innovators)",
+        gradeBadge: "CLASS 9 & 10",
+        eligibility: "Students currently enrolled in Class 9th or 10th",
+        tagline: "CREATIVE SCIENCE, SMART LIVING & ECO-SOLUTIONS",
         description:
-          "High-speed 120-minute rapid prototyping and problem-solving hackathon. Teams design and deploy working software prototypes under extreme time pressure.",
-        format: "120 Min Sprint • Team 2–4 • Live Evaluation",
-        icon: "⚡",
-        duration: "120 Minutes (2 Hours)",
-        teamSize: "2–4 Members",
-        highlights: [
-          "Real-World Problem Statements",
-          "Rapid Working Software Deployment",
-          "Live Jury Code Review & Scoring",
+          "Tailored for junior school students to explore foundational science, environmental conservation, smart campus automation, and creative digital learning through practical, hands-on prototypes.",
+        accentColor: "emerald",
+        problemStatements: [
+          {
+            id: "ps-j-01",
+            code: "NGH-J-01",
+            title: "Smart Waste Segregation & Campus Eco-Tracker",
+            domain: "Sustainability & Clean Tech",
+            icon: "🌱",
+            description:
+              "Design an automated or sensor-based waste segregation prototype (distinguishing dry, wet, or plastic items) or a digital recycling tracker that encourages school students to minimize campus litter and monitor daily recyclable collection.",
+            objective:
+              "Promote zero-waste habits in schools through automated sorting mechanisms and gamified recycling metrics.",
+            deliverables: [
+              "Functional hardware model or sensor circuit demonstrating automated waste detection/sorting",
+              "Presentation or interactive poster explaining environmental impact and school deployment",
+            ],
+            recommendedTools: [
+              "Arduino / Micro:bit / Basic sensors",
+              "Recycled cardboard / Mechanical sorting chutes",
+              "Scratch / Python / Web dashboard",
+            ],
+          },
+          {
+            id: "ps-j-02",
+            code: "NGH-J-02",
+            title: "Intelligent Water Overflow & Leakage Alert System",
+            domain: "Water Conservation & Resource Management",
+            icon: "💧",
+            description:
+              "Create an automated water level monitor for school and household overhead tanks that automatically shuts off the water pump upon reaching capacity and rings an alert buzzer to prevent water overflow and pipe leakages.",
+            objective:
+              "Prevent thousands of liters of clean drinking water wastage daily through automated overflow cutoff circuits.",
+            deliverables: [
+              "Functional circuit model using water level/ultrasonic sensors and automated relay buzzer",
+              "Live demonstration of automated pump shutoff and overflow alert trigger",
+            ],
+            recommendedTools: [
+              "Ultrasonic / Float / Soil moisture sensors",
+              "Relay module & Buzzer",
+              "Breadboard / Tinkercad simulation",
+            ],
+          },
+          {
+            id: "ps-j-03",
+            code: "NGH-J-03",
+            title: "Gamified Interactive Science & Mathematics Learning Simulator",
+            domain: "EdTech & Game Design",
+            icon: "🎮",
+            description:
+              "Develop an interactive digital quiz, simulation game, or visual puzzle (using Scratch, Python, or Web) that transforms complex science concepts (e.g., laws of motion, electric circuits, human anatomy, fractions) into fun, gamified puzzles for school peers.",
+            objective:
+              "Empower peer-to-peer visual learning through interactive storytelling, gameplay, and conceptual simulations.",
+            deliverables: [
+              "Playable digital game or web application prototype",
+              "Short user guide or interactive walkthrough demonstration",
+            ],
+            recommendedTools: [
+              "Scratch / Block programming",
+              "Python / Pygame",
+              "HTML5 / CSS / JavaScript",
+            ],
+          },
+          {
+            id: "ps-j-04",
+            code: "NGH-J-04",
+            title: "Classroom Smart Energy Guardian",
+            domain: "Smart Campus & Energy Efficiency",
+            icon: "⚡",
+            description:
+              "Build a smart classroom automation prototype utilizing motion detectors (PIR) and light sensors (LDR) to automatically shut off classroom lights and fans when rooms are vacant, helping schools reduce electrical power wastage.",
+            objective:
+              "Drastically reduce school electricity bills and carbon footprint through smart occupancy sensing.",
+            deliverables: [
+              "Demonstration breadboard model with PIR and LDR sensor automation",
+              "Calculated energy savings analysis for a typical 10-room school building",
+            ],
+            recommendedTools: [
+              "PIR Motion Sensor",
+              "LDR Light Sensor",
+              "Arduino / Microcontroller or Logic IC",
+            ],
+          },
         ],
       },
       {
-        id: "exhibition",
-        number: "02",
-        title: "Science Exhibition",
-        subtitle: "(Working Models & Prototypes)",
-        tag: "LIVE EXPO",
+        id: "class-11-12",
+        title: "Class 11 & 12 Category (Senior Innovators)",
+        gradeBadge: "CLASS 11 & 12",
+        eligibility: "Students currently enrolled in Class 11th or 12th",
+        tagline: "ADVANCED APPLIED TECH, AI, IOT & REAL-WORLD PROBLEM SOLVING",
         description:
-          "Showcase working scientific models, eco-tech apparatus, physics demonstrations, and research innovations judged by distinguished scientists and faculty panels.",
-        format: "Exhibition Arena • Live Demos",
-        icon: "🔬",
-        duration: "Full-Day Exhibition",
-        teamSize: "1–3 Members",
-        highlights: [
-          "Physical Working Models",
-          "Eco-Tech & Applied Science Innovations",
-          "Direct Defense to Visiting Scientist Panel",
-        ],
-      },
-      {
-        id: "pitching",
-        number: "03",
-        title: "Idea Pitching",
-        subtitle: "(Mini Shark Tank)",
-        tag: "VENTURE PITCH",
-        description:
-          "Pitch groundbreaking scientific and technology startup concepts to a live panel of investor judges and mentors. Defend your technical feasibility and business vision.",
-        format: "5m Pitch + 3m Q&A • Slide Deck",
-        icon: "💡",
-        duration: "5m Pitch + 3m Q&A",
-        teamSize: "1–3 Members",
-        highlights: [
-          "Investor & Mentor Shark Tank Jury",
-          "Commercial Viability & Feasibility",
-          "Seed Mentorship & Incubation Opportunities",
-        ],
-      },
-      {
-        id: "robotics",
-        number: "04",
-        title: "60 Minute Build Up",
-        subtitle: "(Robotics Challenge, etc.)",
-        tag: "HARDWARE ARENA",
-        description:
-          "An on-the-spot hardware engineering and robotics showdown. Assemble, wire, and calibrate your robotic machine in exactly 60 minutes, then navigate the obstacle arena.",
-        format: "60-Min Build • Obstacle Arena",
-        icon: "🤖",
-        duration: "60 Minutes (1 Hour)",
-        teamSize: "2–4 Members",
-        highlights: [
-          "On-The-Spot Hardware Assembly",
-          "Sensor Calibration & Wiring Under Clock",
-          "Rough-Terrain Obstacle Arena Run",
+          "Challenging senior school students to build sophisticated, high-impact prototypes leveraging artificial intelligence, IoT sensor arrays, robotics, health monitoring, and cyber safety tools.",
+        accentColor: "purple",
+        problemStatements: [
+          {
+            id: "ps-s-01",
+            code: "NGH-S-01",
+            title: "AI & IoT Early Warning Network for Landslides and Hill Floods",
+            domain: "Disaster Resilience & Climate Tech",
+            icon: "📡",
+            description:
+              "Develop a multi-sensor alert station (monitoring soil moisture saturation, ground vibration, and rainfall rate) or an AI computer vision model to detect early micro-shifts on steep slopes and trigger rapid community sirens and emergency SMS notifications.",
+            objective:
+              "Provide vital early warning lead time to vulnerable communities in hilly and flood-prone terrains.",
+            deliverables: [
+              "Working IoT hardware prototype or AI detection algorithm with dashboard interface",
+              "Live demonstration of multi-sensor data feed and emergency alert trigger",
+            ],
+            recommendedTools: [
+              "ESP32 / NodeMCU / Arduino",
+              "Soil moisture & Vibration sensors",
+              "Python / OpenCV / IoT Cloud dashboard",
+            ],
+          },
+          {
+            id: "ps-s-02",
+            code: "NGH-S-02",
+            title: "Smart Tele-Health Kiosk & Rapid Diagnostic Assistant for Remote Areas",
+            domain: "Digital Healthcare & Medical Tech",
+            icon: "🏥",
+            description:
+              "Design a portable health diagnostic station or mobile web platform that connects basic medical sensors (pulse oximeter, non-contact infrared temperature, heart rate), generates an automated patient triage summary, and facilitates remote consultations.",
+            objective:
+              "Bring affordable, rapid preliminary medical screening and telehealth access to remote and underserved rural schools and villages.",
+            deliverables: [
+              "Working sensor-integrated hardware prototype or mobile/web diagnostic interface",
+              "Patient triage report generation demonstration with simulated medical metrics",
+            ],
+            recommendedTools: [
+              "MAX30102 / Pulse sensor",
+              "MLX90614 Temperature sensor",
+              "React / Flutter / Firebase dashboard",
+            ],
+          },
+          {
+            id: "ps-s-03",
+            code: "NGH-S-03",
+            title: "AI Cyber-Shield: Anti-Bullying, Phishing & Teen Safety Guardian",
+            domain: "Cybersecurity & Digital Well-being",
+            icon: "🛡️",
+            description:
+              "Create an AI-powered browser extension, desktop utility, or chatbot that analyzes text and URLs in real-time to alert teenage students against toxic cyberbullying comments, fraudulent phishing URLs, and online predatory traps.",
+            objective:
+              "Foster a safer digital environment for school students through proactive NLP moderation and threat detection.",
+            deliverables: [
+              "Functional browser extension or prototype software application",
+              "Live demo testing against known toxic phrases and deceptive phishing URLs",
+            ],
+            recommendedTools: [
+              "Natural Language Processing (NLP)",
+              "Chrome Extension APIs",
+              "Python / FastAPI or Node.js",
+            ],
+          },
+          {
+            id: "ps-s-04",
+            code: "NGH-S-04",
+            title: "Autonomous Terrain Navigation & Disaster Rescue Rover",
+            domain: "Robotics & Embedded Systems",
+            icon: "🤖",
+            description:
+              "Construct an autonomous or remote-operated robotic rover equipped with ultrasonic/infrared sensors and camera feed, capable of traversing uneven obstacle terrain to locate targets and deliver emergency kits during simulated disaster scenarios.",
+            objective:
+              "Demonstrate rapid-response robotic mobility in dangerous zones inaccessible to humans during disasters.",
+            deliverables: [
+              "Physical working robotic rover with multi-sensor obstacle avoidance and steering control",
+              "Live arena navigation demo over simulated rough terrain",
+            ],
+            recommendedTools: [
+              "Motor drivers (L298N) & Chassis",
+              "Ultrasonic / IR obstacle sensors",
+              "ESP32-CAM / Arduino / Bluetooth/WiFi control",
+            ],
+          },
         ],
       },
     ],

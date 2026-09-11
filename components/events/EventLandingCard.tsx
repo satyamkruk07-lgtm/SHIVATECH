@@ -77,9 +77,18 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
             </div>
 
             {/* Event Name */}
-            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white uppercase mb-3 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all">
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white uppercase mb-2 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all">
               {event.name}
             </h3>
+
+            {/* Target Audience Bracket Note (e.g. Only for Class 9, 10, 11 & 12 School Students) */}
+            {event.targetAudienceNote && (
+              <div className="mb-4">
+                <span className="inline-block text-xs sm:text-sm font-mono font-bold text-purple-300 bg-purple-500/15 border border-purple-500/35 px-3 py-1 rounded-lg tracking-wider">
+                  [ {event.targetAudienceNote} ]
+                </span>
+              </div>
+            )}
 
             {/* Date & Venue Pill */}
             <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-bold text-slate-300 mb-5">

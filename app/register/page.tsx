@@ -13,6 +13,8 @@ function RegisterContent() {
   const competitionParam = searchParams.get("competition");
   const deptParam = searchParams.get("dept");
   const trackParam = searchParams.get("track");
+  const categoryParam = searchParams.get("category");
+  const psParam = searchParams.get("ps");
 
   const event = getEventBySlug(eventParam) || eventsList[0];
   const isHackathon = event.slug === "hacknation-2-0";
@@ -60,6 +62,26 @@ function RegisterContent() {
               {deptParam && (
                 <span className="text-xs text-slate-400 block mt-0.5">
                   Stream: {deptParam}
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* If user clicked a specific School Hackathon Problem Statement */}
+        {psParam && (
+          <div className="p-3.5 mb-5 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-start space-x-3">
+            <span className="text-purple-400 font-bold">⚡</span>
+            <div>
+              <span className="text-[10px] text-purple-400 font-bold uppercase tracking-widest block">
+                SELECTED SCHOOL PROBLEM STATEMENT
+              </span>
+              <span className="text-sm font-bold text-white">
+                {psParam}
+              </span>
+              {categoryParam && (
+                <span className="text-xs text-purple-300 block mt-0.5 font-bold">
+                  Track: {categoryParam}
                 </span>
               )}
             </div>

@@ -141,10 +141,24 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-mono tracking-tight text-white uppercase drop-shadow-[0_0_35px_rgba(255,255,255,0.2)] mb-4 leading-none"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-mono tracking-tight text-white uppercase drop-shadow-[0_0_35px_rgba(255,255,255,0.2)] mb-3 leading-none"
         >
           {event.name}
         </motion.h1>
+
+        {/* Target Audience Bracket Note */}
+        {event.targetAudienceNote && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.18 }}
+            className="mb-6"
+          >
+            <span className="inline-block text-xs sm:text-sm md:text-base font-mono font-bold text-purple-300 bg-purple-500/15 border border-purple-500/40 px-4 py-1.5 rounded-xl tracking-wider shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+              [ {event.targetAudienceNote} ]
+            </span>
+          </motion.div>
+        )}
 
         {/* Event Theme / Slogan from PDF */}
         {event.theme && (
