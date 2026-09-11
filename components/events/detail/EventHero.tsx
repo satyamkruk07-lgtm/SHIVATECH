@@ -72,13 +72,16 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
     ? "from-emerald-600/20 via-transparent to-transparent"
     : "from-purple-600/20 via-transparent to-transparent";
 
-  // Default stats strip data matching user's requested categories:
-  // participants, teams, other states
-  const statsToRender: EventStatItem[] = event.eventStats || [
-    { id: "s1", value: 500, suffix: "+", label: "PARTICIPANTS" },
-    { id: "s2", value: 100, suffix: "+", label: "TEAMS" },
-    { id: "s3", value: 15, suffix: "+", label: "OTHER STATES" },
-  ];
+  const isHackathon = event.slug === "hacknation-2-0" || event.category === "HACKATHON";
+
+  // Stats strip strictly for Hackathon page
+  const statsToRender: EventStatItem[] = isHackathon
+    ? event.eventStats || [
+        { id: "s1", value: 500, suffix: "+", label: "PARTICIPANTS" },
+        { id: "s2", value: 100, suffix: "+", label: "TEAMS" },
+        { id: "s3", value: 15, suffix: "+", label: "OTHER STATES" },
+      ]
+    : [];
 
   return (
     <section className="relative w-full pt-32 pb-16 sm:pt-40 sm:pb-24 px-4 sm:px-6 lg:px-8 bg-[#02040a] overflow-hidden border-b border-white/10">
@@ -206,47 +209,49 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           </div>
         </motion.div>
 
-        {/* Dynamic Event Stats Strip with Heading - Centered */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.28 }}
-          className="w-full max-w-4xl mx-auto mb-12 flex flex-col items-center"
-        >
-          {/* Heading Type Title Centered */}
-          <div className="text-center mb-5">
-            <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.25em] text-red-400 uppercase font-bold block mb-1">
-              // PARTICIPATION RECORD
-            </span>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-black font-mono tracking-wider text-white uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-              {event.eventStatsTitle || "Previously Participants"}
-            </h3>
-          </div>
+        {/* Dynamic Event Stats Strip with Heading - ONLY ON HACKATHON PAGE */}
+        {isHackathon && statsToRender.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.28 }}
+            className="w-full max-w-4xl mx-auto mb-12 flex flex-col items-center"
+          >
+            {/* Heading Type Title Centered */}
+            <div className="text-center mb-5">
+              <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.25em] text-red-400 uppercase font-bold block mb-1">
+                // PARTICIPATION RECORD
+              </span>
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-black font-mono tracking-wider text-white uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                {event.eventStatsTitle || "Previously Participants"}
+              </h3>
+            </div>
 
-          {/* Centered Stats Box */}
-          <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 py-6 sm:py-8 px-6 sm:px-8 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-xl relative overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.5)]">
-            {statsToRender.map((stat, idx) => (
-              <div
-                key={stat.id || idx}
-                className={`flex flex-col items-center justify-center text-center min-w-0 relative ${
-                  idx < statsToRender.length - 1 ? "sm:border-r sm:border-white/15" : ""
-                }`}
-              >
-                <div className="font-orbitron text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/70 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] mb-2 max-w-full">
-                  <HeroStatCounter
-                    to={stat.value}
-                    prefix={stat.prefix}
-                    suffix={stat.suffix}
-                    customText={stat.customText}
-                  />
+            {/* Centered Stats Box */}
+            <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 py-6 sm:py-8 px-6 sm:px-8 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-xl relative overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+              {statsToRender.map((stat, idx) => (
+                <div
+                  key={stat.id || idx}
+                  className={`flex flex-col items-center justify-center text-center min-w-0 relative ${
+                    idx < statsToRender.length - 1 ? "sm:border-r sm:border-white/15" : ""
+                  }`}
+                >
+                  <div className="font-orbitron text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/70 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] mb-2 max-w-full">
+                    <HeroStatCounter
+                      to={stat.value}
+                      prefix={stat.prefix}
+                      suffix={stat.suffix}
+                      customText={stat.customText}
+                    />
+                  </div>
+                  <div className="font-sans text-[11px] sm:text-xs md:text-sm tracking-[0.2em] text-white/50 uppercase font-semibold">
+                    {stat.label}
+                  </div>
                 </div>
-                <div className="font-sans text-[11px] sm:text-xs md:text-sm tracking-[0.2em] text-white/50 uppercase font-semibold">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         {/* Hero Actions: REGISTER & EXPLORE SCHEDULE */}
         <motion.div

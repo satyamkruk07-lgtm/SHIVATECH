@@ -203,12 +203,6 @@ export const eventsList: EventItem[] = [
     registerUrl: "/register?event=ideathon",
     accentColor: "blue",
     badge: "INCUBATION PIPELINE",
-    eventStatsTitle: "PREVIOUS EDITION PARTICIPATION",
-    eventStats: [
-      { id: "stat-1", value: 400, suffix: "+", label: "PARTICIPANTS" },
-      { id: "stat-2", value: 100, suffix: "+", label: "TEAMS" },
-      { id: "stat-3", value: 12, suffix: "+", label: "OTHER STATES" },
-    ],
     highlights: [
       "18 Suggested Problem Domains",
       "7-Stage Idea-to-Incubation Pipeline",
@@ -287,12 +281,6 @@ export const eventsList: EventItem[] = [
     registerUrl: "/register?event=departmental-technical-events",
     accentColor: "emerald",
     badge: "MULTI-DEPARTMENT EXPO",
-    eventStatsTitle: "PREVIOUS EDITION PARTICIPATION",
-    eventStats: [
-      { id: "stat-1", value: 1500, suffix: "+", label: "PARTICIPANTS" },
-      { id: "stat-2", value: 250, suffix: "+", label: "TEAMS" },
-      { id: "stat-3", value: 14, suffix: "+", label: "OTHER STATES" },
-    ],
     highlights: [
       "6 Academic Department Streams",
       "40+ Specialized Technical Competitions",
@@ -415,12 +403,6 @@ export const eventsList: EventItem[] = [
     registerUrl: "/register?event=science-championship",
     accentColor: "purple",
     badge: "DISCOVERY ARENA",
-    eventStatsTitle: "PREVIOUS EDITION PARTICIPATION",
-    eventStats: [
-      { id: "stat-1", value: 800, suffix: "+", label: "PARTICIPANTS" },
-      { id: "stat-2", value: 120, suffix: "+", label: "TEAMS" },
-      { id: "stat-3", value: 10, suffix: "+", label: "OTHER STATES" },
-    ],
     highlights: [
       "2-Hour Innovation Challenge (Hackathon)",
       "Science Exhibition (Working Models & Prototypes)",
