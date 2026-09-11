@@ -129,14 +129,26 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
               <span className="text-sm leading-none">→</span>
             </Link>
 
-            {/* REGISTER BUTTON -> Opens Register Page */}
-            <Link
-              href={event.registerUrl}
-              className="py-3.5 px-6 rounded-xl font-semibold tracking-wider text-xs uppercase text-center border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/40 text-white transition-all duration-200 flex items-center justify-center space-x-2"
-            >
-              <span>REGISTER</span>
-              <span className="text-xs opacity-60">↗</span>
-            </Link>
+            {/* REGISTER BUTTON -> Opens Register Page or External Form */}
+            {event.registerUrl.startsWith("http") ? (
+              <a
+                href={event.registerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-3.5 px-6 rounded-xl font-semibold tracking-wider text-xs uppercase text-center border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/40 text-white transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer"
+              >
+                <span>REGISTER</span>
+                <span className="text-xs opacity-60">↗</span>
+              </a>
+            ) : (
+              <Link
+                href={event.registerUrl}
+                className="py-3.5 px-6 rounded-xl font-semibold tracking-wider text-xs uppercase text-center border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/40 text-white transition-all duration-200 flex items-center justify-center space-x-2"
+              >
+                <span>REGISTER</span>
+                <span className="text-xs opacity-60">↗</span>
+              </Link>
+            )}
           </div>
         </div>
       </div>

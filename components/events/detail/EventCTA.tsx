@@ -51,12 +51,23 @@ export const EventCTA: React.FC<EventCTAProps> = ({ event }) => {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center gap-4 font-mono w-full sm:w-auto">
-          <Link
-            href={event.registerUrl}
-            className={`w-full sm:w-auto py-4 px-10 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center text-white ${buttonGradient} hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300`}
-          >
-            <span>REGISTER FOR THIS EVENT →</span>
-          </Link>
+          {event.registerUrl.startsWith("http") ? (
+            <a
+              href={event.registerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`w-full sm:w-auto py-4 px-10 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center text-white ${buttonGradient} hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer`}
+            >
+              <span>REGISTER FOR THIS EVENT ↗</span>
+            </a>
+          ) : (
+            <Link
+              href={event.registerUrl}
+              className={`w-full sm:w-auto py-4 px-10 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center text-white ${buttonGradient} hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300`}
+            >
+              <span>REGISTER FOR THIS EVENT →</span>
+            </Link>
+          )}
 
           <Link
             href="/events"

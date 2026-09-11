@@ -163,21 +163,41 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-wrap items-center gap-4 font-mono"
         >
-          <Link
-            href={event.registerUrl}
-            className={`py-3.5 px-8 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center shadow-lg transition-all duration-300 flex items-center space-x-2 text-white hover:brightness-110 hover:-translate-y-0.5 ${
-              isCrimson
-                ? "bg-gradient-to-r from-red-600 to-red-500 shadow-[0_0_25px_rgba(239,68,68,0.4)]"
-                : isBlue
-                ? "bg-gradient-to-r from-sky-600 to-blue-600 shadow-[0_0_25px_rgba(56,189,248,0.4)]"
-                : isEmerald
-                ? "bg-gradient-to-r from-emerald-600 to-teal-600 shadow-[0_0_25px_rgba(16,185,129,0.4)]"
-                : "bg-gradient-to-r from-purple-600 to-indigo-600 shadow-[0_0_25px_rgba(168,85,247,0.4)]"
-            }`}
-          >
-            <span>REGISTER FOR THIS EVENT</span>
-            <span className="text-base leading-none">→</span>
-          </Link>
+          {event.registerUrl.startsWith("http") ? (
+            <a
+              href={event.registerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`py-3.5 px-8 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center shadow-lg transition-all duration-300 flex items-center space-x-2 text-white hover:brightness-110 hover:-translate-y-0.5 cursor-pointer ${
+                isCrimson
+                  ? "bg-gradient-to-r from-red-600 to-red-500 shadow-[0_0_25px_rgba(239,68,68,0.4)]"
+                  : isBlue
+                  ? "bg-gradient-to-r from-sky-600 to-blue-600 shadow-[0_0_25px_rgba(56,189,248,0.4)]"
+                  : isEmerald
+                  ? "bg-gradient-to-r from-emerald-600 to-teal-600 shadow-[0_0_25px_rgba(16,185,129,0.4)]"
+                  : "bg-gradient-to-r from-purple-600 to-indigo-600 shadow-[0_0_25px_rgba(168,85,247,0.4)]"
+              }`}
+            >
+              <span>REGISTER FOR THIS EVENT</span>
+              <span className="text-base leading-none">↗</span>
+            </a>
+          ) : (
+            <Link
+              href={event.registerUrl}
+              className={`py-3.5 px-8 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center shadow-lg transition-all duration-300 flex items-center space-x-2 text-white hover:brightness-110 hover:-translate-y-0.5 ${
+                isCrimson
+                  ? "bg-gradient-to-r from-red-600 to-red-500 shadow-[0_0_25px_rgba(239,68,68,0.4)]"
+                  : isBlue
+                  ? "bg-gradient-to-r from-sky-600 to-blue-600 shadow-[0_0_25px_rgba(56,189,248,0.4)]"
+                  : isEmerald
+                  ? "bg-gradient-to-r from-emerald-600 to-teal-600 shadow-[0_0_25px_rgba(16,185,129,0.4)]"
+                  : "bg-gradient-to-r from-purple-600 to-indigo-600 shadow-[0_0_25px_rgba(168,85,247,0.4)]"
+              }`}
+            >
+              <span>REGISTER FOR THIS EVENT</span>
+              <span className="text-base leading-none">→</span>
+            </Link>
+          )}
 
           <Link
             href="/schedule"

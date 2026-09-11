@@ -183,14 +183,14 @@ export const scheduleData: DaySchedule[] = [
         time: "11:00 AM",
         date: "07–08 OCTOBER 2026",
         title: "HACKNATION 2.0",
-        subtitle: "36-Hour Hackathon Kickoff",
-        description: "An intense 36-hour innovation-driven challenge where elite dev teams build, experiment, and turn bold ideas into working solutions.",
+        subtitle: "30-Hour Hackathon Kickoff",
+        description: "An intense 30-hour innovation-driven challenge where elite dev teams build, experiment, and turn bold ideas into working solutions.",
         venue: "HACKATHON ARENA - HALL A",
         category: "HACKATHON",
         duration: "11:00 AM – 01:00 PM (Sprint 1)",
         icon: "trophy",
         eventSlug: "hacknation-2",
-        registerUrl: "/register?event=hacknation-2",
+        registerUrl: "https://forms.gle/CvYpny3YC5dpdYby7",
         featured: true,
       },
       {
@@ -265,7 +265,7 @@ export const scheduleData: DaySchedule[] = [
   },
 
   // =========================================================================
-  // DAY 03: 36-HOUR HACKATHON CLIMAX & IDEATHON FINALS
+  // DAY 03: 30-HOUR HACKATHON CLIMAX & IDEATHON FINALS
   // =========================================================================
   {
     dayNumber: 3,
@@ -281,7 +281,7 @@ export const scheduleData: DaySchedule[] = [
         date: "08 OCTOBER 2026",
         title: "POWER BREAKFAST",
         subtitle: "Morning Sync & Sprint Review",
-        description: "Espresso bar, breakfast buffet, and mentor checkpoint as teams prepare for the final 4-hour countdown of the 36-hour hackathon.",
+        description: "Espresso bar, breakfast buffet, and mentor checkpoint as teams prepare for the final 4-hour countdown of the 30-hour hackathon.",
         venue: "FOOD PLAZA & ARENA",
         category: "BREAK",
         duration: "08:00 AM – 09:30 AM",
@@ -365,7 +365,7 @@ export const scheduleData: DaySchedule[] = [
         date: "08 OCTOBER 2026",
         title: "VALEDICTORY & AWARDS",
         subtitle: "Hacknation & Ideathon Champions",
-        description: "Celebration of 36-hour hackathon and ideathon winners, cash prize felicitation, and laser music show.",
+        description: "Celebration of 30-hour hackathon and ideathon winners, cash prize felicitation, and laser music show.",
         venue: "OPEN AIR THEATRE",
         category: "AWARDS",
         duration: "06:30 PM – 08:30 PM",

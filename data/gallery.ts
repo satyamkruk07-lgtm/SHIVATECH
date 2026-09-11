@@ -40,7 +40,7 @@ export const galleryData: GalleryItem[] = [
     event: "HACKNATION 2.0",
     date: "07–08 OCTOBER 2026",
     location: "HACKATHON ARENA",
-    description: "Developer teams collaborating and building next-generation software prototypes during the intense 36-hour hackathon.",
+    description: "Developer teams collaborating and building next-generation software prototypes during the intense 30-hour hackathon.",
     x: -360,
     y: -160,
     size: "md",
