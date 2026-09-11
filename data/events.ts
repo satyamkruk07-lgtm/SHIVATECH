@@ -20,6 +20,9 @@ export interface ScienceChallenge {
   description: string;
   format: string;
   icon: string;
+  teamSize?: string;
+  duration?: string;
+  highlights?: string[];
 }
 
 export interface EventItem {
@@ -400,6 +403,13 @@ export const eventsList: EventItem[] = [
           "High-speed 120-minute rapid prototyping and problem-solving hackathon. Teams design and deploy working software prototypes under extreme time pressure.",
         format: "120 Min Sprint • Team 2–4 • Live Evaluation",
         icon: "⚡",
+        duration: "120 Minutes (2 Hours)",
+        teamSize: "2–4 Members",
+        highlights: [
+          "Real-World Problem Statements",
+          "Rapid Working Software Deployment",
+          "Live Jury Code Review & Scoring",
+        ],
       },
       {
         id: "exhibition",
@@ -411,6 +421,13 @@ export const eventsList: EventItem[] = [
           "Showcase working scientific models, eco-tech apparatus, physics demonstrations, and research innovations judged by distinguished scientists and faculty panels.",
         format: "Exhibition Arena • Live Demos",
         icon: "🔬",
+        duration: "Full-Day Exhibition",
+        teamSize: "1–3 Members",
+        highlights: [
+          "Physical Working Models",
+          "Eco-Tech & Applied Science Innovations",
+          "Direct Defense to Visiting Scientist Panel",
+        ],
       },
       {
         id: "pitching",
@@ -422,6 +439,13 @@ export const eventsList: EventItem[] = [
           "Pitch groundbreaking scientific and technology startup concepts to a live panel of investor judges and mentors. Defend your technical feasibility and business vision.",
         format: "5m Pitch + 3m Q&A • Slide Deck",
         icon: "💡",
+        duration: "5m Pitch + 3m Q&A",
+        teamSize: "1–3 Members",
+        highlights: [
+          "Investor & Mentor Shark Tank Jury",
+          "Commercial Viability & Feasibility",
+          "Seed Mentorship & Incubation Opportunities",
+        ],
       },
       {
         id: "robotics",
@@ -433,6 +457,13 @@ export const eventsList: EventItem[] = [
           "An on-the-spot hardware engineering and robotics showdown. Assemble, wire, and calibrate your robotic machine in exactly 60 minutes, then navigate the obstacle arena.",
         format: "60-Min Build • Obstacle Arena",
         icon: "🤖",
+        duration: "60 Minutes (1 Hour)",
+        teamSize: "2–4 Members",
+        highlights: [
+          "On-The-Spot Hardware Assembly",
+          "Sensor Calibration & Wiring Under Clock",
+          "Rough-Terrain Obstacle Arena Run",
+        ],
       },
     ],
   },

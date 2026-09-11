@@ -12,6 +12,7 @@ function RegisterContent() {
   const eventParam = searchParams.get("event") || "hacknation-2-0";
   const competitionParam = searchParams.get("competition");
   const deptParam = searchParams.get("dept");
+  const trackParam = searchParams.get("track");
 
   const event = getEventBySlug(eventParam) || eventsList[0];
   const isHackathon = event.slug === "hacknation-2-0";
@@ -141,7 +142,8 @@ function RegisterContent() {
                 Select Competition Track
               </label>
               <select
-                defaultValue="all"
+                key={trackParam || "all"}
+                defaultValue={trackParam || "all"}
                 className="w-full px-4 py-3 rounded bg-[#070c1a] border border-purple-500/40 text-purple-200 focus:outline-none focus:border-purple-400 transition-colors"
               >
                 <option value="all" className="bg-[#070c1a] text-white">All Events / Full Championship</option>
