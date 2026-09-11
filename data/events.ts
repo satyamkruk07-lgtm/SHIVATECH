@@ -104,7 +104,7 @@ export const eventsList: EventItem[] = [
     eventStats: [
       { id: "stat-1", value: 500, suffix: "+", label: "PARTICIPANTS" },
       { id: "stat-2", value: 100, suffix: "+", label: "TEAMS" },
-      { id: "stat-3", value: 15, suffix: "+", label: "OTHER STATES" },
+      { id: "stat-3", value: 16, suffix: "+", label: "OTHER STATES" },
     ],
     highlights: [
       "30 Hours Continuous Development Sprint",
