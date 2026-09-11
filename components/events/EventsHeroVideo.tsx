@@ -33,16 +33,13 @@ export const EventsHeroVideo: React.FC = () => {
       {/* 2. SUBTLE GRADIENT BLEND (For seamless page integration) */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#02040a] via-transparent to-[#02040a]/40 pointer-events-none" />
 
-      {/* 3. SUBTLE SCROLL INDICATOR AT BOTTOM */}
+      {/* 3. SUBTLE SCROLL INDICATOR AT BOTTOM (Minimal icon only, zero text) */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.6 }}
-        className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center space-y-1.5 pointer-events-none select-none"
+        className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center pointer-events-none select-none"
       >
-        <span className="text-[9px] font-mono tracking-[0.3em] text-slate-400/80 uppercase">
-          SCROLL TO EXPLORE
-        </span>
         <div className="w-5 h-8 rounded-full border border-white/25 flex items-start justify-center p-1 bg-black/40 backdrop-blur-sm">
           <motion.div
             animate={{ y: [0, 8, 0] }}
