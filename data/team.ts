@@ -34,7 +34,7 @@ export const facultyCoordinators: TeamMember[] = [
   },
   {
     id: "shivali-pundir",
-    name: "Ms. Shivali Pundir",
+    name: "Mrs. Shivali Pundir",
     role: "Faculty Coordinator",
     category: "faculty",
     image: "/team/shivali.jpeg",
