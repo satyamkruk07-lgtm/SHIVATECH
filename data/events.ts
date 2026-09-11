@@ -34,6 +34,13 @@ export interface EventStatItem {
   label: string;
 }
 
+export interface ParticipatingState {
+  id: string;
+  description: string;
+  imageUrl: string;
+  imageHint: string;
+}
+
 export interface EventItem {
   id: string; // Slug & unique ID
   slug: string;
@@ -57,6 +64,8 @@ export interface EventItem {
   // Event-specific structured details from PDF
   tracks?: string[];
   tracksTitle?: string;
+  participatingStatesTitle?: string;
+  participatingStates?: ParticipatingState[];
   structure?: string[];
   structureTitle?: string;
   evaluation?: EvaluationParameter[];
@@ -122,6 +131,105 @@ export const eventsList: EventItem[] = [
       "Smart Healthcare",
       "AI or Cyber Security",
       "Open Theme",
+    ],
+    participatingStatesTitle: "Past Participating States",
+    participatingStates: [
+      {
+        id: "state-1",
+        description: "Uttarakhand",
+        imageUrl: "https://travelogyindia.b-cdn.net/storage/app/upload/mountains-of-uttarakhand.jpg",
+        imageHint: "uttarakhand mountains",
+      },
+      {
+        id: "state-2",
+        description: "Uttar Pradesh",
+        imageUrl: "https://cdn.pixabay.com/photo/2022/06/13/21/06/taj-mahal-7260693_1280.jpg",
+        imageHint: "taj mahal",
+      },
+      {
+        id: "state-3",
+        description: "Rajasthan",
+        imageUrl: "https://cdn.pixabay.com/photo/2021/04/06/11/22/hawa-mahal-6156123_1280.jpg",
+        imageHint: "hawa mahal",
+      },
+      {
+        id: "state-4",
+        description: "Delhi",
+        imageUrl: "https://cdn.pixabay.com/photo/2020/02/02/17/24/travel-4813658_1280.jpg",
+        imageHint: "delhi landmark",
+      },
+      {
+        id: "state-5",
+        description: "Madhya Pradesh",
+        imageUrl: "https://cdn.pixabay.com/photo/2023/05/14/13/28/sanchi-7992913_960_720.jpg",
+        imageHint: "sanchi stupa",
+      },
+      {
+        id: "state-6",
+        description: "Maharashtra",
+        imageUrl: "https://cdn.pixabay.com/photo/2014/07/11/23/03/gateway-of-india-390768_1280.jpg",
+        imageHint: "gateway india",
+      },
+      {
+        id: "state-7",
+        description: "Tamil Nadu",
+        imageUrl: "https://thearchitectsdiary.com/wp-content/uploads/2023/11/Gopuram-12-jpg.webp",
+        imageHint: "tamil temple",
+      },
+      {
+        id: "state-8",
+        description: "Kerala",
+        imageUrl: "https://img.freepik.com/premium-photo/boat-with-houseboat-water-palm-trees-background_979520-96612.jpg?w=2000",
+        imageHint: "kerala backwaters",
+      },
+      {
+        id: "state-9",
+        description: "Haryana",
+        imageUrl: "https://cdn.pixabay.com/photo/2024/03/05/09/25/ai-generated-8614213_640.png",
+        imageHint: "haryana fields",
+      },
+      {
+        id: "state-10",
+        description: "Bihar",
+        imageUrl: "https://img.freepik.com/premium-photo/mahabodhi-temple-bodhgaya_78361-2548.jpg?w=2000",
+        imageHint: "mahabodhi temple",
+      },
+      {
+        id: "state-11",
+        description: "Gujarat",
+        imageUrl: "https://img.freepik.com/premium-photo/somnath-temple-facade-gujarat-stock-photo_911060-52643.jpg",
+        imageHint: "somnath temple",
+      },
+      {
+        id: "state-12",
+        description: "Punjab",
+        imageUrl: "https://img.freepik.com/premium-photo/golden-temple-punjab-sacred-sikh-shrine-stunningly-gilded-offering-sanctuary-spiritual_921026-36768.jpg?w=2000",
+        imageHint: "golden temple",
+      },
+      {
+        id: "state-13",
+        description: "Andhra Pradesh",
+        imageUrl: "https://tse4.mm.bing.net/th/id/OIP._5V-2uNBkX6KNchbWTuVuQAAAA?rs=1&pid=ImgDetMain&o=7&rm=3",
+        imageHint: "andhra coast",
+      },
+      {
+        id: "state-14",
+        description: "Tripura",
+        imageUrl: "https://img.freepik.com/premium-psd/tribal-thatched-house-isolated-transparent-background_220739-124149.jpg",
+        imageHint: "tripura heritage",
+      },
+      {
+        id: "state-15",
+        description: "Chandigarh",
+        imageUrl: "https://th.bing.com/th/id/R.cda8423a0911aa7275f5bef8ed6e33a9?rik=UTRDNpSAk70fIA&riu=http%3a%2f%2fwww.chandigarhcity.com%2fwp-content%2fuploads%2fsites%2f1%2fnggallery%2fopen-hand-monument%2f2.jpg&ehk=h5agGaWjSSnKA0fAozjhTXqozmv8C6M4ck9SEt3ODVQ%3d&risl=&pid=ImgRaw&r=0",
+        imageHint: "chandigarh hand",
+      },
+      {
+        id: "state-16",
+        description: "Jammu and Kashmir",
+        imageUrl: "https://img.freepik.com/premium-photo/boats-lake-with-mountains-background_865967-232355.jpg",
+        imageHint: "kashmir lake",
+      },
     ],
     structureTitle: "Hackathon Execution Structure",
     structure: [

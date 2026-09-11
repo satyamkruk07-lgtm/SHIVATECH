@@ -12,6 +12,7 @@ import EventEvaluation from "@/components/events/detail/EventEvaluation";
 import EventDepartments from "@/components/events/detail/EventDepartments";
 import EventOpportunities from "@/components/events/detail/EventOpportunities";
 import EventScienceChallenges from "@/components/events/detail/EventScienceChallenges";
+import EventParticipatingStates from "@/components/events/detail/EventParticipatingStates";
 import EventCTA from "@/components/events/detail/EventCTA";
 
 interface PageProps {
@@ -72,6 +73,14 @@ export default async function EventDetailPage({ params }: PageProps) {
           tracks={event.tracks}
           accentColor={event.accentColor}
           badgeText={event.category}
+        />
+      )}
+
+      {/* 4.1 PAST PARTICIPATING STATES (Hacknation 2.0 - directly below Proposed Technology Tracks) */}
+      {event.participatingStates && event.participatingStates.length > 0 && (
+        <EventParticipatingStates
+          title={event.participatingStatesTitle || "Past Participating States"}
+          states={event.participatingStates}
         />
       )}
 
