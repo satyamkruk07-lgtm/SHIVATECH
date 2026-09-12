@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { eventsList, getEventBySlug } from "@/data/events";
 import EventHero from "@/components/events/detail/EventHero";
+import HackathonJourneyTimeline from "@/components/events/detail/HackathonJourneyTimeline";
 import EventOverview from "@/components/events/detail/EventOverview";
 import EventTracks from "@/components/events/detail/EventTracks";
 import EventTimeline from "@/components/events/detail/EventTimeline";
@@ -63,8 +64,17 @@ export default async function EventDetailPage({ params }: PageProps) {
       {/* 1. GLOBAL NAVBAR (With SHIVA INNOVEX brand) */}
       <Navbar />
 
-      {/* 2. CINEMATIC EVENT HERO */}
+      {/* 2. CINEMATIC EVENT HERO (Includes Hero, Audience Badge & Event Basic Information) */}
       <EventHero event={event} />
+
+      {/* 2.5 HACKATHON JOURNEY TIMELINE (New Premium Section for Next-Gen Hackathon 1.0) */}
+      {event.journeyMilestones && event.journeyMilestones.length > 0 && (
+        <HackathonJourneyTimeline
+          title={event.journeyTitle}
+          subtitle={event.journeySubtitle}
+          milestones={event.journeyMilestones}
+        />
+      )}
 
       {/* 3. EXECUTIVE OVERVIEW & OBJECTIVES */}
       <EventOverview event={event} />

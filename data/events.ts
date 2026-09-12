@@ -64,6 +64,18 @@ export interface SchoolHackathonCategory {
   problemStatements: SchoolHackathonProblemStatement[];
 }
 
+export interface JourneyMilestone {
+  number: string;
+  date: string;
+  dateFull: string;
+  label: string;
+  title: string;
+  description: string;
+  badge?: string;
+  accent: "cyan" | "blue" | "purple" | "crimson";
+  isGrandFinal?: boolean;
+}
+
 export interface EventItem {
   id: string; // Slug & unique ID
   slug: string;
@@ -99,6 +111,9 @@ export interface EventItem {
   schoolCategories?: SchoolHackathonCategory[];
   eventStatsTitle?: string;
   eventStats?: EventStatItem[];
+  journeyTitle?: string;
+  journeySubtitle?: string;
+  journeyMilestones?: JourneyMilestone[];
 }
 
 export const eventsList: EventItem[] = [
@@ -511,11 +526,68 @@ export const eventsList: EventItem[] = [
     name: "NEXT-GEN HACKATHON 1.0",
     targetAudienceNote: "Only for Class 9, 10, 11 & 12 School Students",
     category: "SCHOOL HACKATHON",
-    date: "10 OCTOBER 2026",
+    date: "14 SEPT – 10 OCT 2026 (FINAL: 10 OCT)",
     fullDateSchedule: [
-      "10 October 2026 (09:30 AM) — Check-in, Hardware Kit Handover & Lab Allotment",
-      "10 October 2026 (10:00 AM – 04:00 PM) — 6-Hour Intensive Innovation Hackathon & Hardware Build Sprint",
-      "10 October 2026 (04:15 PM) — Grand Jury Evaluation, Live Demos & School Trophy Awards Ceremony",
+      "14 September 2026 — Launch of Next-Gen Hackathon 1.0",
+      "15 September 2026 — Mentoring Starts for Registered Students",
+      "30 September 2026 — Registration Closes (Last Date)",
+      "30 September – 04 October 2026 — Mind Breaking Session with Mentors",
+      "10 October 2026 (10:00 AM – 04:00 PM) — Grand Final Round of Next-Gen Hackathon 1.0",
+    ],
+    journeyTitle: "THE HACKATHON JOURNEY",
+    journeySubtitle: "FROM LAUNCH TO THE GRAND FINAL",
+    journeyMilestones: [
+      {
+        number: "01",
+        date: "14 SEPT 2026",
+        dateFull: "14 SEPTEMBER 2026",
+        label: "LAUNCH",
+        title: "Launch of Next-Gen Hackathon 1.0",
+        description: "Launch of Next-Gen Hackathon 1.0",
+        badge: "PHASE 01 // KICKOFF",
+        accent: "cyan",
+      },
+      {
+        number: "02",
+        date: "15 SEPT 2026",
+        dateFull: "15 SEPTEMBER 2026",
+        label: "MENTORING STARTS",
+        title: "Mentoring Starts for Registered Students",
+        description: "Mentoring starts for registered students",
+        badge: "PHASE 02 // MENTORSHIP",
+        accent: "blue",
+      },
+      {
+        number: "03",
+        date: "30 SEPT 2026",
+        dateFull: "30 SEPTEMBER 2026",
+        label: "REGISTRATION CLOSES",
+        title: "Last Date of Registration",
+        description: "Last date of registration",
+        badge: "PHASE 03 // DEADLINE",
+        accent: "purple",
+      },
+      {
+        number: "04",
+        date: "30 SEPT – 04 OCT 2026",
+        dateFull: "30 SEPTEMBER – 04 OCTOBER 2026",
+        label: "MIND-BREAKING MENTOR SESSIONS",
+        title: "Mind Breaking Session with Mentors",
+        description: "Mind Breaking Session with Mentors",
+        badge: "PHASE 04 // SPRINT",
+        accent: "crimson",
+      },
+      {
+        number: "05",
+        date: "10 OCT 2026",
+        dateFull: "10 OCTOBER 2026",
+        label: "GRAND FINAL",
+        title: "Final Round of Next-Gen Hackathon 1.0",
+        description: "Final Round of Next-Gen Hackathon 1.0",
+        badge: "PHASE 05 // GRAND FINALE",
+        accent: "crimson",
+        isGrandFinal: true,
+      },
     ],
     duration: "6 Hours (10:00 AM – 04:00 PM)",
     venue: "C-Block Shivalik University",
