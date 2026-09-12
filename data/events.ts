@@ -118,7 +118,7 @@ export const eventsList: EventItem[] = [
       "8 October 2026 (05:00 PM) — Code Freeze, Prototype Demos, Grand Jury Evaluation & Awards Ceremony",
     ],
     duration: "30 Hours",
-    venue: "Main Computing Hub & Applied Innovation Labs",
+    venue: "C-Block Shivalik University",
     theme: "Code. Create. Collaborate. Solve.",
     tagline: "30-HOUR INTENSIVE TECHNOLOGY & PROTOTYPE DEVELOPMENT SPRINT",
     description:
@@ -310,12 +310,12 @@ export const eventsList: EventItem[] = [
     number: "02",
     name: "IDEATHON",
     category: "INNOVATION & ENTREPRENEURSHIP",
-    date: "07-08OCTOBER 2026",
+    date: "07–08 OCTOBER 2026",
     fullDateSchedule: [
       "6 October 2026 — Idea Presentations, Pitching Sessions, Expert Evaluation & Workshops",
     ],
     duration: "Full-Day Innovation Sprint",
-    venue: "Executive Conference Hall & CBII Innovation Suite",
+    venue: "Conference Room CBII",
     theme: "Innovate for a Better Tomorrow",
     tagline: "IDENTIFY REAL-WORLD PROBLEMS & DEVELOP INNOVATIVE SOLUTIONS",
     description:
@@ -393,7 +393,7 @@ export const eventsList: EventItem[] = [
       "8 October 2026 — Departmental Technical Events, Project Demonstrations & Challenges",
     ],
     duration: "Multi-Day Departmental Championships",
-    venue: "Academic Department Complexes & Engineering Arenas",
+    venue: "Respective Departments, Shivalik University",
     theme: "Engineering Excellence & Applied Practical Skills",
     tagline: "DEPARTMENT-WISE DEDICATED TECHNICAL COMPETITIONS",
     description:

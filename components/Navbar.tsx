@@ -14,6 +14,7 @@ const navLinks = [
   { name: "SCHEDULE", href: "/schedule" },
   { name: "GALLERY", href: "/gallery" },
   { name: "TEAM", href: "/team" },
+  { name: "CONTACT US", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -163,7 +164,7 @@ export default function Navbar() {
         </div>
 
         {/* CENTER: Desktop Navigation Items */}
-        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
+        <nav className="hidden md:flex items-center space-x-4 lg:space-x-7">
           {navLinks.map((link, idx) => {
             const isIndicatorActive = effectiveActiveIndex === idx;
             return (

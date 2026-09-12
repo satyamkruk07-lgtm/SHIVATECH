@@ -33,26 +33,6 @@ export const EventOverview: React.FC<EventOverviewProps> = ({ event }) => {
             <p className="text-xs sm:text-sm font-mono text-slate-400 tracking-wider">
               {event.tagline}
             </p>
-
-            {/* Schedule Breakdown Box if present */}
-            {event.fullDateSchedule && event.fullDateSchedule.length > 0 && (
-              <div className="pt-4 mt-4 border-t border-white/10 space-y-2">
-                <span className="text-[10px] font-mono tracking-[0.2em] text-slate-400 font-bold uppercase block mb-2">
-                  EVENT TIMELINE IN SHIVATECH 2026:
-                </span>
-                <div className="space-y-2">
-                  {event.fullDateSchedule.map((line, idx) => (
-                    <div
-                      key={idx}
-                      className="p-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-slate-300 flex items-start space-x-2"
-                    >
-                      <span className="text-red-400 font-bold shrink-0">▸</span>
-                      <span>{line}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </motion.div>
 
           {/* Right Column: Source Description & Key Purposes */}

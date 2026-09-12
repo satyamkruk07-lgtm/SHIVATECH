@@ -513,7 +513,7 @@ export const scheduleData: DaySchedule[] = [
         title: "NEXT-GEN HACKATHON 1.0",
         subtitle: "6-Hour School Innovation Hackathon (Class 9–12)",
         description: "6-Hour intensive innovation hackathon exclusively for Class 9–12 students (Team: 4–5 students + 1 faculty mentor ( Not Mandatory )). Hardware kits and lab equipment provided by the University.",
-        venue: "EXHIBITION HALL C & APPLIED LABS",
+        venue: "C-BLOCK SHIVALIK UNIVERSITY",
         category: "COMPETITION",
         duration: "10:00 AM – 04:00 PM",
         icon: "science",
