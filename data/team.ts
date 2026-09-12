@@ -263,7 +263,7 @@ export const studentCoordinators: TeamMember[] = [
     name: "Ayushi",
     role: "ACM MEMBER",
     category: "student",
-    image: "/team/ayushi.jpg",
+    image: "/team/ayushi-raj.jpg",
     description: "ACM Student Member",
     socials: {},
   },
