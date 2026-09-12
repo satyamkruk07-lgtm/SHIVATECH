@@ -81,12 +81,29 @@ export const TeamCarousel: React.FC = () => {
 
               {/* Photo Area */}
               <div className="relative w-full h-[62%] rounded-xl overflow-hidden bg-[#030612] border border-white/10">
-                <img
-                  src={currentMember.image}
-                  alt={currentMember.name}
-                  className="w-full h-full object-cover object-top brightness-95 contrast-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#080e22] via-transparent to-transparent opacity-80" />
+                {currentMember.image ? (
+                  <img
+                    src={currentMember.image}
+                    alt={currentMember.name}
+                    className="w-full h-full object-cover object-top brightness-95 contrast-105"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-[#080e22] to-[#030612] p-4">
+                    <div className="w-16 h-16 rounded-2xl bg-white/[0.04] border border-white/15 flex items-center justify-center text-slate-300">
+                      <span className="font-mono text-xl font-bold">
+                        {currentMember.name
+                          .split(" ")
+                          .filter(Boolean)
+                          .map((n) => n[0])
+                          .slice(0, 2)
+                          .join("")
+                          .toUpperCase()}
+                      </span>
+                    </div>
+                    <span className="mt-2 text-[10px] font-mono tracking-[0.2em] text-slate-400 uppercase">ACM MEMBER</span>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#080e22] via-transparent to-transparent opacity-80 pointer-events-none" />
                 <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-[#040814]/85 border border-white/20 text-[10px] font-mono text-cyan-400 font-bold">
                   0{currentIndex + 1} / 0{total}
                 </div>

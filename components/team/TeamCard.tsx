@@ -45,17 +45,38 @@ export const TeamCard: React.FC<TeamCardProps> = ({
 
       {/* 2. Top: Portrait Photo */}
       <div className="relative w-full aspect-[4/5] sm:h-72 rounded-xl overflow-hidden bg-[#030612] border border-white/10 group-hover:border-white/20 transition-colors duration-300">
-        <Image
-          src={member.image}
-          alt={member.name}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          priority
-          className="object-cover object-top transition-transform duration-500 group-hover:scale-105 brightness-95 contrast-105"
-        />
+        {member.image ? (
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            priority={false}
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-105 brightness-95 contrast-105"
+          />
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-[#080e22] via-[#040817] to-[#02050e] relative overflow-hidden p-4 select-none">
+            {/* Ambient Tech Grid Texture */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:1.25rem_1.25rem] pointer-events-none" />
+            <div className="relative z-10 w-20 h-20 rounded-2xl bg-white/[0.04] border border-white/15 flex items-center justify-center text-slate-300 group-hover:border-red-500/50 group-hover:text-red-400 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.25)] transition-all">
+              <span className="font-mono text-2xl font-black tracking-wider">
+                {member.name
+                  .split(" ")
+                  .filter(Boolean)
+                  .map((n) => n[0])
+                  .slice(0, 2)
+                  .join("")
+                  .toUpperCase()}
+              </span>
+            </div>
+            <span className="relative z-10 mt-3 text-[10px] font-mono tracking-[0.25em] uppercase text-slate-400 font-bold text-center">
+              ACM MEMBER
+            </span>
+          </div>
+        )}
 
         {/* Subtle Gradient Vignette at bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#080e22] via-[#080e22]/20 to-transparent opacity-85 group-hover:opacity-60 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080e22] via-[#080e22]/20 to-transparent opacity-85 group-hover:opacity-60 transition-opacity duration-300 pointer-events-none" />
 
         {/* Category Badge on top-right (Only for Faculty Coordinators) */}
         {isFaculty && (
