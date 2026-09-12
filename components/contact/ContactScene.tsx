@@ -36,7 +36,7 @@ interface ContactMember {
 const contactMembers: ContactMember[] = [
   {
     name: "Kshitij Jain",
-    role: "ACM Faculty Coordinator",
+    role: "ACM Faculty Head & Incubation Manager",
     category: "faculty",
     badge: "FACULTY COORDINATOR",
     badgeColor: "purple",

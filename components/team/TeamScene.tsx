@@ -72,8 +72,8 @@ export default function TeamScene() {
           <div className="h-[2px] w-28 bg-gradient-to-r from-amber-400 to-transparent mt-2" />
         </div>
 
-        {/* 3 Faculty Cards in balanced 3-column layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+        {/* 4 Faculty Cards in balanced 4-column layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-7xl mx-auto">
           {facultyCoordinators.map((member) => (
             <TeamCard key={member.id} member={member} isFaculty={true} />
           ))}

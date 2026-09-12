@@ -15,9 +15,18 @@ export interface TeamMember {
 
 export const facultyCoordinators: TeamMember[] = [
   {
+    id: "ajay-kumar-verma",
+    name: "Mr. Ajay Kumar Verma",
+    role: "Associate Dean at the Center of Business Incubation and Innovations (CBII)",
+    category: "faculty",
+    image: "/team/ajay-kumar-verma.jpg",
+    description: "Associate Dean, CBII",
+    socials: {},
+  },
+  {
     id: "kshitij-jain",
     name: "Er. Kshitij Jain",
-    role: "ACM Faculty Coordinator",
+    role: "ACM Faculty Head & Incubation Manager",
     category: "faculty",
     image: "/team/kshitij-jain.jpeg",
     description: "Faculty Mentor & Advisor",
