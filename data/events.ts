@@ -518,7 +518,7 @@ export const eventsList: EventItem[] = [
       "10 October 2026 (04:15 PM) — Grand Jury Evaluation, Live Demos & School Trophy Awards Ceremony",
     ],
     duration: "6 Hours (10:00 AM – 04:00 PM)",
-    venue: "Main Computing Hub, Applied Innovation Labs & Exhibition Hall C",
+    venue: "C-Block Shivalik University",
     theme: "Young Innovators for a Better Tomorrow",
     tagline: "EXCLUSIVE 6-HOUR SCHOOL HACKATHON FOR BUDDING STUDENT CREATORS",
     description:
