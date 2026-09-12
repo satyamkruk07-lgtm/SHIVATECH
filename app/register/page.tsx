@@ -109,6 +109,27 @@ function RegisterContent() {
           </div>
         )}
 
+        {/* Next-Gen Hackathon 1.0 Official Google Form Direct Link Box */}
+        {(event.slug === "next-gen-hackathon" || event.slug === "science-championship") && (
+          <div className="p-4 mb-6 rounded-xl bg-purple-950/40 border border-purple-500/40">
+            <span className="text-[10px] text-purple-400 font-bold uppercase tracking-widest block mb-1">
+              OFFICIAL NEXT-GEN HACKATHON 1.0 REGISTRATION FORM
+            </span>
+            <p className="text-xs text-slate-300 font-sans mb-3 leading-relaxed">
+              NEXT-GEN HACKATHON 1.0 registrations for Class 9, 10, 11 & 12 students are being officially recorded via Google Forms.
+            </p>
+            <a
+              href="https://forms.gle/thqCVXNKctqwujBy9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs tracking-wider shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all cursor-pointer"
+            >
+              <span>OPEN GOOGLE FORM (NEXT-GEN 1.0)</span>
+              <span>↗</span>
+            </a>
+          </div>
+        )}
+
         <p className="text-sm text-white/70 leading-relaxed mb-6 font-sans">
           {event.description}
         </p>

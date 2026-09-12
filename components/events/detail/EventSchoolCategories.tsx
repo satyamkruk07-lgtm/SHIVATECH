@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   SchoolHackathonCategory,
@@ -139,7 +138,7 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
               </div>
               <div className="bg-black/60 px-3.5 py-2 rounded-xl border border-white/15 flex items-center space-x-2 shadow-inner">
                 <span className="text-purple-400">👥 TEAM FORMAT:</span>
-                <span className="text-white">4–5 STUDENTS + 1 FACULTY MENTOR</span>
+                <span className="text-white">4–5 STUDENTS + 1 FACULTY MENTOR ( NOT MANDATORY )</span>
               </div>
             </div>
           </div>
@@ -168,10 +167,6 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
         {/* Problem Statements Grid (4 Cards per Category) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
           {currentCategory.problemStatements.map((ps, psIdx) => {
-            const registerLink = `/register?event=next-gen-hackathon&category=${encodeURIComponent(
-              currentCategory.gradeBadge
-            )}&ps=${encodeURIComponent(ps.title)}`;
-
             return (
               <motion.div
                 key={ps.id}
@@ -254,23 +249,15 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
                       setSelectedPS(ps);
                       setActiveCategory(currentCategory);
                     }}
-                    className="text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-white flex items-center space-x-1.5 transition-colors py-2"
-                  >
-                    <span>DETAILS & SPECS</span>
-                    <span className="text-sm">👁</span>
-                  </button>
-
-                  <Link
-                    href={registerLink}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md flex items-center space-x-1.5 ${
+                    className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md flex items-center justify-center space-x-2 cursor-pointer ${
                       isEmerald
-                        ? "bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/25"
-                        : "bg-purple-600 hover:bg-purple-500 shadow-purple-600/25"
+                        ? "bg-emerald-600/30 hover:bg-emerald-600 border border-emerald-500/40 hover:border-emerald-400"
+                        : "bg-purple-600/30 hover:bg-purple-600 border border-purple-500/40 hover:border-purple-400"
                     }`}
                   >
-                    <span>REGISTER</span>
-                    <span>→</span>
-                  </Link>
+                    <span>VIEW PROBLEM STATEMENT & DETAILS</span>
+                    <span className="text-sm">👁</span>
+                  </button>
                 </div>
               </motion.div>
             );
@@ -415,7 +402,7 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
                   </div>
                   <div className="p-3 rounded-xl bg-black/40 border border-white/10">
                     <span className="text-[10px] text-purple-400 font-bold block uppercase">👥 TEAM FORMAT</span>
-                    <span className="text-white font-bold">4–5 Students + 1 Mentor</span>
+                    <span className="text-white font-bold text-[11px]">4–5 Students + 1 Mentor ( Not Mandatory )</span>
                   </div>
                   <div className="p-3 rounded-xl bg-black/40 border border-amber-400/30 bg-amber-500/10">
                     <span className="text-[10px] text-amber-300 font-bold block uppercase">🛠️ HARDWARE</span>
@@ -450,23 +437,13 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
               </div>
 
               {/* Modal Actions */}
-              <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center gap-3">
-                <Link
-                  href={`/register?event=next-gen-hackathon&category=${encodeURIComponent(
-                    activeCategory.gradeBadge
-                  )}&ps=${encodeURIComponent(selectedPS.title)}`}
-                  className="w-full sm:flex-1 py-3.5 px-6 rounded-xl font-bold tracking-widest text-xs uppercase text-center text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 shadow-[0_0_25px_rgba(168,85,247,0.35)] hover:brightness-110 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer flex items-center justify-center space-x-2"
-                >
-                  <span>REGISTER FOR THIS PROBLEM STATEMENT</span>
-                  <span className="text-sm">→</span>
-                </Link>
-
+              <div className="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setSelectedPS(null)}
-                  className="w-full sm:w-auto py-3.5 px-6 rounded-xl font-bold tracking-wider text-xs uppercase border border-white/20 hover:bg-white/10 text-slate-300 transition-colors cursor-pointer"
+                  className="w-full sm:w-auto py-3 px-8 rounded-xl font-bold tracking-wider text-xs uppercase border border-white/20 bg-white/5 hover:bg-white/10 text-white transition-colors cursor-pointer"
                 >
-                  CLOSE
+                  CLOSE BRIEFING ✕
                 </button>
               </div>
             </motion.div>
