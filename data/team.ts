@@ -21,7 +21,9 @@ export const facultyCoordinators: TeamMember[] = [
     category: "faculty",
     image: "/team/kshitij-jain.jpeg",
     description: "Faculty Mentor & Advisor",
-    socials: {},
+    socials: {
+      email: "kshitij.jain@shivalikcollege.edu.in",
+    },
   },
   {
     id: "santosh-joshi",
@@ -51,7 +53,9 @@ export const studentCoordinators: TeamMember[] = [
     category: "student",
     image: "/team/rifat.jpeg",
     description: "Overall Festival Lead & Strategy",
-    socials: {},
+    socials: {
+      email: "rifat.parvez@shivalikcollege.edu.in",
+    },
   },
   {
     id: "shivam-kumar",
@@ -60,7 +64,9 @@ export const studentCoordinators: TeamMember[] = [
     category: "student",
     image: "/team/shivam.jpeg",
     description: "Operations & Team Management",
-    socials: {},
+    socials: {
+      email: "shivamm9693kr@gmail.com",
+    },
   },
   {
     id: "aman-bhardwaj",
@@ -87,7 +93,9 @@ export const studentCoordinators: TeamMember[] = [
     category: "student",
     image: "/team/kumar-satyam.jpeg",
     description: "Visual Identity & Creative Lead",
-    socials: {},
+    socials: {
+      email: "satyamkruk07@gmail.com",
+    },
   },
   {
     id: "himanshu-kumar",

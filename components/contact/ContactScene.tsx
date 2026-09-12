@@ -32,14 +32,14 @@ interface ContactMember {
 
 const contactMembers: ContactMember[] = [
   {
-    name: "Mrs. Shivali Pundir",
-    role: "Faculty Coordinator",
+    name: "Kshitij Jain",
+    role: "ACM Faculty Coordinator",
     category: "faculty",
     badge: "FACULTY COORDINATOR",
     badgeColor: "purple",
-    image: "/team/shivali.jpeg",
-    email: "shivali.pundir@shivalikcollege.edu.in",
-    phone: "+91 94105 52820",
+    image: "/team/kshitij-jain.jpeg",
+    email: "kshitij.jain@shivalikcollege.edu.in",
+    phone: "+91 83750 52135",
   },
   {
     name: "Rifat Parvez",
@@ -49,7 +49,7 @@ const contactMembers: ContactMember[] = [
     badgeColor: "crimson",
     image: "/team/rifat.jpeg",
     email: "rifat.parvez@shivalikcollege.edu.in",
-    phone: "+91 79038 96570",
+    phone: "+91 91051 33069",
   },
   {
     name: "Shivam Kumar",
@@ -58,8 +58,8 @@ const contactMembers: ContactMember[] = [
     badge: "VICE CHAIRPERSON",
     badgeColor: "sky",
     image: "/team/shivam.jpeg",
-    email: "shivam.kumar@shivalikcollege.edu.in",
-    phone: "+91 91428 14068",
+    email: "shivamm9693kr@gmail.com",
+    phone: "+91 96935 61946",
   },
   {
     name: "Kumar Satyam",
@@ -69,7 +69,7 @@ const contactMembers: ContactMember[] = [
     badgeColor: "amber",
     image: "/team/kumar-satyam.jpeg",
     email: "satyamkruk07@gmail.com",
-    phone: "+91 93043 14751",
+    phone: "+91 70605 50243",
   },
 ];
 
