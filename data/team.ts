@@ -91,7 +91,7 @@ export const studentCoordinators: TeamMember[] = [
     name: "Kumar Satyam",
     role: "Graphic Head",
     category: "student",
-    image: "/team/kumar-satyam.jpeg",
+    image: "/team/kumar-satyam-2026.jpg",
     description: "Visual Identity & Creative Lead",
     socials: {
       email: "satyamkruk07@gmail.com",
