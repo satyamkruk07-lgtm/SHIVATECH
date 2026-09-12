@@ -159,7 +159,7 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
               </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-200 font-sans leading-relaxed">
-              Apna project banane ke liye zaroori <strong className="text-white font-semibold">hardware components, microcontrollers (Arduino/ESP), sensor modules, breadboards, testing apparatus, aur university innovation labs</strong> aapko campus par hi provide kiye jayenge taaki aap aasani se apna prototype build kar sakein!
+              To support student innovators in bringing their ideas to life, all essential <strong className="text-white font-semibold">hardware components, microcontrollers (Arduino / ESP32), sensor modules, breadboards, and testing apparatus</strong> will be provided on-campus by the University, alongside guided access to advanced innovation labs for seamless prototype development.
             </p>
           </div>
         </div>
