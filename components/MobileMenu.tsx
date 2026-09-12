@@ -28,7 +28,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
         type="button"
         aria-label="Toggle navigation menu"
         aria-expanded={isOpen}
-        className="md:hidden z-50 p-2 text-white/90 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-lg transition-colors"
+        className="lg:hidden z-50 p-2 text-white/90 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-lg transition-colors"
         onClick={onToggle}
       >
         {isOpen ? <X size={26} className="text-red-400" /> : <Menu size={26} />}
@@ -42,7 +42,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 top-0 left-0 w-full h-screen bg-[#040814]/95 backdrop-blur-2xl z-40 flex flex-col items-center justify-center p-6 space-y-6 md:hidden overflow-y-auto"
+            className="fixed inset-0 top-0 left-0 w-full h-screen bg-[#040814]/95 backdrop-blur-2xl z-40 flex flex-col items-center justify-center p-6 space-y-6 lg:hidden overflow-y-auto"
           >
             {/* Background Neon Accent Glow */}
             <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-64 h-64 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />

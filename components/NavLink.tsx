@@ -27,7 +27,7 @@ export const NavLink: React.FC<NavLinkProps> = ({
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
       onClick={onClick}
-      className={`group relative text-sm lg:text-base font-mono font-bold tracking-[0.22em] uppercase py-2 px-2.5 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-md ${
+      className={`group relative text-xs lg:text-[13px] xl:text-sm font-mono font-bold tracking-[0.10em] lg:tracking-[0.14em] uppercase py-1.5 px-1.5 lg:px-2 xl:px-2.5 whitespace-nowrap transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-md ${
         isActive
           ? "text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.9)]"
           : "text-white/80 hover:text-white hover:drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]"
@@ -47,7 +47,7 @@ export const NavLink: React.FC<NavLinkProps> = ({
           {/* Web Connection Detail */}
           <div className="w-[1.5px] h-2 bg-cyan-400 opacity-90" />
           {/* Glowing Red Line */}
-          <div className="w-full min-w-[34px] h-[3px] rounded-full bg-gradient-to-r from-red-500 via-white to-blue-500 shadow-[0_0_12px_#ef4444,0_0_8px_#3b82f6]" />
+          <div className="w-full min-w-[26px] h-[3px] rounded-full bg-gradient-to-r from-red-500 via-white to-blue-500 shadow-[0_0_12px_#ef4444,0_0_8px_#3b82f6]" />
         </motion.div>
       )}
 
