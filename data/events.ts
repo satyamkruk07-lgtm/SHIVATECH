@@ -310,7 +310,7 @@ export const eventsList: EventItem[] = [
     number: "02",
     name: "IDEATHON",
     category: "INNOVATION & ENTREPRENEURSHIP",
-    date: "07 OCTOBER 2026",
+    date: "07-08OCTOBER 2026",
     fullDateSchedule: [
       "6 October 2026 — Idea Presentations, Pitching Sessions, Expert Evaluation & Workshops",
     ],
