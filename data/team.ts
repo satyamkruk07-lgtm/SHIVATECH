@@ -54,7 +54,7 @@ export const studentCoordinators: TeamMember[] = [
     image: "/team/rifat.jpeg",
     description: "Overall Festival Lead & Strategy",
     socials: {
-      email: "rifat.parvez@shivalikcollege.edu.in",
+      email: "rifatparvez04@gmail.com",
     },
   },
   {

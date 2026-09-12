@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -15,6 +14,10 @@ import {
   GraduationCap,
   Users,
   Navigation,
+  Crown,
+  Award,
+  Palette,
+  Sparkles,
   ExternalLink,
 } from "lucide-react";
 import Footer from "@/components/Footer";
@@ -25,7 +28,7 @@ interface ContactMember {
   category: "faculty" | "student";
   badge: string;
   badgeColor: "purple" | "crimson" | "sky" | "amber";
-  image: string;
+  iconType: "faculty" | "chairperson" | "vice" | "design";
   email: string;
   phone: string;
 }
@@ -37,7 +40,7 @@ const contactMembers: ContactMember[] = [
     category: "faculty",
     badge: "FACULTY COORDINATOR",
     badgeColor: "purple",
-    image: "/team/kshitij-jain.jpeg",
+    iconType: "faculty",
     email: "kshitij.jain@shivalikcollege.edu.in",
     phone: "+91 83750 52135",
   },
@@ -47,8 +50,8 @@ const contactMembers: ContactMember[] = [
     category: "student",
     badge: "CHAIRPERSON",
     badgeColor: "crimson",
-    image: "/team/rifat.jpeg",
-    email: "rifat.parvez@shivalikcollege.edu.in",
+    iconType: "chairperson",
+    email: "rifatparvez04@gmail.com",
     phone: "+91 91051 33069",
   },
   {
@@ -57,7 +60,7 @@ const contactMembers: ContactMember[] = [
     category: "student",
     badge: "VICE CHAIRPERSON",
     badgeColor: "sky",
-    image: "/team/shivam.jpeg",
+    iconType: "vice",
     email: "shivamm9693kr@gmail.com",
     phone: "+91 96935 61946",
   },
@@ -67,7 +70,7 @@ const contactMembers: ContactMember[] = [
     category: "student",
     badge: "GRAPHIC HEAD ACM",
     badgeColor: "amber",
-    image: "/team/kumar-satyam.jpeg",
+    iconType: "design",
     email: "satyamkruk07@gmail.com",
     phone: "+91 70605 50243",
   },
@@ -80,6 +83,19 @@ export default function ContactScene() {
     navigator.clipboard.writeText(text);
     setCopiedKey(key);
     setTimeout(() => setCopiedKey(null), 2000);
+  };
+
+  const renderIcon = (type: ContactMember["iconType"]) => {
+    switch (type) {
+      case "faculty":
+        return <GraduationCap className="w-5 h-5 text-purple-400" />;
+      case "chairperson":
+        return <Crown className="w-5 h-5 text-red-400" />;
+      case "vice":
+        return <Users className="w-5 h-5 text-sky-400" />;
+      case "design":
+        return <Palette className="w-5 h-5 text-amber-400" />;
+    }
   };
 
   return (
@@ -149,7 +165,7 @@ export default function ContactScene() {
             </div>
           </div>
 
-          {/* 4 Cards Grid */}
+          {/* 4 Cards Grid without Photos */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactMembers.map((member, idx) => {
               const emailKey = `email-${idx}`;
@@ -164,14 +180,23 @@ export default function ContactScene() {
                   ? "bg-sky-500/15 border-sky-500/40 text-sky-300 shadow-[0_0_15px_rgba(56,189,248,0.25)]"
                   : "bg-amber-500/15 border-amber-500/40 text-amber-300 shadow-[0_0_15px_rgba(251,191,36,0.25)]";
 
-              const borderHover =
+              const borderTopColor =
                 member.badgeColor === "purple"
-                  ? "hover:border-purple-500/60 hover:shadow-[0_0_35px_rgba(168,85,247,0.25)]"
+                  ? "border-t-purple-500/80 hover:border-purple-500/60 hover:shadow-[0_0_35px_rgba(168,85,247,0.25)]"
                   : member.badgeColor === "crimson"
-                  ? "hover:border-red-500/60 hover:shadow-[0_0_35px_rgba(239,68,68,0.25)]"
+                  ? "border-t-red-500/80 hover:border-red-500/60 hover:shadow-[0_0_35px_rgba(239,68,68,0.25)]"
                   : member.badgeColor === "sky"
-                  ? "hover:border-sky-500/60 hover:shadow-[0_0_35px_rgba(56,189,248,0.25)]"
-                  : "hover:border-amber-500/60 hover:shadow-[0_0_35px_rgba(251,191,36,0.25)]";
+                  ? "border-t-sky-500/80 hover:border-sky-500/60 hover:shadow-[0_0_35px_rgba(56,189,248,0.25)]"
+                  : "border-t-amber-500/80 hover:border-amber-500/60 hover:shadow-[0_0_35px_rgba(251,191,36,0.25)]";
+
+              const iconBg =
+                member.badgeColor === "purple"
+                  ? "bg-purple-500/15 border-purple-500/30"
+                  : member.badgeColor === "crimson"
+                  ? "bg-red-500/15 border-red-500/30"
+                  : member.badgeColor === "sky"
+                  ? "bg-sky-500/15 border-sky-500/30"
+                  : "bg-amber-500/15 border-amber-500/30";
 
               return (
                 <motion.div
@@ -179,22 +204,16 @@ export default function ContactScene() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: idx * 0.1 }}
-                  className={`p-6 rounded-3xl bg-[#040814]/85 border border-white/15 backdrop-blur-xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden ${borderHover}`}
+                  className={`p-6 sm:p-7 rounded-3xl bg-[#040814]/85 border border-white/15 border-t-[3px] backdrop-blur-xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden ${borderTopColor}`}
                 >
-                  {/* Top Subtle Tech Accents */}
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-white/[0.02] rounded-bl-full pointer-events-none" />
+                  {/* Subtle Tech Accents */}
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-white/[0.02] rounded-bl-full pointer-events-none" />
 
                   <div>
-                    {/* Member Photo & Category Tag */}
-                    <div className="flex items-start justify-between gap-3 mb-5">
-                      <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-2xl overflow-hidden border-2 border-white/20 group-hover:border-white/40 transition-colors shadow-lg shrink-0">
-                        <Image
-                          src={member.image}
-                          alt={member.name}
-                          fill
-                          sizes="96px"
-                          className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                        />
+                    {/* Card Header: Role Icon & Category Badge */}
+                    <div className="flex items-center justify-between gap-3 mb-5">
+                      <div className={`w-11 h-11 rounded-2xl flex items-center justify-center border ${iconBg} shadow-inner group-hover:scale-110 transition-transform`}>
+                        {renderIcon(member.iconType)}
                       </div>
 
                       <span
@@ -204,15 +223,15 @@ export default function ContactScene() {
                       </span>
                     </div>
 
-                    {/* Designation Badge */}
-                    <div className="mb-2">
+                    {/* Role / Designation */}
+                    <div className="mb-1.5">
                       <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest block">
                         {member.role}
                       </span>
                     </div>
 
                     {/* Member Name */}
-                    <h3 className="text-lg sm:text-xl font-black font-mono tracking-wide text-white uppercase group-hover:text-red-400 transition-colors mb-5 leading-snug">
+                    <h3 className="text-xl sm:text-2xl font-black font-mono tracking-wide text-white uppercase group-hover:text-red-400 transition-colors mb-5 leading-tight">
                       {member.name}
                     </h3>
 
@@ -222,8 +241,8 @@ export default function ContactScene() {
                     {/* Contact Details List */}
                     <div className="space-y-3.5 text-xs font-mono">
                       {/* Email Address */}
-                      <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col">
-                        <div className="flex items-center justify-between text-[10px] text-slate-400 uppercase tracking-wider mb-1">
+                      <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col">
+                        <div className="flex items-center justify-between text-[10px] text-slate-400 uppercase tracking-wider mb-1.5">
                           <span className="flex items-center space-x-1.5">
                             <Mail className="w-3 h-3 text-red-400" />
                             <span>EMAIL ID</span>
@@ -247,15 +266,15 @@ export default function ContactScene() {
                         </div>
                         <a
                           href={`mailto:${member.email}`}
-                          className="text-slate-200 hover:text-white font-semibold break-all transition-colors underline-offset-2 hover:underline"
+                          className="text-slate-200 hover:text-white font-semibold break-all transition-colors underline-offset-2 hover:underline text-[11px] sm:text-xs"
                         >
                           {member.email}
                         </a>
                       </div>
 
                       {/* Contact Number */}
-                      <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col">
-                        <div className="flex items-center justify-between text-[10px] text-slate-400 uppercase tracking-wider mb-1">
+                      <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col">
+                        <div className="flex items-center justify-between text-[10px] text-slate-400 uppercase tracking-wider mb-1.5">
                           <span className="flex items-center space-x-1.5">
                             <Phone className="w-3 h-3 text-sky-400" />
                             <span>PHONE / WHATSAPP</span>
@@ -279,7 +298,7 @@ export default function ContactScene() {
                         </div>
                         <a
                           href={`tel:${member.phone.replace(/\s+/g, "")}`}
-                          className="text-slate-200 hover:text-emerald-400 font-bold tracking-wider transition-colors"
+                          className="text-slate-200 hover:text-emerald-400 font-bold tracking-wider transition-colors text-xs sm:text-sm"
                         >
                           {member.phone}
                         </a>
@@ -311,7 +330,7 @@ export default function ContactScene() {
         </section>
 
         {/* =================================================================== */}
-        {/* SECTION 2: LOCATION & TRANSIT SECTION (AS DESIGNED)                 */}
+        {/* SECTION 2: LOCATION & TRANSIT SECTION                               */}
         {/* =================================================================== */}
         <section className="mb-20 font-mono">
           <div className="flex items-center space-x-3 mb-8">
