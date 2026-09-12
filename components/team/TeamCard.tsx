@@ -131,9 +131,9 @@ export const TeamCard: React.FC<TeamCardProps> = ({
             )}
             {member.socials.email && (
               <a
-                href={member.socials.email}
-                className="hover:text-red-400 transition-colors"
-                title="Email"
+                href={`mailto:${member.socials.email}`}
+                className="hover:text-red-400 hover:scale-110 active:scale-95 transition-all"
+                title={`Send email to ${member.name} (${member.socials.email})`}
                 onClick={(e) => e.stopPropagation()}
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
