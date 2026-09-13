@@ -375,6 +375,15 @@ export const studentCoordinators: TeamMember[] = [
     description: "ACM Student Member",
     socials: {},
   },
+  {
+    id: "aman-gupta",
+    name: "Aman Gupta",
+    role: "ACM MEMBER",
+    category: "student",
+    image: "/team/aman-gupta.jpeg",
+    description: "ACM Student Member",
+    socials: {},
+  },
 ];
 
 export const teamData: TeamMember[] = [
