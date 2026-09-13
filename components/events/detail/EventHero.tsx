@@ -278,7 +278,16 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           transition={{ duration: 0.5, delay: 0.32 }}
           className="flex flex-wrap items-center gap-4 font-mono"
         >
-          {event.registerUrl.startsWith("http") ? (
+          {!event.isRegistrationOpen ? (
+            <Link
+              href={`/register?event=${event.slug}`}
+              className="py-3.5 px-8 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center shadow-lg transition-all duration-300 flex items-center space-x-2 text-amber-300 border border-amber-400/50 bg-amber-500/15 shadow-[0_0_25px_rgba(245,158,11,0.25)] hover:brightness-110 hover:-translate-y-0.5"
+            >
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+              <span>REGISTRATION OPENING SOON</span>
+              <span className="text-base leading-none">→</span>
+            </Link>
+          ) : event.registerUrl.startsWith("http") ? (
             <a
               href={event.registerUrl}
               target="_blank"

@@ -93,6 +93,8 @@ export interface EventItem {
   prize?: string;
   teamSize?: string;
   registerUrl: string;
+  isRegistrationOpen?: boolean;
+  registrationNotice?: string;
   accentColor: "crimson" | "blue" | "emerald" | "purple";
   badge?: string;
   highlights: string[];
@@ -147,6 +149,7 @@ export const eventsList: EventItem[] = [
     prize: "Up to ₹2,00,000",
     teamSize: "4–6 Members",
     registerUrl: "https://forms.gle/CvYpny3YC5dpdYby7",
+    isRegistrationOpen: true,
     accentColor: "crimson",
     badge: "FLAGSHIP HACKATHON",
     eventStatsTitle: "Previously Participants",
@@ -344,6 +347,8 @@ export const eventsList: EventItem[] = [
     prize: "₹30,000+",
     teamSize: "2–4 Members",
     registerUrl: "/register?event=ideathon",
+    isRegistrationOpen: false,
+    registrationNotice: "Registration is opening soon",
     accentColor: "blue",
     badge: "INCUBATION PIPELINE",
     highlights: [
@@ -422,6 +427,8 @@ export const eventsList: EventItem[] = [
     prize: "₹50,000+",
     teamSize: "Individual & Teams",
     registerUrl: "/register?event=departmental-technical-events",
+    isRegistrationOpen: false,
+    registrationNotice: "Registration is opening soon",
     accentColor: "emerald",
     badge: "MULTI-DEPARTMENT EXPO",
     highlights: [
@@ -605,6 +612,7 @@ export const eventsList: EventItem[] = [
     prize: "₹25,000+ & School Trophies",
     teamSize: "4–5 Students + 1 Faculty Mentor ( Not Mandatory )",
     registerUrl: "https://forms.gle/thqCVXNKctqwujBy9",
+    isRegistrationOpen: true,
     accentColor: "purple",
     badge: "SCHOOL EXCLUSIVE",
     highlights: [

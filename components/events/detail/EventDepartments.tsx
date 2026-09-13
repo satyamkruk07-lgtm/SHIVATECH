@@ -179,10 +179,10 @@ export const EventDepartments: React.FC<EventDepartmentsProps> = ({ departments 
                 <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row items-stretch gap-2">
                   <Link
                     href={registerLink}
-                    className="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold tracking-wider uppercase text-center text-white bg-gradient-to-r from-emerald-600 to-teal-600 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:brightness-110 hover:-translate-y-0.5 transition-all flex items-center justify-center space-x-1.5 cursor-pointer"
+                    className="flex-1 py-2.5 px-3 rounded-xl text-[11px] font-bold tracking-wider uppercase text-center text-amber-200 border border-amber-400/40 bg-amber-500/15 shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:brightness-110 hover:-translate-y-0.5 transition-all flex items-center justify-center space-x-1 cursor-pointer"
                   >
-                    <span>REGISTER</span>
-                    <span className="text-sm leading-none">→</span>
+                    <span>OPENING SOON</span>
+                    <span className="text-xs leading-none">→</span>
                   </Link>
 
                   <button
@@ -328,9 +328,10 @@ export const EventDepartments: React.FC<EventDepartmentsProps> = ({ departments 
                   href={`/register?event=departmental-technical-events&competition=${encodeURIComponent(
                     activeCompetition.title
                   )}&dept=${encodeURIComponent(activeCompetition.department)}`}
-                  className="w-full sm:flex-1 py-3.5 px-6 rounded-xl font-bold tracking-widest text-xs uppercase text-center text-white bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600 shadow-[0_0_25px_rgba(16,185,129,0.35)] hover:brightness-110 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer flex items-center justify-center space-x-2"
+                  className="w-full sm:flex-1 py-3.5 px-6 rounded-xl font-bold tracking-widest text-xs uppercase text-center text-amber-200 border border-amber-400/40 bg-amber-500/15 shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:brightness-110 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer flex items-center justify-center space-x-2"
                 >
-                  <span>REGISTER FOR THIS EVENT</span>
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                  <span>REGISTRATION OPENING SOON</span>
                   <span className="text-sm">→</span>
                 </Link>
 

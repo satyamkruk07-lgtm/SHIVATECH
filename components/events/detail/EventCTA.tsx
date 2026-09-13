@@ -51,7 +51,15 @@ export const EventCTA: React.FC<EventCTAProps> = ({ event }) => {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center gap-4 font-mono w-full sm:w-auto">
-          {event.registerUrl.startsWith("http") ? (
+          {!event.isRegistrationOpen ? (
+            <Link
+              href={`/register?event=${event.slug}`}
+              className="w-full sm:w-auto py-4 px-10 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center text-amber-200 border-2 border-amber-400/50 bg-amber-500/15 shadow-[0_0_30px_rgba(245,158,11,0.3)] hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center space-x-2"
+            >
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+              <span>REGISTRATION OPENING SOON →</span>
+            </Link>
+          ) : event.registerUrl.startsWith("http") ? (
             <a
               href={event.registerUrl}
               target="_blank"

@@ -143,7 +143,16 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
             </Link>
 
             {/* REGISTER BUTTON -> Opens Register Page or External Form */}
-            {event.registerUrl.startsWith("http") ? (
+            {!event.isRegistrationOpen ? (
+              <Link
+                href={`/register?event=${event.slug}`}
+                className="py-3.5 px-4 rounded-xl font-bold tracking-wider text-[11px] uppercase text-center border border-amber-400/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 transition-all duration-200 flex items-center justify-center space-x-1.5"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                <span>REGISTRATION OPENING SOON</span>
+                <span className="text-xs opacity-60">→</span>
+              </Link>
+            ) : event.registerUrl.startsWith("http") ? (
               <a
                 href={event.registerUrl}
                 target="_blank"

@@ -130,89 +130,138 @@ function RegisterContent() {
           </div>
         )}
 
-        <p className="text-sm text-white/70 leading-relaxed mb-6 font-sans">
-          {event.description}
-        </p>
-
-        {/* Registration Form */}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert(`Registration submitted for ${event.name}!`);
-            router.push(`/events/${event.slug}`);
-          }}
-          className="space-y-4 font-mono text-sm"
-        >
-          <div>
-            <label className="block text-xs text-white/50 tracking-wider mb-1 uppercase">
-              Full Name
-            </label>
-            <input
-              type="text"
-              required
-              placeholder="ENTER YOUR NAME"
-              className="w-full px-4 py-3 rounded bg-white/5 border border-white/15 text-white placeholder-white/20 focus:outline-none focus:border-red-500 transition-colors"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs text-white/50 tracking-wider mb-1 uppercase">
-              Email Address
-            </label>
-            <input
-              type="email"
-              required
-              placeholder="ENTER YOUR EMAIL"
-              className="w-full px-4 py-3 rounded bg-white/5 border border-white/15 text-white placeholder-white/20 focus:outline-none focus:border-blue-500 transition-colors"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs text-white/50 tracking-wider mb-1 uppercase">
-              College / Institution
-            </label>
-            <input
-              type="text"
-              required
-              placeholder="ENTER COLLEGE NAME"
-              className="w-full px-4 py-3 rounded bg-white/5 border border-white/15 text-white placeholder-white/20 focus:outline-none focus:border-red-500 transition-colors"
-            />
-          </div>
-
-          {event.slug === "science-championship" && (
-            <div>
-              <label className="block text-xs text-purple-300/80 tracking-wider mb-1 uppercase font-semibold">
-                Select Competition Track
-              </label>
-              <select
-                key={trackParam || "all"}
-                defaultValue={trackParam || "all"}
-                className="w-full px-4 py-3 rounded bg-[#070c1a] border border-purple-500/40 text-purple-200 focus:outline-none focus:border-purple-400 transition-colors"
-              >
-                <option value="all" className="bg-[#070c1a] text-white">All Events / Full Championship</option>
-                <option value="hackathon" className="bg-[#070c1a] text-white">1. 2-Hour Innovation Challenge (Hackathon)</option>
-                <option value="exhibition" className="bg-[#070c1a] text-white">2. Science Exhibition</option>
-                <option value="pitching" className="bg-[#070c1a] text-white">3. Idea Pitching (Mini Shark Tank)</option>
-                <option value="robotics" className="bg-[#070c1a] text-white">4. 60-Minute Build Up (Robotics Challenge, etc.)</option>
-              </select>
+        {/* If Registration is Opening Soon (Events 2 & 3: Ideathon & Departmental Technical Events) */}
+        {!event.isRegistrationOpen ? (
+          <div className="py-8 px-2 flex flex-col items-center text-center">
+            {/* Pulsing Holographic Lock Beacon */}
+            <div className="relative mb-6">
+              <div className="w-20 h-20 rounded-2xl bg-amber-500/15 border-2 border-amber-400/50 flex items-center justify-center text-amber-300 shadow-[0_0_35px_rgba(245,158,11,0.35)]">
+                <svg className="w-9 h-9 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+              </div>
+              <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-amber-400 animate-ping opacity-80" />
             </div>
-          )}
 
-          <div className="pt-4 flex flex-col sm:flex-row gap-3">
-            <button
-              type="submit"
-              className="flex-1 py-3.5 bg-gradient-to-r from-red-600 to-blue-600 rounded-lg text-white font-bold text-xs sm:text-sm tracking-widest shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:brightness-110 transition-all text-center cursor-pointer"
-            >
-              CONFIRM REGISTRATION
-            </button>
-            <Link
-              href={`/events/${event.slug}`}
-              className="px-6 py-3.5 border border-white/20 rounded-lg text-white/70 hover:text-white hover:bg-white/10 font-bold text-xs sm:text-sm tracking-widest transition-colors text-center"
-            >
-              BACK TO EVENT
-            </Link>
+            {/* Status Pill Badge */}
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-bold tracking-[0.25em] uppercase mb-4">
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+              <span>OFFICIAL REGISTRATION STATUS</span>
+            </div>
+
+            {/* Prominent Text */}
+            <h2 className="text-2xl sm:text-3xl font-black font-mono tracking-tight text-white uppercase mb-3 drop-shadow-[0_0_20px_rgba(251,191,36,0.3)]">
+              REGISTRATION IS OPENING SOON
+            </h2>
+
+            <p className="text-xs sm:text-sm text-slate-300 font-sans max-w-md mx-auto leading-relaxed mb-8">
+              Registration links for <strong className="text-white">{event.name}</strong> are currently not connected. No registrations are being accepted at this time. The official registration portal will open soon.
+            </p>
+
+            {/* Navigation Actions */}
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+              <Link
+                href={`/events/${event.slug}`}
+                className="w-full sm:w-auto py-3.5 px-8 rounded-xl font-bold tracking-widest text-xs uppercase bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all text-center"
+              >
+                ← BACK TO EVENT DETAILS
+              </Link>
+              <Link
+                href="/events"
+                className="w-full sm:w-auto py-3.5 px-8 rounded-xl font-bold tracking-widest text-xs uppercase bg-gradient-to-r from-red-600 to-sky-600 text-white shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:brightness-110 transition-all text-center"
+              >
+                EXPLORE ALL EVENTS →
+              </Link>
+            </div>
           </div>
-        </form>
+        ) : (
+          <>
+            <p className="text-sm text-white/70 leading-relaxed mb-6 font-sans">
+              {event.description}
+            </p>
+
+            {/* Registration Form */}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert(`Registration submitted for ${event.name}!`);
+                router.push(`/events/${event.slug}`);
+              }}
+              className="space-y-4 font-mono text-sm"
+            >
+              <div>
+                <label className="block text-xs text-white/50 tracking-wider mb-1 uppercase">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="ENTER YOUR NAME"
+                  className="w-full px-4 py-3 rounded bg-white/5 border border-white/15 text-white placeholder-white/20 focus:outline-none focus:border-red-500 transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs text-white/50 tracking-wider mb-1 uppercase">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  required
+                  placeholder="ENTER YOUR EMAIL"
+                  className="w-full px-4 py-3 rounded bg-white/5 border border-white/15 text-white placeholder-white/20 focus:outline-none focus:border-blue-500 transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs text-white/50 tracking-wider mb-1 uppercase">
+                  College / Institution
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="ENTER COLLEGE NAME"
+                  className="w-full px-4 py-3 rounded bg-white/5 border border-white/15 text-white placeholder-white/20 focus:outline-none focus:border-red-500 transition-colors"
+                />
+              </div>
+
+              {event.slug === "science-championship" && (
+                <div>
+                  <label className="block text-xs text-purple-300/80 tracking-wider mb-1 uppercase font-semibold">
+                    Select Competition Track
+                  </label>
+                  <select
+                    key={trackParam || "all"}
+                    defaultValue={trackParam || "all"}
+                    className="w-full px-4 py-3 rounded bg-[#070c1a] border border-purple-500/40 text-purple-200 focus:outline-none focus:border-purple-400 transition-colors"
+                  >
+                    <option value="all" className="bg-[#070c1a] text-white">All Events / Full Championship</option>
+                    <option value="hackathon" className="bg-[#070c1a] text-white">1. 2-Hour Innovation Challenge (Hackathon)</option>
+                    <option value="exhibition" className="bg-[#070c1a] text-white">2. Science Exhibition</option>
+                    <option value="pitching" className="bg-[#070c1a] text-white">3. Idea Pitching (Mini Shark Tank)</option>
+                    <option value="robotics" className="bg-[#070c1a] text-white">4. 60-Minute Build Up (Robotics Challenge, etc.)</option>
+                  </select>
+                </div>
+              )}
+
+              <div className="pt-4 flex flex-col sm:flex-row gap-3">
+                <button
+                  type="submit"
+                  className="flex-1 py-3.5 bg-gradient-to-r from-red-600 to-blue-600 rounded-lg text-white font-bold text-xs sm:text-sm tracking-widest shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:brightness-110 transition-all text-center cursor-pointer"
+                >
+                  CONFIRM REGISTRATION
+                </button>
+                <Link
+                  href={`/events/${event.slug}`}
+                  className="px-6 py-3.5 border border-white/20 rounded-lg text-white/70 hover:text-white hover:bg-white/10 font-bold text-xs sm:text-sm tracking-widest transition-colors text-center"
+                >
+                  BACK TO EVENT
+                </Link>
+              </div>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );
