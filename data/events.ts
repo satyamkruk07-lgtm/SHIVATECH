@@ -406,10 +406,10 @@ export const eventsList: EventItem[] = [
     number: "03",
     name: "DEPARTMENTAL TECHNICAL EVENTS",
     category: "TECHNICAL COMPETITIONS",
-    date: "06 & 08 OCTOBER 2026",
+    date: "09 OCTOBER 2026",
     fullDateSchedule: [
-      "6 October 2026 — Technical Competitions, Departmental Workshops & Expert Sessions",
-      "8 October 2026 — Departmental Technical Events, Project Demonstrations & Challenges",
+      "9 October 2026 — Technical Competitions, Departmental Workshops & Expert Sessions",
+      "9 October 2026 — Departmental Technical Events, Project Demonstrations & Challenges",
     ],
     duration: "Multi-Day Departmental Championships",
     venue: "Respective Departments, Shivalik University",
@@ -532,7 +532,7 @@ export const eventsList: EventItem[] = [
     name: "NEXT-GEN HACKATHON 1.0",
     targetAudienceNote: "Only for Class 9, 10, 11 & 12 School Students",
     category: "SCHOOL HACKATHON",
-    date: "14 SEPT – 10 OCT 2026 (FINAL: 10 OCT)",
+    date: "10 OCT 2026",
     fullDateSchedule: [
       "14 September 2026 — Launch of Next-Gen Hackathon 1.0",
       "15 September 2026 — Mentoring Starts for Registered Students",
