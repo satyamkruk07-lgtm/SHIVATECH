@@ -346,9 +346,8 @@ export const eventsList: EventItem[] = [
     ],
     prize: "₹30,000+",
     teamSize: "2–4 Members",
-    registerUrl: "/register?event=ideathon",
-    isRegistrationOpen: false,
-    registrationNotice: "Registration is opening soon",
+    registerUrl: "https://forms.gle/6e6y7YaP2FWrfrwW7",
+    isRegistrationOpen: true,
     accentColor: "blue",
     badge: "INCUBATION PIPELINE",
     highlights: [

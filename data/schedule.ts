@@ -219,7 +219,7 @@ export const scheduleData: DaySchedule[] = [
         duration: "02:00 PM – 04:00 PM",
         icon: "bulb",
         eventSlug: "ideathon",
-        registerUrl: "/register?event=ideathon",
+        registerUrl: "https://forms.gle/6e6y7YaP2FWrfrwW7",
         featured: true,
       },
       {

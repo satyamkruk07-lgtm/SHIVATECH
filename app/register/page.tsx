@@ -130,7 +130,28 @@ function RegisterContent() {
           </div>
         )}
 
-        {/* If Registration is Opening Soon (Events 2 & 3: Ideathon & Departmental Technical Events) */}
+        {/* Ideathon Official Google Form Direct Link Box */}
+        {event.slug === "ideathon" && (
+          <div className="p-4 mb-6 rounded-xl bg-blue-950/40 border border-blue-500/40">
+            <span className="text-[10px] text-sky-400 font-bold uppercase tracking-widest block mb-1">
+              OFFICIAL IDEATHON REGISTRATION FORM
+            </span>
+            <p className="text-xs text-slate-300 font-sans mb-3 leading-relaxed">
+              IDEATHON registrations (2–4 Members, ₹30,000+ in prizes, CBII Incubation pipeline) are being officially recorded via Google Forms.
+            </p>
+            <a
+              href="https://forms.gle/6e6y7YaP2FWrfrwW7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs tracking-wider shadow-[0_0_20px_rgba(56,189,248,0.4)] transition-all cursor-pointer"
+            >
+              <span>OPEN GOOGLE FORM (IDEATHON)</span>
+              <span>↗</span>
+            </a>
+          </div>
+        )}
+
+        {/* If Registration is Opening Soon (Event 3: Departmental Technical Events) */}
         {!event.isRegistrationOpen ? (
           <div className="py-8 px-2 flex flex-col items-center text-center">
             {/* Pulsing Holographic Lock Beacon */}

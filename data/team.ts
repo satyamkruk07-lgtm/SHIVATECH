@@ -165,6 +165,7 @@ export const studentCoordinators: TeamMember[] = [
     name: "Komal Kumari",
     role: "ACM MEMBER",
     category: "student",
+    image: "/team/komal-kumari.jpeg",
     description: "ACM Student Member",
     socials: {},
   },
