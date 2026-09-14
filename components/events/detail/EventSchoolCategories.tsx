@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   SchoolHackathonCategory,
@@ -22,9 +22,19 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
   const [activeCategory, setActiveCategory] =
     useState<SchoolHackathonCategory | null>(categories[0] || null);
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedDomain, setSelectedDomain] = useState<string>("ALL");
+  const [selectedType, setSelectedType] = useState<string>("ALL");
+  const [visibleCount, setVisibleCount] = useState<number>(16);
+
   useEffect(() => {
     if (categories && categories.length > 0) {
       setActiveCategory(categories[activeCategoryIndex] || categories[0]);
+      // Reset visible count and domain filter on grade tab switch
+      setSelectedDomain("ALL");
+      setSelectedType("ALL");
+      setSearchQuery("");
+      setVisibleCount(16);
     }
   }, [activeCategoryIndex, categories]);
 
@@ -44,31 +54,103 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
   const currentCategory = categories[activeCategoryIndex] || categories[0];
   const isEmerald = currentCategory.accentColor === "emerald";
 
-  return (
-    <section className="relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#02040a] border-b border-white/[0.06] overflow-hidden">
-      {/* Ambient Cyber Background Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-purple-600/[0.06] rounded-full blur-[160px] pointer-events-none" />
+  // List of unique domains with counts
+  const domainList = useMemo(() => {
+    const domainsMap: Record<string, { count: number; icon: string }> = {};
+    currentCategory.problemStatements.forEach((ps) => {
+      if (!domainsMap[ps.domain]) {
+        domainsMap[ps.domain] = { count: 0, icon: ps.icon || "⚡" };
+      }
+      domainsMap[ps.domain].count += 1;
+    });
 
-      <div className="max-w-6xl mx-auto font-mono relative z-10">
+    return Object.entries(domainsMap).map(([domain, data]) => ({
+      domain,
+      count: data.count,
+      icon: data.icon,
+    }));
+  }, [currentCategory]);
+
+  // Filter problem statements based on search, domain, and type
+  const filteredStatements = useMemo(() => {
+    return currentCategory.problemStatements.filter((ps) => {
+      // Domain filter
+      if (selectedDomain !== "ALL" && ps.domain !== selectedDomain) {
+        return false;
+      }
+
+      // Type filter
+      if (selectedType !== "ALL" && ps.categoryType !== selectedType) {
+        return false;
+      }
+
+      // Search query filter
+      if (searchQuery.trim() !== "") {
+        const query = searchQuery.toLowerCase().trim();
+        const inTitle = ps.title.toLowerCase().includes(query);
+        const inDesc = ps.description.toLowerCase().includes(query);
+        const inCode = ps.code.toLowerCase().includes(query);
+        const inObj = ps.objective.toLowerCase().includes(query);
+        const inDomain = ps.domain.toLowerCase().includes(query);
+        const inTools =
+          ps.recommendedTools &&
+          ps.recommendedTools.some((t) => t.toLowerCase().includes(query));
+
+        return inTitle || inDesc || inCode || inObj || inDomain || inTools;
+      }
+
+      return true;
+    });
+  }, [currentCategory, selectedDomain, selectedType, searchQuery]);
+
+  const displayedStatements =
+    selectedDomain !== "ALL" || searchQuery.trim() !== "" || selectedType !== "ALL"
+      ? filteredStatements
+      : filteredStatements.slice(0, visibleCount);
+
+  const hasMore =
+    selectedDomain === "ALL" &&
+    searchQuery.trim() === "" &&
+    selectedType === "ALL" &&
+    visibleCount < filteredStatements.length;
+
+  return (
+    <section
+      id="school-problem-statements"
+      className="relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#02040a] border-b border-white/[0.06] overflow-hidden"
+    >
+      {/* Ambient Background Glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-600/[0.07] rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-[500px] h-[300px] bg-cyan-600/[0.05] rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto font-mono relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-[11px] font-bold tracking-[0.25em] uppercase mb-3">
+        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-[11px] font-bold tracking-[0.25em] uppercase mb-3 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
             <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-            <span>EXCLUSIVE SCHOOL HACKATHON ARENA</span>
+            <span>EXCLUSIVE SCHOOL INNOVATION ARENA</span>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white uppercase mb-3 drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white uppercase mb-4 drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]">
             {title}
           </h2>
 
-          <p className="text-xs sm:text-sm text-slate-300 font-sans max-w-2xl mx-auto leading-relaxed">
-            Open exclusively for students of <strong className="text-purple-300">Class 9, 10, 11 & 12</strong>. Select your grade category below to explore the official problem statements and build your winning prototype!
+          <p className="text-xs sm:text-base text-slate-300 font-sans max-w-3xl mx-auto leading-relaxed">
+            Open exclusively for budding school innovators of{" "}
+            <strong className="text-purple-300 font-semibold">
+              Class 9, 10, 11 & 12
+            </strong>
+            . Explore our official curriculum-aligned problem statements across{" "}
+            <strong className="text-cyan-300 font-semibold">
+              7 real-world themes
+            </strong>
+            , or submit your own unique solution under Open Theme!
           </p>
         </div>
 
-        {/* Category Selector Tabs */}
+        {/* Grade Tab Selector (Class 9 & 10 vs Class 11 & 12) */}
         <div className="flex justify-center mb-8 sm:mb-12">
-          <div className="inline-flex p-1.5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md gap-1.5 sm:gap-2">
+          <div className="inline-flex p-1.5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md gap-1.5 sm:gap-2 shadow-2xl">
             {categories.map((cat, idx) => {
               const isActive = idx === activeCategoryIndex;
               const isCatEmerald = cat.accentColor === "emerald";
@@ -77,7 +159,7 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategoryIndex(idx)}
-                  className={`px-4 sm:px-7 py-3 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 flex items-center space-x-2.5 ${
+                  className={`px-4 sm:px-8 py-3 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 flex items-center space-x-2.5 cursor-pointer ${
                     isActive
                       ? isCatEmerald
                         ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-[0_0_25px_rgba(16,185,129,0.35)]"
@@ -85,10 +167,13 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
                       : "text-slate-400 hover:text-white hover:bg-white/[0.04]"
                   }`}
                 >
-                  <span className="text-sm sm:text-base">
+                  <span className="text-base sm:text-lg">
                     {idx === 0 ? "🌱" : "⚡"}
                   </span>
                   <span>{cat.gradeBadge}</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/40 text-slate-200 border border-white/10">
+                    {cat.problemStatements.length} PS
+                  </span>
                 </button>
               );
             })}
@@ -134,11 +219,11 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
             <div className="shrink-0 flex flex-col sm:flex-row items-start sm:items-center gap-2 text-xs font-bold font-mono text-slate-300 self-start md:self-auto">
               <div className="bg-black/60 px-3.5 py-2 rounded-xl border border-white/15 flex items-center space-x-2 shadow-inner">
                 <span className="text-amber-400">⏱ DURATION:</span>
-                <span className="text-white">6 HOURS</span>
+                <span className="text-white">6 HOURS SPRINT</span>
               </div>
               <div className="bg-black/60 px-3.5 py-2 rounded-xl border border-white/15 flex items-center space-x-2 shadow-inner">
-                <span className="text-purple-400">👥 TEAM FORMAT:</span>
-                <span className="text-white">4–5 STUDENTS + 1 FACULTY MENTOR ( NOT MANDATORY )</span>
+                <span className="text-purple-400">👥 TEAM:</span>
+                <span className="text-white">4–5 STUDENTS + 1 MENTOR (OPTIONAL)</span>
               </div>
             </div>
           </div>
@@ -152,31 +237,207 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
           <div className="flex-1">
             <div className="flex flex-wrap items-center gap-2 mb-1">
               <span className="text-xs sm:text-sm font-black text-amber-300 uppercase tracking-wider">
-                UNIVERSITY HARDWARE & LAB EQUIPMENT PROVIDED
+                UNIVERSITY HARDWARE & LAB APPARATUS PROVIDED ON-CAMPUS
               </span>
               <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-400/25 text-amber-200 border border-amber-400/50 uppercase tracking-widest">
-                ON-CAMPUS SUPPORT
+                FREE UNIVERSITY LAB ACCESS
               </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-200 font-sans leading-relaxed">
-              To support student innovators in bringing their ideas to life, all essential <strong className="text-white font-semibold">hardware components, microcontrollers (Arduino / ESP32), sensor modules, breadboards, and testing apparatus</strong> will be provided on-campus by the University, alongside guided access to advanced innovation labs for seamless prototype development.
+              To support student innovators, all essential{" "}
+              <strong className="text-white font-semibold">
+                microcontrollers (Arduino / ESP32), sensor modules (ultrasonic, PIR, LDR, soil moisture, temperature, gas), relays, breadboards, jumper wires, and testing apparatus
+              </strong>{" "}
+              will be provided on-campus by the University, alongside guided faculty mentorship in our high-tech labs.
             </p>
           </div>
         </div>
 
-        {/* Problem Statements Grid (4 Cards per Category) */}
+        {/* Filter Controls Bar (Search + Domain Pills + Type Pills) */}
+        <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-md">
+          {/* Top Row: Search Box & Type Filters */}
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-4">
+            {/* Search Input */}
+            <div className="relative flex-1">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-sm">
+                🔍
+              </div>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search problem statements by keyword, sensor, Arduino, ESP32, Python, title..."
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-black/50 border border-white/15 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-400 transition-colors"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-white cursor-pointer text-xs"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            {/* Type Selector Pills */}
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold hidden sm:inline">
+                TYPE:
+              </span>
+              {[
+                { id: "ALL", label: "All Types" },
+                { id: "Hardware", label: "⚙️ Hardware / IoT" },
+                { id: "Software", label: "💻 Software / App" },
+                { id: "Open", label: "💡 Open Innovation" },
+              ].map((t) => {
+                const isActive = selectedType === t.id;
+                return (
+                  <button
+                    key={t.id}
+                    onClick={() => setSelectedType(t.id)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                      isActive
+                        ? "bg-white/20 text-white border border-white/40 shadow-sm"
+                        : "bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 border border-white/10"
+                    }`}
+                  >
+                    {t.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Bottom Row: Theme / Domain Filter Pills */}
+          <div className="pt-3 border-t border-white/[0.08]">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
+                SELECT BY DOMAIN / THEME:
+              </span>
+              {(selectedDomain !== "ALL" ||
+                selectedType !== "ALL" ||
+                searchQuery.trim() !== "") && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedDomain("ALL");
+                    setSelectedType("ALL");
+                    setSearchQuery("");
+                  }}
+                  className="text-[10px] text-red-400 hover:text-red-300 font-bold uppercase tracking-wider underline cursor-pointer"
+                >
+                  Reset All Filters ✕
+                </button>
+              )}
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setSelectedDomain("ALL")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center space-x-1.5 cursor-pointer ${
+                  selectedDomain === "ALL"
+                    ? isEmerald
+                      ? "bg-emerald-500/25 border border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.2)]"
+                      : "bg-purple-500/25 border border-purple-400 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+                    : "bg-white/[0.03] border border-white/10 text-slate-400 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <span>🌐 All Themes</span>
+                <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/40 text-slate-300">
+                  {currentCategory.problemStatements.length}
+                </span>
+              </button>
+
+              {domainList.map(({ domain, count, icon }) => {
+                const isSelected = selectedDomain === domain;
+                return (
+                  <button
+                    key={domain}
+                    onClick={() => setSelectedDomain(domain)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold tracking-wider transition-all flex items-center space-x-1.5 cursor-pointer ${
+                      isSelected
+                        ? isEmerald
+                          ? "bg-emerald-500/25 border border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.2)]"
+                          : "bg-purple-500/25 border border-purple-400 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+                        : "bg-white/[0.03] border border-white/10 text-slate-400 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    <span>{icon}</span>
+                    <span>{domain}</span>
+                    <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/40 text-slate-300">
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Results Counter Summary */}
+        <div className="flex items-center justify-between mb-6 px-1">
+          <div className="text-xs text-slate-400 font-mono">
+            SHOWING{" "}
+            <strong className="text-white">{displayedStatements.length}</strong>{" "}
+            OF{" "}
+            <strong className="text-white">
+              {filteredStatements.length}
+            </strong>{" "}
+            PROBLEM STATEMENTS
+            {selectedDomain !== "ALL" && (
+              <span className="text-purple-300"> • Theme: {selectedDomain}</span>
+            )}
+            {selectedType !== "ALL" && (
+              <span className="text-cyan-300"> • Type: {selectedType}</span>
+            )}
+          </div>
+
+          <div className="text-[11px] text-slate-400 hidden sm:block">
+            Click on any card to view detailed specifications & tools
+          </div>
+        </div>
+
+        {/* Empty State */}
+        {filteredStatements.length === 0 && (
+          <div className="p-12 text-center rounded-2xl bg-white/[0.02] border border-white/10 my-8">
+            <span className="text-4xl mb-3 block">🔍</span>
+            <h4 className="text-base sm:text-lg font-bold text-white mb-1">
+              No Problem Statements Found
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-400 max-w-md mx-auto mb-4 font-sans">
+              No problem statements matched your search criteria. Try a different keyword or reset filters.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedDomain("ALL");
+                setSelectedType("ALL");
+                setSearchQuery("");
+              }}
+              className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+            >
+              Reset Filters
+            </button>
+          </div>
+        )}
+
+        {/* Problem Statements Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-          {currentCategory.problemStatements.map((ps, psIdx) => {
+          {displayedStatements.map((ps, psIdx) => {
+            const isHardware = ps.categoryType === "Hardware";
+            const isOpen = ps.categoryType === "Open";
+
             return (
               <motion.div
                 key={ps.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: psIdx * 0.08 }}
+                transition={{ duration: 0.3, delay: Math.min(psIdx * 0.03, 0.3) }}
                 className={`relative flex flex-col justify-between rounded-2xl p-6 sm:p-7 transition-all duration-300 group hover:-translate-y-1 ${
                   isEmerald
-                    ? "bg-gradient-to-br from-emerald-950/20 via-[#070e14] to-[#03060a] border border-emerald-500/25 hover:border-emerald-400/80 shadow-[0_0_30px_rgba(16,185,129,0.06)] hover:shadow-[0_0_35px_rgba(16,185,129,0.22)]"
-                    : "bg-gradient-to-br from-purple-950/20 via-[#0a0818] to-[#04030d] border border-purple-500/25 hover:border-purple-400/80 shadow-[0_0_30px_rgba(168,85,247,0.06)] hover:shadow-[0_0_35px_rgba(168,85,247,0.22)]"
+                    ? "bg-gradient-to-br from-emerald-950/20 via-[#070e14] to-[#03060a] border border-emerald-500/25 hover:border-emerald-400/80 shadow-[0_0_30px_rgba(16,185,129,0.06)] hover:shadow-[0_0_35px_rgba(16,185,129,0.2)]"
+                    : "bg-gradient-to-br from-purple-950/20 via-[#0a0818] to-[#04030d] border border-purple-500/25 hover:border-purple-400/80 shadow-[0_0_30px_rgba(168,85,247,0.06)] hover:shadow-[0_0_35px_rgba(168,85,247,0.2)]"
                 }`}
               >
                 {/* Tech Corner Accents */}
@@ -191,12 +452,13 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
                   }`}
                 />
 
-                {/* Card Top: Code, Domain & Icon */}
+                {/* Card Top: Code, Domain Badges & Icon */}
                 <div>
-                  <div className="flex items-center justify-between mb-3.5">
-                    <div className="flex items-center space-x-2">
+                  <div className="flex items-center justify-between mb-3.5 gap-2">
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      {/* Code Badge */}
                       <span
-                        className={`text-[10px] font-bold px-2.5 py-0.5 rounded border uppercase tracking-widest ${
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${
                           isEmerald
                             ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-300"
                             : "bg-purple-500/15 border-purple-500/40 text-purple-300"
@@ -204,13 +466,40 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
                       >
                         {ps.code}
                       </span>
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">
-                        {ps.domain}
+
+                      {/* Domain Badge */}
+                      <span className="text-[10px] text-slate-300 px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-semibold flex items-center space-x-1">
+                        <span>{ps.icon}</span>
+                        <span>{ps.domain}</span>
                       </span>
+
+                      {/* Hardware / Software Type Badge */}
+                      <span
+                        className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${
+                          isOpen
+                            ? "bg-amber-500/20 text-amber-300 border border-amber-500/40"
+                            : isHardware
+                            ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
+                            : "bg-blue-500/20 text-blue-300 border border-blue-500/40"
+                        }`}
+                      >
+                        {isOpen
+                          ? "💡 OPEN THEME"
+                          : isHardware
+                          ? "⚙️ HARDWARE KIT"
+                          : "💻 SOFTWARE APP"}
+                      </span>
+
+                      {/* Flagship Star Badge if present */}
+                      {ps.difficulty === "Flagship" && (
+                        <span className="text-[9px] font-black px-2 py-0.5 rounded bg-amber-400/20 text-amber-200 border border-amber-400/50">
+                          ⭐ FLAGSHIP
+                        </span>
+                      )}
                     </div>
 
                     <div
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center text-lg border group-hover:scale-110 transition-transform ${
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center text-lg border group-hover:scale-110 transition-transform shrink-0 ${
                         isEmerald
                           ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
                           : "bg-purple-500/10 border-purple-500/30 text-purple-300"
@@ -225,20 +514,47 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
                     {ps.title}
                   </h4>
 
-                  {/* Description */}
+                  {/* Description (Problem) */}
                   <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed mb-4 line-clamp-3">
+                    <strong className="text-slate-200 font-mono text-xs block mb-0.5">
+                      PROBLEM:
+                    </strong>
                     {ps.description}
                   </p>
 
-                  {/* Objective Pill */}
-                  <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/10 mb-5">
+                  {/* Objective (Task / Challenge) */}
+                  <div className="p-3 rounded-xl bg-white/[0.02] border border-white/10 mb-4">
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-0.5">
-                      🎯 TARGET GOAL:
+                      {isHardware ? "⚙️ CHALLENGE / GOAL:" : "🎯 TASK:"}
                     </span>
-                    <p className="text-xs text-slate-300 font-sans">
+                    <p className="text-xs text-slate-300 font-sans line-clamp-2">
                       {ps.objective}
                     </p>
                   </div>
+
+                  {/* Tools / Suggested Components preview */}
+                  {ps.recommendedTools && ps.recommendedTools.length > 0 && (
+                    <div className="mb-4">
+                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">
+                        {isHardware ? "SUGGESTED HARDWARE / SENSORS:" : "TOOLS / TECH:"}
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {ps.recommendedTools.slice(0, 4).map((tool, tIdx) => (
+                          <span
+                            key={tIdx}
+                            className="text-[10px] font-sans px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 text-slate-300"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                        {ps.recommendedTools.length > 4 && (
+                          <span className="text-[10px] font-sans px-1.5 py-0.5 rounded bg-white/[0.02] text-slate-500">
+                            +{ps.recommendedTools.length - 4} more
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Card Bottom Actions */}
@@ -255,7 +571,7 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
                         : "bg-purple-600/30 hover:bg-purple-600 border border-purple-500/40 hover:border-purple-400"
                     }`}
                   >
-                    <span>VIEW PROBLEM STATEMENT & DETAILS</span>
+                    <span>VIEW FULL PROBLEM BRIEFING</span>
                     <span className="text-sm">👁</span>
                   </button>
                 </div>
@@ -263,6 +579,23 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
             );
           })}
         </div>
+
+        {/* Load More Button (Only when showing "All Themes") */}
+        {hasMore && (
+          <div className="text-center mt-10 sm:mt-12">
+            <button
+              type="button"
+              onClick={() => setVisibleCount((prev) => prev + 16)}
+              className="py-3.5 px-8 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/40 text-white text-xs font-bold uppercase tracking-widest transition-all cursor-pointer shadow-lg inline-flex items-center space-x-2"
+            >
+              <span>LOAD MORE PROBLEM STATEMENTS</span>
+              <span className="text-purple-400 font-bold">
+                ({filteredStatements.length - visibleCount} REMAINING)
+              </span>
+              <span>↓</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* =================================================================== */}
@@ -307,9 +640,18 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
                     <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30">
                       {activeCategory.gradeBadge}
                     </span>
-                    <span className="text-[10px] text-slate-400 uppercase">
-                      {selectedPS.domain}
+                    <span className="text-[10px] text-slate-300 px-2 py-0.5 rounded bg-white/5 border border-white/10 uppercase">
+                      {selectedPS.icon} {selectedPS.domain}
                     </span>
+                    {selectedPS.categoryType && (
+                      <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 uppercase">
+                        {selectedPS.categoryType === "Hardware"
+                          ? "⚙️ HARDWARE KIT"
+                          : selectedPS.categoryType === "Software"
+                          ? "💻 SOFTWARE APP"
+                          : "💡 OPEN THEME"}
+                      </span>
+                    )}
                   </div>
 
                   <h3
@@ -333,20 +675,20 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
 
               {/* Modal Content */}
               <div className="space-y-4 mb-6">
-                {/* Full Description */}
+                {/* Full Problem Briefing */}
                 <div>
                   <h4 className="text-xs font-bold text-purple-400 uppercase tracking-widest mb-1.5">
-                    // PROBLEM BRIEFING & CONTEXT
+                    // PROBLEM BRIEFING & REAL-WORLD CONTEXT
                   </h4>
                   <p className="text-xs sm:text-sm text-slate-200 font-sans leading-relaxed bg-white/[0.02] p-4 rounded-xl border border-white/10">
                     {selectedPS.description}
                   </p>
                 </div>
 
-                {/* Target Objective */}
+                {/* Target Objective / Task / Challenge */}
                 <div>
                   <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-1.5">
-                    🎯 TARGET OBJECTIVE & IMPACT
+                    🎯 TARGET OBJECTIVE & ACTIONABLE TASK
                   </h4>
                   <p className="text-xs sm:text-sm text-slate-200 font-sans leading-relaxed bg-white/[0.02] p-4 rounded-xl border border-white/10">
                     {selectedPS.objective}
@@ -354,7 +696,7 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
                 </div>
 
                 {/* Deliverables */}
-                {selectedPS.deliverables && (
+                {selectedPS.deliverables && selectedPS.deliverables.length > 0 && (
                   <div>
                     <h4 className="text-xs font-bold text-sky-400 uppercase tracking-widest mb-2">
                       📋 EXPECTED PROJECT DELIVERABLES
@@ -375,38 +717,49 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
                   </div>
                 )}
 
-                {/* Recommended Tools */}
-                {selectedPS.recommendedTools && (
-                  <div>
-                    <h4 className="text-xs font-bold text-amber-400 uppercase tracking-widest mb-2">
-                      🛠️ SUGGESTED HARDWARE & SOFTWARE TOOLS
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedPS.recommendedTools.map((tool, tIdx) => (
-                        <span
-                          key={tIdx}
-                          className="text-[11px] font-sans px-3 py-1 rounded-lg bg-white/5 border border-white/15 text-slate-300"
-                        >
-                          {tool}
-                        </span>
-                      ))}
+                {/* Recommended Tools / Components */}
+                {selectedPS.recommendedTools &&
+                  selectedPS.recommendedTools.length > 0 && (
+                    <div>
+                      <h4 className="text-xs font-bold text-amber-400 uppercase tracking-widest mb-2">
+                        🛠️ SUGGESTED HARDWARE SENSORS & SOFTWARE TOOLS
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedPS.recommendedTools.map((tool, tIdx) => (
+                          <span
+                            key={tIdx}
+                            className="text-[11px] font-sans px-3 py-1 rounded-lg bg-white/5 border border-white/15 text-slate-300"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
                 {/* Key Event Parameters Callout */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs font-mono">
                   <div className="p-3 rounded-xl bg-black/40 border border-white/10">
-                    <span className="text-[10px] text-amber-400 font-bold block uppercase">⏱ DURATION</span>
+                    <span className="text-[10px] text-amber-400 font-bold block uppercase">
+                      ⏱ DURATION
+                    </span>
                     <span className="text-white font-bold">6 Hours Sprint</span>
                   </div>
                   <div className="p-3 rounded-xl bg-black/40 border border-white/10">
-                    <span className="text-[10px] text-purple-400 font-bold block uppercase">👥 TEAM FORMAT</span>
-                    <span className="text-white font-bold text-[11px]">4–5 Students + 1 Mentor ( Not Mandatory )</span>
+                    <span className="text-[10px] text-purple-400 font-bold block uppercase">
+                      👥 TEAM FORMAT
+                    </span>
+                    <span className="text-white font-bold text-[11px]">
+                      4–5 Students + 1 Mentor (Optional)
+                    </span>
                   </div>
                   <div className="p-3 rounded-xl bg-black/40 border border-amber-400/30 bg-amber-500/10">
-                    <span className="text-[10px] text-amber-300 font-bold block uppercase">🛠️ HARDWARE</span>
-                    <span className="text-amber-200 font-bold">Provided by University</span>
+                    <span className="text-[10px] text-amber-300 font-bold block uppercase">
+                      🛠️ HARDWARE
+                    </span>
+                    <span className="text-amber-200 font-bold">
+                      Provided on Campus
+                    </span>
                   </div>
                 </div>
 
@@ -437,11 +790,21 @@ export const EventSchoolCategories: React.FC<EventSchoolCategoriesProps> = ({
               </div>
 
               {/* Modal Actions */}
-              <div className="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
+              <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                <a
+                  href="https://forms.gle/thqCVXNKctqwujBy9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-3 px-6 rounded-xl font-bold tracking-wider text-xs uppercase bg-gradient-to-r from-purple-600 to-indigo-600 hover:brightness-110 text-white transition-all text-center shadow-[0_0_20px_rgba(168,85,247,0.3)] flex items-center justify-center space-x-2 cursor-pointer"
+                >
+                  <span>REGISTER FOR THIS CHALLENGE</span>
+                  <span>↗</span>
+                </a>
+
                 <button
                   type="button"
                   onClick={() => setSelectedPS(null)}
-                  className="w-full sm:w-auto py-3 px-8 rounded-xl font-bold tracking-wider text-xs uppercase border border-white/20 bg-white/5 hover:bg-white/10 text-white transition-colors cursor-pointer"
+                  className="py-3 px-6 rounded-xl font-bold tracking-wider text-xs uppercase border border-white/20 bg-white/5 hover:bg-white/10 text-white transition-colors cursor-pointer text-center"
                 >
                   CLOSE BRIEFING ✕
                 </button>

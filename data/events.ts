@@ -1,3 +1,5 @@
+import { nextGenHackathonSchoolCategories } from "./schoolProblemStatements";
+
 export interface EvaluationParameter {
   parameter: string;
   weightage: string;
@@ -46,11 +48,14 @@ export interface SchoolHackathonProblemStatement {
   code: string;
   title: string;
   domain: string;
+  themeNumber?: number;
   icon: string;
   description: string;
   objective: string;
   deliverables: string[];
   recommendedTools?: string[];
+  categoryType?: "Software" | "Hardware" | "Open";
+  difficulty?: "Standard" | "Advanced" | "Flagship";
 }
 
 export interface SchoolHackathonCategory {
@@ -623,192 +628,7 @@ export const eventsList: EventItem[] = [
       "Cash Prizes, School Champion Trophies & Certificates",
     ],
     schoolCategoriesTitle: "Next-Gen Hackathon Categories & Problem Statements",
-    schoolCategories: [
-      {
-        id: "class-9-10",
-        title: "Class 9 & 10 Category (Junior Innovators)",
-        gradeBadge: "CLASS 9 & 10",
-        eligibility: "Students currently enrolled in Class 9th or 10th",
-        tagline: "CREATIVE SCIENCE, SMART LIVING & ECO-SOLUTIONS",
-        description:
-          "Tailored for junior school students to explore foundational science, environmental conservation, smart campus automation, and creative digital learning through practical prototypes. Essential hardware kits and lab equipment are provided on-campus by the University.",
-        accentColor: "emerald",
-        problemStatements: [
-          {
-            id: "ps-j-01",
-            code: "NGH-J-01",
-            title: "Smart Waste Segregation & Campus Eco-Tracker",
-            domain: "Sustainability & Clean Tech",
-            icon: "🌱",
-            description:
-              "Design an automated or sensor-based waste segregation prototype (distinguishing dry, wet, or plastic items) or a digital recycling tracker that encourages school students to minimize campus litter and monitor daily recyclable collection.",
-            objective:
-              "Promote zero-waste habits in schools through automated sorting mechanisms and gamified recycling metrics.",
-            deliverables: [
-              "Functional hardware model or sensor circuit demonstrating automated waste detection/sorting",
-              "Presentation or interactive poster explaining environmental impact and school deployment",
-            ],
-            recommendedTools: [
-              "Arduino / Micro:bit / Basic sensors",
-              "Recycled cardboard / Mechanical sorting chutes",
-              "Scratch / Python / Web dashboard",
-            ],
-          },
-          {
-            id: "ps-j-02",
-            code: "NGH-J-02",
-            title: "Intelligent Water Overflow & Leakage Alert System",
-            domain: "Water Conservation & Resource Management",
-            icon: "💧",
-            description:
-              "Create an automated water level monitor for school and household overhead tanks that automatically shuts off the water pump upon reaching capacity and rings an alert buzzer to prevent water overflow and pipe leakages.",
-            objective:
-              "Prevent thousands of liters of clean drinking water wastage daily through automated overflow cutoff circuits.",
-            deliverables: [
-              "Functional circuit model using water level/ultrasonic sensors and automated relay buzzer",
-              "Live demonstration of automated pump shutoff and overflow alert trigger",
-            ],
-            recommendedTools: [
-              "Ultrasonic / Float / Soil moisture sensors",
-              "Relay module & Buzzer",
-              "Breadboard / Tinkercad simulation",
-            ],
-          },
-          {
-            id: "ps-j-03",
-            code: "NGH-J-03",
-            title: "Gamified Interactive Science & Mathematics Learning Simulator",
-            domain: "EdTech & Game Design",
-            icon: "🎮",
-            description:
-              "Develop an interactive digital quiz, simulation game, or visual puzzle (using Scratch, Python, or Web) that transforms complex science concepts (e.g., laws of motion, electric circuits, human anatomy, fractions) into fun, gamified puzzles for school peers.",
-            objective:
-              "Empower peer-to-peer visual learning through interactive storytelling, gameplay, and conceptual simulations.",
-            deliverables: [
-              "Playable digital game or web application prototype",
-              "Short user guide or interactive walkthrough demonstration",
-            ],
-            recommendedTools: [
-              "Scratch / Block programming",
-              "Python / Pygame",
-              "HTML5 / CSS / JavaScript",
-            ],
-          },
-          {
-            id: "ps-j-04",
-            code: "NGH-J-04",
-            title: "Classroom Smart Energy Guardian",
-            domain: "Smart Campus & Energy Efficiency",
-            icon: "⚡",
-            description:
-              "Build a smart classroom automation prototype utilizing motion detectors (PIR) and light sensors (LDR) to automatically shut off classroom lights and fans when rooms are vacant, helping schools reduce electrical power wastage.",
-            objective:
-              "Drastically reduce school electricity bills and carbon footprint through smart occupancy sensing.",
-            deliverables: [
-              "Demonstration breadboard model with PIR and LDR sensor automation",
-              "Calculated energy savings analysis for a typical 10-room school building",
-            ],
-            recommendedTools: [
-              "PIR Motion Sensor",
-              "LDR Light Sensor",
-              "Arduino / Microcontroller or Logic IC",
-            ],
-          },
-        ],
-      },
-      {
-        id: "class-11-12",
-        title: "Class 11 & 12 Category (Senior Innovators)",
-        gradeBadge: "CLASS 11 & 12",
-        eligibility: "Students currently enrolled in Class 11th or 12th",
-        tagline: "ADVANCED APPLIED TECH, AI, IOT & REAL-WORLD PROBLEM SOLVING",
-        description:
-          "Challenging senior school students to build sophisticated, high-impact prototypes leveraging artificial intelligence, IoT sensor arrays, robotics, health monitoring, and cyber safety tools. Essential hardware development kits, microcontrollers, and lab apparatus are provided on-campus by the University.",
-        accentColor: "purple",
-        problemStatements: [
-          {
-            id: "ps-s-01",
-            code: "NGH-S-01",
-            title: "AI & IoT Early Warning Network for Landslides and Hill Floods",
-            domain: "Disaster Resilience & Climate Tech",
-            icon: "📡",
-            description:
-              "Develop a multi-sensor alert station (monitoring soil moisture saturation, ground vibration, and rainfall rate) or an AI computer vision model to detect early micro-shifts on steep slopes and trigger rapid community sirens and emergency SMS notifications.",
-            objective:
-              "Provide vital early warning lead time to vulnerable communities in hilly and flood-prone terrains.",
-            deliverables: [
-              "Working IoT hardware prototype or AI detection algorithm with dashboard interface",
-              "Live demonstration of multi-sensor data feed and emergency alert trigger",
-            ],
-            recommendedTools: [
-              "ESP32 / NodeMCU / Arduino",
-              "Soil moisture & Vibration sensors",
-              "Python / OpenCV / IoT Cloud dashboard",
-            ],
-          },
-          {
-            id: "ps-s-02",
-            code: "NGH-S-02",
-            title: "Smart Tele-Health Kiosk & Rapid Diagnostic Assistant for Remote Areas",
-            domain: "Digital Healthcare & Medical Tech",
-            icon: "🏥",
-            description:
-              "Design a portable health diagnostic station or mobile web platform that connects basic medical sensors (pulse oximeter, non-contact infrared temperature, heart rate), generates an automated patient triage summary, and facilitates remote consultations.",
-            objective:
-              "Bring affordable, rapid preliminary medical screening and telehealth access to remote and underserved rural schools and villages.",
-            deliverables: [
-              "Working sensor-integrated hardware prototype or mobile/web diagnostic interface",
-              "Patient triage report generation demonstration with simulated medical metrics",
-            ],
-            recommendedTools: [
-              "MAX30102 / Pulse sensor",
-              "MLX90614 Temperature sensor",
-              "React / Flutter / Firebase dashboard",
-            ],
-          },
-          {
-            id: "ps-s-03",
-            code: "NGH-S-03",
-            title: "AI Cyber-Shield: Anti-Bullying, Phishing & Teen Safety Guardian",
-            domain: "Cybersecurity & Digital Well-being",
-            icon: "🛡️",
-            description:
-              "Create an AI-powered browser extension, desktop utility, or chatbot that analyzes text and URLs in real-time to alert teenage students against toxic cyberbullying comments, fraudulent phishing URLs, and online predatory traps.",
-            objective:
-              "Foster a safer digital environment for school students through proactive NLP moderation and threat detection.",
-            deliverables: [
-              "Functional browser extension or prototype software application",
-              "Live demo testing against known toxic phrases and deceptive phishing URLs",
-            ],
-            recommendedTools: [
-              "Natural Language Processing (NLP)",
-              "Chrome Extension APIs",
-              "Python / FastAPI or Node.js",
-            ],
-          },
-          {
-            id: "ps-s-04",
-            code: "NGH-S-04",
-            title: "Autonomous Terrain Navigation & Disaster Rescue Rover",
-            domain: "Robotics & Embedded Systems",
-            icon: "🤖",
-            description:
-              "Construct an autonomous or remote-operated robotic rover equipped with ultrasonic/infrared sensors and camera feed, capable of traversing uneven obstacle terrain to locate targets and deliver emergency kits during simulated disaster scenarios.",
-            objective:
-              "Demonstrate rapid-response robotic mobility in dangerous zones inaccessible to humans during disasters.",
-            deliverables: [
-              "Physical working robotic rover with multi-sensor obstacle avoidance and steering control",
-              "Live arena navigation demo over simulated rough terrain",
-            ],
-            recommendedTools: [
-              "Motor drivers (L298N) & Chassis",
-              "Ultrasonic / IR obstacle sensors",
-              "ESP32-CAM / Arduino / Bluetooth/WiFi control",
-            ],
-          },
-        ],
-      },
-    ],
+    schoolCategories: nextGenHackathonSchoolCategories,
   },
 ];
 
