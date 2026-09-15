@@ -15,6 +15,7 @@ import EventOpportunities from "@/components/events/detail/EventOpportunities";
 import EventSchoolCategories from "@/components/events/detail/EventSchoolCategories";
 import EventParticipatingStates from "@/components/events/detail/EventParticipatingStates";
 import EventCTA from "@/components/events/detail/EventCTA";
+import QuantumDriftPage from "@/components/events/quantum-drift/QuantumDriftPage";
 
 interface PageProps {
   params: Promise<{
@@ -28,6 +29,7 @@ export async function generateStaticParams() {
       slug: event.slug,
     })),
     { slug: "science-championship" },
+    { slug: "quantum-drift" },
   ];
 }
 
@@ -57,6 +59,11 @@ export default async function EventDetailPage({ params }: PageProps) {
 
   if (!event) {
     notFound();
+  }
+
+  // Specialized dedicated experience for Quantum Drift
+  if (slug === "quantum-drift" || event.slug === "quantum-drift") {
+    return <QuantumDriftPage event={event} />;
   }
 
   return (

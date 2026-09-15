@@ -81,6 +81,16 @@ export interface JourneyMilestone {
   isGrandFinal?: boolean;
 }
 
+export interface QuantumDriftPhase {
+  number: string;
+  name: string;
+  tagline: string;
+  description: string;
+  progressionLabel: string;
+  image: string;
+  accent: "green" | "cyan" | "crimson" | "amber";
+}
+
 export interface EventItem {
   id: string; // Slug & unique ID
   slug: string;
@@ -121,6 +131,7 @@ export interface EventItem {
   journeyTitle?: string;
   journeySubtitle?: string;
   journeyMilestones?: JourneyMilestone[];
+  quantumPhases?: QuantumDriftPhase[];
 }
 
 export const eventsList: EventItem[] = [
@@ -629,6 +640,91 @@ export const eventsList: EventItem[] = [
     ],
     schoolCategoriesTitle: "Next-Gen Hackathon Categories & Problem Statements",
     schoolCategories: nextGenHackathonSchoolCategories,
+  },
+
+  // =========================================================================
+  // 05 — QUANTUM DRIFT (Specialized Robotics Arena Experience)
+  // =========================================================================
+  {
+    id: "quantum-drift",
+    slug: "quantum-drift",
+    number: "05",
+    name: "QUANTUM DRIFT",
+    category: "ROBOTICS",
+    date: "09 OCTOBER 2026",
+    fullDateSchedule: [
+      "09 October 2026 — Phase 01: Robo Soccer Arena Matches",
+      "09 October 2026 — Phase 02: Path Robo Follower Precision Course",
+      "09 October 2026 — Phase 03: Robo War Combat Pit Faceoffs",
+      "09 October 2026 — Phase 04: Grand Finale Robo Race Championship",
+    ],
+    duration: "Full-Day Robotics Arena Championship",
+    venue: "Main Robotics Arena, Shivalik University",
+    theme: "Build • Drive • Survive",
+    tagline: "BUILD • DRIVE • SURVIVE",
+    description:
+      "A four-phase robotic competition where participants progress from Robo Soccer to Path Robo Follower, Robo War, and the final Robo Race.",
+    purpose: [
+      "Bring your own self-built robotic car or compete with a purchased robotic car.",
+      "Clear Phase 01 Robo Soccer to qualify and advance to Phase 02.",
+      "Pass Phase 02 Path Robo Follower precision navigation to reach Phase 03.",
+      "Survive Phase 03 Robo War head-to-head combat to enter the Phase 04 final race.",
+      "Compete in the ultimate Robo Race championship round to become the Quantum Drift Champion.",
+    ],
+    registerUrl: "/register?event=quantum-drift",
+    isRegistrationOpen: false,
+    registrationNotice: "Registration is opening soon",
+    accentColor: "crimson",
+    badge: "ROBOTICS ARENA",
+    highlights: [
+      "4 Progressive Knockout Arena Phases",
+      "Self-Built or Purchased Robotic Car Eligible",
+      "One Car Competes Through All 4 Challenges",
+      "Robo Soccer → Path Follower → Robo War → Robo Race",
+      "Grand Finale Championship Run",
+    ],
+    quantumPhases: [
+      {
+        number: "01",
+        name: "ROBO SOCCER",
+        tagline: "MASTER THE FIELD",
+        description:
+          "A robotic football challenge where participants control their robot within the arena.",
+        progressionLabel: "CLEAR PHASE → ADVANCE",
+        image: "/events/quantum-drift/phase-01-soccer.jpg",
+        accent: "green",
+      },
+      {
+        number: "02",
+        name: "PATH ROBO FOLLOWER",
+        tagline: "CONTROL THE LINE",
+        description:
+          "A precision challenge focused on following the designated path through the course.",
+        progressionLabel: "CLEAR PHASE → ADVANCE",
+        image: "/events/quantum-drift/phase-02-follower.jpg",
+        accent: "cyan",
+      },
+      {
+        number: "03",
+        name: "ROBO WAR",
+        tagline: "OUTPLAY YOUR OPPONENT",
+        description:
+          "A head-to-head robotic challenge inside a controlled arena.",
+        progressionLabel: "CLEAR PHASE → ADVANCE",
+        image: "/events/quantum-drift/phase-03-war.jpg",
+        accent: "crimson",
+      },
+      {
+        number: "04",
+        name: "ROBO RACE",
+        tagline: "THE FINAL RUN",
+        description:
+          "Reach the final phase and compete in the ultimate Quantum Drift challenge.",
+        progressionLabel: "BECOME THE QUANTUM DRIFT CHAMPION",
+        image: "/events/quantum-drift/phase-04-race.jpg",
+        accent: "amber",
+      },
+    ],
   },
 ];
 
