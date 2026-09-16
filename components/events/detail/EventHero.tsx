@@ -183,7 +183,7 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl mb-8 font-mono"
+          className={`grid grid-cols-1 sm:grid-cols-2 ${event.registrationFee ? "lg:grid-cols-5" : "lg:grid-cols-4"} gap-3.5 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl mb-8 font-mono`}
         >
           {/* Date */}
           <div className="flex flex-col">
@@ -225,6 +225,20 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
               🏆 {event.prize ? `${event.prize} Awards + Incubation` : "Awards, Certificates & Mentorship"}
             </span>
           </div>
+
+          {/* Registration Fee */}
+          {event.registrationFee && (
+            <div className="flex flex-col justify-center sm:col-span-2 lg:col-span-1 p-2.5 sm:p-3 rounded-xl bg-red-500/[0.08] border border-red-500/30 shadow-[0_0_20px_rgba(239,68,68,0.15)] relative overflow-hidden">
+              <span className="text-[10px] tracking-widest text-red-400 uppercase font-bold mb-1 flex items-center space-x-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+                <span>REGISTRATION FEE</span>
+              </span>
+              <span className="text-base sm:text-lg font-black text-white tracking-tight flex items-baseline space-x-1">
+                <span className="text-red-400 font-black">₹250</span>
+                <span className="text-slate-200 font-bold text-xs sm:text-sm">/ MEMBER</span>
+              </span>
+            </div>
+          )}
         </motion.div>
 
         {/* Dynamic Event Stats Strip with Heading - ONLY ON HACKATHON PAGE */}
@@ -267,6 +281,21 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
                   </div>
                 </div>
               ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* Registration Fee Reminder (Immediately above Hero Register Button) */}
+        {event.registrationFee && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="mb-4"
+          >
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-xs sm:text-sm font-mono font-bold text-red-400 tracking-wider uppercase shadow-[0_0_20px_rgba(239,68,68,0.2)]">
+              <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+              <span>REGISTRATION FEE — {event.registrationFee}</span>
             </div>
           </motion.div>
         )}

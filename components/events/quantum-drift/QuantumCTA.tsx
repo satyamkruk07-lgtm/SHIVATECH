@@ -60,7 +60,7 @@ export const QuantumCTA: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm font-extrabold tracking-[0.25em] text-slate-300 uppercase mb-8"
         >
-          <span>FOUR PHASES</span>
+          <span>THREE PHASES</span>
           <span className="text-red-500">•</span>
           <span>ONE ARENA</span>
           <span className="text-sky-400">•</span>

@@ -40,7 +40,7 @@ export const QuantumConcept: React.FC = () => {
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase leading-[1.05] font-orbitron">
               ONE CAR.
               <br />
-              <span className="text-red-500">FOUR PHASES.</span>
+              <span className="text-red-500">THREE PHASES.</span>
               <br />
               <span className="text-sky-400">ONE FINAL CHAMPION.</span>
             </h2>
@@ -64,7 +64,7 @@ export const QuantumConcept: React.FC = () => {
               <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-sky-400/50" />
 
               <p className="text-base sm:text-lg text-slate-200 font-sans leading-relaxed font-normal">
-                Bring your own robotic car or use a purchased robotic car and compete through four progressive challenges. Clear one phase to advance to the next.
+                Bring your own robotic car or use a purchased robotic car and compete through three progressive challenges. Clear one phase to advance to the next.
               </p>
 
               <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between">

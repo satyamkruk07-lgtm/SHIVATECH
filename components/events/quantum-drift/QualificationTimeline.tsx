@@ -17,16 +17,6 @@ const progressionSteps = [
   {
     stepNumber: "02",
     phaseLabel: "PHASE 02",
-    title: "PATH ROBO FOLLOWER",
-    tagline: "CONTROL THE LINE",
-    description: "Precision automated path navigation.",
-    status: "QUALIFICATION ROUND",
-    accentClass: "text-sky-400 border-sky-500/30 bg-sky-500/10",
-    glowColor: "rgba(56,189,248,0.5)",
-  },
-  {
-    stepNumber: "03",
-    phaseLabel: "PHASE 03",
     title: "ROBO WAR",
     tagline: "OUTPLAY YOUR OPPONENT",
     description: "Head-to-head combat faceoff.",
@@ -35,8 +25,8 @@ const progressionSteps = [
     glowColor: "rgba(239,68,68,0.5)",
   },
   {
-    stepNumber: "04",
-    phaseLabel: "PHASE 04",
+    stepNumber: "03",
+    phaseLabel: "PHASE 03",
     title: "ROBO RACE",
     tagline: "THE FINAL RUN",
     description: "High-speed championship final.",
@@ -74,9 +64,9 @@ export const QualificationTimeline: React.FC = () => {
         {/* 1. DESKTOP VIEW: HORIZONTAL GLOWING PROGRESSION LINE */}
         <div className="hidden lg:block relative my-12">
           {/* Continuous Glowing Background Line */}
-          <div className="absolute top-[68px] left-[5%] right-[5%] h-1 bg-gradient-to-r from-emerald-500 via-sky-500 to-amber-500 shadow-[0_0_20px_rgba(239,68,68,0.5)] z-0" />
+          <div className="absolute top-[68px] left-[5%] right-[5%] h-1 bg-gradient-to-r from-emerald-500 via-red-500 to-amber-500 shadow-[0_0_20px_rgba(239,68,68,0.5)] z-0" />
 
-          <div className="grid grid-cols-4 gap-6 relative z-10">
+          <div className="grid grid-cols-3 gap-8 relative z-10">
             {progressionSteps.map((step, idx) => (
               <motion.div
                 key={step.stepNumber}
@@ -123,7 +113,7 @@ export const QualificationTimeline: React.FC = () => {
                 </p>
 
                 {/* Advance Arrow (except for final) */}
-                {idx < 3 && (
+                {idx < 2 && (
                   <div className="mt-4 text-xs font-bold text-red-500/80 tracking-widest uppercase flex items-center space-x-1">
                     <span>CLEAR</span>
                     <span>→</span>
@@ -155,14 +145,14 @@ export const QualificationTimeline: React.FC = () => {
             <div className="text-right">
               <span className="text-xs text-slate-400 uppercase tracking-wider block">FINAL CRITERIA</span>
               <span className="text-sm font-bold text-amber-400 uppercase tracking-widest">
-                OUTLAST ALL 4 PHASES
+                OUTLAST ALL 3 PHASES
               </span>
             </div>
           </motion.div>
         </div>
 
         {/* 2. MOBILE VIEW: VERTICAL TIMELINE */}
-        <div className="block lg:hidden relative pl-6 sm:pl-8 border-l-2 border-gradient-to-b from-emerald-500 via-sky-500 to-amber-500 ml-4 space-y-10">
+        <div className="block lg:hidden relative pl-6 sm:pl-8 border-l-2 border-gradient-to-b from-emerald-500 via-red-500 to-amber-500 ml-4 space-y-10">
           {progressionSteps.map((step, idx) => (
             <motion.div
               key={step.stepNumber}

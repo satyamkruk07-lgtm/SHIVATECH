@@ -24,20 +24,20 @@ export const QuantumPhaseGrid: React.FC<QuantumPhaseGridProps> = ({ phases }) =>
           </div>
 
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase font-orbitron">
-            THE FOUR PHASES
+            THE THREE PHASES
           </h2>
 
           <p className="text-sm sm:text-base text-slate-400 max-w-xl mt-3 font-sans tracking-wide">
-            One arena. Four challenges. One progression.
+            One arena. Three challenges. One progression.
           </p>
 
           <div className="w-24 h-1 bg-gradient-to-r from-red-500 via-sky-400 to-red-500 rounded-full mt-6" />
         </div>
 
-        {/* The 4 Phases Grid */}
+        {/* The 3 Phases Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {phases.map((phase, idx) => {
-            const isPhase4 = phase.number === "04";
+            const isFinalPhase = phase.number === "03" || idx === phases.length - 1;
 
             // Border and accent styling based on phase
             const borderColors = {
@@ -62,7 +62,7 @@ export const QuantumPhaseGrid: React.FC<QuantumPhaseGridProps> = ({ phases }) =>
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
                 className={`relative rounded-2xl overflow-hidden border ${borderColors} transition-all duration-500 group bg-[#040814] flex flex-col justify-between ${
-                  isPhase4 ? "md:col-span-2 md:min-h-[420px]" : "min-h-[380px]"
+                  isFinalPhase ? "md:col-span-2 md:min-h-[420px]" : "min-h-[380px]"
                 }`}
               >
                 {/* 1. VISUAL CARD BACKGROUND */}
@@ -71,7 +71,7 @@ export const QuantumPhaseGrid: React.FC<QuantumPhaseGridProps> = ({ phases }) =>
                     src={phase.image}
                     alt={phase.name}
                     fill
-                    sizes={isPhase4 ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
+                    sizes={isFinalPhase ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
                     className="object-cover object-center opacity-40 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#040814] via-[#040814]/85 to-transparent" />
@@ -84,7 +84,7 @@ export const QuantumPhaseGrid: React.FC<QuantumPhaseGridProps> = ({ phases }) =>
                     PHASE {phase.number}
                   </span>
 
-                  {isPhase4 && (
+                  {isFinalPhase && (
                     <span className="px-3.5 py-1 rounded-full text-[11px] font-bold tracking-[0.25em] uppercase text-amber-300 bg-amber-500/15 border border-amber-500/40 animate-pulse">
                       ★ FINAL PHASE
                     </span>

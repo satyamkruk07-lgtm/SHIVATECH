@@ -8,7 +8,6 @@ import QuantumHero from "./QuantumHero";
 import QuantumConcept from "./QuantumConcept";
 import QuantumPhaseGrid from "./QuantumPhaseGrid";
 import QualificationTimeline from "./QualificationTimeline";
-import RobotChoice from "./RobotChoice";
 import ArenaMap from "./ArenaMap";
 import QuantumSummary from "./QuantumSummary";
 import QuantumCTA from "./QuantumCTA";
@@ -31,16 +30,13 @@ export const QuantumDriftPage: React.FC<QuantumDriftPageProps> = ({ event }) => 
       {/* 3. EVENT INTRO / CONCEPT */}
       <QuantumConcept />
 
-      {/* 4. THE FOUR PHASES */}
+      {/* 4. THE THREE PHASES */}
       <QuantumPhaseGrid phases={phases} />
 
       {/* 5. THE QUALIFICATION JOURNEY */}
       <QualificationTimeline />
 
-      {/* 6. YOUR ROBOT. YOUR CHOICE. */}
-      <RobotChoice />
-
-      {/* 7. THE ARENA */}
+      {/* 6. THE ARENA */}
       <ArenaMap />
 
       {/* 8. EVENT SUMMARY */}

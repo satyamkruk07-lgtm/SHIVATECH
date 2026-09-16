@@ -45,9 +45,17 @@ export const EventCTA: React.FC<EventCTAProps> = ({ event }) => {
           READY TO COMPETE IN {event.name}?
         </h2>
 
-        <p className="text-sm sm:text-base font-sans text-slate-300 max-w-xl leading-relaxed mb-8">
+        <p className="text-sm sm:text-base font-sans text-slate-300 max-w-xl leading-relaxed mb-6">
           Register now to secure your team slot, access challenge mentoring, and showcase your innovation on the grand stage of Shivalik University.
         </p>
+
+        {/* Registration Fee Reminder (Immediately above Registration CTA) */}
+        {event.registrationFee && (
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-xs sm:text-sm font-mono font-bold text-red-400 tracking-wider uppercase mb-6 shadow-[0_0_20px_rgba(239,68,68,0.2)]">
+            <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+            <span>REGISTRATION FEE — {event.registrationFee}</span>
+          </div>
+        )}
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center gap-4 font-mono w-full sm:w-auto">

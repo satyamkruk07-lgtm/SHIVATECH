@@ -102,7 +102,7 @@ export const QuantumHero: React.FC<QuantumHeroProps> = ({ onExploreClick }) => {
           BUILD <span className="text-red-500">•</span> DRIVE <span className="text-sky-400">•</span> SURVIVE
         </motion.h2>
 
-        {/* Small supporting label: 4 PHASES • 1 FINAL CHAMPION */}
+        {/* Small supporting label: 3 PHASES • 1 FINAL CHAMPION */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -110,7 +110,7 @@ export const QuantumHero: React.FC<QuantumHeroProps> = ({ onExploreClick }) => {
           className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-lg bg-black/60 border border-white/10 text-xs sm:text-sm font-semibold tracking-[0.25em] text-slate-300 uppercase mb-8 backdrop-blur-md"
         >
           <span className="w-2 h-2 rounded-full bg-red-500" />
-          <span>4 PHASES</span>
+          <span>3 PHASES</span>
           <span className="text-slate-600">•</span>
           <span className="w-2 h-2 rounded-full bg-sky-400" />
           <span>1 FINAL CHAMPION</span>
@@ -153,7 +153,7 @@ export const QuantumHero: React.FC<QuantumHeroProps> = ({ onExploreClick }) => {
           </div>
           <div className="flex flex-col items-center p-3 rounded-lg bg-white/[0.02] border border-white/5">
             <span className="text-[10px] text-slate-500 tracking-wider uppercase">CHALLENGES</span>
-            <span className="text-xs sm:text-sm font-bold text-red-400 tracking-wide">4 PHASES</span>
+            <span className="text-xs sm:text-sm font-bold text-red-400 tracking-wide">3 PHASES</span>
           </div>
           <div className="flex flex-col items-center p-3 rounded-lg bg-white/[0.02] border border-white/5">
             <span className="text-[10px] text-slate-500 tracking-wider uppercase">VEHICLE TYPE</span>

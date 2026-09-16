@@ -16,7 +16,7 @@ const summarySpecs = [
   },
   {
     label: "CORE FORMAT",
-    value: "FOUR PROGRESSIVE PHASES",
+    value: "THREE PROGRESSIVE PHASES",
     highlight: "text-sky-400 font-bold",
   },
   {
@@ -31,7 +31,7 @@ const summarySpecs = [
   },
   {
     label: "CHAMPIONSHIP STAGE",
-    value: "PHASE 04 ROBO RACE",
+    value: "PHASE 03 ROBO RACE",
     highlight: "text-amber-300 font-bold",
   },
 ];
@@ -47,7 +47,7 @@ export const QuantumSummary: React.FC = () => {
         <div className="flex flex-col items-center text-center mb-14 sm:mb-16">
           <div className="flex items-center space-x-2 text-xs tracking-[0.3em] uppercase text-red-400 font-bold mb-3">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-            <span>SECTION 06 // TECHNICAL SPECIFICATIONS</span>
+            <span>SECTION 05 // TECHNICAL SPECIFICATIONS</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white uppercase font-orbitron">
@@ -106,10 +106,6 @@ export const QuantumSummary: React.FC = () => {
             <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-bold text-white tracking-wider">
               <span className="px-2.5 py-1 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
                 ROBO SOCCER
-              </span>
-              <span className="text-slate-500">→</span>
-              <span className="px-2.5 py-1 rounded bg-sky-500/15 text-sky-400 border border-sky-500/30">
-                PATH FOLLOWER
               </span>
               <span className="text-slate-500">→</span>
               <span className="px-2.5 py-1 rounded bg-red-500/15 text-red-400 border border-red-500/30">

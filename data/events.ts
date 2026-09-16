@@ -110,6 +110,7 @@ export interface EventItem {
   registerUrl: string;
   isRegistrationOpen?: boolean;
   registrationNotice?: string;
+  registrationFee?: string;
   accentColor: "crimson" | "blue" | "emerald" | "purple";
   badge?: string;
   highlights: string[];
@@ -164,6 +165,7 @@ export const eventsList: EventItem[] = [
     ],
     prize: "Up to ₹2,00,000",
     teamSize: "4–6 Members",
+    registrationFee: "₹250 / MEMBER",
     registerUrl: "https://forms.gle/CvYpny3YC5dpdYby7",
     isRegistrationOpen: true,
     accentColor: "crimson",
@@ -654,21 +656,19 @@ export const eventsList: EventItem[] = [
     date: "09 OCTOBER 2026",
     fullDateSchedule: [
       "09 October 2026 — Phase 01: Robo Soccer Arena Matches",
-      "09 October 2026 — Phase 02: Path Robo Follower Precision Course",
-      "09 October 2026 — Phase 03: Robo War Combat Pit Faceoffs",
-      "09 October 2026 — Phase 04: Grand Finale Robo Race Championship",
+      "09 October 2026 — Phase 02: Robo War Combat Pit Faceoffs",
+      "09 October 2026 — Phase 03: Grand Finale Robo Race Championship",
     ],
     duration: "Full-Day Robotics Arena Championship",
     venue: "Main Robotics Arena, Shivalik University",
     theme: "Build • Drive • Survive",
     tagline: "BUILD • DRIVE • SURVIVE",
     description:
-      "A four-phase robotic competition where participants progress from Robo Soccer to Path Robo Follower, Robo War, and the final Robo Race.",
+      "A three-phase robotic competition where participants progress from Robo Soccer to Robo War, and the final Robo Race.",
     purpose: [
       "Bring your own self-built robotic car or compete with a purchased robotic car.",
       "Clear Phase 01 Robo Soccer to qualify and advance to Phase 02.",
-      "Pass Phase 02 Path Robo Follower precision navigation to reach Phase 03.",
-      "Survive Phase 03 Robo War head-to-head combat to enter the Phase 04 final race.",
+      "Survive Phase 02 Robo War head-to-head combat to enter the Phase 03 final race.",
       "Compete in the ultimate Robo Race championship round to become the Quantum Drift Champion.",
     ],
     registerUrl: "/register?event=quantum-drift",
@@ -677,10 +677,10 @@ export const eventsList: EventItem[] = [
     accentColor: "crimson",
     badge: "ROBOTICS ARENA",
     highlights: [
-      "4 Progressive Knockout Arena Phases",
+      "3 Progressive Knockout Arena Phases",
       "Self-Built or Purchased Robotic Car Eligible",
-      "One Car Competes Through All 4 Challenges",
-      "Robo Soccer → Path Follower → Robo War → Robo Race",
+      "One Car Competes Through All 3 Challenges",
+      "Robo Soccer → Robo War → Robo Race",
       "Grand Finale Championship Run",
     ],
     quantumPhases: [
@@ -696,16 +696,6 @@ export const eventsList: EventItem[] = [
       },
       {
         number: "02",
-        name: "PATH ROBO FOLLOWER",
-        tagline: "CONTROL THE LINE",
-        description:
-          "A precision challenge focused on following the designated path through the course.",
-        progressionLabel: "CLEAR PHASE → ADVANCE",
-        image: "/events/quantum-drift/phase-02-follower.jpg",
-        accent: "cyan",
-      },
-      {
-        number: "03",
         name: "ROBO WAR",
         tagline: "OUTPLAY YOUR OPPONENT",
         description:
@@ -715,7 +705,7 @@ export const eventsList: EventItem[] = [
         accent: "crimson",
       },
       {
-        number: "04",
+        number: "03",
         name: "ROBO RACE",
         tagline: "THE FINAL RUN",
         description:

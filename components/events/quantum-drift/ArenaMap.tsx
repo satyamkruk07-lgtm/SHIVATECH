@@ -18,16 +18,6 @@ const arenaZones = [
   {
     id: "zone-2",
     code: "ZONE 02",
-    title: "PATH ROBO FOLLOWER",
-    type: "MAZE / LABYRINTH",
-    tagline: "Micro-Sensor Course Navigation",
-    coords: "NE SECTOR",
-    accent: "text-sky-400 border-sky-500/40 bg-sky-500/10",
-    glow: "rgba(56,189,248,0.3)",
-  },
-  {
-    id: "zone-3",
-    code: "ZONE 03",
     title: "ROBO WAR",
     type: "COMBAT PIT",
     tagline: "Reinforced Hazard & Clashing Ring",
@@ -36,8 +26,8 @@ const arenaZones = [
     glow: "rgba(239,68,68,0.3)",
   },
   {
-    id: "zone-4",
-    code: "ZONE 04",
+    id: "zone-3",
+    code: "ZONE 03",
     title: "ROBO RACE",
     type: "HIGH-SPEED CIRCUIT",
     tagline: "Grand Finale Speed & Drifting Track",
@@ -60,7 +50,7 @@ export const ArenaMap: React.FC = () => {
         <div className="flex flex-col items-center text-center mb-16 sm:mb-20">
           <div className="flex items-center space-x-2 text-xs tracking-[0.3em] uppercase text-sky-400 font-bold mb-3">
             <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
-            <span>SECTION 05 // FACILITY LAYOUT</span>
+            <span>SECTION 04 // FACILITY LAYOUT</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase font-orbitron">
@@ -68,7 +58,7 @@ export const ArenaMap: React.FC = () => {
           </h2>
 
           <p className="text-sm sm:text-base text-slate-400 max-w-xl mt-3 font-sans tracking-wide">
-            FOUR CHALLENGES. ONE ARENA.
+            THREE CHALLENGES. ONE ARENA.
           </p>
 
           <div className="w-24 h-1 bg-gradient-to-r from-red-500 via-sky-400 to-red-500 rounded-full mt-6" />
@@ -92,7 +82,7 @@ export const ArenaMap: React.FC = () => {
             </div>
             <div className="hidden sm:flex items-center space-x-6 text-[11px] text-slate-400">
               <span>FACILITY: SHIVALIK TECH LAB</span>
-              <span>GRID: 4 CONNECTED ZONES</span>
+              <span>GRID: 3 CONNECTED ZONES</span>
               <span className="text-sky-400">STATUS: READY</span>
             </div>
           </div>
@@ -129,7 +119,7 @@ export const ArenaMap: React.FC = () => {
         </motion.div>
 
         {/* 2. INTERACTIVE ZONE CARDS STRIP */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
           {arenaZones.map((zone) => {
             const isSelected = activeZone === zone.id;
 
