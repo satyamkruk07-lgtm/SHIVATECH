@@ -679,7 +679,7 @@ export const eventsList: EventItem[] = [
     highlights: [
       "3 Progressive Knockout Arena Phases",
       "Self-Built or Purchased Robotic Car Eligible",
-      "One Car Competes Through All 3 Challenges",
+      "One Robo Competes Through All 3 Challenges",
       "Robo Soccer → Robo War → Robo Race",
       "Grand Finale Championship Run",
     ],
