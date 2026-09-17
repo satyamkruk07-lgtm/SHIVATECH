@@ -123,13 +123,15 @@ export const QuantumHero: React.FC<QuantumHeroProps> = ({ onExploreClick }) => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
         >
-          <Link
-            href="/register?event=quantum-drift"
-            className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold tracking-[0.2em] text-xs sm:text-sm uppercase text-white bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:from-red-500 hover:to-rose-500 shadow-[0_0_35px_rgba(239,68,68,0.4)] border border-red-400/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center space-x-2 group"
+          <a
+            href="https://forms.gle/KJXV1eGUcrtLhJy56"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold tracking-[0.2em] text-xs sm:text-sm uppercase text-white bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:from-red-500 hover:to-rose-500 shadow-[0_0_35px_rgba(239,68,68,0.4)] border border-red-400/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center space-x-2 group cursor-pointer"
           >
             <span>REGISTER NOW</span>
             <span className="group-hover:translate-x-1 transition-transform">→</span>
-          </Link>
+          </a>
 
           <button
             onClick={scrollToExplore}

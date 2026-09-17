@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 
 const arenaZones = [
@@ -77,42 +76,41 @@ export const ArenaMap: React.FC = () => {
             <div className="flex items-center space-x-3">
               <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
               <span className="font-bold tracking-[0.2em] text-white uppercase">
-                QUANTUM DRIFT // ARENA BLUEPRINT
+                QUANTUM DRIFT // ARENA FEED
               </span>
             </div>
             <div className="hidden sm:flex items-center space-x-6 text-[11px] text-slate-400">
               <span>FACILITY: SHIVALIK TECH LAB</span>
               <span>GRID: 3 CONNECTED ZONES</span>
-              <span className="text-sky-400">STATUS: READY</span>
+              <span className="text-emerald-400">FEED: ACTIVE</span>
             </div>
           </div>
 
-          {/* Blueprint Visual Representation */}
-          <div className="relative w-full aspect-[16/9] min-h-[300px] sm:min-h-[420px] lg:min-h-[500px]">
-            <Image
-              src="/events/quantum-drift/arena-concept.jpg"
-              alt="Quantum Drift Arena Map Blueprint"
-              fill
-              sizes="(max-width: 1200px) 100vw, 1200px"
-              className="object-cover object-center opacity-85"
-            />
-            {/* Blueprint Grid Lines Overlay */}
-            <div 
-              className="absolute inset-0 opacity-[0.12] pointer-events-none"
-              style={{
-                backgroundImage: `linear-gradient(to right, rgba(56,189,248,0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(56,189,248,0.3) 1px, transparent 1px)`,
-                backgroundSize: '30px 30px',
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#02040a] via-transparent to-transparent pointer-events-none" />
+          {/* Arena Video Feed Box */}
+          <div className="relative w-full aspect-[16/9] min-h-[300px] sm:min-h-[420px] lg:min-h-[500px] overflow-hidden bg-black">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="w-full h-full object-cover object-center"
+            >
+              <source src="/events/quantum-drift/arena-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
 
-            {/* Central Arena Conflux Label */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-2 rounded-lg bg-black/80 border border-sky-400/50 shadow-[0_0_25px_rgba(56,189,248,0.35)] backdrop-blur-md text-center pointer-events-none">
-              <span className="text-[10px] tracking-[0.25em] text-red-400 font-bold block">
-                CENTRAL NEXUS
+            {/* Subtle bottom gradient to blend cleanly with container */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#02040a]/80 via-transparent to-transparent pointer-events-none" />
+
+            {/* Live Feed Status Badge */}
+            <div className="absolute top-4 right-4 flex items-center space-x-2 px-3 py-1.5 rounded-full bg-black/70 border border-emerald-500/40 backdrop-blur-md pointer-events-none">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span className="text-xs sm:text-sm font-black tracking-widest text-white uppercase font-orbitron">
-                QUANTUM DRIFT
+              <span className="text-[10px] font-mono tracking-widest text-emerald-400 uppercase font-semibold">
+                ARENA FEED • LIVE
               </span>
             </div>
           </div>

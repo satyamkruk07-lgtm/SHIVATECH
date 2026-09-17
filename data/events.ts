@@ -671,9 +671,8 @@ export const eventsList: EventItem[] = [
       "Survive Phase 02 Robo War head-to-head combat to enter the Phase 03 final race.",
       "Compete in the ultimate Robo Race championship round to become the Quantum Drift Champion.",
     ],
-    registerUrl: "/register?event=quantum-drift",
-    isRegistrationOpen: false,
-    registrationNotice: "Registration is opening soon",
+    registerUrl: "https://forms.gle/KJXV1eGUcrtLhJy56",
+    isRegistrationOpen: true,
     accentColor: "crimson",
     badge: "ROBOTICS ARENA",
     highlights: [
