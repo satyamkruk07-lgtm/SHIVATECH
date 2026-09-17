@@ -38,7 +38,7 @@ export const QuantumConcept: React.FC = () => {
             </div>
 
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase leading-[1.05] font-orbitron">
-              ONE ROBO.
+              ONE CAR.
               <br />
               <span className="text-red-500">THREE PHASES.</span>
               <br />

@@ -58,7 +58,25 @@ export const QualificationTimeline: React.FC = () => {
             One continuous progression. Clear each phase to advance toward the championship.
           </p>
 
-          <div className="w-24 h-1 bg-gradient-to-r from-red-500 via-sky-400 to-red-500 rounded-full mt-6" />
+          <div className="w-24 h-1 bg-gradient-to-r from-red-500 via-sky-400 to-red-500 rounded-full mt-6 mb-8" />
+
+          {/* Explicit Progression Breadcrumb */}
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 text-xs font-bold tracking-wider uppercase">
+            <span className="text-emerald-400 font-mono flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
+              START
+            </span>
+            <span className="text-slate-500">→</span>
+            <span className="text-white">01 ROBO SOCCER</span>
+            <span className="text-slate-500">→</span>
+            <span className="text-red-400">02 ROBO WAR</span>
+            <span className="text-slate-500">→</span>
+            <span className="text-amber-300">03 ROBO RACE</span>
+            <span className="text-slate-500">→</span>
+            <span className="text-amber-400 font-orbitron">
+              CHAMPION 🏆
+            </span>
+          </div>
         </div>
 
         {/* 1. DESKTOP VIEW: HORIZONTAL GLOWING PROGRESSION LINE */}
@@ -153,6 +171,26 @@ export const QualificationTimeline: React.FC = () => {
 
         {/* 2. MOBILE VIEW: VERTICAL TIMELINE */}
         <div className="block lg:hidden relative pl-6 sm:pl-8 border-l-2 border-gradient-to-b from-emerald-500 via-red-500 to-amber-500 ml-4 space-y-10">
+          {/* Mobile Start Node */}
+          <div className="relative">
+            <div className="absolute -left-[37px] sm:-left-[45px] top-0 w-8 h-8 rounded-xl bg-[#040814] border-2 border-emerald-400 flex items-center justify-center text-[10px] font-black shadow-[0_0_15px_rgba(52,211,153,0.5)]">
+              <span className="text-emerald-400 font-mono">GO</span>
+            </div>
+            <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between">
+              <div>
+                <span className="text-[10px] text-emerald-400 font-black tracking-widest uppercase block">
+                  QUALIFICATION ENTRY
+                </span>
+                <span className="text-base font-black text-white font-orbitron">
+                  START
+                </span>
+              </div>
+              <span className="text-xs font-bold text-emerald-400 tracking-wider">
+                ↓ BEGIN
+              </span>
+            </div>
+          </div>
+
           {progressionSteps.map((step, idx) => (
             <motion.div
               key={step.stepNumber}

@@ -7,17 +7,32 @@ const summarySpecs = [
   {
     label: "EVENT NAME",
     value: "QUANTUM DRIFT",
-    highlight: "text-white",
+    highlight: "text-white font-bold",
   },
   {
-    label: "DATE OF COMPETITION",
+    label: "EVENT DATE",
     value: "09 OCTOBER 2026",
-    highlight: "text-red-400 font-bold",
+    highlight: "text-white font-bold",
   },
   {
-    label: "CORE FORMAT",
-    value: "THREE PROGRESSIVE PHASES",
+    label: "3 PROGRESSIVE PHASES",
+    value: "ROBO SOCCER → ROBO WAR → ROBO RACE",
     highlight: "text-sky-400 font-bold",
+  },
+  {
+    label: "TEAM SIZE",
+    value: "1–4 MEMBERS",
+    highlight: "text-white font-bold",
+  },
+  {
+    label: "REGISTRATION FEE",
+    value: "₹300 / TEAM",
+    highlight: "text-red-400 font-black",
+  },
+  {
+    label: "PRIZE POOL",
+    value: "UPTO ₹35,000",
+    highlight: "text-amber-300 font-black",
   },
   {
     label: "ELIGIBLE VEHICLES",
@@ -27,12 +42,7 @@ const summarySpecs = [
   {
     label: "QUALIFICATION RULE",
     value: "PASS CURRENT PHASE TO ADVANCE",
-    highlight: "text-emerald-400",
-  },
-  {
-    label: "CHAMPIONSHIP STAGE",
-    value: "PHASE 03 ROBO RACE",
-    highlight: "text-amber-300 font-bold",
+    highlight: "text-emerald-400 font-bold",
   },
 ];
 

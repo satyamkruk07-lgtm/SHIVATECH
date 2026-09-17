@@ -67,11 +67,40 @@ export const QuantumCTA: React.FC = () => {
           <span>ONE FINAL CHAMPION</span>
         </motion.div>
 
-        <motion.p
+        {/* Supporting Event Metadata Badges */}
+        <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex flex-wrap items-center justify-center gap-3 mb-8 max-w-xl mx-auto"
+        >
+          <div className="px-3.5 py-1.5 rounded-lg bg-white/[0.04] border border-white/15 text-xs font-mono">
+            <span className="text-slate-400">DATE: </span>
+            <span className="text-white font-bold">09 OCTOBER 2026</span>
+          </div>
+
+          <div className="px-3.5 py-1.5 rounded-lg bg-red-500/15 border border-red-500/40 text-xs font-mono">
+            <span className="text-red-300">FEE: </span>
+            <span className="text-red-400 font-black">₹300 / TEAM</span>
+          </div>
+
+          <div className="px-3.5 py-1.5 rounded-lg bg-sky-500/15 border border-sky-500/30 text-xs font-mono">
+            <span className="text-sky-300">TEAM: </span>
+            <span className="text-sky-400 font-bold">1–4 MEMBERS</span>
+          </div>
+
+          <div className="px-3.5 py-1.5 rounded-lg bg-amber-500/15 border border-amber-500/40 text-xs font-mono">
+            <span className="text-amber-300">PRIZE POOL: </span>
+            <span className="text-amber-400 font-black">UPTO ₹35,000</span>
+          </div>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.35 }}
           className="text-xs sm:text-sm text-slate-400 max-w-lg font-sans leading-relaxed mb-10"
         >
           Compete with your self-built or purchased robotic car on 09 October 2026 at the Shivalik University Robotics Arena.
