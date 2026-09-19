@@ -31,6 +31,7 @@ interface ContactMember {
   iconType: "faculty" | "chairperson" | "vice" | "design";
   email: string;
   phone: string;
+  instagram?: string;
 }
 
 const contactMembers: ContactMember[] = [
@@ -53,6 +54,7 @@ const contactMembers: ContactMember[] = [
     iconType: "chairperson",
     email: "rifatparvez04@gmail.com",
     phone: "+91 91051 33069",
+    instagram: "https://www.instagram.com/thediamondr_?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==",
   },
   {
     name: "Shivam Kumar",
@@ -73,6 +75,7 @@ const contactMembers: ContactMember[] = [
     iconType: "design",
     email: "satyamkruk07@gmail.com",
     phone: "+91 70605 50243",
+    instagram: "https://www.instagram.com/official_satya_3843/",
   },
 ];
 
@@ -322,6 +325,20 @@ export default function ContactScene() {
                       <Mail className="w-3 h-3 text-red-400" />
                       <span>EMAIL</span>
                     </a>
+                    {member.instagram && (
+                      <a
+                        href={member.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="py-2.5 px-3 rounded-xl bg-gradient-to-r from-pink-500/15 to-purple-500/15 hover:from-pink-500/25 hover:to-purple-500/25 border border-pink-500/30 hover:border-pink-500/60 text-[11px] font-bold text-pink-400 hover:text-pink-300 uppercase tracking-wider text-center transition-all flex items-center justify-center space-x-1.5 shadow-sm"
+                        title="Instagram"
+                      >
+                        <svg className="w-3.5 h-3.5 fill-current text-pink-400" viewBox="0 0 24 24">
+                          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                        </svg>
+                        <span>INSTA</span>
+                      </a>
+                    )}
                   </div>
                 </motion.div>
               );

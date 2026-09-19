@@ -64,6 +64,7 @@ export const studentCoordinators: TeamMember[] = [
     description: "Overall Festival Lead & Strategy",
     socials: {
       email: "rifatparvez04@gmail.com",
+      instagram: "https://www.instagram.com/thediamondr_?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==",
     },
   },
   {
@@ -104,6 +105,7 @@ export const studentCoordinators: TeamMember[] = [
     description: "Visual Identity & Creative Lead",
     socials: {
       email: "satyamkruk07@gmail.com",
+      instagram: "https://www.instagram.com/official_satya_3843/",
     },
   },
   {
