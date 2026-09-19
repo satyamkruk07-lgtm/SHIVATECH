@@ -373,7 +373,7 @@ export const faqEventsData: FAQEventSection[] = [
         number: "09",
         question: "Who are the Quantum Drift event coordinators?",
         answer:
-          "You can connect directly with the official event coordinators: Kumar Satyam (Phone: 7060550243) and Srishti Raj (Phone: 7762863296).",
+          "You can connect directly with the official event coordinators: Kumar Satyam (Phone: 7060550243) and Srishti Raj.",
         highlight: "Kumar Satyam & Srishti Raj",
       },
       {

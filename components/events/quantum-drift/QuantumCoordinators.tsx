@@ -8,7 +8,7 @@ interface Coordinator {
   code: string;
   name: string;
   role: string;
-  phone: string;
+  phone?: string;
   accent: "crimson" | "cyan";
 }
 
@@ -26,7 +26,6 @@ const coordinators: Coordinator[] = [
     code: "COORDINATOR 02",
     name: "Srishti Raj",
     role: "EVENT COORDINATOR",
-    phone: "7762863296",
     accent: "cyan",
   },
 ];
@@ -118,26 +117,44 @@ export const QuantumCoordinators: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Clickable Phone Number Link */}
-                <div className="pt-5 border-t border-white/10">
-                  <span className="text-[10px] text-slate-500 tracking-wider uppercase block mb-1">
-                    DIRECT PHONE / WHATSAPP
-                  </span>
-                  <a
-                    href={`tel:${coord.phone}`}
-                    className={`inline-flex items-center space-x-2.5 px-4 py-2.5 rounded-xl border transition-all text-xs sm:text-sm font-bold tracking-wider ${
-                      isCrimson
-                        ? "bg-red-500/10 hover:bg-red-500/20 text-white hover:text-red-300 border-red-500/30 hover:border-red-500/60"
-                        : "bg-sky-500/10 hover:bg-sky-500/20 text-white hover:text-sky-300 border-sky-500/30 hover:border-sky-500/60"
-                    }`}
-                  >
-                    <span className="text-base">☎</span>
-                    <span>{coord.phone}</span>
-                    <span className="text-[10px] text-slate-400 uppercase tracking-widest pl-1 font-mono">
-                      (TAP TO CALL)
+                {/* Direct Phone or Coordinator Status */}
+                {coord.phone ? (
+                  <div className="pt-5 border-t border-white/10">
+                    <span className="text-[10px] text-slate-500 tracking-wider uppercase block mb-1">
+                      DIRECT PHONE / WHATSAPP
                     </span>
-                  </a>
-                </div>
+                    <a
+                      href={`tel:${coord.phone}`}
+                      className={`inline-flex items-center space-x-2.5 px-4 py-2.5 rounded-xl border transition-all text-xs sm:text-sm font-bold tracking-wider ${
+                        isCrimson
+                          ? "bg-red-500/10 hover:bg-red-500/20 text-white hover:text-red-300 border-red-500/30 hover:border-red-500/60"
+                          : "bg-sky-500/10 hover:bg-sky-500/20 text-white hover:text-sky-300 border-sky-500/30 hover:border-sky-500/60"
+                      }`}
+                    >
+                      <span className="text-base">☎</span>
+                      <span>{coord.phone}</span>
+                      <span className="text-[10px] text-slate-400 uppercase tracking-widest pl-1 font-mono">
+                        (TAP TO CALL)
+                      </span>
+                    </a>
+                  </div>
+                ) : (
+                  <div className="pt-5 border-t border-white/10">
+                    <span className="text-[10px] text-slate-500 tracking-wider uppercase block mb-1">
+                      COORDINATOR STATUS
+                    </span>
+                    <div
+                      className={`inline-flex items-center space-x-2 px-3.5 py-2.5 rounded-xl border text-xs font-bold tracking-wider ${
+                        isCrimson
+                          ? "bg-red-500/10 text-red-300 border-red-500/30"
+                          : "bg-sky-500/10 text-sky-300 border-sky-500/30"
+                      }`}
+                    >
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                      <span>OFFICIAL EVENT COORDINATOR</span>
+                    </div>
+                  </div>
+                )}
               </motion.div>
             );
           })}
