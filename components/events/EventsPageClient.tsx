@@ -17,11 +17,12 @@ export const EventsPageClient: React.FC = () => {
       {/* 2. EVENTS INTRO ("OUR EVENTS" - Explore innovation, technology...) */}
       <EventsIntro />
 
-      {/* 3. FOUR PREMIUM EVENT BLOCKS */}
+      {/* 3. PREMIUM EVENT BLOCKS */}
       {/* 01 — HACKNATION 2.0 */}
       {/* 02 — IDEATHON */}
       {/* 03 — DEPARTMENTAL TECHNICAL EVENTS */}
-      {/* 04 — NEXT-GEN HACKATHON 1.0 */}
+      {/* 04 — QUANTUM DRIFT */}
+      {/* 05 — FUN ACTIVITIES & GAMES */}
       <div className="relative w-full bg-[#02040a] py-8 sm:py-12 space-y-4">
         {eventsList.map((event, index) => (
           <EventLandingCard

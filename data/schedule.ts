@@ -483,7 +483,7 @@ export const scheduleData: DaySchedule[] = [
   },
 
   // =========================================================================
-  // DAY 05: NEXT-GEN HACKATHON 1.0 & GRAND VALEDICTORY
+  // DAY 05: GRAND FINALE & VALEDICTORY
   // =========================================================================
   {
     dayNumber: 5,
@@ -495,31 +495,15 @@ export const scheduleData: DaySchedule[] = [
       {
         id: "d5-01",
         day: 5,
-        time: "09:00 AM",
-        date: "10 OCTOBER 2026",
-        title: "CHAMPIONSHIP SETUP",
-        subtitle: "Stall Allotment & Science Check-in",
-        description: "Setup of science prototypes, eco-tech models, physics apparatus, and project presentation boards.",
-        venue: "EXHIBITION HALL C",
-        category: "CEREMONY",
-        duration: "09:00 AM – 10:00 AM",
-        icon: "badge",
-      },
-      {
-        id: "d5-02",
-        day: 5,
         time: "10:00 AM",
         date: "10 OCTOBER 2026",
-        title: "NEXT-GEN HACKATHON 1.0",
-        subtitle: "6-Hour School Innovation Hackathon (Class 9–12)",
-        description: "6-Hour intensive innovation hackathon exclusively for Class 9–12 students (Team: 4–5 students + 1 faculty mentor ( Not Mandatory )). Hardware kits and lab equipment provided by the University.",
-        venue: "C-BLOCK SHIVALIK UNIVERSITY",
-        category: "COMPETITION",
-        duration: "10:00 AM – 04:00 PM",
-        icon: "science",
-        eventSlug: "next-gen-hackathon",
-        registerUrl: "https://forms.gle/thqCVXNKctqwujBy9",
-        featured: true,
+        title: "INNOVATION EXPO & SHOWCASE",
+        subtitle: "Prototype Displays & Open Gallery",
+        description: "Public exhibition of selected student prototypes, engineering models, and innovative technological solutions.",
+        venue: "EXHIBITION HALL C",
+        category: "CEREMONY",
+        duration: "10:00 AM – 01:00 PM",
+        icon: "badge",
       },
       {
         id: "d5-03",
@@ -539,14 +523,13 @@ export const scheduleData: DaySchedule[] = [
         day: 5,
         time: "02:00 PM",
         date: "10 OCTOBER 2026",
-        title: "IDEA PITCHING & JURY DEFENSE",
-        subtitle: "Mini Shark Tank & Final Demos",
-        description: "Idea Pitching (Mini Shark Tank) presentations, live robotics demonstration rounds, and final jury defense.",
-        venue: "EXHIBITION HALL C & AUDITORIUM",
+        title: "FINAL JURY DEFENSE & DEMOS",
+        subtitle: "Grand Finale Evaluations",
+        description: "Final presentations, live demonstration rounds, and executive jury defense before the awards ceremony.",
+        venue: "GRAND AUDITORIUM",
         category: "COMPETITION",
         duration: "02:00 PM – 04:30 PM",
-        icon: "science",
-        eventSlug: "next-gen-hackathon",
+        icon: "trophy",
         featured: true,
       },
       {

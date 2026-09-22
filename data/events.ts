@@ -1,5 +1,3 @@
-import { nextGenHackathonSchoolCategories } from "./schoolProblemStatements";
-
 export interface EvaluationParameter {
   parameter: string;
   weightage: string;
@@ -108,6 +106,8 @@ export interface EventItem {
   prize?: string;
   teamSize?: string;
   registerUrl: string;
+  externalRegisterUrl?: string;
+  internalRegisterUrl?: string;
   isRegistrationOpen?: boolean;
   registrationNotice?: string;
   registrationFee?: string;
@@ -365,6 +365,8 @@ export const eventsList: EventItem[] = [
     prize: "₹30,000+",
     teamSize: "2–4 Members",
     registerUrl: "https://forms.gle/6e6y7YaP2FWrfrwW7",
+    externalRegisterUrl: "https://forms.gle/6e6y7YaP2FWrfrwW7",
+    internalRegisterUrl: "",
     isRegistrationOpen: true,
     accentColor: "blue",
     badge: "INCUBATION PIPELINE",
@@ -541,116 +543,12 @@ export const eventsList: EventItem[] = [
   },
 
   // =========================================================================
-  // 04 — NEXT-GEN HACKATHON 1.0 (Only for Class 9, 10, 11 & 12 School Students)
-  // =========================================================================
-  {
-    id: "next-gen-hackathon",
-    slug: "next-gen-hackathon",
-    number: "04",
-    name: "NEXT-GEN HACKATHON 1.0",
-    targetAudienceNote: "Only for Class 9, 10, 11 & 12 School Students",
-    category: "SCHOOL HACKATHON",
-    date: "10 OCT 2026",
-    fullDateSchedule: [
-      "14 September 2026 — Launch of Next-Gen Hackathon 1.0",
-      "15 September 2026 — Mentoring Starts for Registered Students",
-      "30 September 2026 — Registration Closes (Last Date)",
-      "30 September – 04 October 2026 — Mind Breaking Session with Mentors",
-      "10 October 2026 (10:00 AM – 04:00 PM) — Grand Final Round of Next-Gen Hackathon 1.0",
-    ],
-    journeyTitle: "THE HACKATHON JOURNEY",
-    journeySubtitle: "FROM LAUNCH TO THE GRAND FINAL",
-    journeyMilestones: [
-      {
-        number: "01",
-        date: "14 SEPT 2026",
-        dateFull: "14 SEPTEMBER 2026",
-        label: "LAUNCH",
-        title: "Launch of Next-Gen Hackathon 1.0",
-        description: "Launch of Next-Gen Hackathon 1.0",
-        badge: "PHASE 01 // KICKOFF",
-        accent: "cyan",
-      },
-      {
-        number: "02",
-        date: "15 SEPT 2026",
-        dateFull: "15 SEPTEMBER 2026",
-        label: "MENTORING STARTS",
-        title: "Mentoring Starts for Registered Students",
-        description: "Mentoring starts for registered students",
-        badge: "PHASE 02 // MENTORSHIP",
-        accent: "blue",
-      },
-      {
-        number: "03",
-        date: "30 SEPT 2026",
-        dateFull: "30 SEPTEMBER 2026",
-        label: "REGISTRATION CLOSES",
-        title: "Last Date of Registration",
-        description: "Last date of registration",
-        badge: "PHASE 03 // DEADLINE",
-        accent: "purple",
-      },
-      {
-        number: "04",
-        date: "30 SEPT – 04 OCT 2026",
-        dateFull: "30 SEPTEMBER – 04 OCTOBER 2026",
-        label: "MIND-BREAKING MENTOR SESSIONS",
-        title: "Mind Breaking Session with Mentors",
-        description: "Mind Breaking Session with Mentors",
-        badge: "PHASE 04 // SPRINT",
-        accent: "crimson",
-      },
-      {
-        number: "05",
-        date: "10 OCT 2026",
-        dateFull: "10 OCTOBER 2026",
-        label: "GRAND FINAL",
-        title: "Final Round of Next-Gen Hackathon 1.0",
-        description: "Final Round of Next-Gen Hackathon 1.0",
-        badge: "PHASE 05 // GRAND FINALE",
-        accent: "crimson",
-        isGrandFinal: true,
-      },
-    ],
-    duration: "6 Hours (10:00 AM – 04:00 PM)",
-    venue: "C-Block Shivalik University",
-    theme: "Young Innovators for a Better Tomorrow",
-    tagline: "EXCLUSIVE 6-HOUR SCHOOL HACKATHON FOR BUDDING STUDENT CREATORS",
-    description:
-      "An intensive 6-hour school innovation hackathon exclusively for students of Class 9, 10, 11 & 12. Divided into two dedicated categories: Class 9 & 10 (Junior Innovators) and Class 11 & 12 (Senior Innovators). Essential hardware components, sensor kits, development boards, and innovation lab equipment will be provided on-campus by the University to empower students in building their project prototypes.",
-    purpose: [
-      "To ignite scientific curiosity, computational thinking, and hands-on tinkering among school students.",
-      "To provide a supportive, mentored university-level hackathon platform for Class 9th to 12th innovators.",
-      "To provide necessary hardware kits, sensors, and lab apparatus directly from the university.",
-      "To transform creative school ideas into working software, hardware circuits, and physical prototypes.",
-      "To recognize and reward top young innovators with trophies, certificates, and exciting prizes.",
-    ],
-    prize: "₹25,000+ & School Trophies",
-    teamSize: "4–5 Students + 1 Faculty Mentor ( Not Mandatory )",
-    registerUrl: "https://forms.gle/thqCVXNKctqwujBy9",
-    isRegistrationOpen: true,
-    accentColor: "purple",
-    badge: "SCHOOL EXCLUSIVE",
-    highlights: [
-      "Exclusively for Class 9, 10, 11 & 12 School Students",
-      "6-Hour Rapid Prototyping & Build Sprint",
-      "Team Format: 4–5 Students + 1 Faculty Mentor ( Not Mandatory )",
-      "Hardware, Sensor Kits & Lab Equipment Provided by University",
-      "Two Dedicated Categories: Class 9–10 & Class 11–12",
-      "Cash Prizes, School Champion Trophies & Certificates",
-    ],
-    schoolCategoriesTitle: "Next-Gen Hackathon Categories & Problem Statements",
-    schoolCategories: nextGenHackathonSchoolCategories,
-  },
-
-  // =========================================================================
-  // 05 — QUANTUM DRIFT (Specialized Robotics Arena Experience)
+  // 04 — QUANTUM DRIFT (Specialized Robotics Arena Experience)
   // =========================================================================
   {
     id: "quantum-drift",
     slug: "quantum-drift",
-    number: "05",
+    number: "04",
     name: "QUANTUM DRIFT",
     category: "ROBOTICS",
     date: "09 OCTOBER 2026",
@@ -720,12 +618,12 @@ export const eventsList: EventItem[] = [
   },
 
   // =========================================================================
-  // 06 — FUN ACTIVITIES & GAMES
+  // 05 — FUN ACTIVITIES & GAMES
   // =========================================================================
   {
     id: "fun-activities-and-games",
     slug: "fun-activities-and-games",
-    number: "06",
+    number: "05",
     name: "FUN ACTIVITIES & GAMES",
     category: "CREATIVE & ESPORTS",
     date: "SHIVATECH FESTIVAL 2026",
@@ -760,14 +658,6 @@ export function getEventBySlug(slug: string): EventItem | undefined {
   }
   if (normalized === "shivatech") {
     return eventsList.find((e) => e.slug === "departmental-technical-events");
-  }
-  if (
-    normalized === "science-championship" ||
-    normalized === "next-gen-hackathon" ||
-    normalized === "next-gen-hackathon-1-0" ||
-    normalized === "next-gen-hackathon-1-o"
-  ) {
-    return eventsList.find((e) => e.slug === "next-gen-hackathon" || e.slug === "science-championship");
   }
   if (
     normalized === "fun-activities" ||

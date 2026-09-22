@@ -132,45 +132,47 @@ function RegisterContent() {
           </div>
         )}
 
-        {/* Next-Gen Hackathon 1.0 Official Google Form Direct Link Box */}
-        {(event.slug === "next-gen-hackathon" || event.slug === "science-championship") && (
-          <div className="p-4 mb-6 rounded-xl bg-purple-950/40 border border-purple-500/40">
-            <span className="text-[10px] text-purple-400 font-bold uppercase tracking-widest block mb-1">
-              OFFICIAL NEXT-GEN HACKATHON 1.0 REGISTRATION FORM
-            </span>
-            <p className="text-xs text-slate-300 font-sans mb-3 leading-relaxed">
-              NEXT-GEN HACKATHON 1.0 registrations for Class 9, 10, 11 & 12 students are being officially recorded via Google Forms.
-            </p>
-            <a
-              href="https://forms.gle/thqCVXNKctqwujBy9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs tracking-wider shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all cursor-pointer"
-            >
-              <span>OPEN GOOGLE FORM (NEXT-GEN 1.0)</span>
-              <span>↗</span>
-            </a>
-          </div>
-        )}
-
-        {/* Ideathon Official Google Form Direct Link Box */}
+        {/* Ideathon Official Google Form Direct Link Box (External & Internal) */}
         {event.slug === "ideathon" && (
           <div className="p-4 mb-6 rounded-xl bg-blue-950/40 border border-blue-500/40">
             <span className="text-[10px] text-sky-400 font-bold uppercase tracking-widest block mb-1">
-              OFFICIAL IDEATHON REGISTRATION FORM
+              OFFICIAL IDEATHON REGISTRATION FORMS
             </span>
-            <p className="text-xs text-slate-300 font-sans mb-3 leading-relaxed">
-              IDEATHON registrations (2–4 Members, ₹30,000+ in prizes, CBII Incubation pipeline) are being officially recorded via Google Forms.
+            <p className="text-xs text-slate-300 font-sans mb-3.5 leading-relaxed">
+              IDEATHON registrations are divided into separate portals for External and Internal participants. Please select your registration form below:
             </p>
-            <a
-              href="https://forms.gle/6e6y7YaP2FWrfrwW7"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs tracking-wider shadow-[0_0_20px_rgba(56,189,248,0.4)] transition-all cursor-pointer"
-            >
-              <span>OPEN GOOGLE FORM (IDEATHON)</span>
-              <span>↗</span>
-            </a>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={event.externalRegisterUrl || "https://forms.gle/6e6y7YaP2FWrfrwW7"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold text-xs tracking-wider shadow-[0_0_20px_rgba(56,189,248,0.4)] transition-all cursor-pointer"
+              >
+                <span>EXTERNAL REGISTRATION</span>
+                <span>↗</span>
+              </a>
+
+              {event.internalRegisterUrl ? (
+                <a
+                  href={event.internalRegisterUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs tracking-wider shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all cursor-pointer"
+                >
+                  <span>INTERNAL REGISTRATION</span>
+                  <span>↗</span>
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => alert("Internal registration form link will be updated shortly. Please check back soon!")}
+                  className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs tracking-wider transition-all cursor-pointer"
+                >
+                  <span>INTERNAL REGISTRATION</span>
+                  <span className="text-xs text-amber-300">⏳ COMING SOON</span>
+                </button>
+              )}
+            </div>
           </div>
         )}
 
@@ -291,24 +293,7 @@ function RegisterContent() {
                 />
               </div>
 
-              {event.slug === "science-championship" && (
-                <div>
-                  <label className="block text-xs text-purple-300/80 tracking-wider mb-1 uppercase font-semibold">
-                    Select Competition Track
-                  </label>
-                  <select
-                    key={trackParam || "all"}
-                    defaultValue={trackParam || "all"}
-                    className="w-full px-4 py-3 rounded bg-[#070c1a] border border-purple-500/40 text-purple-200 focus:outline-none focus:border-purple-400 transition-colors"
-                  >
-                    <option value="all" className="bg-[#070c1a] text-white">All Events / Full Championship</option>
-                    <option value="hackathon" className="bg-[#070c1a] text-white">1. 2-Hour Innovation Challenge (Hackathon)</option>
-                    <option value="exhibition" className="bg-[#070c1a] text-white">2. Science Exhibition</option>
-                    <option value="pitching" className="bg-[#070c1a] text-white">3. Idea Pitching (Mini Shark Tank)</option>
-                    <option value="robotics" className="bg-[#070c1a] text-white">4. 60-Minute Build Up (Robotics Challenge, etc.)</option>
-                  </select>
-                </div>
-              )}
+
 
               {event.slug === "fun-activities-and-games" && (
                 <div>

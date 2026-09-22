@@ -332,7 +332,40 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           transition={{ duration: 0.5, delay: 0.32 }}
           className="flex flex-wrap items-center gap-4 font-mono"
         >
-          {!event.isRegistrationOpen ? (
+          {event.slug === "ideathon" ? (
+            <>
+              <a
+                href={event.externalRegisterUrl || event.registerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-3.5 px-6 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center shadow-lg transition-all duration-300 flex items-center space-x-2 text-white bg-gradient-to-r from-sky-600 to-blue-600 shadow-[0_0_25px_rgba(56,189,248,0.4)] hover:brightness-110 hover:-translate-y-0.5 cursor-pointer"
+              >
+                <span>EXTERNAL REGISTRATION</span>
+                <span className="text-base leading-none">↗</span>
+              </a>
+
+              {event.internalRegisterUrl ? (
+                <a
+                  href={event.internalRegisterUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-3.5 px-6 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center shadow-lg transition-all duration-300 flex items-center space-x-2 text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-[0_0_25px_rgba(168,85,247,0.4)] hover:brightness-110 hover:-translate-y-0.5 cursor-pointer"
+                >
+                  <span>INTERNAL REGISTRATION</span>
+                  <span className="text-base leading-none">↗</span>
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => alert("Internal registration form link will be updated shortly. Please check back soon!")}
+                  className="py-3.5 px-6 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center border border-white/20 bg-white/10 hover:bg-white/15 text-white transition-all duration-200 flex items-center space-x-2 cursor-pointer"
+                >
+                  <span>INTERNAL REGISTRATION</span>
+                  <span className="text-xs text-amber-300">⏳ COMING SOON</span>
+                </button>
+              )}
+            </>
+          ) : !event.isRegistrationOpen ? (
             <Link
               href={`/register?event=${event.slug}`}
               className="py-3.5 px-8 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center shadow-lg transition-all duration-300 flex items-center space-x-2 text-amber-300 border border-amber-400/50 bg-amber-500/15 shadow-[0_0_25px_rgba(245,158,11,0.25)] hover:brightness-110 hover:-translate-y-0.5"

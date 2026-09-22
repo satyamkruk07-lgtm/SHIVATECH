@@ -143,7 +143,40 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
             </Link>
 
             {/* REGISTER BUTTON -> Opens Register Page or External Form */}
-            {!event.isRegistrationOpen ? (
+            {event.slug === "ideathon" ? (
+              <div className="flex flex-wrap items-center gap-2">
+                <a
+                  href={event.externalRegisterUrl || event.registerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-3.5 px-4 rounded-xl font-semibold tracking-wider text-xs uppercase text-center border border-sky-400/40 bg-sky-500/15 hover:bg-sky-500/25 text-sky-200 transition-all duration-200 flex items-center justify-center space-x-1.5 cursor-pointer"
+                >
+                  <span>EXTERNAL</span>
+                  <span className="text-xs opacity-75">↗</span>
+                </a>
+
+                {event.internalRegisterUrl ? (
+                  <a
+                    href={event.internalRegisterUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="py-3.5 px-4 rounded-xl font-semibold tracking-wider text-xs uppercase text-center border border-purple-400/40 bg-purple-500/15 hover:bg-purple-500/25 text-purple-200 transition-all duration-200 flex items-center justify-center space-x-1.5 cursor-pointer"
+                  >
+                    <span>INTERNAL</span>
+                    <span className="text-xs opacity-75">↗</span>
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => alert("Internal registration form link will be updated shortly. Please check back soon!")}
+                    className="py-3.5 px-4 rounded-xl font-semibold tracking-wider text-xs uppercase text-center border border-white/20 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all duration-200 flex items-center justify-center space-x-1.5 cursor-pointer"
+                  >
+                    <span>INTERNAL</span>
+                    <span className="text-[10px] text-amber-300">⏳</span>
+                  </button>
+                )}
+              </div>
+            ) : !event.isRegistrationOpen ? (
               <Link
                 href={`/register?event=${event.slug}`}
                 className="py-3.5 px-4 rounded-xl font-bold tracking-wider text-[11px] uppercase text-center border border-amber-400/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 transition-all duration-200 flex items-center justify-center space-x-1.5"

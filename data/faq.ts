@@ -220,83 +220,11 @@ export const faqEventsData: FAQEventSection[] = [
   },
 
   // =========================================================================
-  // 04 — SCIENCE CHAMPIONSHIP (NEXT-GEN HACKATHON 1.0)
-  // =========================================================================
-  {
-    id: "science-championship",
-    number: "04",
-    name: "SCIENCE CHAMPIONSHIP",
-    filterLabel: "SCIENCE CHAMPIONSHIP",
-    tagline: "EXCLUSIVE 6-HOUR SCHOOL HACKATHON FOR BUDDING STUDENT CREATORS",
-    badge: "SCHOOL EXCLUSIVE (CLASSES 9–12)",
-    accent: "purple",
-    detailRoute: "/events/science-championship",
-    faqs: [
-      {
-        id: "sc-1",
-        number: "01",
-        question: "What is the SCIENCE CHAMPIONSHIP (Next-Gen Hackathon 1.0)?",
-        answer:
-          "The SCIENCE CHAMPIONSHIP is an exclusive 6-hour school innovation hackathon tailored specifically for Class 9, 10, 11, and 12 students to kindle scientific curiosity, computational thinking, and hands-on tinkering.",
-        highlight: "Exclusive School Hackathon",
-      },
-      {
-        id: "sc-2",
-        number: "02",
-        question: "Who is eligible to participate in the SCIENCE CHAMPIONSHIP?",
-        answer:
-          "Participation is strictly reserved for school students currently studying in Class 9, 10, 11, or 12. It features two dedicated divisions: Junior Innovators (Class 9 & 10) and Senior Innovators (Class 11 & 12).",
-        highlight: "Classes 9, 10, 11 & 12",
-      },
-      {
-        id: "sc-3",
-        number: "03",
-        question: "What is the team size and composition?",
-        answer:
-          "Each school team must consist of 4 to 5 students. Teams may also be accompanied by 1 school faculty mentor (faculty presence is optional and not mandatory).",
-        highlight: "4–5 Students (+ 1 Optional Mentor)",
-      },
-      {
-        id: "sc-4",
-        number: "04",
-        question: "Will hardware, sensors, and equipment be provided?",
-        answer:
-          "Yes! Essential microcontrollers, sensor kits, electronic hardware components, and innovation lab equipment are provided directly on-campus by Shivalik University for students to construct their working prototypes.",
-        highlight: "Hardware Kits Provided on Campus",
-      },
-      {
-        id: "sc-5",
-        number: "05",
-        question: "What are the prizes and school honors?",
-        answer:
-          "Winning school squads receive cash prizes from a pool of ₹25,000+, prestigious School Championship Trophies, medals, and official merit certificates for every student participant.",
-        highlight: "₹25,000+ & School Trophies",
-      },
-      {
-        id: "sc-6",
-        number: "06",
-        question: "When is the Grand Final Round?",
-        answer:
-          "The Grand Final Round of Next-Gen Hackathon 1.0 will take place on 10 October 2026 from 10:00 AM to 04:00 PM at C-Block, Shivalik University.",
-        highlight: "10 October 2026 (10:00 AM – 04:00 PM)",
-      },
-      {
-        id: "sc-7",
-        number: "07",
-        question: "How do schools register their teams?",
-        answer:
-          "School teachers, coordinators, or students can register team entries through the official Google Form linked on the Science Championship event page.",
-        highlight: "Official School Registration Form",
-      },
-    ],
-  },
-
-  // =========================================================================
-  // 05 — QUANTUM DRIFT
+  // 04 — QUANTUM DRIFT
   // =========================================================================
   {
     id: "quantum-drift",
-    number: "05",
+    number: "04",
     name: "QUANTUM DRIFT",
     filterLabel: "QUANTUM DRIFT",
     tagline: "THREE PROGRESSIVE KNOCKOUT PHASES • ONE FINAL ROBOTIC CHAMPION",
@@ -383,6 +311,62 @@ export const faqEventsData: FAQEventSection[] = [
         answer:
           "Click the 'Register Now' button on the Quantum Drift page to open the official Google Form and lock in your team's entry.",
         highlight: "Official Google Form",
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 05 — FUN ACTIVITIES & GAMES
+  // =========================================================================
+  {
+    id: "fun-activities-and-games",
+    number: "05",
+    name: "FUN ACTIVITIES & GAMES",
+    filterLabel: "FUN ACTIVITIES & GAMES",
+    tagline: "CREATIVE SKIN ARTISTRY & HIGH-OCTANE BEYBLADE TOURNAMENT",
+    badge: "FESTIVAL SPECIAL ARENA",
+    accent: "purple",
+    detailRoute: "/events/fun-activities-and-games",
+    faqs: [
+      {
+        id: "fa-1",
+        number: "01",
+        question: "What are the Fun Activities & Games at SHIVA INNOVEX?",
+        answer:
+          "Fun Activities & Games features two dynamic festival zones: 'Skin Artistry' (a creative skin/body painting canvas activity) and the 'Beyblade Tournament' (an action-packed knockout arena competition).",
+        highlight: "Skin Artistry & Beyblade Tournament",
+      },
+      {
+        id: "fa-2",
+        number: "02",
+        question: "What is the registration fee for the activities?",
+        answer:
+          "The registration fee is ₹50 / PER PERSON for each activity. Participants can register easily online or at the activity reporting desk.",
+        highlight: "₹50 / PER PERSON",
+      },
+      {
+        id: "fa-3",
+        number: "03",
+        question: "Who is eligible to participate?",
+        answer:
+          "All registered attendees, college students, and festival visitors are welcome to join both Skin Artistry and the Beyblade Tournament.",
+        highlight: "Open to All Festival Participants",
+      },
+      {
+        id: "fa-4",
+        number: "04",
+        question: "Are skin painting materials provided for Skin Artistry?",
+        answer:
+          "Yes! Safe, certified skin-friendly body paints and application brushes are provided at the activity station.",
+        highlight: "Skin-Safe Paints Provided",
+      },
+      {
+        id: "fa-5",
+        number: "05",
+        question: "How does the Beyblade Tournament work?",
+        answer:
+          "Participants battle head-to-head in official battle dishes following a fast-paced single-elimination bracket until a festival champion is crowned.",
+        highlight: "Knockout Arena Battles",
       },
     ],
   },

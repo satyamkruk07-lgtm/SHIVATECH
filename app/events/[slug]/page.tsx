@@ -29,7 +29,6 @@ export async function generateStaticParams() {
     ...eventsList.map((event) => ({
       slug: event.slug,
     })),
-    { slug: "science-championship" },
     { slug: "quantum-drift" },
     { slug: "fun-activities-and-games" },
   ];

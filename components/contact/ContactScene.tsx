@@ -455,7 +455,7 @@ export default function ContactScene() {
                     <span className="text-red-400 font-bold">01</span>
                     <div>
                       <span className="text-white font-bold block">C-Block Computing Center</span>
-                      <span className="text-[11px] text-slate-400">Hacknation 2.0 & Next-Gen Hackathon 1.0</span>
+                      <span className="text-[11px] text-slate-400">Hacknation 2.0 (Grand 30-Hour Arena)</span>
                     </div>
                   </div>
 
