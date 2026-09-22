@@ -91,7 +91,7 @@ export const scheduleData: DaySchedule[] = [
         day: 1,
         time: "01:00 PM",
         date: "05–06 OCTOBER 2026",
-        title: "INVESTOR LUNCHEON",
+        title: "INVESTOR LUNCH",
         subtitle: "High-Tea & Deal Flow Networking",
         description: "Private networking lunch connecting aspiring founders with institutional mentors, angel investors, and industry executives.",
         venue: "VIP LOUNGE & DECK",

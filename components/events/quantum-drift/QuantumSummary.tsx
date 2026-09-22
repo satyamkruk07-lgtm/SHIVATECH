@@ -16,7 +16,7 @@ const summarySpecs = [
   },
   {
     label: "3 PROGRESSIVE PHASES",
-    value: "ROBO SOCCER → ROBO WAR → ROBO RACE",
+    value: "ROBO RACE → ROBO SOCCER → ROBO WAR",
     highlight: "text-sky-400 font-bold",
   },
   {
@@ -114,16 +114,16 @@ export const QuantumSummary: React.FC = () => {
             </span>
 
             <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-bold text-white tracking-wider">
+              <span className="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                ROBO RACE
+              </span>
+              <span className="text-slate-500">→</span>
               <span className="px-2.5 py-1 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
                 ROBO SOCCER
               </span>
               <span className="text-slate-500">→</span>
               <span className="px-2.5 py-1 rounded bg-red-500/15 text-red-400 border border-red-500/30">
                 ROBO WAR
-              </span>
-              <span className="text-slate-500">→</span>
-              <span className="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
-                ROBO RACE
               </span>
             </div>
           </div>

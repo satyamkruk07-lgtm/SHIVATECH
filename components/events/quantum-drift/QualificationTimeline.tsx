@@ -7,32 +7,32 @@ const progressionSteps = [
   {
     stepNumber: "01",
     phaseLabel: "PHASE 01",
-    title: "ROBO SOCCER",
-    tagline: "MASTER THE FIELD",
-    description: "Navigate & control in the arena.",
+    title: "ROBO RACE",
+    tagline: "SPEED & PRECISION",
+    description: "High-speed circuit qualification sprint.",
     status: "STARTING ROUND",
-    accentClass: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
-    glowColor: "rgba(16,185,129,0.5)",
+    accentClass: "text-amber-300 border-amber-500/30 bg-amber-500/10",
+    glowColor: "rgba(245,158,11,0.5)",
   },
   {
     stepNumber: "02",
     phaseLabel: "PHASE 02",
-    title: "ROBO WAR",
-    tagline: "OUTPLAY YOUR OPPONENT",
-    description: "Head-to-head combat faceoff.",
-    status: "SEMI-FINAL COMBAT",
-    accentClass: "text-red-400 border-red-500/30 bg-red-500/10",
-    glowColor: "rgba(239,68,68,0.5)",
+    title: "ROBO SOCCER",
+    tagline: "MASTER THE FIELD",
+    description: "Turf agility & ball maneuvering battle.",
+    status: "SEMI-FINAL CHALLENGE",
+    accentClass: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+    glowColor: "rgba(16,185,129,0.5)",
   },
   {
     stepNumber: "03",
     phaseLabel: "PHASE 03",
-    title: "ROBO RACE",
-    tagline: "THE FINAL RUN",
-    description: "High-speed championship final.",
+    title: "ROBO WAR",
+    tagline: "THE FINAL COMBAT",
+    description: "Head-to-head combat arena faceoff.",
     status: "GRAND FINALE",
-    accentClass: "text-amber-300 border-amber-500/40 bg-amber-500/15",
-    glowColor: "rgba(245,158,11,0.6)",
+    accentClass: "text-red-400 border-red-500/40 bg-red-500/15",
+    glowColor: "rgba(239,68,68,0.6)",
   },
 ];
 
@@ -62,16 +62,16 @@ export const QualificationTimeline: React.FC = () => {
 
           {/* Explicit Progression Breadcrumb */}
           <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 text-xs font-bold tracking-wider uppercase">
-            <span className="text-emerald-400 font-mono flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
+            <span className="text-amber-400 font-mono flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping inline-block" />
               START
             </span>
             <span className="text-slate-500">→</span>
-            <span className="text-white">01 ROBO SOCCER</span>
+            <span className="text-white">01 ROBO RACE</span>
             <span className="text-slate-500">→</span>
-            <span className="text-red-400">02 ROBO WAR</span>
+            <span className="text-emerald-400">02 ROBO SOCCER</span>
             <span className="text-slate-500">→</span>
-            <span className="text-amber-300">03 ROBO RACE</span>
+            <span className="text-red-400">03 ROBO WAR</span>
             <span className="text-slate-500">→</span>
             <span className="text-amber-400 font-orbitron">
               CHAMPION 🏆
@@ -82,7 +82,7 @@ export const QualificationTimeline: React.FC = () => {
         {/* 1. DESKTOP VIEW: HORIZONTAL GLOWING PROGRESSION LINE */}
         <div className="hidden lg:block relative my-12">
           {/* Continuous Glowing Background Line */}
-          <div className="absolute top-[68px] left-[5%] right-[5%] h-1 bg-gradient-to-r from-emerald-500 via-red-500 to-amber-500 shadow-[0_0_20px_rgba(239,68,68,0.5)] z-0" />
+          <div className="absolute top-[68px] left-[5%] right-[5%] h-1 bg-gradient-to-r from-amber-500 via-emerald-500 to-red-500 shadow-[0_0_20px_rgba(239,68,68,0.5)] z-0" />
 
           <div className="grid grid-cols-3 gap-8 relative z-10">
             {progressionSteps.map((step, idx) => (
@@ -170,22 +170,22 @@ export const QualificationTimeline: React.FC = () => {
         </div>
 
         {/* 2. MOBILE VIEW: VERTICAL TIMELINE */}
-        <div className="block lg:hidden relative pl-6 sm:pl-8 border-l-2 border-gradient-to-b from-emerald-500 via-red-500 to-amber-500 ml-4 space-y-10">
+        <div className="block lg:hidden relative pl-6 sm:pl-8 border-l-2 border-gradient-to-b from-amber-500 via-emerald-500 to-red-500 ml-4 space-y-10">
           {/* Mobile Start Node */}
           <div className="relative">
-            <div className="absolute -left-[37px] sm:-left-[45px] top-0 w-8 h-8 rounded-xl bg-[#040814] border-2 border-emerald-400 flex items-center justify-center text-[10px] font-black shadow-[0_0_15px_rgba(52,211,153,0.5)]">
-              <span className="text-emerald-400 font-mono">GO</span>
+            <div className="absolute -left-[37px] sm:-left-[45px] top-0 w-8 h-8 rounded-xl bg-[#040814] border-2 border-amber-400 flex items-center justify-center text-[10px] font-black shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+              <span className="text-amber-400 font-mono">GO</span>
             </div>
-            <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between">
               <div>
-                <span className="text-[10px] text-emerald-400 font-black tracking-widest uppercase block">
+                <span className="text-[10px] text-amber-400 font-black tracking-widest uppercase block">
                   QUALIFICATION ENTRY
                 </span>
                 <span className="text-base font-black text-white font-orbitron">
                   START
                 </span>
               </div>
-              <span className="text-xs font-bold text-emerald-400 tracking-wider">
+              <span className="text-xs font-bold text-amber-400 tracking-wider">
                 ↓ BEGIN
               </span>
             </div>

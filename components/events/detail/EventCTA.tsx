@@ -51,9 +51,29 @@ export const EventCTA: React.FC<EventCTAProps> = ({ event }) => {
 
         {/* Registration Fee Reminder (Immediately above Registration CTA) */}
         {event.registrationFee && (
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-xs sm:text-sm font-mono font-bold text-red-400 tracking-wider uppercase mb-6 shadow-[0_0_20px_rgba(239,68,68,0.2)]">
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-xs sm:text-sm font-mono font-bold text-red-400 tracking-wider uppercase mb-5 shadow-[0_0_20px_rgba(239,68,68,0.2)]">
             <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
             <span>REGISTRATION FEE — {event.registrationFee}</span>
+          </div>
+        )}
+
+        {/* Internal Student Registration Notice (Exclusively for HackNation 2.0) */}
+        {(event.slug === "hacknation-2-0" || event.category === "HACKATHON") && (
+          <div className="mb-6 w-full max-w-xl text-left">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-amber-500/[0.08] border border-amber-500/40 backdrop-blur-md shadow-[0_0_25px_rgba(245,158,11,0.15)] relative overflow-hidden">
+              <div className="flex items-start sm:items-center space-x-2 text-xs sm:text-sm font-mono font-black tracking-wider text-amber-300 uppercase leading-snug">
+                <span className="text-base sm:text-lg leading-none flex-shrink-0">⚠️</span>
+                <span>
+                  REGISTRATION OPEN FOR{" "}
+                  <span className="text-amber-200 underline decoration-amber-400/70 decoration-2 underline-offset-2">
+                    INTERNAL STUDENTS ONLY
+                  </span>
+                </span>
+              </div>
+              <p className="text-[11px] sm:text-xs text-slate-300 font-sans mt-1.5 leading-relaxed pl-6 sm:pl-7">
+                External team registrations are already closed. This registration form is exclusively for students of &quot;Shivalik University&quot;
+              </p>
+            </div>
           </div>
         )}
 

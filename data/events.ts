@@ -166,7 +166,7 @@ export const eventsList: EventItem[] = [
     prize: "Up to ₹2,00,000",
     teamSize: "4–6 Members",
     registrationFee: "₹250 / MEMBER",
-    registerUrl: "https://forms.gle/CvYpny3YC5dpdYby7",
+    registerUrl: "https://forms.gle/8Mk7g54FsrNDSyAo9",
     isRegistrationOpen: true,
     accentColor: "crimson",
     badge: "FLAGSHIP HACKATHON",
@@ -655,21 +655,21 @@ export const eventsList: EventItem[] = [
     category: "ROBOTICS",
     date: "09 OCTOBER 2026",
     fullDateSchedule: [
-      "09 October 2026 — Phase 01: Robo Soccer Arena Matches",
-      "09 October 2026 — Phase 02: Robo War Combat Pit Faceoffs",
-      "09 October 2026 — Phase 03: Grand Finale Robo Race Championship",
+      "09 October 2026 — Phase 01: Robo Race Circuit Sprint",
+      "09 October 2026 — Phase 02: Robo Soccer Arena Matches",
+      "09 October 2026 — Phase 03: Grand Finale Robo War Combat",
     ],
     duration: "Full-Day Robotics Arena Championship",
     venue: "Main Robotics Arena, Shivalik University",
     theme: "Build • Drive • Survive",
     tagline: "BUILD • DRIVE • SURVIVE",
     description:
-      "A three-phase robotic competition where participants progress from Robo Soccer to Robo War, and the final Robo Race.",
+      "A three-phase robotic competition where participants progress from Robo Race to Robo Soccer, and the final Robo War.",
     purpose: [
       "Bring your own self-built robotic car or compete with a purchased robotic car.",
-      "Clear Phase 01 Robo Soccer to qualify and advance to Phase 02.",
-      "Survive Phase 02 Robo War head-to-head combat to enter the Phase 03 final race.",
-      "Compete in the ultimate Robo Race championship round to become the Quantum Drift Champion.",
+      "Clear Phase 01 Robo Race to qualify and advance to Phase 02.",
+      "Survive Phase 02 Robo Soccer turf faceoffs to enter the Phase 03 final combat.",
+      "Compete in the ultimate Robo War championship round to become the Quantum Drift Champion.",
     ],
     prize: "UPTO ₹35,000",
     registrationFee: "₹300 / TEAM",
@@ -682,12 +682,22 @@ export const eventsList: EventItem[] = [
       "3 Progressive Knockout Arena Phases",
       "Self-Built or Purchased Robotic Car Eligible",
       "One Robo Competes Through All 3 Challenges",
-      "Robo Soccer → Robo War → Robo Race",
+      "Robo Race → Robo Soccer → Robo War",
       "Grand Finale Championship Run",
     ],
     quantumPhases: [
       {
         number: "01",
+        name: "ROBO RACE",
+        tagline: "SPEED & PRECISION",
+        description:
+          "Navigate high-speed curves, straightaways, and timed checkpoints to qualify for Phase 02.",
+        progressionLabel: "CLEAR PHASE → ADVANCE",
+        image: "/events/quantum-drift/phase-04-race.jpg",
+        accent: "amber",
+      },
+      {
+        number: "02",
         name: "ROBO SOCCER",
         tagline: "MASTER THE FIELD",
         description:
@@ -697,25 +707,43 @@ export const eventsList: EventItem[] = [
         accent: "green",
       },
       {
-        number: "02",
+        number: "03",
         name: "ROBO WAR",
-        tagline: "OUTPLAY YOUR OPPONENT",
+        tagline: "THE FINAL COMBAT",
         description:
-          "A head-to-head robotic challenge inside a controlled arena.",
-        progressionLabel: "CLEAR PHASE → ADVANCE",
+          "Reach the final phase and compete in the ultimate head-to-head combat arena.",
+        progressionLabel: "BECOME THE QUANTUM DRIFT CHAMPION",
         image: "/events/quantum-drift/phase-03-war.jpg",
         accent: "crimson",
       },
-      {
-        number: "03",
-        name: "ROBO RACE",
-        tagline: "THE FINAL RUN",
-        description:
-          "Reach the final phase and compete in the ultimate Quantum Drift challenge.",
-        progressionLabel: "BECOME THE QUANTUM DRIFT CHAMPION",
-        image: "/events/quantum-drift/phase-04-race.jpg",
-        accent: "amber",
-      },
+    ],
+  },
+
+  // =========================================================================
+  // 06 — FUN ACTIVITIES & GAMES
+  // =========================================================================
+  {
+    id: "fun-activities-and-games",
+    slug: "fun-activities-and-games",
+    number: "06",
+    name: "FUN ACTIVITIES & GAMES",
+    category: "CREATIVE & ESPORTS",
+    date: "SHIVATECH FESTIVAL 2026",
+    venue: "Festival Activity Zone, Shivalik University",
+    theme: "Where creativity meets competition.",
+    tagline: "WHERE CREATIVITY MEETS COMPETITION",
+    description:
+      "A dynamic blend of artistic expression and competitive entertainment featuring Skin Artistry and the Beyblade Tournament.",
+    registrationFee: "₹50 / PERSON",
+    registerUrl: "/register?event=fun-activities-and-games",
+    isRegistrationOpen: true,
+    accentColor: "purple",
+    badge: "FESTIVAL SPECIAL",
+    highlights: [
+      "Skin Artistry: Living canvas & creative body painting",
+      "Beyblade Tournament: Knockout battle arena clashes",
+      "Open to all festival attendees and students",
+      "Interactive entertainment, community & fun",
     ],
   },
 ];
@@ -740,6 +768,13 @@ export function getEventBySlug(slug: string): EventItem | undefined {
     normalized === "next-gen-hackathon-1-o"
   ) {
     return eventsList.find((e) => e.slug === "next-gen-hackathon" || e.slug === "science-championship");
+  }
+  if (
+    normalized === "fun-activities" ||
+    normalized === "fun-activities-and-games" ||
+    normalized === "fun-games"
+  ) {
+    return eventsList.find((e) => e.slug === "fun-activities-and-games");
   }
 
   return eventsList.find((e) => e.slug === normalized || e.id === normalized);

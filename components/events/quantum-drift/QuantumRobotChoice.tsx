@@ -53,7 +53,7 @@ export const QuantumRobotChoice: React.FC = () => {
             </h3>
 
             <p className="text-sm text-slate-300 font-sans leading-relaxed mb-6">
-              Design, fabricate, and wire your custom chassis from scratch. Tailor motor torque for Robo Soccer, reinforce armor for Robo War, and tune gear ratios for the high-speed Robo Race finale.
+              Design, fabricate, and wire your custom chassis from scratch. Tune gear ratios for the high-speed Robo Race, tailor motor torque for Robo Soccer, and reinforce armor for the Robo War combat finale.
             </p>
 
             <div className="space-y-2.5 pt-6 border-t border-white/10 text-xs font-sans">

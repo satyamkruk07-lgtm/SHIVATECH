@@ -341,8 +341,8 @@ export const faqEventsData: FAQEventSection[] = [
         number: "05",
         question: "What are the three phases of Quantum Drift?",
         answer:
-          "The tournament consists of exactly three sequential knockout phases: Phase 01: ROBO SOCCER (turf maneuvering and goal scoring), Phase 02: ROBO WAR (head-to-head combat in the hazard ring), and Phase 03: ROBO RACE (high-speed championship circuit sprint).",
-        highlight: "01 Robo Soccer → 02 Robo War → 03 Robo Race",
+          "The tournament consists of exactly three sequential knockout phases: Phase 01: ROBO RACE (high-speed championship circuit sprint), Phase 02: ROBO SOCCER (turf maneuvering and goal scoring), and Phase 03: ROBO WAR (head-to-head combat in the hazard ring).",
+        highlight: "01 Robo Race → 02 Robo Soccer → 03 Robo War",
       },
       {
         id: "qd-6",

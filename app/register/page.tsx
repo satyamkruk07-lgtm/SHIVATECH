@@ -15,6 +15,7 @@ function RegisterContent() {
   const trackParam = searchParams.get("track");
   const categoryParam = searchParams.get("category");
   const psParam = searchParams.get("ps");
+  const activityParam = searchParams.get("activity");
 
   const event = getEventBySlug(eventParam) || eventsList[0];
   const isHackathon = event.slug === "hacknation-2-0";
@@ -88,22 +89,44 @@ function RegisterContent() {
           </div>
         )}
 
+        {/* If user clicked a specific Fun Activity */}
+        {activityParam && (
+          <div className="p-3.5 mb-5 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-start space-x-3">
+            <span className="text-pink-400 font-bold">🎨</span>
+            <div>
+              <span className="text-[10px] text-pink-400 font-bold uppercase tracking-widest block">
+                SELECTED ACTIVITY
+              </span>
+              <span className="text-sm font-bold text-white uppercase">
+                {activityParam === "skin-artistry"
+                  ? "Skin Artistry"
+                  : activityParam === "beyblade-tournament"
+                  ? "Beyblade Tournament"
+                  : activityParam}
+              </span>
+              <span className="text-xs text-emerald-400 font-bold block mt-0.5">
+                Registration Fee: ₹50 / Person
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* Hacknation 2.0 Official Google Form Direct Link Box */}
         {isHackathon && (
-          <div className="p-4 mb-6 rounded-xl bg-red-950/30 border border-red-500/40">
-            <span className="text-[10px] text-red-400 font-bold uppercase tracking-widest block mb-1">
-              OFFICIAL HACKATHON REGISTRATION FORM
+          <div className="p-4 mb-6 rounded-xl bg-amber-950/20 border border-amber-500/40">
+            <span className="text-[10px] text-amber-300 font-bold uppercase tracking-widest block mb-1">
+              ⚠️ REGISTRATION OPEN FOR INTERNAL STUDENTS ONLY
             </span>
             <p className="text-xs text-slate-300 font-sans mb-3 leading-relaxed">
-              HACKNATION 2.0 registrations (30 Hours, 4–6 Members, Up to ₹2 Lakhs in prizes) are being officially recorded via Google Forms.
+              External team registrations are already closed. This registration form is exclusively for students of &quot;Shivalik University&quot;
             </p>
             <a
-              href="https://forms.gle/CvYpny3YC5dpdYby7"
+              href="https://forms.gle/8Mk7g54FsrNDSyAo9"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold text-xs tracking-wider shadow-[0_0_20px_rgba(239,68,68,0.4)] transition-all cursor-pointer"
             >
-              <span>OPEN GOOGLE FORM</span>
+              <span>OPEN GOOGLE FORM (INTERNAL STUDENTS)</span>
               <span>↗</span>
             </a>
           </div>
@@ -158,7 +181,7 @@ function RegisterContent() {
               OFFICIAL QUANTUM DRIFT REGISTRATION FORM
             </span>
             <p className="text-xs text-slate-300 font-sans mb-3 leading-relaxed">
-              QUANTUM DRIFT registrations (Robo Soccer, Robo War, Robo Race) are being officially recorded via Google Forms.
+              QUANTUM DRIFT registrations (Robo Race, Robo Soccer, Robo War) are being officially recorded via Google Forms.
             </p>
             <a
               href="https://forms.gle/KJXV1eGUcrtLhJy56"
@@ -287,12 +310,40 @@ function RegisterContent() {
                 </div>
               )}
 
+              {event.slug === "fun-activities-and-games" && (
+                <div>
+                  <label className="block text-xs text-pink-300/90 tracking-wider mb-1 uppercase font-semibold">
+                    Select Fun Activity (₹50 / Per Person)
+                  </label>
+                  <select
+                    key={activityParam || "both"}
+                    defaultValue={
+                      activityParam === "skin-artistry"
+                        ? "skin-artistry"
+                        : activityParam === "beyblade-tournament"
+                        ? "beyblade-tournament"
+                        : "both"
+                    }
+                    className="w-full px-4 py-3 rounded bg-[#070c1a] border border-pink-500/40 text-pink-200 focus:outline-none focus:border-pink-400 transition-colors"
+                  >
+                    <option value="both" className="bg-[#070c1a] text-white">Choose Activity / Both Activities (₹50 per person)</option>
+                    <option value="skin-artistry" className="bg-[#070c1a] text-white">🎨 Skin Artistry — ₹50 / Person</option>
+                    <option value="beyblade-tournament" className="bg-[#070c1a] text-white">⚡ Beyblade Tournament — ₹50 / Person</option>
+                  </select>
+                  <p className="text-[11px] text-emerald-400 mt-1.5 font-mono">
+                    Registration Fee: ₹50 / per person payable at reporting desk.
+                  </p>
+                </div>
+              )}
+
               <div className="pt-4 flex flex-col sm:flex-row gap-3">
                 <button
                   type="submit"
                   className="flex-1 py-3.5 bg-gradient-to-r from-red-600 to-blue-600 rounded-lg text-white font-bold text-xs sm:text-sm tracking-widest shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:brightness-110 transition-all text-center cursor-pointer"
                 >
-                  CONFIRM REGISTRATION
+                  {event.slug === "fun-activities-and-games"
+                    ? "CONFIRM REGISTRATION (₹50 / PERSON)"
+                    : "CONFIRM REGISTRATION"}
                 </button>
                 <Link
                   href={`/events/${event.slug}`}

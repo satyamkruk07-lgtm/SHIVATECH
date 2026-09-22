@@ -300,6 +300,31 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           </motion.div>
         )}
 
+        {/* Internal Student Registration Notice (Exclusively for HackNation 2.0) */}
+        {isHackathon && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.31 }}
+            className="mb-5 w-full max-w-xl text-left"
+          >
+            <div className="p-3.5 sm:p-4 rounded-xl bg-amber-500/[0.08] border border-amber-500/40 backdrop-blur-md shadow-[0_0_25px_rgba(245,158,11,0.15)] relative overflow-hidden">
+              <div className="flex items-start sm:items-center space-x-2 text-xs sm:text-sm font-mono font-black tracking-wider text-amber-300 uppercase leading-snug">
+                <span className="text-base sm:text-lg leading-none flex-shrink-0">⚠️</span>
+                <span>
+                  REGISTRATION OPEN FOR{" "}
+                  <span className="text-amber-200 underline decoration-amber-400/70 decoration-2 underline-offset-2">
+                    INTERNAL STUDENTS ONLY
+                  </span>
+                </span>
+              </div>
+              <p className="text-[11px] sm:text-xs text-slate-300 font-sans mt-1.5 leading-relaxed pl-6 sm:pl-7">
+                External team registrations are already closed. This registration form is exclusively for students of &quot;Shivalik University&quot;
+              </p>
+            </div>
+          </motion.div>
+        )}
+
         {/* Hero Actions: REGISTER & EXPLORE SCHEDULE */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
