@@ -74,6 +74,19 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
                   ★ {event.badge}
                 </span>
               )}
+
+              {event.slug === "hacknation-2-0" && (
+                <a
+                  href="https://unstop.com/hackathons/national-level-hackathon-shivalik-college-of-engineering-sce-dehradun-1753896"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 text-[11px] sm:text-xs font-mono font-bold tracking-wider text-white bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 px-3.5 py-1.5 rounded-lg border border-sky-400/60 shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
+                >
+                  <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                  <span>PPT ROUND FOR EXTERNAL TEAM</span>
+                  <span className="text-xs">↗</span>
+                </a>
+              )}
             </div>
 
             {/* Event Name */}
@@ -95,36 +108,40 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
             )}
 
             {/* Date & Venue Pill */}
-            <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-bold text-slate-300 mb-5">
-              <span className="flex items-center space-x-1.5 text-red-400 uppercase tracking-wider">
-                <svg
-                  className="w-4 h-4 text-red-500 fill-none stroke-current"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                >
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                  <line x1="16" y1="2" x2="16" y2="6" />
-                  <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
+            <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-300 mb-4">
+              <span className="flex items-center space-x-1.5 text-red-400 font-bold">
+                <span>📅</span>
                 <span>{event.date}</span>
               </span>
-
-              <span className="text-white/20 hidden sm:inline">•</span>
-
-              <span className="text-slate-400 font-normal">
-                📍 {event.venue}
+              <span className="text-slate-600">•</span>
+              <span className="flex items-center space-x-1.5 text-slate-300 font-semibold truncate max-w-full">
+                <span>📍</span>
+                <span>{event.venue}</span>
               </span>
             </div>
 
-            {/* Short Source-Based Description */}
-            <p className="text-sm sm:text-base text-slate-300 font-sans font-normal leading-relaxed max-w-2xl">
+            {/* Description */}
+            <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed mb-6">
               {event.description}
             </p>
+
+            {/* Micro Highlights Pill Row */}
+            {event.highlights && event.highlights.length > 0 && (
+              <div className="flex flex-wrap gap-2 pt-2 border-t border-white/5">
+                {event.highlights.slice(0, 3).map((hl, i) => (
+                  <span
+                    key={i}
+                    className="text-[10px] sm:text-[11px] font-mono font-medium text-slate-400 px-2.5 py-0.5 rounded bg-white/[0.02] border border-white/5"
+                  >
+                    • {hl}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Right Block: Action Buttons */}
-          <div className="flex flex-col sm:flex-row lg:flex-col items-stretch gap-3 shrink-0 lg:w-56">
+          {/* Right Block: Actions */}
+          <div className="flex flex-col sm:flex-row lg:flex-col items-stretch justify-center gap-3 w-full lg:w-48 self-stretch lg:self-center border-t lg:border-t-0 lg:border-l border-white/10 pt-6 lg:pt-0 lg:pl-8">
             {/* VIEW DETAILS BUTTON -> Opens Dedicated Page */}
             <Link
               href={detailUrl}
@@ -175,6 +192,27 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
                     <span className="text-[10px] text-amber-300">⏳</span>
                   </button>
                 )}
+              </div>
+            ) : event.slug === "hacknation-2-0" ? (
+              <div className="flex flex-col gap-2 w-full">
+                <a
+                  href={event.registerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-3 px-5 rounded-xl font-semibold tracking-wider text-xs uppercase text-center border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/40 text-white transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer"
+                >
+                  <span>REGISTER</span>
+                  <span className="text-xs opacity-60">↗</span>
+                </a>
+                <a
+                  href="https://unstop.com/hackathons/national-level-hackathon-shivalik-college-of-engineering-sce-dehradun-1753896"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-3 px-3 rounded-xl font-bold tracking-wider text-[11px] uppercase text-center border border-sky-400/50 bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 hover:text-white transition-all duration-200 flex items-center justify-center space-x-1 cursor-pointer shadow-[0_0_15px_rgba(56,189,248,0.2)]"
+                >
+                  <span>PPT ROUND</span>
+                  <span className="text-xs">↗</span>
+                </a>
               </div>
             ) : !event.isRegistrationOpen ? (
               <Link

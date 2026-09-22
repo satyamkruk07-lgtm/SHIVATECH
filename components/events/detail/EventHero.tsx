@@ -129,6 +129,19 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
             </span>
           )}
 
+          {event.slug === "hacknation-2-0" && (
+            <a
+              href="https://unstop.com/hackathons/national-level-hackathon-shivalik-college-of-engineering-sce-dehradun-1753896"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 text-xs font-mono font-bold tracking-wider text-white bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 px-3.5 py-1.5 rounded-lg border border-sky-400/60 shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
+            >
+              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+              <span>PPT ROUND FOR EXTERNAL TEAM</span>
+              <span className="text-xs">↗</span>
+            </a>
+          )}
+
           {event.duration && (
             <span className="text-[11px] sm:text-xs font-semibold tracking-wider text-slate-400 px-3 py-1 rounded-md bg-white/[0.03] border border-white/10">
               ⏱ {event.duration}
