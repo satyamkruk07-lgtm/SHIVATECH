@@ -362,7 +362,7 @@ export const eventsList: EventItem[] = [
       "To connect student innovators directly with CBII incubation, seed funding, and mentors.",
       "To prepare student ventures for national-level innovation competitions.",
     ],
-    prize: "₹30,000+",
+    prize: "Upto 10 Lakh",
     teamSize: "2–4 Members",
     registerUrl: "https://forms.gle/6e6y7YaP2FWrfrwW7",
     externalRegisterUrl: "https://forms.gle/6e6y7YaP2FWrfrwW7",
@@ -371,6 +371,7 @@ export const eventsList: EventItem[] = [
     accentColor: "blue",
     badge: "INCUBATION PIPELINE",
     highlights: [
+      "Funding Prize: Upto 10 Lakh",
       "18 Suggested Problem Domains",
       "7-Stage Idea-to-Incubation Pipeline",
       "CBII Incubation & Mentorship Opportunities",

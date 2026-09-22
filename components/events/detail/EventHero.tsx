@@ -235,7 +235,7 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
               OPPORTUNITY & REWARDS
             </span>
             <span className="text-xs sm:text-sm font-bold text-emerald-400">
-              🏆 {event.prize ? `${event.prize} Awards + Incubation` : "Awards, Certificates & Mentorship"}
+              🏆 {event.slug === "ideathon" ? "Upto 10 Lakh Funding Prize + Incubation" : event.prize ? `${event.prize} Awards + Incubation` : "Awards, Certificates & Mentorship"}
             </span>
           </div>
 

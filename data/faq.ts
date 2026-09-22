@@ -133,8 +133,8 @@ export const faqEventsData: FAQEventSection[] = [
         number: "04",
         question: "What are the prizes and incubation opportunities?",
         answer:
-          "Winning teams compete for ₹30,000+ in prizes, and more importantly, gain direct fast-track incubation support with CBII (Centre for Business Innovation & Incubation) at Shivalik University, including seed funding pipelines and founder mentorship.",
-        highlight: "₹30,000+ & CBII Incubation",
+          "Winning teams compete for funding prizes Upto 10 Lakh, and more importantly, gain direct fast-track incubation support with CBII (Centre for Business Innovation & Incubation) at Shivalik University, including seed funding pipelines and founder mentorship.",
+        highlight: "Upto 10 Lakh Funding & CBII Incubation",
       },
       {
         id: "id-5",
