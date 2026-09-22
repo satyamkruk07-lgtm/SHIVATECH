@@ -366,7 +366,7 @@ export const eventsList: EventItem[] = [
     teamSize: "2–4 Members",
     registerUrl: "https://forms.gle/6e6y7YaP2FWrfrwW7",
     externalRegisterUrl: "https://forms.gle/6e6y7YaP2FWrfrwW7",
-    internalRegisterUrl: "",
+    internalRegisterUrl: "https://forms.gle/5XrJJw1Rre9LpaC39",
     isRegistrationOpen: true,
     accentColor: "blue",
     badge: "INCUBATION PIPELINE",
