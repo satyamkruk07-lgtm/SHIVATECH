@@ -18,9 +18,9 @@ interface ActivityData {
 
 const activities: ActivityData[] = [
   {
-    id: "skin-artistry",
+    id: "web-of-colour",
     number: "01",
-    name: "SKIN ARTISTRY",
+    name: "WEB OF COLOUR",
     tagline: "CREATIVE BODY & SKIN CANVAS",
     description:
       "Unleash your creativity through colors and transform skin into a canvas. Create unique artistic designs, patterns and visual expressions using skin-safe body paints.",

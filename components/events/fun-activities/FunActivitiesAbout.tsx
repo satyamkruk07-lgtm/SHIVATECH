@@ -56,7 +56,7 @@ export const FunActivitiesAbout: React.FC = () => {
                   </h4>
                 </div>
                 <p className="text-xs text-slate-300 font-sans leading-relaxed">
-                  Celebrate individual and collaborative artistic vision through safe, vibrant skin artistry and living canvas creations.
+                  Celebrate individual and collaborative artistic vision through safe, vibrant Web of Colour and living canvas creations.
                 </p>
               </div>
 

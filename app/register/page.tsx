@@ -98,8 +98,8 @@ function RegisterContent() {
                 SELECTED ACTIVITY
               </span>
               <span className="text-sm font-bold text-white uppercase">
-                {activityParam === "skin-artistry"
-                  ? "Skin Artistry"
+                {activityParam === "web-of-colour" || activityParam === "skin-artistry"
+                  ? "Web of Colour"
                   : activityParam === "beyblade-tournament"
                   ? "Beyblade Tournament"
                   : activityParam}
@@ -303,8 +303,8 @@ function RegisterContent() {
                   <select
                     key={activityParam || "both"}
                     defaultValue={
-                      activityParam === "skin-artistry"
-                        ? "skin-artistry"
+                      activityParam === "web-of-colour" || activityParam === "skin-artistry"
+                        ? "web-of-colour"
                         : activityParam === "beyblade-tournament"
                         ? "beyblade-tournament"
                         : "both"
@@ -312,7 +312,7 @@ function RegisterContent() {
                     className="w-full px-4 py-3 rounded bg-[#070c1a] border border-pink-500/40 text-pink-200 focus:outline-none focus:border-pink-400 transition-colors"
                   >
                     <option value="both" className="bg-[#070c1a] text-white">Choose Activity / Both Activities (₹50 per person)</option>
-                    <option value="skin-artistry" className="bg-[#070c1a] text-white">🎨 Skin Artistry — ₹50 / Person</option>
+                    <option value="web-of-colour" className="bg-[#070c1a] text-white">🎨 Web of Colour — ₹50 / Person</option>
                     <option value="beyblade-tournament" className="bg-[#070c1a] text-white">⚡ Beyblade Tournament — ₹50 / Person</option>
                   </select>
                   <p className="text-[11px] text-emerald-400 mt-1.5 font-mono">

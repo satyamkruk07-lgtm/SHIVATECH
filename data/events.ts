@@ -632,14 +632,14 @@ export const eventsList: EventItem[] = [
     theme: "Where creativity meets competition.",
     tagline: "WHERE CREATIVITY MEETS COMPETITION",
     description:
-      "A dynamic blend of artistic expression and competitive entertainment featuring Skin Artistry and the Beyblade Tournament.",
+      "A dynamic blend of artistic expression and competitive entertainment featuring Web of Colour and the Beyblade Tournament.",
     registrationFee: "₹50 / PERSON",
     registerUrl: "/register?event=fun-activities-and-games",
     isRegistrationOpen: true,
     accentColor: "purple",
     badge: "FESTIVAL SPECIAL",
     highlights: [
-      "Skin Artistry: Living canvas & creative body painting",
+      "Web of Colour: Living canvas & creative body painting",
       "Beyblade Tournament: Knockout battle arena clashes",
       "Open to all festival attendees and students",
       "Interactive entertainment, community & fun",

@@ -323,7 +323,7 @@ export const faqEventsData: FAQEventSection[] = [
     number: "05",
     name: "FUN ACTIVITIES & GAMES",
     filterLabel: "FUN ACTIVITIES & GAMES",
-    tagline: "CREATIVE SKIN ARTISTRY & HIGH-OCTANE BEYBLADE TOURNAMENT",
+    tagline: "CREATIVE WEB OF COLOUR & HIGH-OCTANE BEYBLADE TOURNAMENT",
     badge: "FESTIVAL SPECIAL ARENA",
     accent: "purple",
     detailRoute: "/events/fun-activities-and-games",
@@ -333,8 +333,8 @@ export const faqEventsData: FAQEventSection[] = [
         number: "01",
         question: "What are the Fun Activities & Games at SHIVA INNOVEX?",
         answer:
-          "Fun Activities & Games features two dynamic festival zones: 'Skin Artistry' (a creative skin/body painting canvas activity) and the 'Beyblade Tournament' (an action-packed knockout arena competition).",
-        highlight: "Skin Artistry & Beyblade Tournament",
+          "Fun Activities & Games features two dynamic festival zones: 'Web of Colour' (a creative skin/body painting canvas activity) and the 'Beyblade Tournament' (an action-packed knockout arena competition).",
+        highlight: "Web of Colour & Beyblade Tournament",
       },
       {
         id: "fa-2",
@@ -349,13 +349,13 @@ export const faqEventsData: FAQEventSection[] = [
         number: "03",
         question: "Who is eligible to participate?",
         answer:
-          "All registered attendees, college students, and festival visitors are welcome to join both Skin Artistry and the Beyblade Tournament.",
+          "All registered attendees, college students, and festival visitors are welcome to join both Web of Colour and the Beyblade Tournament.",
         highlight: "Open to All Festival Participants",
       },
       {
         id: "fa-4",
         number: "04",
-        question: "Are skin painting materials provided for Skin Artistry?",
+        question: "Are skin painting materials provided for Web of Colour?",
         answer:
           "Yes! Safe, certified skin-friendly body paints and application brushes are provided at the activity station.",
         highlight: "Skin-Safe Paints Provided",

@@ -5,11 +5,11 @@ import FunActivitiesPage from "@/components/events/fun-activities/FunActivitiesP
 export const metadata: Metadata = {
   title: "FUN ACTIVITIES & GAMES | SHIVA INNOVEX 2026",
   description:
-    "Where creativity meets competition. Explore Skin Artistry and the Beyblade Tournament at SHIVA INNOVEX 2026.",
+    "Where creativity meets competition. Explore Web of Colour and the Beyblade Tournament at SHIVA INNOVEX 2026.",
   openGraph: {
     title: "FUN ACTIVITIES & GAMES | SHIVA INNOVEX 2026",
     description:
-      "Where creativity meets competition. Explore Skin Artistry and the Beyblade Tournament at SHIVA INNOVEX 2026.",
+      "Where creativity meets competition. Explore Web of Colour and the Beyblade Tournament at SHIVA INNOVEX 2026.",
   },
 };
 

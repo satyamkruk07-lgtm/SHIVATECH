@@ -17,7 +17,7 @@ export const FunActivitiesPage: React.FC = () => {
       {/* 2. CINEMATIC HERO */}
       <FunActivitiesHero />
 
-      {/* 3. TWO PREMIUM EVENT CARDS (SKIN ARTISTRY & BEYBLADE TOURNAMENT) */}
+      {/* 3. TWO PREMIUM EVENT CARDS (WEB OF COLOUR & BEYBLADE TOURNAMENT) */}
       <FunActivitiesCards />
 
       {/* 4. ABOUT THE ACTIVITIES SECTION */}
