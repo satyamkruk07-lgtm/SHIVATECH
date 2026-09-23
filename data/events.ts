@@ -106,7 +106,6 @@ export interface EventItem {
   prize?: string;
   teamSize?: string;
   registerUrl: string;
-  externalRegisterUrl?: string;
   internalRegisterUrl?: string;
   isRegistrationOpen?: boolean;
   registrationNotice?: string;
@@ -364,8 +363,7 @@ export const eventsList: EventItem[] = [
     ],
     prize: "Upto 10 Lakh",
     teamSize: "2–4 Members",
-    registerUrl: "https://forms.gle/6e6y7YaP2FWrfrwW7",
-    externalRegisterUrl: "https://forms.gle/6e6y7YaP2FWrfrwW7",
+    registerUrl: "https://forms.gle/5XrJJw1Rre9LpaC39",
     internalRegisterUrl: "https://forms.gle/5XrJJw1Rre9LpaC39",
     isRegistrationOpen: true,
     accentColor: "blue",

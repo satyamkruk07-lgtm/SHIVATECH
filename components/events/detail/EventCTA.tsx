@@ -81,17 +81,7 @@ export const EventCTA: React.FC<EventCTAProps> = ({ event }) => {
         <div className="flex flex-col sm:flex-row items-center gap-4 font-mono w-full sm:w-auto">
           {event.slug === "ideathon" ? (
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
-              <a
-                href={event.externalRegisterUrl || event.registerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto py-4 px-8 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center text-white bg-gradient-to-r from-sky-600 via-blue-500 to-sky-600 shadow-[0_0_30px_rgba(56,189,248,0.4)] hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer flex items-center justify-center space-x-2"
-              >
-                <span>EXTERNAL REGISTRATION</span>
-                <span className="text-sm">↗</span>
-              </a>
-
-              {event.internalRegisterUrl ? (
+              {event.internalRegisterUrl && (
                 <a
                   href={event.internalRegisterUrl}
                   target="_blank"
@@ -101,16 +91,14 @@ export const EventCTA: React.FC<EventCTAProps> = ({ event }) => {
                   <span>INTERNAL REGISTRATION</span>
                   <span className="text-sm">↗</span>
                 </a>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => alert("Internal registration form link will be updated shortly. Please check back soon!")}
-                  className="w-full sm:w-auto py-4 px-8 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center text-white border border-white/20 bg-white/10 hover:bg-white/15 transition-all duration-200 cursor-pointer flex items-center justify-center space-x-2"
-                >
-                  <span>INTERNAL REGISTRATION</span>
-                  <span className="text-xs text-amber-300">⏳ COMING SOON</span>
-                </button>
               )}
+              <Link
+                href="/contact"
+                className="w-full sm:w-auto py-4 px-8 rounded-xl font-semibold tracking-wide text-xs sm:text-sm text-center border border-sky-400/40 bg-sky-500/10 hover:bg-sky-500/20 text-sky-300 hover:text-white transition-all duration-200 cursor-pointer flex items-center justify-center space-x-2"
+              >
+                <span>External teams: Contact our coordinators on Contact Page</span>
+                <span className="text-sm">→</span>
+              </Link>
             </div>
           ) : !event.isRegistrationOpen ? (
             <Link

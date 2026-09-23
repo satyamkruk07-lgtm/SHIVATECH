@@ -132,27 +132,17 @@ function RegisterContent() {
           </div>
         )}
 
-        {/* Ideathon Official Google Form Direct Link Box (External & Internal) */}
+        {/* Ideathon Official Registration Box */}
         {event.slug === "ideathon" && (
           <div className="p-4 mb-6 rounded-xl bg-blue-950/40 border border-blue-500/40">
             <span className="text-[10px] text-sky-400 font-bold uppercase tracking-widest block mb-1">
-              OFFICIAL IDEATHON REGISTRATION FORMS
+              OFFICIAL IDEATHON REGISTRATION
             </span>
             <p className="text-xs text-slate-300 font-sans mb-3.5 leading-relaxed">
-              IDEATHON registrations are divided into separate portals for External and Internal participants. Please select your registration form below:
+              Internal college participants can register directly via the Google Form below. External teams, please contact our coordinators on the contact page.
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              <a
-                href={event.externalRegisterUrl || "https://forms.gle/6e6y7YaP2FWrfrwW7"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold text-xs tracking-wider shadow-[0_0_20px_rgba(56,189,248,0.4)] transition-all cursor-pointer"
-              >
-                <span>EXTERNAL REGISTRATION</span>
-                <span>↗</span>
-              </a>
-
-              {event.internalRegisterUrl ? (
+              {event.internalRegisterUrl && (
                 <a
                   href={event.internalRegisterUrl}
                   target="_blank"
@@ -162,16 +152,15 @@ function RegisterContent() {
                   <span>INTERNAL REGISTRATION</span>
                   <span>↗</span>
                 </a>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => alert("Internal registration form link will be updated shortly. Please check back soon!")}
-                  className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs tracking-wider transition-all cursor-pointer"
-                >
-                  <span>INTERNAL REGISTRATION</span>
-                  <span className="text-xs text-amber-300">⏳ COMING SOON</span>
-                </button>
               )}
+
+              <Link
+                href="/contact"
+                className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg bg-sky-500/15 hover:bg-sky-500/25 border border-sky-400/40 text-sky-300 hover:text-white font-semibold text-xs tracking-wide transition-all cursor-pointer"
+              >
+                <span>External team: Contact our coordinators on Contact Page</span>
+                <span>→</span>
+              </Link>
             </div>
           </div>
         )}

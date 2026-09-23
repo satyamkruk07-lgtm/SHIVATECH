@@ -74,19 +74,6 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
                   ★ {event.badge}
                 </span>
               )}
-
-              {event.slug === "hacknation-2-0" && (
-                <a
-                  href="https://unstop.com/hackathons/national-level-hackathon-shivalik-college-of-engineering-sce-dehradun-1753896"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 text-[11px] sm:text-xs font-mono font-bold tracking-wider text-white bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 px-3.5 py-1.5 rounded-lg border border-sky-400/60 shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
-                >
-                  <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                  <span>PPT ROUND FOR EXTERNAL TEAM</span>
-                  <span className="text-xs">↗</span>
-                </a>
-              )}
             </div>
 
             {/* Event Name */}
@@ -161,58 +148,25 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
 
             {/* REGISTER BUTTON -> Opens Register Page or External Form */}
             {event.slug === "ideathon" ? (
-              <div className="flex flex-wrap items-center gap-2">
-                <a
-                  href={event.externalRegisterUrl || event.registerUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-3.5 px-4 rounded-xl font-semibold tracking-wider text-xs uppercase text-center border border-sky-400/40 bg-sky-500/15 hover:bg-sky-500/25 text-sky-200 transition-all duration-200 flex items-center justify-center space-x-1.5 cursor-pointer"
-                >
-                  <span>EXTERNAL</span>
-                  <span className="text-xs opacity-75">↗</span>
-                </a>
-
+              <div className="flex flex-col gap-2 w-full">
                 {event.internalRegisterUrl ? (
                   <a
                     href={event.internalRegisterUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="py-3.5 px-4 rounded-xl font-semibold tracking-wider text-xs uppercase text-center border border-purple-400/40 bg-purple-500/15 hover:bg-purple-500/25 text-purple-200 transition-all duration-200 flex items-center justify-center space-x-1.5 cursor-pointer"
+                    className="py-3 px-4 rounded-xl font-bold tracking-wider text-xs uppercase text-center border border-purple-400/40 bg-purple-500/15 hover:bg-purple-500/25 text-purple-200 hover:text-white transition-all duration-200 flex items-center justify-center space-x-1.5 cursor-pointer shadow-[0_0_15px_rgba(168,85,247,0.2)]"
                   >
-                    <span>INTERNAL</span>
+                    <span>INTERNAL REGISTRATION</span>
                     <span className="text-xs opacity-75">↗</span>
                   </a>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => alert("Internal registration form link will be updated shortly. Please check back soon!")}
-                    className="py-3.5 px-4 rounded-xl font-semibold tracking-wider text-xs uppercase text-center border border-white/20 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all duration-200 flex items-center justify-center space-x-1.5 cursor-pointer"
-                  >
-                    <span>INTERNAL</span>
-                    <span className="text-[10px] text-amber-300">⏳</span>
-                  </button>
-                )}
-              </div>
-            ) : event.slug === "hacknation-2-0" ? (
-              <div className="flex flex-col gap-2 w-full">
-                <a
-                  href={event.registerUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-3 px-5 rounded-xl font-semibold tracking-wider text-xs uppercase text-center border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/40 text-white transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer"
+                ) : null}
+                <Link
+                  href="/contact"
+                  className="py-2 px-3 rounded-lg font-medium tracking-wide text-[11px] text-center border border-sky-400/30 bg-sky-500/10 hover:bg-sky-500/20 text-sky-300 hover:text-white transition-all duration-200 flex items-center justify-center space-x-1"
                 >
-                  <span>REGISTER</span>
-                  <span className="text-xs opacity-60">↗</span>
-                </a>
-                <a
-                  href="https://unstop.com/hackathons/national-level-hackathon-shivalik-college-of-engineering-sce-dehradun-1753896"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-3 px-3 rounded-xl font-bold tracking-wider text-[11px] uppercase text-center border border-sky-400/50 bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 hover:text-white transition-all duration-200 flex items-center justify-center space-x-1 cursor-pointer shadow-[0_0_15px_rgba(56,189,248,0.2)]"
-                >
-                  <span>PPT ROUND</span>
-                  <span className="text-xs">↗</span>
-                </a>
+                  <span>External team: Contact our coordinators on Contact Page</span>
+                  <span className="text-xs">→</span>
+                </Link>
               </div>
             ) : !event.isRegistrationOpen ? (
               <Link

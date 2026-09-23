@@ -129,18 +129,6 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
             </span>
           )}
 
-          {event.slug === "hacknation-2-0" && (
-            <a
-              href="https://unstop.com/hackathons/national-level-hackathon-shivalik-college-of-engineering-sce-dehradun-1753896"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 text-xs font-mono font-bold tracking-wider text-white bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 px-3.5 py-1.5 rounded-lg border border-sky-400/60 shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
-            >
-              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-              <span>PPT ROUND FOR EXTERNAL TEAM</span>
-              <span className="text-xs">↗</span>
-            </a>
-          )}
 
           {event.duration && (
             <span className="text-[11px] sm:text-xs font-semibold tracking-wider text-slate-400 px-3 py-1 rounded-md bg-white/[0.03] border border-white/10">
@@ -346,38 +334,26 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           className="flex flex-wrap items-center gap-4 font-mono"
         >
           {event.slug === "ideathon" ? (
-            <>
-              <a
-                href={event.externalRegisterUrl || event.registerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="py-3.5 px-6 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center shadow-lg transition-all duration-300 flex items-center space-x-2 text-white bg-gradient-to-r from-sky-600 to-blue-600 shadow-[0_0_25px_rgba(56,189,248,0.4)] hover:brightness-110 hover:-translate-y-0.5 cursor-pointer"
-              >
-                <span>EXTERNAL REGISTRATION</span>
-                <span className="text-base leading-none">↗</span>
-              </a>
-
-              {event.internalRegisterUrl ? (
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full">
+              {event.internalRegisterUrl && (
                 <a
                   href={event.internalRegisterUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="py-3.5 px-6 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center shadow-lg transition-all duration-300 flex items-center space-x-2 text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-[0_0_25px_rgba(168,85,247,0.4)] hover:brightness-110 hover:-translate-y-0.5 cursor-pointer"
+                  className="py-3.5 px-6 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-[0_0_25px_rgba(168,85,247,0.4)] hover:brightness-110 hover:-translate-y-0.5 cursor-pointer"
                 >
                   <span>INTERNAL REGISTRATION</span>
                   <span className="text-base leading-none">↗</span>
                 </a>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => alert("Internal registration form link will be updated shortly. Please check back soon!")}
-                  className="py-3.5 px-6 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center border border-white/20 bg-white/10 hover:bg-white/15 text-white transition-all duration-200 flex items-center space-x-2 cursor-pointer"
-                >
-                  <span>INTERNAL REGISTRATION</span>
-                  <span className="text-xs text-amber-300">⏳ COMING SOON</span>
-                </button>
               )}
-            </>
+              <Link
+                href="/contact"
+                className="py-3.5 px-6 rounded-xl font-semibold tracking-wide text-xs sm:text-sm text-center border border-sky-400/40 bg-sky-500/10 hover:bg-sky-500/20 text-sky-300 hover:text-white transition-all duration-200 flex items-center justify-center space-x-2"
+              >
+                <span>External teams: Contact our coordinators on Contact Page</span>
+                <span className="text-base leading-none">→</span>
+              </Link>
+            </div>
           ) : !event.isRegistrationOpen ? (
             <Link
               href={`/register?event=${event.slug}`}
