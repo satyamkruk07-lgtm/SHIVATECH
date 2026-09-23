@@ -149,8 +149,8 @@ export const faqEventsData: FAQEventSection[] = [
         number: "06",
         question: "How do teams register for IDEATHON?",
         answer:
-          "Registration is handled online via the dedicated IDEATHON Google Form linked directly on the official IDEATHON event detail page.",
-        highlight: "Direct Online Registration",
+          "Registration is handled online via separate portals for External teams and Internal (college) teams (Google Form: forms.gle/5XrJJw1Rre9LpaC39) linked directly on the official IDEATHON page and registration section.",
+        highlight: "External & Internal Online Portals",
       },
     ],
   },
