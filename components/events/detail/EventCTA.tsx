@@ -77,6 +77,17 @@ export const EventCTA: React.FC<EventCTAProps> = ({ event }) => {
           </div>
         )}
 
+        {/* Registration Deadline Banner */}
+        {event.registrationDeadline && (
+          <div className="mb-6 inline-flex items-center space-x-2.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500/20 via-yellow-400/20 to-amber-500/20 border border-amber-400/60 text-amber-200 font-mono shadow-[0_0_20px_rgba(251,191,36,0.3)]">
+            <span className="text-base sm:text-lg">⏰</span>
+            <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider">
+              LAST DATE OF REGISTRATION: {event.registrationDeadline.toUpperCase()}
+            </span>
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+          </div>
+        )}
+
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center gap-4 font-mono w-full sm:w-auto">
           {event.slug === "ideathon" ? (

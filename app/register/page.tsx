@@ -120,15 +120,26 @@ function RegisterContent() {
             <p className="text-xs text-slate-300 font-sans mb-3 leading-relaxed">
               External team registrations are already closed. This registration form is exclusively for students of &quot;Shivalik University&quot;
             </p>
-            <a
-              href="https://forms.gle/8Mk7g54FsrNDSyAo9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold text-xs tracking-wider shadow-[0_0_20px_rgba(239,68,68,0.4)] transition-all cursor-pointer"
-            >
-              <span>OPEN GOOGLE FORM (INTERNAL STUDENTS)</span>
-              <span>↗</span>
-            </a>
+            <div className="flex flex-wrap items-center gap-3 mb-3">
+              <a
+                href="https://forms.gle/8Mk7g54FsrNDSyAo9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold text-xs tracking-wider shadow-[0_0_20px_rgba(239,68,68,0.4)] transition-all cursor-pointer"
+              >
+                <span>OPEN GOOGLE FORM (INTERNAL STUDENTS)</span>
+                <span>↗</span>
+              </a>
+            </div>
+            <div className="pt-2.5 border-t border-amber-500/30 flex items-center justify-between flex-wrap gap-2 text-xs font-mono">
+              <span className="text-amber-300 font-bold flex items-center space-x-1.5">
+                <span>⏰</span>
+                <span>LAST DATE OF REGISTRATION: 25TH SEP 2026</span>
+              </span>
+              <span className="text-[10px] text-amber-200 bg-amber-400/20 px-2 py-0.5 rounded font-bold uppercase">
+                DEADLINE
+              </span>
+            </div>
           </div>
         )}
 
@@ -141,7 +152,7 @@ function RegisterContent() {
             <p className="text-xs text-slate-300 font-sans mb-3.5 leading-relaxed">
               Internal college participants can register directly via the Google Form below. External teams, please contact our coordinators on the contact page.
             </p>
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3 mb-3">
               {event.internalRegisterUrl && (
                 <a
                   href={event.internalRegisterUrl}
@@ -161,6 +172,15 @@ function RegisterContent() {
                 <span>External team: Contact our coordinators on Contact Page</span>
                 <span>→</span>
               </Link>
+            </div>
+            <div className="pt-2.5 border-t border-sky-500/30 flex items-center justify-between flex-wrap gap-2 text-xs font-mono">
+              <span className="text-amber-300 font-bold flex items-center space-x-1.5">
+                <span>⏰</span>
+                <span>LAST DATE OF REGISTRATION: 25TH SEP 2026</span>
+              </span>
+              <span className="text-[10px] text-amber-200 bg-amber-400/20 px-2 py-0.5 rounded font-bold uppercase">
+                DEADLINE
+              </span>
             </div>
           </div>
         )}

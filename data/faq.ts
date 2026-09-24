@@ -77,8 +77,8 @@ export const faqEventsData: FAQEventSection[] = [
         number: "06",
         question: "What are the important dates and venue for HACKNATION 2.0?",
         answer:
-          "HACKNATION 2.0 will take place on 07–08 October 2026 at C-Block, Shivalik University. The 30-hour development kickoff begins on 7 October at 11:00 AM, continuing through the night until prototype evaluations on the evening of 8 October.",
-        highlight: "07–08 October 2026 • C-Block",
+          "The Last Date of Registration is 25 September 2026. HACKNATION 2.0 will take place on 07–08 October 2026 at C-Block, Shivalik University. The 30-hour development kickoff begins on 7 October at 11:00 AM, continuing through the night until prototype evaluations on the evening of 8 October.",
+        highlight: "Last Date: 25 Sep 2026 • Event: 07–08 Oct 2026",
       },
       {
         id: "hn-7",
@@ -141,8 +141,8 @@ export const faqEventsData: FAQEventSection[] = [
         number: "05",
         question: "When and where is IDEATHON conducted?",
         answer:
-          "IDEATHON takes place on 07–08 October 2026 at the Conference Room, CBII, Shivalik University.",
-        highlight: "07–08 October 2026 • CBII Conference Room",
+          "The Last Date of Registration is 25 September 2026. IDEATHON takes place on 07–08 October 2026 at the Conference Room, CBII, Shivalik University.",
+        highlight: "Last Date: 25 Sep 2026 • Event: 07–08 Oct 2026",
       },
       {
         id: "id-6",

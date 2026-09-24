@@ -102,7 +102,7 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
             )}
 
             {/* Date & Venue Pill */}
-            <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-300 mb-4">
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs sm:text-sm text-slate-300 mb-4">
               <span className="flex items-center space-x-1.5 text-red-400 font-bold">
                 <span>📅</span>
                 <span>{event.date}</span>
@@ -112,6 +112,15 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
                 <span>📍</span>
                 <span>{event.venue}</span>
               </span>
+              {event.registrationDeadline && (
+                <>
+                  <span className="text-slate-600">•</span>
+                  <span className="flex items-center space-x-1.5 text-amber-300 font-black bg-gradient-to-r from-amber-500/20 via-yellow-400/25 to-amber-500/20 px-2.5 py-1 rounded border border-amber-400/60 shadow-[0_0_15px_rgba(245,158,11,0.25)]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                    <span>LAST DATE: {event.registrationDeadline.toUpperCase()}</span>
+                  </span>
+                </>
+              )}
             </div>
 
             {/* Description */}
@@ -136,6 +145,17 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
 
           {/* Right Block: Actions */}
           <div className="flex flex-col sm:flex-row lg:flex-col items-stretch justify-center gap-3 w-full lg:w-48 self-stretch lg:self-center border-t lg:border-t-0 lg:border-l border-white/10 pt-6 lg:pt-0 lg:pl-8">
+            {event.registrationDeadline && (
+              <div className="text-center py-2 px-2.5 rounded-xl bg-gradient-to-r from-amber-500/15 via-yellow-400/15 to-amber-500/15 border border-amber-400/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+                <span className="text-[10px] text-amber-300 font-bold uppercase tracking-wider block">
+                  REGISTRATION CLOSES
+                </span>
+                <span className="text-xs font-black text-white font-mono uppercase tracking-wide">
+                  ⏰ {event.registrationDeadline}
+                </span>
+              </div>
+            )}
+
             {/* VIEW DETAILS BUTTON -> Opens Dedicated Page */}
             <Link
               href={detailUrl}

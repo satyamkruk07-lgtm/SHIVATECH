@@ -185,6 +185,38 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           </motion.div>
         )}
 
+        {/* Prominent Registration Deadline Banner */}
+        {event.registrationDeadline && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.22 }}
+            className="mb-8 w-full max-w-4xl"
+          >
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-amber-500/20 via-yellow-400/15 to-amber-500/20 border-2 border-amber-400 shadow-[0_0_30px_rgba(251,191,36,0.35)] backdrop-blur-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 font-mono">
+              <div className="flex items-center space-x-3">
+                <span className="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-xl sm:text-2xl">
+                  ⏰
+                </span>
+                <div>
+                  <span className="text-[10px] sm:text-xs font-bold text-amber-300 tracking-[0.2em] uppercase block">
+                    OFFICIAL REGISTRATION DEADLINE
+                  </span>
+                  <span className="text-sm sm:text-base lg:text-lg font-black text-white tracking-wider uppercase drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]">
+                    LAST DATE TO REGISTER: {event.registrationDeadline.toUpperCase()}
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-400/20 border border-amber-400/60 self-end sm:self-center shadow-[0_0_12px_rgba(251,191,36,0.4)]">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                <span className="text-xs font-black text-amber-200 uppercase tracking-widest">
+                  CLOSING SOON
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* Schedule & Metadata Bar (Box 1 in user image) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -403,6 +435,13 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
               <span>REGISTER FOR THIS EVENT</span>
               <span className="text-base leading-none">→</span>
             </Link>
+          )}
+
+          {event.registrationDeadline && (
+            <div className="py-3.5 px-5 rounded-xl font-bold tracking-wider text-xs sm:text-sm uppercase text-center border border-amber-400/50 bg-amber-500/15 text-amber-300 shadow-[0_0_20px_rgba(245,158,11,0.2)] flex items-center justify-center space-x-2">
+              <span className="text-base">⏰</span>
+              <span>LAST DATE: {event.registrationDeadline.toUpperCase()}</span>
+            </div>
           )}
 
           <Link
