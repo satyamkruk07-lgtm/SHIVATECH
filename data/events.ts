@@ -169,6 +169,7 @@ export const eventsList: EventItem[] = [
     isRegistrationOpen: true,
     accentColor: "crimson",
     badge: "FLAGSHIP HACKATHON",
+    registrationNotice: "REGISTRATION OPEN FOR INTERNAL STUDENTS ONLY",
     eventStatsTitle: "Previously Participants",
     eventStats: [
       { id: "stat-1", value: 500, suffix: "+", label: "PARTICIPANTS" },

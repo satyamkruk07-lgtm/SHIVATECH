@@ -74,6 +74,13 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
                   ★ {event.badge}
                 </span>
               )}
+
+              {event.slug === "hacknation-2-0" && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-gradient-to-r from-amber-500/20 via-yellow-400/20 to-amber-500/20 border border-amber-400 text-amber-200 text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(251,191,36,0.35)]">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                  <span>DISCLAIMER: REGISTRATION OPEN FOR INTERNAL STUDENTS ONLY</span>
+                </span>
+              )}
             </div>
 
             {/* Event Name */}
