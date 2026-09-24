@@ -76,6 +76,10 @@ export const QuantumHero: React.FC<QuantumHeroProps> = ({ onExploreClick }) => {
           <span className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-sky-300 bg-sky-500/10 border border-sky-500/25">
             09 OCTOBER 2026
           </span>
+          <span className="px-3.5 py-1 rounded-full text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-amber-300 bg-amber-500/15 border border-amber-400/60 shadow-[0_0_20px_rgba(251,191,36,0.3)] flex items-center space-x-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            <span>LAST DATE: 04 OCT 2026</span>
+          </span>
         </motion.div>
 
         {/* Main Title: QUANTUM DRIFT */}
@@ -107,13 +111,43 @@ export const QuantumHero: React.FC<QuantumHeroProps> = ({ onExploreClick }) => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-lg bg-black/60 border border-white/10 text-xs sm:text-sm font-semibold tracking-[0.25em] text-slate-300 uppercase mb-8 backdrop-blur-md"
+          className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-lg bg-black/60 border border-white/10 text-xs sm:text-sm font-semibold tracking-[0.25em] text-slate-300 uppercase mb-6 backdrop-blur-md"
         >
           <span className="w-2 h-2 rounded-full bg-red-500" />
           <span>3 PHASES</span>
           <span className="text-slate-600">•</span>
           <span className="w-2 h-2 rounded-full bg-sky-400" />
           <span>1 FINAL CHAMPION</span>
+        </motion.div>
+
+        {/* Prominent Registration Deadline Banner */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="mb-8 w-full max-w-2xl"
+        >
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-amber-500/20 via-yellow-400/15 to-amber-500/20 border-2 border-amber-400 shadow-[0_0_30px_rgba(251,191,36,0.35)] backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-3 font-mono">
+            <div className="flex items-center space-x-3">
+              <span className="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-xl sm:text-2xl">
+                ⏰
+              </span>
+              <div className="text-left">
+                <span className="text-[10px] sm:text-xs font-bold text-amber-300 tracking-[0.2em] uppercase block">
+                  REGISTRATION DEADLINE
+                </span>
+                <span className="text-xs sm:text-sm md:text-base font-black text-white tracking-wider uppercase drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]">
+                  LAST DATE OF REGISTRATION: 04 OCT 2026
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-amber-400/20 border border-amber-400/60 self-end sm:self-center shadow-[0_0_12px_rgba(251,191,36,0.4)]">
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+              <span className="text-[10px] sm:text-[11px] font-black text-amber-200 uppercase tracking-widest">
+                CLOSING SOON
+              </span>
+            </div>
+          </div>
         </motion.div>
 
         {/* CTA Buttons */}
@@ -147,11 +181,15 @@ export const QuantumHero: React.FC<QuantumHeroProps> = ({ onExploreClick }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-12 sm:mt-16 w-full max-w-3xl pt-6 border-t border-white/10"
+          className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 mt-12 sm:mt-16 w-full max-w-4xl pt-6 border-t border-white/10"
         >
           <div className="flex flex-col items-center p-3 rounded-lg bg-white/[0.02] border border-white/5">
             <span className="text-[10px] text-slate-500 tracking-wider uppercase">DATE</span>
             <span className="text-xs sm:text-sm font-bold text-white tracking-wide">09 OCT 2026</span>
+          </div>
+          <div className="flex flex-col items-center p-3 rounded-lg bg-amber-500/10 border border-amber-400/40 shadow-[0_0_15px_rgba(251,191,36,0.15)]">
+            <span className="text-[10px] text-amber-300 tracking-wider uppercase font-bold">LAST DATE</span>
+            <span className="text-xs sm:text-sm font-black text-amber-200 tracking-wide">04 OCT 2026</span>
           </div>
           <div className="flex flex-col items-center p-3 rounded-lg bg-white/[0.02] border border-white/5">
             <span className="text-[10px] text-slate-500 tracking-wider uppercase">CHALLENGES</span>
@@ -161,7 +199,7 @@ export const QuantumHero: React.FC<QuantumHeroProps> = ({ onExploreClick }) => {
             <span className="text-[10px] text-slate-500 tracking-wider uppercase">VEHICLE TYPE</span>
             <span className="text-xs sm:text-sm font-bold text-sky-400 tracking-wide">BUILT / PURCHASED</span>
           </div>
-          <div className="flex flex-col items-center p-3 rounded-lg bg-white/[0.02] border border-white/5">
+          <div className="flex flex-col items-center p-3 rounded-lg bg-white/[0.02] border border-white/5 col-span-2 sm:col-span-1">
             <span className="text-[10px] text-slate-500 tracking-wider uppercase">OUTCOME</span>
             <span className="text-xs sm:text-sm font-bold text-amber-300 tracking-wide">1 CHAMPION</span>
           </div>

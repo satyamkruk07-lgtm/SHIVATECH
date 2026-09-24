@@ -245,8 +245,8 @@ export const faqEventsData: FAQEventSection[] = [
         number: "02",
         question: "When and where is Quantum Drift taking place?",
         answer:
-          "Quantum Drift takes place on 09 October 2026 at the Main Robotics Arena, Shivalik University.",
-        highlight: "09 October 2026 • Main Robotics Arena",
+          "Quantum Drift takes place on 09 October 2026 at the Main Robotics Arena, Shivalik University. The Last Date of Registration is 04 October 2026.",
+        highlight: "Last Date: 04 Oct 2026 • Event: 09 Oct 2026",
       },
       {
         id: "qd-3",

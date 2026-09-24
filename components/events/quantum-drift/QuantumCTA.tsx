@@ -75,6 +75,11 @@ export const QuantumCTA: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-wrap items-center justify-center gap-3 mb-8 max-w-xl mx-auto"
         >
+          <div className="px-3.5 py-1.5 rounded-lg bg-amber-500/20 border border-amber-400/60 text-xs font-mono shadow-[0_0_15px_rgba(245,158,11,0.25)]">
+            <span className="text-amber-300">LAST DATE: </span>
+            <span className="text-amber-200 font-black">04 OCT 2026</span>
+          </div>
+
           <div className="px-3.5 py-1.5 rounded-lg bg-white/[0.04] border border-white/15 text-xs font-mono">
             <span className="text-slate-400">DATE: </span>
             <span className="text-white font-bold">09 OCTOBER 2026</span>
@@ -101,10 +106,27 @@ export const QuantumCTA: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.35 }}
-          className="text-xs sm:text-sm text-slate-400 max-w-lg font-sans leading-relaxed mb-10"
+          className="text-xs sm:text-sm text-slate-400 max-w-lg font-sans leading-relaxed mb-6"
         >
           Compete with your self-built or purchased robotic car on 09 October 2026 at the Shivalik University Robotics Arena.
         </motion.p>
+
+        {/* Prominent Registration Deadline Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.38 }}
+          className="inline-flex items-center space-x-2.5 px-5 py-2.5 rounded-full bg-amber-500/15 border-2 border-amber-400/60 shadow-[0_0_25px_rgba(245,158,11,0.3)] mb-8"
+        >
+          <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping" />
+          <span className="text-xs sm:text-sm font-mono font-black text-amber-200 tracking-wider uppercase">
+            ⏰ LAST DATE OF REGISTRATION: 04 OCT 2026
+          </span>
+          <span className="text-[10px] font-mono font-bold bg-amber-400/30 text-amber-100 px-2 py-0.5 rounded uppercase">
+            DEADLINE
+          </span>
+        </motion.div>
 
         {/* Action Buttons */}
         <motion.div

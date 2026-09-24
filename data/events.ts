@@ -560,6 +560,7 @@ export const eventsList: EventItem[] = [
     category: "ROBOTICS",
     date: "09 OCTOBER 2026",
     fullDateSchedule: [
+      "04 October 2026 — Last Date of Registration (Deadline)",
       "09 October 2026 — Phase 01: Robo Race Circuit Sprint",
       "09 October 2026 — Phase 02: Robo Soccer Arena Matches",
       "09 October 2026 — Phase 03: Grand Finale Robo War Combat",
@@ -580,10 +581,12 @@ export const eventsList: EventItem[] = [
     registrationFee: "₹300 / TEAM",
     teamSize: "1–4 MEMBERS",
     registerUrl: "https://forms.gle/KJXV1eGUcrtLhJy56",
+    registrationDeadline: "04 Oct 2026",
     isRegistrationOpen: true,
     accentColor: "crimson",
     badge: "ROBOTICS ARENA",
     highlights: [
+      "Last Date of Registration: 04 Oct 2026",
       "3 Progressive Knockout Arena Phases",
       "Self-Built or Purchased Robotic Car Eligible",
       "One Robo Competes Through All 3 Challenges",

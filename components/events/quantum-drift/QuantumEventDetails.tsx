@@ -150,6 +150,35 @@ export const QuantumEventDetails: React.FC = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Prominent Registration Deadline Alert Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="mt-6 p-4 sm:p-5 rounded-2xl bg-amber-500/10 border-2 border-amber-400/50 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-[0_0_25px_rgba(245,158,11,0.2)]"
+        >
+          <div className="flex items-center space-x-3 text-center sm:text-left">
+            <span className="w-3 h-3 rounded-full bg-amber-400 animate-ping flex-shrink-0" />
+            <div>
+              <div className="text-[11px] text-amber-400 font-bold uppercase tracking-widest font-mono">
+                CRITICAL REGISTRATION NOTICE
+              </div>
+              <div className="text-sm sm:text-base font-black text-white font-mono">
+                LAST DATE OF REGISTRATION: <span className="text-amber-300">04 OCTOBER 2026</span>
+              </div>
+            </div>
+          </div>
+          <a
+            href="https://forms.gle/KJXV1eGUcrtLhJy56"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-black font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-lg cursor-pointer whitespace-nowrap"
+          >
+            REGISTER BEFORE 04 OCT →
+          </a>
+        </motion.div>
       </div>
     </section>
   );

@@ -15,6 +15,11 @@ const summarySpecs = [
     highlight: "text-white font-bold",
   },
   {
+    label: "LAST REGISTRATION DATE",
+    value: "04 OCTOBER 2026 (DEADLINE)",
+    highlight: "text-amber-300 font-black",
+  },
+  {
     label: "3 PROGRESSIVE PHASES",
     value: "ROBO RACE → ROBO SOCCER → ROBO WAR",
     highlight: "text-sky-400 font-bold",
