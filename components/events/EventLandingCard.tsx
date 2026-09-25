@@ -158,16 +158,7 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
 
           {/* Right Block: Actions */}
           <div className="flex flex-col sm:flex-row lg:flex-col items-stretch justify-center gap-3 w-full lg:w-48 self-stretch lg:self-center border-t lg:border-t-0 lg:border-l border-white/10 pt-6 lg:pt-0 lg:pl-8">
-            {event.isRegistrationClosed ? (
-              <div className="text-center py-2 px-2.5 rounded-xl bg-rose-500/15 border border-rose-500/40 shadow-[0_0_15px_rgba(244,63,94,0.2)]">
-                <span className="text-[10px] text-rose-300 font-bold uppercase tracking-wider block">
-                  REGISTRATION STATUS
-                </span>
-                <span className="text-xs font-black text-rose-200 font-mono uppercase tracking-wide">
-                  ⛔ CLOSED NOW
-                </span>
-              </div>
-            ) : event.registrationDeadline ? (
+            {!event.isRegistrationClosed && event.registrationDeadline && (
               <div className="text-center py-2 px-2.5 rounded-xl bg-gradient-to-r from-amber-500/15 via-yellow-400/15 to-amber-500/15 border border-amber-400/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
                 <span className="text-[10px] text-amber-300 font-bold uppercase tracking-wider block">
                   REGISTRATION CLOSES
@@ -176,7 +167,7 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
                   ⏰ {event.registrationDeadline}
                 </span>
               </div>
-            ) : null}
+            )}
 
             {/* VIEW DETAILS BUTTON -> Opens Dedicated Page */}
             <Link

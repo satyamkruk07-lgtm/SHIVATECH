@@ -373,30 +373,8 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           </motion.div>
         )}
 
-        {/* Internal Student Registration Notice or Closed Notice */}
-        {event.isRegistrationClosed ? (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.31 }}
-            className="mb-5 w-full max-w-xl text-left"
-          >
-            <div className="p-3.5 sm:p-4 rounded-xl bg-rose-500/[0.1] border-2 border-rose-500/50 backdrop-blur-md shadow-[0_0_25px_rgba(244,63,94,0.2)] relative overflow-hidden">
-              <div className="flex items-center space-x-2 text-xs sm:text-sm font-mono font-black tracking-wider text-rose-300 uppercase leading-snug">
-                <span className="text-base sm:text-lg leading-none flex-shrink-0">⛔</span>
-                <span>
-                  REGISTRATIONS IS{" "}
-                  <span className="text-white underline decoration-rose-400/70 decoration-2 underline-offset-2">
-                    CLOSED NOW
-                  </span>
-                </span>
-              </div>
-              <p className="text-[11px] sm:text-xs text-slate-300 font-sans mt-1.5 leading-relaxed pl-6 sm:pl-7">
-                The registration deadline for {event.name} has concluded ({event.registrationDeadline || "25th Sep 2026"}). No further registrations are being accepted.
-              </p>
-            </div>
-          </motion.div>
-        ) : isHackathon ? (
+        {/* Internal Student Registration Notice (Exclusively for HackNation 2.0 when open) */}
+        {isHackathon && !event.isRegistrationClosed && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -418,7 +396,7 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
               </p>
             </div>
           </motion.div>
-        ) : null}
+        )}
 
         {/* Hero Actions: REGISTER & EXPLORE SCHEDULE */}
         <motion.div
