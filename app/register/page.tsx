@@ -112,7 +112,7 @@ function RegisterContent() {
         )}
 
         {/* Hacknation 2.0 Official Google Form Direct Link Box */}
-        {isHackathon && (
+        {isHackathon && !event.isRegistrationClosed && (
           <div className="p-4 mb-6 rounded-xl bg-amber-950/20 border border-amber-500/40">
             <span className="text-[10px] text-amber-300 font-bold uppercase tracking-widest block mb-1">
               ⚠️ REGISTRATION OPEN FOR INTERNAL STUDENTS ONLY
@@ -144,7 +144,7 @@ function RegisterContent() {
         )}
 
         {/* Ideathon Official Registration Box */}
-        {event.slug === "ideathon" && (
+        {event.slug === "ideathon" && !event.isRegistrationClosed && (
           <div className="p-4 mb-6 rounded-xl bg-blue-950/40 border border-blue-500/40">
             <span className="text-[10px] text-sky-400 font-bold uppercase tracking-widest block mb-1">
               OFFICIAL IDEATHON REGISTRATION
@@ -217,8 +217,53 @@ function RegisterContent() {
           </div>
         )}
 
-        {/* If Registration is Opening Soon (Event 3: Departmental Technical Events) */}
-        {!event.isRegistrationOpen ? (
+        {/* 1. If Registration is Closed (HackNation 2.0 & Ideathon) */}
+        {event.isRegistrationClosed ? (
+          <div className="py-8 px-2 flex flex-col items-center text-center">
+            {/* Pulsing Holographic Lock Beacon */}
+            <div className="relative mb-6">
+              <div className="w-20 h-20 rounded-2xl bg-rose-500/15 border-2 border-rose-500/50 flex items-center justify-center text-rose-400 shadow-[0_0_35px_rgba(244,63,94,0.35)]">
+                <svg className="w-9 h-9 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+              </div>
+              <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-rose-500 opacity-80" />
+            </div>
+
+            {/* Status Pill Badge */}
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-rose-500/15 border border-rose-500/40 text-rose-300 text-[11px] font-bold tracking-[0.25em] uppercase mb-4">
+              <span className="w-2 h-2 rounded-full bg-rose-400" />
+              <span>OFFICIAL REGISTRATION STATUS: CLOSED</span>
+            </div>
+
+            {/* Prominent Exact Text requested by user */}
+            <h2 className="text-2xl sm:text-3xl font-black font-mono tracking-tight text-white uppercase mb-3 drop-shadow-[0_0_20px_rgba(244,63,94,0.4)]">
+              Registrations is Closed Now
+            </h2>
+
+            <p className="text-xs sm:text-sm text-slate-300 font-sans max-w-md mx-auto leading-relaxed mb-8">
+              Official registrations for <strong className="text-white">{event.name}</strong> reached the deadline on{" "}
+              <strong className="text-rose-300">{event.registrationDeadline || "25th Sep 2026"}</strong> and registrations are now officially closed. No new submissions can be accepted.
+            </p>
+
+            {/* Navigation Actions */}
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+              <Link
+                href={`/events/${event.slug}`}
+                className="w-full sm:w-auto py-3.5 px-8 rounded-xl font-bold tracking-widest text-xs uppercase bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all text-center"
+              >
+                ← BACK TO EVENT DETAILS
+              </Link>
+              <Link
+                href="/events"
+                className="w-full sm:w-auto py-3.5 px-8 rounded-xl font-bold tracking-widest text-xs uppercase bg-gradient-to-r from-red-600 to-sky-600 text-white shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:brightness-110 transition-all text-center"
+              >
+                EXPLORE ALL EVENTS →
+              </Link>
+            </div>
+          </div>
+        ) : !event.isRegistrationOpen ? (
           <div className="py-8 px-2 flex flex-col items-center text-center">
             {/* Pulsing Holographic Lock Beacon */}
             <div className="relative mb-6">

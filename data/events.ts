@@ -108,6 +108,7 @@ export interface EventItem {
   registerUrl: string;
   internalRegisterUrl?: string;
   isRegistrationOpen?: boolean;
+  isRegistrationClosed?: boolean;
   registrationNotice?: string;
   registrationDeadline?: string;
   registrationFee?: string;
@@ -147,7 +148,7 @@ export const eventsList: EventItem[] = [
     category: "HACKATHON",
     date: "07–08 OCTOBER 2026",
     fullDateSchedule: [
-      "25 September 2026 — Last Date of Registration (Deadline)",
+      "25 September 2026 — Last Date of Registration (Closed)",
       "7 October 2026 (11:00 AM) — Hackathon Launch, Problem Statements Reveal & 30-Hour Coding Kickoff",
       "7 October 2026 (Overnight) — Continuous Architecture Development, Mentorship Rounds & Midnight Checkpoint",
       "8 October 2026 (05:00 PM) — Code Freeze, Prototype Demos, Grand Jury Evaluation & Awards Ceremony",
@@ -169,10 +170,11 @@ export const eventsList: EventItem[] = [
     registrationFee: "₹250 / MEMBER",
     registerUrl: "https://forms.gle/8Mk7g54FsrNDSyAo9",
     registrationDeadline: "25th Sep 2026",
-    isRegistrationOpen: true,
+    isRegistrationOpen: false,
+    isRegistrationClosed: true,
     accentColor: "crimson",
     badge: "FLAGSHIP HACKATHON",
-    registrationNotice: "REGISTRATION OPEN FOR INTERNAL STUDENTS ONLY",
+    registrationNotice: "REGISTRATIONS IS CLOSED NOW",
     eventStatsTitle: "Previously Participants",
     eventStats: [
       { id: "stat-1", value: 500, suffix: "+", label: "PARTICIPANTS" },
@@ -180,7 +182,7 @@ export const eventsList: EventItem[] = [
       { id: "stat-3", value: 16, suffix: "+", label: "OTHER STATES" },
     ],
     highlights: [
-      "Last Date of Registration: 25th Sep 2026",
+      "Registrations is Closed Now (Deadline was 25th Sep 2026)",
       "30 Hours Continuous Development Sprint",
       "Up to ₹2,00,000 Total Prize Pool",
       "7 Proposed Technology Tracks",
@@ -352,7 +354,7 @@ export const eventsList: EventItem[] = [
     category: "INNOVATION & ENTREPRENEURSHIP",
     date: "07–08 OCTOBER 2026",
     fullDateSchedule: [
-      "25 September 2026 — Last Date of Registration (Deadline)",
+      "25 September 2026 — Last Date of Registration (Closed)",
       "6 October 2026 — Idea Presentations, Pitching Sessions, Expert Evaluation & Workshops",
     ],
     duration: "Full-Day Innovation Sprint",
@@ -372,11 +374,13 @@ export const eventsList: EventItem[] = [
     registerUrl: "https://forms.gle/5XrJJw1Rre9LpaC39",
     internalRegisterUrl: "https://forms.gle/5XrJJw1Rre9LpaC39",
     registrationDeadline: "25th Sep 2026",
-    isRegistrationOpen: true,
+    isRegistrationOpen: false,
+    isRegistrationClosed: true,
     accentColor: "blue",
     badge: "INCUBATION PIPELINE",
+    registrationNotice: "REGISTRATIONS IS CLOSED NOW",
     highlights: [
-      "Last Date of Registration: 25th Sep 2026",
+      "Registrations is Closed Now (Deadline was 25th Sep 2026)",
       "Funding Prize: Upto 10 Lakh",
       "18 Suggested Problem Domains",
       "7-Stage Idea-to-Incubation Pipeline",

@@ -77,16 +77,16 @@ export const faqEventsData: FAQEventSection[] = [
         number: "06",
         question: "What are the important dates and venue for HACKNATION 2.0?",
         answer:
-          "The Last Date of Registration is 25 September 2026. HACKNATION 2.0 will take place on 07–08 October 2026 at C-Block, Shivalik University. The 30-hour development kickoff begins on 7 October at 11:00 AM, continuing through the night until prototype evaluations on the evening of 8 October.",
-        highlight: "Last Date: 25 Sep 2026 • Event: 07–08 Oct 2026",
+          "Registrations is Closed Now. The Last Date of Registration was 25 September 2026. HACKNATION 2.0 will take place on 07–08 October 2026 at C-Block, Shivalik University. The 30-hour development kickoff begins on 7 October at 11:00 AM, continuing through the night until prototype evaluations on the evening of 8 October.",
+        highlight: "Registrations Closed • Event: 07–08 Oct 2026",
       },
       {
         id: "hn-7",
         number: "07",
         question: "How can our team register for HACKNATION 2.0?",
         answer:
-          "Official registrations are submitted through the official HACKNATION 2.0 Google Form, accessible directly from the HACKNATION 2.0 event details page.",
-        highlight: "Official Google Form",
+          "Registrations is Closed Now. The registration deadline (25 September 2026) has concluded and no further registrations are being accepted.",
+        highlight: "Registrations is Closed Now",
       },
     ],
   },
@@ -141,16 +141,16 @@ export const faqEventsData: FAQEventSection[] = [
         number: "05",
         question: "When and where is IDEATHON conducted?",
         answer:
-          "The Last Date of Registration is 25 September 2026. IDEATHON takes place on 07–08 October 2026 at the Conference Room, CBII, Shivalik University.",
-        highlight: "Last Date: 25 Sep 2026 • Event: 07–08 Oct 2026",
+          "Registrations is Closed Now. The Last Date of Registration was 25 September 2026. IDEATHON takes place on 07–08 October 2026 at the Conference Room, CBII, Shivalik University.",
+        highlight: "Registrations Closed • Event: 07–08 Oct 2026",
       },
       {
         id: "id-6",
         number: "06",
         question: "How do teams register for IDEATHON?",
         answer:
-          "Internal college teams can register directly via the internal Google Form (forms.gle/5XrJJw1Rre9LpaC39). External teams are requested to contact our event coordinators directly via the Contact page.",
-        highlight: "Internal Form & Coordinator Contact",
+          "Registrations is Closed Now. The registration deadline (25 September 2026) has concluded. For inquiries, please reach out to our coordinators via the Contact page.",
+        highlight: "Registrations is Closed Now",
       },
     ],
   },

@@ -129,12 +129,17 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
             </span>
           )}
 
-          {event.slug === "hacknation-2-0" && (
+          {event.isRegistrationClosed ? (
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rose-500/20 border border-rose-500 text-rose-200 text-xs sm:text-sm font-mono font-black tracking-wider uppercase shadow-[0_0_20px_rgba(244,63,94,0.35)]">
+              <span className="w-2 h-2 rounded-full bg-rose-400" />
+              <span>REGISTRATIONS IS CLOSED NOW</span>
+            </span>
+          ) : event.slug === "hacknation-2-0" ? (
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-gradient-to-r from-amber-500/20 via-yellow-400/20 to-amber-500/20 border border-amber-400 text-amber-200 text-xs sm:text-sm font-mono font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(251,191,36,0.35)]">
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
               <span>DISCLAIMER: REGISTRATION OPEN FOR INTERNAL STUDENTS ONLY</span>
             </span>
-          )}
+          ) : null}
 
           {event.duration && (
             <span className="text-[11px] sm:text-xs font-semibold tracking-wider text-slate-400 px-3 py-1 rounded-md bg-white/[0.03] border border-white/10">
@@ -185,8 +190,37 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           </motion.div>
         )}
 
-        {/* Prominent Registration Deadline Banner */}
-        {event.registrationDeadline && (
+        {/* Prominent Registration Deadline / Closed Notice Banner */}
+        {event.isRegistrationClosed ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.22 }}
+            className="mb-8 w-full max-w-4xl"
+          >
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-rose-500/25 via-red-500/15 to-rose-500/25 border-2 border-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.35)] backdrop-blur-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 font-mono">
+              <div className="flex items-center space-x-3">
+                <span className="w-10 h-10 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-xl sm:text-2xl">
+                  ⛔
+                </span>
+                <div>
+                  <span className="text-[10px] sm:text-xs font-bold text-rose-300 tracking-[0.2em] uppercase block">
+                    OFFICIAL REGISTRATION STATUS
+                  </span>
+                  <span className="text-sm sm:text-base lg:text-lg font-black text-white tracking-wider uppercase drop-shadow-[0_0_10px_rgba(244,63,94,0.8)]">
+                    REGISTRATIONS IS CLOSED NOW
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-rose-500/20 border border-rose-400/60 self-end sm:self-center shadow-[0_0_12px_rgba(244,63,94,0.4)]">
+                <span className="w-2 h-2 rounded-full bg-rose-400" />
+                <span className="text-xs font-black text-rose-200 uppercase tracking-widest">
+                  DEADLINE: {event.registrationDeadline?.toUpperCase() || "25TH SEP 2026"} (CONCLUDED)
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        ) : event.registrationDeadline ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -215,7 +249,7 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
               </div>
             </div>
           </motion.div>
-        )}
+        ) : null}
 
         {/* Schedule & Metadata Bar (Box 1 in user image) */}
         <motion.div
@@ -339,8 +373,30 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           </motion.div>
         )}
 
-        {/* Internal Student Registration Notice (Exclusively for HackNation 2.0) */}
-        {isHackathon && (
+        {/* Internal Student Registration Notice or Closed Notice */}
+        {event.isRegistrationClosed ? (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.31 }}
+            className="mb-5 w-full max-w-xl text-left"
+          >
+            <div className="p-3.5 sm:p-4 rounded-xl bg-rose-500/[0.1] border-2 border-rose-500/50 backdrop-blur-md shadow-[0_0_25px_rgba(244,63,94,0.2)] relative overflow-hidden">
+              <div className="flex items-center space-x-2 text-xs sm:text-sm font-mono font-black tracking-wider text-rose-300 uppercase leading-snug">
+                <span className="text-base sm:text-lg leading-none flex-shrink-0">⛔</span>
+                <span>
+                  REGISTRATIONS IS{" "}
+                  <span className="text-white underline decoration-rose-400/70 decoration-2 underline-offset-2">
+                    CLOSED NOW
+                  </span>
+                </span>
+              </div>
+              <p className="text-[11px] sm:text-xs text-slate-300 font-sans mt-1.5 leading-relaxed pl-6 sm:pl-7">
+                The registration deadline for {event.name} has concluded ({event.registrationDeadline || "25th Sep 2026"}). No further registrations are being accepted.
+              </p>
+            </div>
+          </motion.div>
+        ) : isHackathon ? (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -362,7 +418,7 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
               </p>
             </div>
           </motion.div>
-        )}
+        ) : null}
 
         {/* Hero Actions: REGISTER & EXPLORE SCHEDULE */}
         <motion.div
@@ -371,7 +427,12 @@ export const EventHero: React.FC<EventHeroProps> = ({ event }) => {
           transition={{ duration: 0.5, delay: 0.32 }}
           className="flex flex-wrap items-center gap-4 font-mono"
         >
-          {event.slug === "ideathon" ? (
+          {event.isRegistrationClosed ? (
+            <div className="py-3.5 px-8 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center shadow-lg border-2 border-rose-500/60 bg-rose-500/20 text-rose-200 flex items-center space-x-2 cursor-not-allowed shadow-[0_0_25px_rgba(244,63,94,0.3)]">
+              <span>⛔</span>
+              <span>REGISTRATIONS IS CLOSED NOW</span>
+            </div>
+          ) : event.slug === "ideathon" ? (
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full">
               {event.internalRegisterUrl && (
                 <a

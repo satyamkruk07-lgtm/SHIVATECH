@@ -75,12 +75,17 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
                 </span>
               )}
 
-              {event.slug === "hacknation-2-0" && (
+              {event.isRegistrationClosed ? (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-rose-500/20 border border-rose-500 text-rose-200 text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(244,63,94,0.35)]">
+                  <span className="w-2 h-2 rounded-full bg-rose-400" />
+                  <span>REGISTRATIONS IS CLOSED NOW</span>
+                </span>
+              ) : event.slug === "hacknation-2-0" ? (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-gradient-to-r from-amber-500/20 via-yellow-400/20 to-amber-500/20 border border-amber-400 text-amber-200 text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(251,191,36,0.35)]">
                   <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
                   <span>DISCLAIMER: REGISTRATION OPEN FOR INTERNAL STUDENTS ONLY</span>
                 </span>
-              )}
+              ) : null}
             </div>
 
             {/* Event Name */}
@@ -112,7 +117,15 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
                 <span>📍</span>
                 <span>{event.venue}</span>
               </span>
-              {event.registrationDeadline && (
+              {event.isRegistrationClosed ? (
+                <>
+                  <span className="text-slate-600">•</span>
+                  <span className="flex items-center space-x-1.5 text-rose-300 font-black bg-rose-500/20 px-2.5 py-1 rounded border border-rose-500/60 shadow-[0_0_15px_rgba(244,63,94,0.3)]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
+                    <span>REGISTRATIONS IS CLOSED NOW</span>
+                  </span>
+                </>
+              ) : event.registrationDeadline ? (
                 <>
                   <span className="text-slate-600">•</span>
                   <span className="flex items-center space-x-1.5 text-amber-300 font-black bg-gradient-to-r from-amber-500/20 via-yellow-400/25 to-amber-500/20 px-2.5 py-1 rounded border border-amber-400/60 shadow-[0_0_15px_rgba(245,158,11,0.25)]">
@@ -120,7 +133,7 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
                     <span>LAST DATE: {event.registrationDeadline.toUpperCase()}</span>
                   </span>
                 </>
-              )}
+              ) : null}
             </div>
 
             {/* Description */}
@@ -145,7 +158,16 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
 
           {/* Right Block: Actions */}
           <div className="flex flex-col sm:flex-row lg:flex-col items-stretch justify-center gap-3 w-full lg:w-48 self-stretch lg:self-center border-t lg:border-t-0 lg:border-l border-white/10 pt-6 lg:pt-0 lg:pl-8">
-            {event.registrationDeadline && (
+            {event.isRegistrationClosed ? (
+              <div className="text-center py-2 px-2.5 rounded-xl bg-rose-500/15 border border-rose-500/40 shadow-[0_0_15px_rgba(244,63,94,0.2)]">
+                <span className="text-[10px] text-rose-300 font-bold uppercase tracking-wider block">
+                  REGISTRATION STATUS
+                </span>
+                <span className="text-xs font-black text-rose-200 font-mono uppercase tracking-wide">
+                  ⛔ CLOSED NOW
+                </span>
+              </div>
+            ) : event.registrationDeadline ? (
               <div className="text-center py-2 px-2.5 rounded-xl bg-gradient-to-r from-amber-500/15 via-yellow-400/15 to-amber-500/15 border border-amber-400/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
                 <span className="text-[10px] text-amber-300 font-bold uppercase tracking-wider block">
                   REGISTRATION CLOSES
@@ -154,7 +176,7 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
                   ⏰ {event.registrationDeadline}
                 </span>
               </div>
-            )}
+            ) : null}
 
             {/* VIEW DETAILS BUTTON -> Opens Dedicated Page */}
             <Link
@@ -173,8 +195,13 @@ export const EventLandingCard: React.FC<EventLandingCardProps> = ({ event, index
               <span className="text-sm leading-none">→</span>
             </Link>
 
-            {/* REGISTER BUTTON -> Opens Register Page or External Form */}
-            {event.slug === "ideathon" ? (
+            {/* REGISTER BUTTON -> Opens Register Page or External Form or Closed Notice */}
+            {event.isRegistrationClosed ? (
+              <div className="py-3 px-3 rounded-xl font-bold tracking-wider text-[11px] uppercase text-center border border-rose-500/50 bg-rose-500/15 text-rose-300 flex items-center justify-center space-x-1.5 cursor-not-allowed shadow-[0_0_15px_rgba(244,63,94,0.25)]">
+                <span>⛔</span>
+                <span>REGISTRATIONS IS CLOSED NOW</span>
+              </div>
+            ) : event.slug === "ideathon" ? (
               <div className="flex flex-col gap-2 w-full">
                 {event.internalRegisterUrl ? (
                   <a

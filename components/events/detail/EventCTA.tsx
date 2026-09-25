@@ -77,8 +77,15 @@ export const EventCTA: React.FC<EventCTAProps> = ({ event }) => {
           </div>
         )}
 
-        {/* Registration Deadline Banner */}
-        {event.registrationDeadline && (
+        {/* Registration Deadline Banner / Closed Notice */}
+        {event.isRegistrationClosed ? (
+          <div className="mb-6 inline-flex items-center space-x-2.5 px-5 py-2.5 rounded-xl bg-rose-500/20 border-2 border-rose-500/60 text-rose-200 font-mono shadow-[0_0_25px_rgba(244,63,94,0.35)]">
+            <span className="text-base sm:text-lg">⛔</span>
+            <span className="text-xs sm:text-sm font-black uppercase tracking-wider">
+              REGISTRATIONS IS CLOSED NOW
+            </span>
+          </div>
+        ) : event.registrationDeadline ? (
           <div className="mb-6 inline-flex items-center space-x-2.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500/20 via-yellow-400/20 to-amber-500/20 border border-amber-400/60 text-amber-200 font-mono shadow-[0_0_20px_rgba(251,191,36,0.3)]">
             <span className="text-base sm:text-lg">⏰</span>
             <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider">
@@ -86,11 +93,16 @@ export const EventCTA: React.FC<EventCTAProps> = ({ event }) => {
             </span>
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
           </div>
-        )}
+        ) : null}
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center gap-4 font-mono w-full sm:w-auto">
-          {event.slug === "ideathon" ? (
+          {event.isRegistrationClosed ? (
+            <div className="w-full sm:w-auto py-4 px-10 rounded-xl font-bold tracking-widest text-xs sm:text-sm uppercase text-center text-rose-200 border-2 border-rose-500/60 bg-rose-500/20 shadow-[0_0_30px_rgba(244,63,94,0.3)] flex items-center justify-center space-x-2 cursor-not-allowed">
+              <span>⛔</span>
+              <span>REGISTRATIONS IS CLOSED NOW</span>
+            </div>
+          ) : event.slug === "ideathon" ? (
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
               {event.internalRegisterUrl && (
                 <a
